@@ -32,6 +32,7 @@ const Footer = () => {
                     <li><a href="#">Más vendidos</a></li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Productos Naturales</a></li>
+                    <li><a href="/policity">Politicas</a></li>
                 </ul>
             </div>
 
