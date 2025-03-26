@@ -3,8 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Footer from './components/Footer'
-import Formulario from './components/Formulario'
-import TestimonioPrincipal from './components/TestimonioPrincipal'
+import Formulario from './pages/SectionFormulario/Formulario'
+import TestimonioPrincipal from './pages/SectionTestimonios/TestimonioPrincipal'
 
 function App() {
   const [count, setCount] = useState(0)
