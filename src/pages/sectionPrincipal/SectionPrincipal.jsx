@@ -1,29 +1,45 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 import styles from "../../styles/SectionPrincipal.module.css";
 
-const SectionPrincipal = () => {
+const Carousel = () => {
+    return (
+        <Swiper navigation modules={[Navigation]} className={styles.carousel}>
+            <SwiperSlide className={styles.slide}>
+                <div className={styles.content}>
+                    <h1>¡Renueva tu Belleza! ✨</h1>
+                    <p>
+                        Descubre nuestras promociones especiales en cuidado de la piel y maquillaje. 
+                        ¡Solo por tiempo limitado!
+                    </p>
+                    <div className={styles.buttons}>
+                        <button className={styles.primary}>Ver Promoción</button>
+                        <button className={styles.secondary}>Conócenos</button>
+                    </div>
+                </div>
+                <div className={styles.image}>
+                    <img src="/src/assets/image/mujerof.png" alt="Belleza" />
+                </div>
+            </SwiperSlide>
 
-  return (
-    <div className={styles.carrusel}>
-        <div className={styles.contenido}>
-            <img src="/src/assets/image/logo-navi.png" className={styles.logo}/>
-            <h1 className={styles.titulo}>
-            ¡Renueva tu Belleza!
-            </h1>
-            <p className={styles.descripcion}>
-                Descubre nuestras promociones especiales en cuidado de la piel
-                y maquillaje. ¡Solo por tiempo limitado!
-            </p>
-
-            <div className={styles.buttons}>
-                <button className={styles.promobutton}>Ver Promoción</button>
-                <button className={styles.conocebutton}>Conócenos</button>
-            </div>
-
-            </div>
-            <img src="/src/assets/image/mujer.png" className={styles.model} alt="Modelo"/>
-    </div>
-  );
-
+            <SwiperSlide className={styles.slide}>
+                <div className={styles.content}>
+                    <h1>¡Piel perfecta al instante! 🌿</h1>
+                    <p>Consigue un acabado profesiona con nuestro nuevo Serum iluminador. ¡Oferta exclusiva por lanzamiento</p>
+                    <div className={styles.buttons}>
+                        <button className={styles.primary}>Comprar ahora</button>
+                        <button className={styles.secondary}>Conócenos</button>
+                    </div>
+                </div>
+                <div className={styles.imaged}>
+                <img src="/src/assets/image/mujer2.png" alt="Belleza" />
+                </div>
+            </SwiperSlide>
+          
+        </Swiper>
+    );
 };
 
-export default SectionPrincipal;
+export default Carousel;

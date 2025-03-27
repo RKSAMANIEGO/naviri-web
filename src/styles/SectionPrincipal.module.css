@@ -1,4 +1,5 @@
-* {
+
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,47 +7,81 @@
 }
 
 
-.carrusel{
+.carousel {
+    width: 100%;
+    height: 600px;
+    position: relative;
+}
+
+.slide {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(to right, #ff69b4, #ffc0cb);
-    padding: 2rem;
-    height: 610px;
+    justify-content: center;
+    background: linear-gradient(to right, #FFAFEB, #FFECFA);
+    gap: 20px;
+    width: 100%;
+    padding: 0 5%;
+    overflow: hidden;
 }
 
-.contenido{
-    text-align: left;
-    width: 50%;
-    margin-left: 50px;
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+    gap:10px
 }
 
-.logo {
-    width: 100px;
-}
-
-.titulo {
-    font-size: 60px;
-    font-weight: 500;
+h1 {
+    font-size: 50px;
+    font-weight: bold;
     color: #000;
+    font-family: 'Playfair Display', serif;
 }
 
-.descripcion {
-    font-size: 20px;
-    margin-top: 30px;
-    color: #000;
+p {
+    font-size:20px;
+    color: #000000;
     font-weight: bold;
 }
+  
 
-.buttons{
-    margin-top: 30px;
+.image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
 }
 
-.promobutton {
-    background-color: #ff4a8d;
+.image img {
+    width: 450px;
+    height: auto;
+    object-fit: cover; 
+}
+
+.imaged {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.imaged img {
+    width: 630px;
+    height: auto;
+    object-fit: cover; 
+ 
+}
+.buttons {
+    margin-top: 20px;
+}
+
+.primary {
+    background: #ff6b81;
     color: white;
-    font-weight: bold;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -54,24 +89,17 @@
     transition: 0.2s ease-in-out;
 }
 
-.promobutton:hover {
-    background-color: #ff6bbc;
+.primary:hover {
+    background: #ff4a8d;
 }
 
-.conocebutton {
-    background: #fff;
-    color: #FF6BBC;
-    font-weight: bold;
-    padding: 10px 15px;
+
+.secondary {
+    background: white;
+    color: #ff6b81;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.model {
-    width: 1400px;
-    height: auto;
-    border-radius: 10px;
-    position: absolute;
-    margin-left: 300px;
-}
