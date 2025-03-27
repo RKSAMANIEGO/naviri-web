@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../styles/producto.module.css'
 import {products} from '../utils/products'
 import PaginationProducts from './PaginationProducts'
+import ModalProducts from './ModalProducts'
 
 const ContentProducts = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [productSelected,setProductSelected]=useState({});  
+
+
     return (
         <section className={styles.contentProducts}>
             {products.map((product) => (
-            <section className={styles.sectionProducts} key={product.id}>
+            <section onClick={()=>{
+                setIsOpen(true)
+                console.log("Producto seleccionado"+product.id)    
+                const productById= products.find((prod)=> prod.id===product.id);
+                setProductSelected(productById);
+                console.log(productById);
+            }} 
+            className={styles.sectionProducts} key={product.id} 
+            >
                 <div style={{
                     width:"100%",
                     height:"190px",
@@ -30,6 +43,7 @@ const ContentProducts = () => {
             </section>
             ))}
             <PaginationProducts/>
+            <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected}/>
         </section>
     )
 }

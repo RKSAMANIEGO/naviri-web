@@ -13,7 +13,7 @@ import aceiteOregano from "../assets/image/aceideOREGANO.jpeg";
 export const products = [
 	{
 		id: 1,
-		producto: "aceite",
+		producto: "Aceite",
 		subCategoria: "Aceite de cadendula",
 		descripcion: "Hidratacion profunda para toda la piel",
 		precio: 20.0,
@@ -21,7 +21,7 @@ export const products = [
 	},
 	{
 		id: 2,
-		producto: "aceite",
+		producto: "Aceite",
 		subCategoria: "Aceite de coco",
 		descripcion: "Hidratacion profunda para la piel",
 		precio: 20.0,
