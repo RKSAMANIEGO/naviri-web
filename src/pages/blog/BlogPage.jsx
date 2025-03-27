@@ -28,7 +28,7 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-[#FCEEF2] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-8xl mx-auto">
         {/* Header */}
         <header className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-[#F2B5D4] mb-4">
@@ -41,7 +41,7 @@ const BlogPage = () => {
         </header>
 
         {/* Blog Posts Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-4">
           {blogs.data && blogs.data.map((blog) => (
             <BlogCard key={blog.id} blog={blog} />
           ))}

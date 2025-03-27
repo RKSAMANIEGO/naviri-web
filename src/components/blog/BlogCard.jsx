@@ -17,21 +17,22 @@ const BlogCard = ({ blog }) => {
   return (
     <div 
       key={blog.id} 
-      className="bg-white rounded-2xl overflow-hidden shadow-lg transform transition-all hover:shadow-2xl hover:-translate-y-2"
+      className=" w-[300px] bg-white rounded-2xl overflow-hidden shadow-lg transform transition-all hover:shadow-2xl hover:-translate-y-2"
     >
       {/* Imagen */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="cursor-pointer relative h-48 overflow-hidden">
         <img 
-          src="https://api.navinatubelleza.com/storage/policies/d888a4d2-8a4b-4d1c-a795-1e9e31166860.jpeg"
+          src={"https://api.navinatubelleza.com/storage/policies/d888a4d2-8a4b-4d1c-a795-1e9e31166860.jpeg"}
           alt={blog.title} 
           className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110"
+          onClick={handleReadMore}
         />
       </div>
 
       {/* Contentenido */}
-      <div className="p-6">
+      <div className="p-4">
         {/* etiqueta */}
-        <div className="flex items-center mb-3 space-x-2">                  
+        <div className="flex items-center mb-1 space-x-2">                  
           <span 
             className="bg-[#E1CCF5] bg-opacity-30  px-2 py-1 rounded-full text-xs"
           >
@@ -40,22 +41,22 @@ const BlogCard = ({ blog }) => {
         </div>
 
         {/* titulo */}
-        <h2 className="text-xl font-bold text-neutral-800 mb-3">
+        <h2 className="text-lg font-bold text-neutral-800 mb-3">
           {blog.title}
         </h2>
 
         {/* Descripcion */}
-        <p className="text-neutral-600 mb-4 line-clamp-5 ">
+        <p className="text-neutral-600 mb-4 line-clamp-5 text-sm">
           {blog.description}
         </p>
 
         {/* Actualizado */}
-        <div className="flex justify-between items-center text-sm text-neutral-500">
+        {/* <div className="flex justify-between items-center text-sm text-neutral-500">
           <div className="flex items-center space-x-2">
             <Clock className="w-4 h-4 text-[#F2B5D4]" />
             <span>{new Date().toLocaleDateString()}</span>
           </div>
-        </div>
+        </div> */}
 
         {/* boton de Leer Mas */}
         <button className="mt-4 cursor-pointer w-full flex items-center justify-center space-x-2 bg-[#F2B5D4] text-white py-2 rounded-full hover:bg-fuchsia-500 transition-all focus:outline-none"

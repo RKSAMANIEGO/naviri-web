@@ -1,5 +1,6 @@
 import {FaShoppingCart, FaSearch} from 'react-icons/fa';
 import styles from "./header.module.css"
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -9,7 +10,7 @@ const Header = () => {
         </div>
 
         <nav className={styles.nav}>
-            <a href="#">Inicio</a>
+            <Link to='/'>Inicio</Link>
             <div className={styles.dropnow}>
                 <a href="#">Productos</a>
             </div>
