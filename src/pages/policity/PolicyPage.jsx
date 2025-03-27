@@ -1,17 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Leaf, ShieldCheck, Globe, ChevronRight, Lock } from 'lucide-react'
 import { getPolicies } from '../../services/policyService'
+import { useQuery } from '@tanstack/react-query'
 
 const PolicyPage = () => {
-  const [policy, setPolicy] = useState({})
+  const { data: policy, error, isLoading } = useQuery({
+    queryKey: ["policy"], 
+    queryFn: getPolicies,
+    staleTime: 1000 * 60 * 5,
+  })
 
-  useEffect(() => {
-    const fetchData = async () =>  {
-      const policyData = await getPolicies()
-      setPolicy(policyData)
-    }
-    fetchData()
-  }, [])
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Cargando...</p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Error al cargar la política: {error.message}</p>
+      </div>
+    )
+  }
 
   const sections = [
     { icon: <ShieldCheck />, title: "Seguridad de Datos" },
@@ -22,7 +35,6 @@ const PolicyPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F9F6FB] to-[#FFF5F9] py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
       <div className="w-full max-w-3xl">
-
         <div className="mb-16 text-center">
           <div className="inline-flex items-center gap-2 mb-4 text-[#7E5A9F] justify-center">
             <Lock className="w-6 h-6" />
@@ -60,11 +72,9 @@ const PolicyPage = () => {
                 dangerouslySetInnerHTML={{ __html: policy.description }} 
                 className="space-y-8 text-left"
               />
-
               <div>
-                <img src={policy.image.url} alt="" />
+                {policy.image?.url && <img src={policy.image.url} alt="Imagen de la política" />}
               </div>
-              
               <div className="mt-12 p-8 bg-[#FFF9FC] rounded-xl border border-[#FFEBF3] text-center">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-4 flex items-center gap-2 justify-center">
                   <ShieldCheck className="text-[#7E5A9F]" />
