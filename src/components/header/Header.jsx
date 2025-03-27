@@ -1,3 +1,5 @@
+import {FaShoppingCart, FaSearch} from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {FaShoppingCart, FaSearch, FaChevronDown } from 'react-icons/fa';
 import styles from "../../styles/header.module.css";
@@ -16,6 +18,10 @@ const Header = () => {
         </div>
 
         <nav className={styles.nav}>
+            <Link to='/'>Inicio</Link>
+            <div className={styles.dropnow}>
+                <a href="#">Productos</a>
+            </div>
             <a href="#">Inicio</a>
 
             <div className={styles.dropnow}
@@ -82,6 +88,7 @@ const Header = () => {
 
     </header>
  );
-};
+ 
+}
 
 export default Header;
