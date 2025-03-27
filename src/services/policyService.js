@@ -6,7 +6,7 @@ export const getPolicies = async () => {
       console.log("Respuesta API:", response);
       return response.data;
   } catch (error) {
-      console.error("Error al obtener zapatillas:", error);
+      console.error("Error al obtener Policies:", error);
       return [];
   }
 };

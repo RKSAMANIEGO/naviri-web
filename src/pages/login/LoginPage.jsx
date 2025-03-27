@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login } from "../services/authService";
+import { login } from "../../services/authService";
 
 const LoginPage = () => {
     const [form, setForm] = useState({
@@ -10,24 +10,20 @@ const LoginPage = () => {
     const { username, password } = form;
 
     const onChangeText = (event) => {
-    const { name, value } = event.target;
-    setForm(prev => ({ ...prev, [name]: value }));
-    setError(''); 
+      const { name, value } = event.target;
+      setForm(prev => ({ ...prev, [name]: value }));
     };
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
-        setIsSubmitting(true);
         
         try {
           await login(form);
         } catch (error) {
-          setError(error.message || "Error al iniciar sesión. Verifica tus credenciales.");
-        } finally {
-          setIsSubmitting(false);
-        }
+          console.log(error);
+          
+        } 
       };
     
   return (

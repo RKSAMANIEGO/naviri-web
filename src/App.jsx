@@ -1,11 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
-import Prueba from "./routes/prueba";
+import Router from "./routes/router";
 
 function App() {
   return (
     
       <BrowserRouter>
-        <Prueba />
+        <Router  />
      </BrowserRouter>
 
   )
