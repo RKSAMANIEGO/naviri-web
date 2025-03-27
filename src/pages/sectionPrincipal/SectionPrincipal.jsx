@@ -1,4 +1,4 @@
-import styles from "./SectionPrincipal.module.css";
+import styles from "../../styles/SectionPrincipal.module.css";
 
 const SectionPrincipal = () => {
 

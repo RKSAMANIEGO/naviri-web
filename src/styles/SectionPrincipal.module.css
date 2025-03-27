@@ -12,7 +12,7 @@
     justify-content: space-between;
     background: linear-gradient(to right, #ff69b4, #ffc0cb);
     padding: 2rem;
-    height: 650px;
+    height: 610px;
 }
 
 .contenido{
@@ -69,8 +69,9 @@
 }
 
 .model {
-    width: 1500px;
+    width: 1400px;
+    height: auto;
     border-radius: 10px;
     position: absolute;
-    margin-left: 90px;
+    margin-left: 300px;
 }

@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import styles from "./footer.module.css";
+import styles from "../../styles/footer.module.css"
 
 
 const Footer = () => {
