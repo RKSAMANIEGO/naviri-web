@@ -1,11 +1,12 @@
 .formContainer {
-    background: linear-gradient(135deg, #c639c6 0%, #8a2be2 100%);
-    padding: 4rem 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
+  background: linear-gradient(to left, #6a1bb8 10%, #8a2be2 40%, #c639c6 90%);
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
   
   .formContent {
     max-width: 600px;
