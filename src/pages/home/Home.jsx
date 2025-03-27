@@ -1,5 +1,5 @@
 
-import Header from "../../components/header/header";
+import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import SectionPrincipal from "../../pages/sectionPrincipal/SectionPrincipal";
 
