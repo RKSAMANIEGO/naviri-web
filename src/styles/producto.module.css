@@ -44,6 +44,11 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	cursor: pointer;
+}
+
+.options a:hover {
+	background-color: rgb(244, 193, 222);
 }
 
 .options a i {
@@ -51,6 +56,7 @@
 	color: rgba(255, 107, 188, 1);
 	font-weight: bold;
 }
+
 
 /*SEARCH TITLE*/
 .title {
@@ -96,10 +102,24 @@
 }
 
 .search label button {
-	background-color: black;
+	background: linear-gradient(to right, transparent 50%, rgba(255, 221, 240, 1)50%);
+	background-position: left;
+	background-size: 200%;
+	transition: all 0.6s ease-in-out;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.search label button {
+	background-color: rgba(0, 0, 0, 0.89);
 	color: white;
 	border-radius: 8px;
 	padding: 12px 17px;
+}
+
+.search label button:hover {
+	background-position: right;
+	color: rgba(255, 107, 188, 1);
 }
 
 .search h4 {
@@ -120,7 +140,7 @@
 .search div section p {
 	font-size: 18px;
 	font-weight: 600;
-	padding: 10px;
+	padding: 10px 0;
 }
 
 .search div section select {
@@ -128,8 +148,10 @@
 	font-weight: 600;
 	padding: 10px;
 	border-radius: 8px;
-	border: 1px solid rgb(118, 114, 114);
+	border: 1px solid rgb(181, 181, 181);
 }
+
+
 
 /*CONTENT PRODUCTS*/
 .contentProducts {
@@ -185,6 +207,12 @@
 	font-size: 14px;
 }
 
+.contentProducts section button:first-child:hover {
+	background-color: rgb(255, 68, 171);
+	border: 1px solid rgb(255, 68, 171);
+	color: white;
+}
+
 .contentProducts section button:last-child {
 	border-radius: 8px;
 	width: 140px;
@@ -193,6 +221,11 @@
 	font-weight: bolder;
 	padding: 8px;
 	font-size: 14px;
+}
+
+.contentProducts section button:last-child:hover {
+	background-color: rgb(72, 171, 50);
+	color: white;
 }
 
 /*PAGINATION PRODUCTS*/

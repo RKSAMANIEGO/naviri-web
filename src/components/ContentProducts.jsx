@@ -6,13 +6,12 @@ import PaginationProducts from './PaginationProducts'
 const ContentProducts = () => {
     return (
         <section className={styles.contentProducts}>
-            {        products.map((product) => (
+            {products.map((product) => (
             <section className={styles.sectionProducts} key={product.id}>
                 <div style={{
                     width:"100%",
                     height:"190px",
                     marginBottom:"10px",
-                    /* backgroundImage: `url(${aceiteCadendula})`,*/
                     backgroundImage: `url(${product.imagen})`,  
                     backgroundSize: "80%",
                     backgroundPosition:"center 70%",
