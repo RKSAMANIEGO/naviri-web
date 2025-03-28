@@ -1,12 +1,25 @@
+import { useState } from 'react'
 import styles from '../styles/producto.module.css'
 
-const SearchProducts = () => {
+const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
+
+    const[searchText,setSearchText]=useState("");
+    const[valuePrecio,setValuePrecio]=useState(0);
+
+    //PRECIOS
+    const precios= products.map(obj => obj.precio);
+    const listPrecios= new Set(precios);
+
+    const searchProducts = () =>{
+            recibirTextInput(searchText);
+    }
+
     return (
     <div  className={styles.search}>
         <section className='container-search'>
             <label>
-                <input type="text" placeholder='Buscar productos...'/> 
-                <button>Buscar</button>
+                <input type="text" placeholder='Buscar productos...' value={searchText} onChange={(e)=>setSearchText(e.target.value)} /> 
+                <button onClick={searchProducts}>Buscar</button>
             </label>
             
             <h4>Filtros</h4>
@@ -21,9 +34,18 @@ const SearchProducts = () => {
 
                 <section>
                     <p>Precios</p>
-                    <select>
-                        <option>Todas las precios</option>
-                    </select>
+
+                        <select value={valuePrecio} onChange={(e)=>{
+                            setValuePrecio(e.target.value)
+                            recibirValuePrecio(e.target.value)
+                            console.log(e.target.value);
+                        }}>
+                            <option value={''}>Todos los precios</option>
+                        { [...listPrecios].map(precio => (
+                            <option  key={precio} value={precio}>{precio}</option>     
+                        ))}
+                        </select>
+            
                 </section>
             </div>
             

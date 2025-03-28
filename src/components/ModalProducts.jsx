@@ -1,9 +1,14 @@
 import Modal from 'react-modal'
 import styles from '../styles/producto.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 Modal.setAppElement("#root")
 const ModalProducts = ({isOpen,onClose,product}) => {
     const[stock,setStock]=useState(0);
+
+
+    useEffect(()=>{
+        setStock(0);
+    },[product])
 
     const decrementStock=()=>{
         if(stock>0){

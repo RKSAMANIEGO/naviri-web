@@ -54,7 +54,7 @@ export const products = [
 	{
 		id: 6,
 		producto: "Aceite",
-		subCategoria: "Aceide esencial  OREGANO",
+		subCategoria: "Aceite esencial  OREGANO",
 		descripcion: "Hidratacion profunda para el cuerpo",
 		precio: 25.0,
 		imagen: `${aceiteOregano}`,
@@ -70,7 +70,7 @@ export const products = [
 	{
 		id: 8,
 		producto: "Aceite",
-		subCategoria: "aceite esencial JAZMIN",
+		subCategoria: "Aceite esencial JAZMIN",
 		descripcion: "Hidratacion profunda para las manos",
 		precio: 15.0,
 		imagen: `${aceiteJazmin}`,
@@ -78,7 +78,7 @@ export const products = [
 	{
 		id: 9,
 		producto: "Aceite",
-		subCategoria: "aceite esencial LAVANDA",
+		subCategoria: "Aceite esencial LAVANDA",
 		descripcion: "Hidratacion profunda para el cabello",
 		precio: 20.0,
 		imagen: `${aceiteLavanda}`,
@@ -86,7 +86,7 @@ export const products = [
 	{
 		id: 10,
 		producto: "Aceite",
-		subCategoria: "aceite esencial MENTA",
+		subCategoria: "Aceite esencial MENTA",
 		descripcion: "Hidratacion profunda para el cuerpo",
 		precio: 25.0,
 		imagen: `${aceiteMenta}`,
@@ -94,7 +94,7 @@ export const products = [
 	{
 		id: 11,
 		producto: "Aceite",
-		subCategoria: "aceite esencial ROSA",
+		subCategoria: "Aceite esencial ROSA",
 		descripcion: "Hidratacion profunda para el cabello",
 		precio: 20.0,
 		imagen: `${aceiteRosa}`,
@@ -102,7 +102,7 @@ export const products = [
 	{
 		id: 12,
 		producto: "Aceite",
-		subCategoria: "aceite esencial YLANG-YLANG",
+		subCategoria: "Aceite esencial YLANG-YLANG",
 		descripcion: "Hidratacion profunda para el cuerpo",
 		precio: 25.0,
 		imagen: `${aceiteUva}`,
