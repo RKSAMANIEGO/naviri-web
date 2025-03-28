@@ -1,4 +1,6 @@
 import {FaShoppingCart, FaSearch} from 'react-icons/fa';
+import styles from "./header.module.css"
+import { Link } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {FaShoppingCart, FaSearch, FaChevronDown } from 'react-icons/fa';
@@ -18,6 +20,7 @@ const Header = () => {
         </div>
 
         <nav className={styles.nav}>
+            <Link to='/'>Inicio</Link>
             <Link to='/'>Inicio</Link>
             <div className={styles.dropnow}>
                 <a href="#">Productos</a>

@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 import styles from "../../styles/footer.module.css"
 
 
@@ -32,6 +33,8 @@ const Footer = () => {
                     <li><a href="#">Más vendidos</a></li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Productos Naturales</a></li>
+                    <li><Link to="/policity">Politicas</Link></li>
+                    <li><Link to="/blog">Blogs</Link></li>
                 </ul>
             </div>
 
