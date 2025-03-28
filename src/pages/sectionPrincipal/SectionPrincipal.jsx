@@ -9,6 +9,9 @@ const Carousel = () => {
         <Swiper navigation modules={[Navigation]} className={styles.carousel}>
             <SwiperSlide className={styles.slide}>
                 <div className={styles.content}>
+                  <div className={styles.logo}>
+                      <img src="/src/assets/image/logo-navi.png" alt="Logo" />
+                  </div>
                     <h1>¡Renueva tu Belleza! ✨</h1>
                     <p>
                         Descubre nuestras promociones especiales en cuidado de la piel y maquillaje. 
@@ -26,7 +29,10 @@ const Carousel = () => {
 
             <SwiperSlide className={styles.slide}>
                 <div className={styles.content}>
-                    <h1>¡Piel perfecta al instante! 🌿</h1>
+                    <div className={styles.logo}>
+                       <img src="/src/assets/image/logo-navi.png" alt="Logo" />
+                   </div>
+                    <h1>¡Piel perfecta al instante!🌿</h1>
                     <p>Consigue un acabado profesiona con nuestro nuevo Serum iluminador. ¡Oferta exclusiva por lanzamiento</p>
                     <div className={styles.buttons}>
                         <button className={styles.primary}>Comprar ahora</button>

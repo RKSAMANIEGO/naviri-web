@@ -8,10 +8,10 @@ const Footer = () => {
         <div className={styles.container}>
             <div className={styles.sectionfooter}>
                 <img src ="/src/assets/image/logo-navi.png" className={styles.logo}/>
-                <p className={styles.footerdescrip}>
-                    Tu destino de belleza integral, donde la calidad y los mejores productos
-                    se unen para realzar tu belleza natural.
-                </p>
+                <h1 className={styles.footerdescrip}>
+                    <p>Tu destino de belleza integral, donde la calidad y los mejores productos
+                    se unen para realzar tu belleza natural.</p>
+                </h1>
             </div>
 
             <div className={styles.sectionfooter}>

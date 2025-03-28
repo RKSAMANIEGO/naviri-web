@@ -44,6 +44,13 @@
     margin-right: 50px;
 }
 
+.footerdescrip p{
+    font-size: 12px;
+    color:#929292;
+    font-family: Inter, 'san-serif';
+    font-weight: 500;
+}
+
 .sectionfooter h3 {
     color: black;
     font-size: 16px;
