@@ -50,6 +50,65 @@
     color: black
 }
 
+.dropnow {
+    position: relative;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 10;
+    min-width: 400px;
+    height: 400px;
+    display: flex;
+}
+
+.dropdown a {
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+
+.productosnew{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    background-color: #e04b88;
+    border-radius: 10px;
+    text-decoration: none;
+    height: 300px;
+    width: 500px;
+    color: white;
+    
+}
+
+.productosnew p{
+    margin: 20px;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+
+.iconDropdown {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.dropnow:hover .iconDropdown {
+    transform: rotate(180deg);
+}
 
 .sectionright {
     display: flex;
