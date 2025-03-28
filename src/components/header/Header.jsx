@@ -19,28 +19,48 @@ const Header = () => {
         <nav className={styles.nav}>
             <Link to="/">Inicio</Link>
 
-            <div className={styles.dropnow}
+            <div
+                className={styles.dropnow}
                 onMouseEnter={() => setShowProductos(true)}
                 onMouseLeave={() => setShowProductos(false)}
             >
                 <a href="#">Productos <FaChevronDown className={styles.iconDropdown}/></a>
                 {showProductos && (
                     <div className={styles.dropdown}>
-                        <a href="#" className={styles.productosnew}>Nuevos Productos
-                            <p>Descubre nuestras ultimas novedades en productos de belleza</p>
+                        <a href="#" className={styles.productosnew}>
+                            <div className={styles.titleproductos}>
+                              <h1>Nuevos Productos</h1>
+                              <p>Descubre nuestras ultimas novedades en productos de belleza</p>
+                            </div>
                         </a>
-                        <a href="#">Ver Todo
+
+                        <div className={styles.sectiondrop1}>
+                        <a href="#">
+                            <h1>Ver todo</h1>
                             <p>Explora nuestra colección completa de productos</p>
                         </a>
-                        <a href="#">Ciudado facial
+                        </div>
+
+                        <div className={styles.sectiondrop2}>
+                        <a href="#">
+                            <h1>Ciudado facial</h1>
                             <p>Cremas, sérums, mascarillas y más para tu rutina facial.</p>
                         </a>
-                        <a href="#">Maquillaje
+                        </div>
+                    
+                        <div className={styles.sectiondrop3}>
+                        <a href="#">
+                            <h1>Maquillaje</h1>
                             <p>Bases, labiales, sombras y todo para tu look perfecto</p>
                         </a>
-                        <a href="#">Ciudado capilar
+                        </div>
+
+                        <div className={styles.sectiondrop4}>
+                        <a href="#">
+                            <h1>Ciudado capilar</h1>
                             <p>Champús, acondicionadores y tratamientos para tu cabello</p>
                         </a>
+                        </div>
                     </div>
                 )}
             </div>
@@ -52,12 +72,49 @@ const Header = () => {
                 <a href="#">Categorías <FaChevronDown className={styles.iconDropdown}/></a>
                 {showCategorias && (
                     <div className={styles.dropdown}>
-                        <a href="#">Accesorios</a>
-                        <a href="#">Aceites</a>
-                        <a href="#">Cosmeticos</a>
-                        <a href="#">Ciudado capilar</a>
-                        <a href="#">Ciudado corporal</a>
-                        <a href="#">Sales Minerales</a>
+
+                       <div className={styles.sectiondrop1}>
+                        <a href="#">
+                            <h1>Accesorios</h1>
+                            <p>Encuentra productos esenciales para limpiar y proteger tu piel</p>
+                        </a>
+                        </div>
+
+                        <div className={styles.sectiondrop2}>
+                        <a href="#">
+                            <h1>Aceite</h1>
+                            <p>Aceites naturales para nutrir, revitalizar tu piel y cabello</p>
+                        </a>
+                        </div>
+
+                        <div className={styles.sectiondrop3}>
+                        <a href="#">
+                            <h1>Cosmeticos</h1>
+                            <p>Brochas, esponjas, neceseres y más para tu rutina</p>
+                        </a>
+                        </div>
+
+                        <div className={styles.sectiondrop4}>
+                        <a href="#">
+                            <h1>Ciudado capilar</h1>
+                            <p>Tratamientos para fortalecer y embellecer tu cabello</p>
+                        </a>
+                        </div>
+
+                        <div className={styles.sectiondrop5}>
+                        <a href="#">
+                            <h1>Ciudado corporal</h1>
+                            <p>Perfumes y colonias para cada ocasión y estilo</p>
+                        </a>
+                        </div>
+
+                        <div className={styles.sectiondrop6}>
+                        <a href="#">
+                            <h1>Sales minerales</h1>
+                            <p>Sales de baño, ídeales para revitalizar y suavizar la piel</p>
+                        </a>
+                        </div>
+    
                     </div>
                 )}
             </div>
@@ -82,7 +139,7 @@ const Header = () => {
         </div>
 
     </header>
- );
+    );
 };
 
 export default Header;

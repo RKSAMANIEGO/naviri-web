@@ -14,7 +14,8 @@
     background-color: white;
     padding: 10px 50px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    flex-wrap: wrap
+    flex-wrap: wrap;
+    font-family: Inter, 'san-serif';
 }
 
 .logo {
@@ -54,49 +55,97 @@
     position: relative;
 }
 
+.dropnow a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #333;
+    text-decoration: none;
+}
+
 .dropdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px; 
     position: absolute;
     top: 100%;
     left: 0;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    border-radius: 5px;
+    padding: 20px;
+    border-radius: 10px;
     z-index: 10;
-    min-width: 400px;
-    height: 400px;
-    display: flex;
+    height: auto;
+    width: 600px;
 }
+
+
+.sectiondrop1, .sectiondrop2, .sectiondrop3, .sectiondrop4,
+.sectiondrop5, .sectiondrop6{
+    font-size: 12px;
+    text-align: start;
+    color: #B2B2B2;
+    font-weight: 300;
+    border-radius: 10px;
+}
+
+.sectiondrop1 h1, .sectiondrop2 h1, .sectiondrop3 h1, .sectiondrop4 h1,
+.sectiondrop5 h1, .sectiondrop6 h1{
+    color:#FF6BBC;
+}
+
+
+.sectiondrop1:hover, .sectiondrop2:hover, .sectiondrop3:hover, .sectiondrop4:hover,
+.sectiondrop5:hover, .sectiondrop6:hover{
+    background-color: #FFECF7;
+}
+
 
 .dropdown a {
-    padding: 8px 12px;
+    display: grid;
+    gap: 5px;
+    padding: 12px;
+    border-radius: 5px;
     color: #333;
     text-decoration: none;
-    border-radius: 5px;
     transition: background-color 0.3s;
+    font-size: 18px;
 }
 
+
+.dropdown p{
+    font-size: 12px;
+    text-align: start;
+    color: #B2B2B2;
+    font-weight: 300;
+}
 
 .productosnew{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px;
-    background-color: #e04b88;
-    border-radius: 10px;
-    text-decoration: none;
-    height: 300px;
-    width: 500px;
+    grid-column: span 2; 
+    background: linear-gradient(to top, #d485c0, #8f497c);
     color: white;
-    
+    width: 250px;
+    height: 300px;
 }
 
-.productosnew p{
-    margin: 20px;
-    font-size: 20px;
+.titleproductos{
+    font-size: 16px;
     color: #ffffff;
+    margin-top: auto;
+    text-align: start;
+
 }
+
+.titleproductos h1{
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.titleproductos p {
+    font-size: 16px;
+    color: white;
+}
+
 
 
 .iconDropdown {
