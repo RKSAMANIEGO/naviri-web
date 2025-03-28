@@ -1,10 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./TestimonioPrincipal.module.css";
 import img from '../../assets/image/logo-navi.png'
-export default function Testi() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+import {getTestimonios} from '../../services/testimoniosServices.js'
 
-  const testimonios = [
+export default function Testi() {
+
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [testimonios, setTestimonios] = useState({})
+
+  useEffect(() => {
+    
+  
+  const fetchData = async() => {
+
+        const dataTestimonio =await getTestimonios();
+        console.log(dataTestimonio);
+        
+        setTestimonios(dataTestimonio)
+
+    }
+    fetchData();
+  }, [])
+  
+
+  /* const testimonios = [
     {
       id: 1,
       nombre: "Daniela García",
@@ -29,7 +49,7 @@ export default function Testi() {
         "Los productos para el cabello son de excelente calidad. Mi cabello nunca había estado tan saludable y brillante como ahora. Además, el envío fue muy rápido.",
       estado: "en línea",
     },
-  ];
+  ]; */
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? testimonios.length - 1 : prevIndex - 1));
@@ -53,18 +73,18 @@ export default function Testi() {
               &lt;
             </button>
             <div className={styles.testimoniosWrapper}>
-              {testimonios.slice(currentIndex, currentIndex + 2).map((testimonio) => (
+              {testimonios.data && testimonios.data.map((testimonio) => (
                 <div key={testimonio.id} className={styles.testimonioCard}>
                   <div className={styles.clienteInfo}>
                     <div className={styles.avatarContainer}>
-                      <img src={testimonio.imagen} alt={testimonio.nombre} width={60} height={60} className={styles.avatar} />
+                      <img src='' alt={testimonio.name_customer} width={60} height={60} className={styles.avatar} />
                     </div>
                     <div className={styles.clienteDetalles}>
-                      <h3 className={styles.clienteNombre}>{testimonio.nombre}</h3>
-                      <p className={styles.clienteEstado}>{testimonio.estado}</p>
+                      <h3 className={styles.clienteNombre}>{testimonio.name_customer}</h3>
+                      <p className={styles.clienteEstado}>{testimonio.qualification}</p>
                     </div>
                   </div>
-                  <p className={styles.testimonioTexto}>{testimonio.texto}</p>
+                  <p className={styles.testimonioTexto}>{testimonio.description}</p>
                 </div>
               ))}
             </div>
@@ -91,7 +111,7 @@ export default function Testi() {
         </div>
 
         <div className={styles.indicadores}>
-          {testimonios.map((_, index) => (
+          {Array.isArray(testimonios) && testimonios.map((_, index) => (
             <button
               key={index}
               className={`${styles.indicador} ${currentIndex === index ? styles.indicadorActivo : ""}`}
