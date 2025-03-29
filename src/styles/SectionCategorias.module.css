@@ -1,0 +1,134 @@
+*{
+    font-family: Inter, 'san-serif';
+}
+
+.categoriesSection {
+    background-color: #ffffff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.headerIcons {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    margin-bottom: 80px;
+}
+
+.iconCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFDDF0; 
+    border-radius: 50%; 
+    width: 50px;
+    height: 50px; 
+}
+
+.icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ff6bbc;
+}
+
+.icons span {
+    font-size: 30px;
+}
+
+.icons p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+}
+
+.categoriestitle h2 {
+    font-size: 36px;
+    color: #B62A69;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+
+.categoriestitle p {
+    font-size: 20px;
+    color: #929292;
+    margin-bottom: 100px;
+    font-weight: 700;
+}
+
+.sectioncategories {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    height: auto;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.iconCirclestar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFDDF0;
+    border-radius: 50%; 
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+  }
+  
+
+
+.card h3 {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #000000;
+    font-weight: 700;
+}
+
+.card p {
+    font-size: 16px;
+    color: #929292;
+    font-weight: 600;
+    margin: 5px 0 20px 0px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card li {
+    font-size: 16px;
+    color: #929292;
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.buttoncard {
+    padding: 10px;
+    background-color: #B62A69;
+    color:white;
+    border-radius: 10px;
+    align-items: flex-end;
+    margin-top: 30px;
+    transition: 0.2s ease-in-out;
+}
+
+.buttoncard:hover{
+    background-color: #ff6bbc;
+}

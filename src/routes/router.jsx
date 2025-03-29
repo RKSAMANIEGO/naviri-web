@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import {PolicyPage, HomePage, MainLayout, BlogPage, BlogDetailsPage} from '../pages/index';
+import {PolicyPage, HomePage, MainLayout, BlogPage, BlogDetailsPage}  from '../pages/index';
 
 
 const Router = () => {

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import BlogCard from "../../components/blog/BlogCard";
 import SectionPrincipal from "../../pages/sectionPrincipal/SectionPrincipal";
+import SectionCategorias from "../sectionCategorias/sectionCategorias";
 
 export const Home = () => {
    
@@ -57,6 +58,8 @@ const blogsMock = [
       <SectionPrincipal/>
        <hr className=" text-gray-50"/>
        <div className="max-w-7xl mx-auto">
+      <SectionCategorias/>
+      
 
          <div className="w-full text-end my-4">
             <button className=" p-2 rounded-full cursor-pointer"
