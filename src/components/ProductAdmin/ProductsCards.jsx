@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Swal from 'sweetalert2'
 import styles from '../../styles/productAdmin.module.css'
 import {products} from '../../utils/products'
+import ModalCrudProduct from './Modal/ModalCrudProduct'
+import ModalProducts from '../../components/Products/ModalProducts'
 const ProductsCards = () => {
+
+    const [isOpenModal,setOpenModal] = useState(false)
+    const [isOpenModalDetailsProduct,setOpenModalDetailsProduct] = useState(false)
+    const [productSelected,setProductSelected]=useState({})
     return (
+
         <>
             <section className={styles.contentProductAdmin}>
                 { products.map((product) => (
-                    <section onClick={()=>{
-                                const productById= products.find((prod)=> prod.id===product.id);
-                                console.log(productById);
-                    }}
-                    className={styles.sectionProducts} key={product.id} 
+                    <section className={styles.sectionProducts} key={product.id} 
                     >
                         <div style={{
                             width:"100%",
@@ -22,7 +25,15 @@ const ProductsCards = () => {
                             backgroundPosition:"center",
                             borderTopLeftRadius:"10px",
                             borderTopRightRadius:"10px",
-                        }}>
+                            cursor:"pointer"
+                        }}
+                        onClick={()=>{
+                            const productById= products.find((prod)=> prod.id===product.id);
+                            setOpenModalDetailsProduct(true);
+                            setProductSelected(productById)
+                            console.log(productById);           
+                        }}
+                        >
                         
                         </div>
                                 
@@ -43,7 +54,7 @@ const ProductsCards = () => {
                         </section>
 
                         <section>
-                            <button><i className="fa-regular fa-pen-to-square"></i> Editar</button>
+                            <button onClick={()=> setOpenModal(true)}><i className="fa-regular fa-pen-to-square"></i> Editar</button>
                             <button onClick={()=>{
                                 Swal.fire({
                                     title: '¿Estás seguro de eliminar este producto?',
@@ -51,6 +62,7 @@ const ProductsCards = () => {
                                     icon:"warning",
                                     showCancelButton:true,
                                     confirmButtonText:"Si, Eliminar",
+                                    cancelButtonText:"Cancelar",
                                     cancelButtonColor:"rgb(196, 22, 13)",
                                     confirmButtonColor:" rgb(26, 47, 210)"
                                 }).then(result => {
@@ -62,9 +74,15 @@ const ProductsCards = () => {
                                 })
                             }}><i className="fa-solid fa-trash-can"></i> Eliminar</button>
                         </section>
+
+                       
                     </section>
+                    
             ))}
+            
             </section>
+            <ModalCrudProduct isOpen={isOpenModal} onClose={()=>setOpenModal(false)} titleModal="updateProduct"/>
+            <ModalProducts isOpen={isOpenModalDetailsProduct} onClose={()=>setOpenModalDetailsProduct(false)} product={productSelected}/>
         </>
     )
 }

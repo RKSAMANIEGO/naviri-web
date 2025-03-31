@@ -3,11 +3,16 @@ import { products } from '../../utils/products';
 import styles from '../../styles/productAdmin.module.css'
 import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
+import ModalCrudProduct from './Modal/ModalCrudProduct';
+import ModalProducts from '../Products/ModalProducts';
 
 const ProductsTable = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
+    const [isOpenModalProducts,setOpenModalProducts]=useState(false);
+    const [productSelect,setProductSelect]=useState({});
+    const [openModalDetailsProduct,setOpenModalDetailsProduct]=useState(false)
 
     useEffect(() => {
         setTotalPages(Math.ceil(products.length / rowsPerPage));
@@ -59,8 +64,13 @@ const ProductsTable = () => {
         name:"Acciones",
         cell:row=>(
             <div className={styles.wrapperOptions}>
-                <i className="fa-solid fa-eye" onClick={()=>console.log(row.id)}></i>
-                <i className="fa-solid fa-pencil"></i>
+                <i className="fa-solid fa-eye" onClick={()=>{
+                    const productById= products.find(product => product.id === row.id)
+                    setProductSelect(productById);
+                    setOpenModalDetailsProduct(true);
+
+                }}></i>
+                <i className="fa-solid fa-pencil" onClick={()=>setOpenModalProducts(true)}></i>
                 <i className="fa-solid fa-trash-can" onClick={()=>{
 
                     Swal.fire({
@@ -71,6 +81,7 @@ const ProductsTable = () => {
                         cancelButtonColor:"rgb(196, 22, 13)",
                         confirmButtonColor:" rgb(26, 47, 210)",
                         confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText:"Cancelar"
                     }).then((result)=>{
                         if(result.value){
                             console.log(row.id);
@@ -125,7 +136,7 @@ const ProductsTable = () => {
 
     return (
     <>
-    <div className={styles.container}></div>
+    <div className={styles.container}>
         <TableProducts
             className={styles.dataTable}
             columns={columns}
@@ -147,6 +158,9 @@ const ProductsTable = () => {
             )}
             onChangeRowsPerPage={handleRowsPerPageChange} 
         />
+        <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct"/>
+        <ModalProducts isOpen={openModalDetailsProduct}  onClose={()=> setOpenModalDetailsProduct(false)} product={productSelect}/>
+    </div>
     </>
     )
 
