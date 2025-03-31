@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { login } from "../services/authservices";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, TextField, Typography, styled } from "@mui/material";
-import "@fontsource/ribeye";
-
+import { useAuthStore } from "../context/authProvider";
+import { useNavigate } from "react-router-dom";
 const StyledContainer = styled(Box)({
   minHeight: "100vh",
   minWidth: "100vw",
@@ -54,7 +53,13 @@ const OpenModalButton = styled(Button)({
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({});
+  const { login, isAuthenticate} = useAuthStore();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticate) navigate("/admin/panel/products");
+  }, [isAuthenticate, navigate]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -67,16 +72,13 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      try {
-        const response = await login(formData);
-        if (response) {
-          alert("Inicio de sesión exitoso.");
-          setOpen(false);
-        }
-      } catch (error) {
-        console.error("Error en el inicio de sesión:", error);
-        alert("Error en el inicio de sesión. Verifica tus credenciales.");
-      }
+    try {
+      await login(formData);
+      navigate("/admin/panel/products");
+    } catch (error) {
+      console.log(error);
+      
+    }
   };
 
   const handleChange = (e) => {

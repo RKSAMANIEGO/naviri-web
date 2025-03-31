@@ -24,7 +24,7 @@ const Header = () => {
                 onMouseEnter={() => setShowProductos(true)}
                 onMouseLeave={() => setShowProductos(false)}
             >
-                <a href="#">Productos <FaChevronDown className={styles.iconDropdown}/></a>
+                <Link to="/products">Productos <FaChevronDown className={styles.iconDropdown}/></Link>
                 {showProductos && (
                     <div className={styles.dropdown}>
                         <a href="#" className={styles.productosnew}>

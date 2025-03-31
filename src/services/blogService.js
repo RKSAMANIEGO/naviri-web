@@ -1,13 +1,20 @@
-import api from '../api/api'
+import api from "../api/api"
 
-
-export const getBlogs = async () => {
+// Servicio actualizado
+export const getBlogs = async (page = 1, limit = 5, category = '') => {
     try {
-        const response = await api.get('/blogs');
-        console.log("Respuesta API:", response);
-        return response.data;
+      const response = await api.get('/blogs', {
+        params: {
+          page,
+          limit, // Cambiado a per_page para coincidir con convención común
+          category
+        }
+      })
+      console.log(response);
+      
+      return response
     } catch (error) {
-        console.error("Error al obtener Blogs:", error);
-        return null;
+      console.error("Error al obtener Blogs:", error)
+      return null
     }
-}
+  }
