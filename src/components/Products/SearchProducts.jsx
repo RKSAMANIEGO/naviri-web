@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from '../styles/producto.module.css'
+import styles from '../../styles/producto.module.css'
 
 const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
 

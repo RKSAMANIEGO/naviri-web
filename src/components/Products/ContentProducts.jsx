@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../styles/producto.module.css'
-import {products} from '../utils/products'
+import styles from '../../styles/producto.module.css'
+import {products} from '../../utils/products'
 import PaginationProducts from './PaginationProducts'
 import ModalProducts from './ModalProducts'
 import SearchProducts from './SearchProducts'
