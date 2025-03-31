@@ -46,7 +46,7 @@
 .categoriestitle h2 {
     font-size: 36px;
     color: #B62A69;
-    margin: 20px 0;
+    margin: 100px 0px 20px 0px;
     font-weight: bold;
 }
 
@@ -121,14 +121,13 @@
 
 .buttoncard {
     padding: 10px;
-    background-color: #B62A69;
-    color:white;
-    border-radius: 10px;
+    color: #ff6bbc;
+    font-weight: 700;
     align-items: flex-end;
     margin-top: 30px;
     transition: 0.2s ease-in-out;
 }
 
 .buttoncard:hover{
-    background-color: #ff6bbc;
+    color: rgb(0, 0, 0);
 }

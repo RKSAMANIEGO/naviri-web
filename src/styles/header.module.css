@@ -59,9 +59,10 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    color: #333;
+    color: #000000;
     text-decoration: none;
 }
+
 
 .dropdown {
     display: grid;
@@ -78,6 +79,7 @@
     height: auto;
     width: 600px;
 }
+
 
 
 .sectiondrop1, .sectiondrop2, .sectiondrop3, .sectiondrop4,
