@@ -99,3 +99,78 @@
 .buttonprod:hover {
     background-color: #a83263;
 }
+
+@media (max-width: 1200px) {
+    .grid {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .title {
+        font-size: 30px; 
+    }
+
+    .subtitle {
+        font-size: 18px; 
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .cardproduc {
+        max-width: 85%; 
+    }
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        justify-items: center;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+
+    .subtitle {
+        font-size: 16px; 
+        text-align: center;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .cardproduc {
+        max-width: 100%;
+    }
+
+    .buttonprod {
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 25px; 
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr; 
+        gap: 20px;
+    }
+
+    .cardproduc {
+        max-width: 100%; 
+    }
+
+    .buttonprod {
+        padding: 6px 12px; 
+    }
+}
