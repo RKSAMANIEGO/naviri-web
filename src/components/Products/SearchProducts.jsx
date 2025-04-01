@@ -18,7 +18,10 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
     <div  className={styles.search}>
         <section className='container-search'>
             <label>
-                <input type="text" placeholder='Buscar productos...' value={searchText} onChange={(e)=>setSearchText(e.target.value)} /> 
+                <span>
+                    <input type="text" placeholder='Buscar productos...' value={searchText} onChange={(e)=>setSearchText(e.target.value)} /> 
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </span>
                 <button onClick={searchProducts}>Buscar</button>
             </label>
             

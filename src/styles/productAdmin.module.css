@@ -22,17 +22,39 @@
     align-items: center;
     justify-content: space-between;
 }
+.productSearch div label{
+    position: relative;
+    width: 100%;
+}
 
-.productSearch div input {
-    width: 95%;
+
+.productSearch div label input {
+    width: 100%;
     border: 1px solid rgb(220, 220, 220, 1);
     padding: 5px 50px;
     border-radius: 8px;
 
+    /*
     background-image: url('../assets/image/search.png');
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: calc(3% - 15px) center;
+    */
+}
+.productSearch div label i{
+    position: absolute;
+    left: 12px;
+    top: 3px;
+    border: none;
+    padding: 5px;
+    color: rgb(66, 63, 63);
+ 
+}
+.productSearch div label i:hover{
+    color: rgb(66, 63, 63);
+    background-color: white;
+    border: none;
+
 }
 
 .productSearch div i {
@@ -43,7 +65,7 @@
     cursor: pointer;
 }
 
-.productSearch div i:hover {
+.productSearch  i:hover {
     background-color: #c52e84;
     color: rgb(255, 255, 255);
 }
