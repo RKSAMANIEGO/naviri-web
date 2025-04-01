@@ -176,8 +176,12 @@
 	height: 350px;
 	border-radius: 12px;
 	border: 1px solid rgb(241, 239, 239);
+	transition: all 0.3s ease-in-out;
+	
 }
-
+.sectionProducts:hover{
+	box-shadow: 0 0 15px rgba(255, 68, 171, 1);
+}
 .sectionProducts p {
 	font-size: 13px;
 	color: rgb(137, 135, 135);
@@ -255,7 +259,8 @@
 }
 
 .pagination button:hover {
-	background-color: rgb(205, 205, 205);
+	background-color: rgba(255, 68, 171, 1);
+	color: white;
 }
 
 

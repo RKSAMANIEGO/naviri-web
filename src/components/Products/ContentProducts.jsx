@@ -51,7 +51,7 @@ const ContentProducts = () => {
                         marginBottom:"10px",
                         backgroundImage: `url(${product.imagen})`,  
                         backgroundSize: "80%",
-                        backgroundPosition:"center 70%",
+                        backgroundPosition:"center 60%",
                         borderTopLeftRadius:"10px",
                         borderTopRightRadius:"10px",
                         cursor:"pointer"
