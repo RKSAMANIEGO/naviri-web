@@ -42,11 +42,7 @@ const ContentProducts = () => {
 
             {/*FILTRO DE PRODUCTOS */}
             { productoFiltrado.map((product) => (
-                <section onClick={()=>{
-                    setIsOpen(true)  
-                    const productById= products.find((prod)=> prod.id===product.id);
-                    setProductSelected(productById);
-                }}
+                <section 
                 className={styles.sectionProducts} key={product.id} 
                 >
                     <div style={{
@@ -58,6 +54,12 @@ const ContentProducts = () => {
                         backgroundPosition:"center 70%",
                         borderTopLeftRadius:"10px",
                         borderTopRightRadius:"10px",
+                        cursor:"pointer"
+                    }}
+                    onClick={()=>{
+                        setIsOpen(true)  
+                        const productById= products.find((prod)=> prod.id===product.id);
+                        setProductSelected(productById);
                     }}>
                     </div>
                     <p className={styles.p}>{product.producto}</p>

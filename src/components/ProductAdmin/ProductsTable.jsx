@@ -78,8 +78,8 @@ const ProductsTable = () => {
                         text: 'No podrás revertir esto',
                         icon:"warning",
                         showCancelButton: true,
-                        cancelButtonColor:"rgb(196, 22, 13)",
-                        confirmButtonColor:" rgb(26, 47, 210)",
+                        cancelButtonColor:"rgb(38, 86, 218)",
+                        confirmButtonColor:"rgb(228, 34, 170)",
                         confirmButtonText: 'Sí, eliminar',
                         cancelButtonText:"Cancelar"
                     }).then((result)=>{

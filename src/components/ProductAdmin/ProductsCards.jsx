@@ -63,8 +63,8 @@ const ProductsCards = () => {
                                     showCancelButton:true,
                                     confirmButtonText:"Si, Eliminar",
                                     cancelButtonText:"Cancelar",
-                                    cancelButtonColor:"rgb(196, 22, 13)",
-                                    confirmButtonColor:" rgb(26, 47, 210)"
+                                    cancelButtonColor:"rgb(38, 86, 218)",
+                                    confirmButtonColor:"rgb(228, 34, 170)",
                                 }).then(result => {
                                     if(result.value){
                                         console.log("Se Elimino el Producto con ID "+product.id);

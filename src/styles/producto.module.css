@@ -130,11 +130,14 @@
 
 .search div {
 	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 	gap: 20px;
 }
 
 .search div section {
-	width: 356px;
+	min-width:100px;
+	max-width: 300px;
 }
 
 .search div section p {
