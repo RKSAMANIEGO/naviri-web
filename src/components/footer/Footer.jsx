@@ -42,18 +42,18 @@ const Footer = () => {
             <div className={styles.sectionfooter}>
                 <h3>Contacto</h3>
                 <ul>
-                   <li className={styles.contactItem}>
+                   <li className={styles.contactItem}><a>
                      <MapPin className={styles.icon} size={18} /> Av. Principal 123, Ciudad
-                   </li>
-                   <li className={styles.contactItem}>
+                   </a></li>
+                   <li className={styles.contactItem}><a>
                      <Phone className={styles.icon} size={18} /> +234 456 789
-                   </li>
-                   <li className={styles.contactItem}>
+                   </a></li>
+                   <li className={styles.contactItem}><a>
                      <Mail className={styles.icon} size={18} /> info@beautyglow.com
-                  </li>
-                   <li className={styles.contactItem}>
+                  </a></li>
+                   <li className={styles.contactItem}><a>
                      <Clock className={styles.icon} size={18} /> Lun-Sáb: 9:00 - 20:00
-                  </li>
+                  </a></li>
                 </ul>
             </div>
         </div>

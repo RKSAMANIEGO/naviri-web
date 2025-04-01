@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {FaShoppingCart, FaSearch, FaChevronDown } from 'react-icons/fa';
+import {FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
 import styles from "../../styles/header.module.css";
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,11 @@ const Header = () => {
 
     const [showProductos, setShowProductos] = useState(false);
     const [showCategorias, setShowCategorias] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
+
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
 
 
     return (
@@ -16,8 +21,13 @@ const Header = () => {
             <img src="/src/assets/image/logo-navi.png" alt="logo"/>
         </div>
 
-        <nav className={styles.nav}>
-            <Link to="/">Inicio</Link>
+        <div className={styles.menuIcon} onClick={toggleMenu}>
+            {showMenu ? <FaTimes/> : <FaBars/>}
+        </div>
+
+        <nav className={`${styles.nav} ${showMenu ? styles.show : ""}`}>  
+
+            <Link to="/" onClick={toggleMenu}>Inicio</Link>
 
             <div
                 className={styles.dropnow}
