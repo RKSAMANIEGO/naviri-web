@@ -86,7 +86,7 @@ const ProductsTable = () => {
                         if(result.value){
                             console.log(row.id);
                         }else{
-                            console.log("No se eliminó");
+                            console.log("No se eliminó el Producto con ID "+row.id);
                         }
                     })
                 }}></i>

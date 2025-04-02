@@ -21,12 +21,13 @@ const Sidebar = () => {
 
   const menuItems = [
     { name: 'Inicio', path: '/admin/panel', icon: <FiHome /> },
-    { name: 'Usuarios', path: '/admin/panel/products', icon: <FiUsers /> },
-    { name: 'Configuración', path: '/admin/panel/customers', icon: <FiSettings /> },
+    { name: 'Productos', path: '/admin/panel/products', icon: <FiUsers /> },
+    { name: 'Clientes', path: '/admin/panel/customers', icon: <FiUsers /> },
+    { name: 'Comentarios', path: '/admin/panel/comentary', icon: <FiSettings /> },
   ];
 
   return (
-    <div className={`h-screen flex flex-col transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'} 
+    <div className={`h-screen flex flex-col transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-55'} 
       bg-white dark:bg-gray-800 shadow-lg relative`}>
       
       {/* Botón de colapso */}
@@ -44,10 +45,10 @@ const Sidebar = () => {
 
       {/* Logo */}
       <div className="p-4 pb-2">
-        <h1 className={`text-xl font-bold overflow-hidden transition-all 
+        <h1 className={`text-x font-bold overflow-hidden transition-all 
           ${isCollapsed ? 'text-center opacity-0 w-0' : 'opacity-100 w-full'}
           text-gray-800 dark:text-white`}>
-          MiApp
+          Panel Administrativo
         </h1>
       </div>
 
@@ -57,7 +58,7 @@ const Sidebar = () => {
           <Link
             key={item.name}
             to={item.path}
-            className={`flex items-center p-3 rounded-lg mb-1 group transition-colors
+            className={`flex items-center p-3 rounded-lg mb-1 group transition-colors text-xs
               ${location.pathname === item.path 
                 ? 'bg-blue-500 text-white' 
                 : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200'}

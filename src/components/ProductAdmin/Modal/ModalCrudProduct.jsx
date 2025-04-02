@@ -14,7 +14,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal}) => {
             backgroundColor: '#f9f9f9',
             padding: '20px 30px',
             height:"470px",
-            width:"700px",
+            width:"750px",
         },
         overlay:{
             backgroundColor: 'rgba(0,0,0,0.5)',

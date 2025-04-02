@@ -44,9 +44,9 @@ const ProductsCards = () => {
                                 <p className={styles.p}>{product.producto}</p>
 
                                 {product.id >=5 ?
-                                    <p className={styles.p}><span className={styles.stockValid}><strong>{product.id}</strong></span> Unidades</p>
+                                    <p className={styles.p}><span className={styles.stockValid}><strong>{String(product.id).padStart(2,'0')}</strong></span> Unidades</p>
                                 :
-                                    <p className={styles.p}><span><strong>{product.id}</strong></span> Unidades</p>
+                                    <p className={styles.p}><span><strong>{String(product.id).padStart(2,'0')}</strong></span> Unidades</p>
                                 }   
                                 
                             </div>

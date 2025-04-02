@@ -13,6 +13,8 @@
 
 }
 
+
+
 .section h2 {
 	font-size: 48px;
 	color: white;
@@ -171,6 +173,7 @@
 	padding-block: 40px;
 }
 
+
 .sectionProducts {
 	width: 263px;
 	height: 350px;
@@ -179,12 +182,8 @@
 	transition: all 0.3s ease-in-out;
 	
 }
-.sectionProducts:active {
-	transform: scale(0.9); 
-	color: #555; 
-  }
-
 .sectionProducts:hover{
+	transform: scale(0.9); 
 	box-shadow: 0 0 15px rgba(255, 68, 171, 1);
 }
 .sectionProducts p {
@@ -217,7 +216,7 @@
 }
 
 .contentProducts section button:first-child {
-	padding: 8px 14px;
+	padding: 8px 10px;
 	border: 1px solid rgb(118, 114, 114);
 	border-radius: 4px;
 	font-size: 14px;

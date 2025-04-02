@@ -4,6 +4,7 @@ import LoginPage from '../pages/LoginPage';
 import Products from '../pages/Products';
 import AdminLayout from '../pages/layout/AdminLayout'
 import RequireAuth from './RequireAuth';
+import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 
@@ -28,7 +29,7 @@ const Router = () => {
 
           <Route element={ <RequireAuth/> }>
             <Route element={<AdminLayout />}>
-              <Route path="/admin/panel/products" element={<h1>Productos</h1>} />
+              <Route path="/admin/panel/products" element={<ProductAdmin/>} />
               <Route path="/admin/panel/customers" element={<h1>Clientes</h1>} />
               <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
             </Route>

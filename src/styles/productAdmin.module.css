@@ -4,6 +4,7 @@
     padding: 0px 40px;
 }
 
+
 .productSearch h2 {
     padding-top: 20px;
     font-size: 28px;
@@ -169,7 +170,12 @@
     height: 370px;
     border-radius: 12px;
     border: 1px solid rgb(241, 239, 239);
+    transition: all 0.3s ease-in-out;
 
+}
+.sectionProducts:hover{
+    transform: scale(0.9);
+    box-shadow:  0 0 15px rgba(255, 68, 171, 1);
 }
 
 .sectionProducts p {
@@ -188,7 +194,7 @@
 .contentProductAdmin section>section {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 5px;
     gap: 10px;
