@@ -38,12 +38,12 @@ const ContentProducts = () => {
     <>
         <SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} products={products}/>
         
-        <section className={styles.contentProducts}>
+        <section className={styles.contentProducts} >
 
             {/*FILTRO DE PRODUCTOS */}
             { productoFiltrado.map((product) => (
                 <section 
-                className={styles.sectionProducts} key={product.id} 
+                className={styles.sectionProducts} key={product.id}
                 >
                     <div style={{
                         width:"100%",
