@@ -162,6 +162,7 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 0 20px;
+    padding-bottom: 30px;
     margin-block: 30px;
 }
 
