@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../../assets/image/logo-navi.png'
 import { FiHome, FiUsers, FiSettings, FiMoon, FiSun, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const Sidebar = () => {
@@ -34,7 +35,7 @@ const Sidebar = () => {
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
         className="absolute -right-3 top-4 bg-white dark:bg-gray-700 p-1.5 rounded-full shadow-lg
-                   border-2 border-gray-200 dark:border-gray-600 hover:scale-105 transition-transform"
+                  border-2 border-gray-200 dark:border-gray-600 hover:scale-105 transition-transform"
       >
         {isCollapsed ? (
           <FiChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-300" />
@@ -45,7 +46,13 @@ const Sidebar = () => {
 
       {/* Logo */}
       <div className="p-4 pb-2">
-        <h1 className={`text-x font-bold overflow-hidden transition-all 
+        <div style={{
+          display:"flex",
+          justifyContent:"center"
+        }}>
+          <img src={logo} alt='logo' width='80px'/>
+        </div>
+        <h1 className={`text-x font-bold overflow-hidden transition-all text-center
           ${isCollapsed ? 'text-center opacity-0 w-0' : 'opacity-100 w-full'}
           text-gray-800 dark:text-white`}>
           Panel Administrativo
