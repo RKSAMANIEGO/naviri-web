@@ -1,4 +1,4 @@
-// src/hooks/useBlogs.js
+
 import { useState } from 'react';
 
 const useBlogs = () => {

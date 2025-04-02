@@ -1,4 +1,4 @@
-// src/components/Blogs/BlogActions.jsx
+
 import React from 'react';
 import styles from './blogAdmin.module.css';
 

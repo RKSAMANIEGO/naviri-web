@@ -1,4 +1,4 @@
-// src/components/Blogs/BlogTable.jsx
+
 import React, { useMemo } from 'react';
 import DataTable from 'react-data-table-component';
 import useBlogs from '../../hooks/blog/useBlog';
