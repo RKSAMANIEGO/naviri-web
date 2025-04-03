@@ -1,13 +1,11 @@
-import './App.css'
-import Products from './pages/Products'
+import { BrowserRouter } from "react-router-dom";
+import Router from "./routes/router";
 
 function App() {
-
   return (
-    <>
-      <Products/>
-    </>
+      <BrowserRouter>
+        <Router  />
+     </BrowserRouter>
   )
 }
-
 export default App

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from '../styles/producto.module.css'
+import styles from '../../styles/producto.module.css'
 
 const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
 
@@ -18,7 +18,10 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
     <div  className={styles.search}>
         <section className='container-search'>
             <label>
-                <input type="text" placeholder='Buscar productos...' value={searchText} onChange={(e)=>setSearchText(e.target.value)} /> 
+                <span>
+                    <input type="text" placeholder='Buscar productos...' value={searchText} onChange={(e)=>setSearchText(e.target.value)} /> 
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </span>
                 <button onClick={searchProducts}>Buscar</button>
             </label>
             
@@ -31,6 +34,14 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
                         <option>Todas las categorias</option>
                     </select>
                 </section>
+
+                <section >
+                    <p>Sub Categorias</p>
+                    <select>
+                        <option>Todas las subCategorias</option>
+                    </select>
+                </section>
+
 
                 <section>
                     <p>Precios</p>
@@ -47,6 +58,8 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
                         </select>
             
                 </section>
+
+
             </div>
             
         </section>

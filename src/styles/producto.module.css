@@ -82,28 +82,35 @@
 
 .search label {
 	display: flex;
-	gap: 10px;
+	gap: 7px;
 }
 
-.search label input {
-	width: 90%;
+.search label span {
+	position: relative;
+	width: 100%;
+}
+
+.search label span input {
+	width: 100%;
 	border: 1px solid rgb(118, 114, 114);
 	padding: 12px 17px;
 	border-radius: 15px;
-	background-image: url('../assets/image/search.png');
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: calc(100% - 15px) center;
-	border: 1px solid #ccc;
 }
 
-.search label input::placeholder {
+.search label span i {
+	position: absolute;
+	right: 2.5%;
+	top: 30%;
+	color: rgb(118, 114, 114);
+}
+
+.search label span input::placeholder {
 	font-weight: 600;
 }
 
 .search label button {
-	background: linear-gradient(to right, transparent 50%, rgba(255, 221, 240, 1)50%);
-	background-position: left;
+	background: linear-gradient(to left, transparent 50%, rgba(255, 221, 240, 1)50%);
+	background-position: right;
 	background-size: 200%;
 	transition: all 0.6s ease-in-out;
 	font-weight: 600;
@@ -118,7 +125,7 @@
 }
 
 .search label button:hover {
-	background-position: right;
+	background-position: left;
 	color: rgba(255, 107, 188, 1);
 }
 
@@ -130,11 +137,14 @@
 
 .search div {
 	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 	gap: 20px;
 }
 
 .search div section {
-	width: 356px;
+	min-width: 100px;
+	max-width: 300px;
 }
 
 .search div section p {
@@ -154,8 +164,15 @@
 
 
 /*CONTENT PRODUCTS*/
+.containerProducts {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .contentProducts {
-	width: 100%;
+	min-width: 440px;
+	max-width: 1200px;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -164,11 +181,19 @@
 	padding-block: 40px;
 }
 
+
 .sectionProducts {
 	width: 263px;
 	height: 350px;
 	border-radius: 12px;
 	border: 1px solid rgb(241, 239, 239);
+	transition: all 0.3s ease-in-out;
+
+}
+
+.sectionProducts:hover {
+	transform: scale(0.9);
+	box-shadow: 0 0 15px rgba(255, 68, 171, 1);
 }
 
 .sectionProducts p {
@@ -201,7 +226,7 @@
 }
 
 .contentProducts section button:first-child {
-	padding: 8px 14px;
+	padding: 8px 10px;
 	border: 1px solid rgb(118, 114, 114);
 	border-radius: 4px;
 	font-size: 14px;
@@ -236,6 +261,7 @@
 	display: flex;
 	justify-content: center;
 	gap: 10px;
+	margin-block: 20px;
 }
 
 .pagination button {
@@ -248,7 +274,8 @@
 }
 
 .pagination button:hover {
-	background-color: rgb(205, 205, 205);
+	background-color: rgba(255, 68, 171, 1);
+	color: white;
 }
 
 

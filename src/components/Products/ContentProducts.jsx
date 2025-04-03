@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../styles/producto.module.css'
-import {products} from '../utils/products'
+import styles from '../../styles/producto.module.css'
+import {products} from '../../utils/products'
 import PaginationProducts from './PaginationProducts'
 import ModalProducts from './ModalProducts'
 import SearchProducts from './SearchProducts'
@@ -37,17 +37,13 @@ const ContentProducts = () => {
     return (
     <>
         <SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} products={products}/>
-        
-        <section className={styles.contentProducts}>
+        <div className={styles.containerProducts}>
+        <section className={styles.contentProducts} >
 
             {/*FILTRO DE PRODUCTOS */}
             { productoFiltrado.map((product) => (
-                <section onClick={()=>{
-                    setIsOpen(true)  
-                    const productById= products.find((prod)=> prod.id===product.id);
-                    setProductSelected(productById);
-                }}
-                className={styles.sectionProducts} key={product.id} 
+                <section 
+                className={styles.sectionProducts} key={product.id}
                 >
                     <div style={{
                         width:"100%",
@@ -55,9 +51,15 @@ const ContentProducts = () => {
                         marginBottom:"10px",
                         backgroundImage: `url(${product.imagen})`,  
                         backgroundSize: "80%",
-                        backgroundPosition:"center 70%",
+                        backgroundPosition:"center 60%",
                         borderTopLeftRadius:"10px",
                         borderTopRightRadius:"10px",
+                        cursor:"pointer"
+                    }}
+                    onClick={()=>{
+                        setIsOpen(true)  
+                        const productById= products.find((prod)=> prod.id===product.id);
+                        setProductSelected(productById);
                     }}>
                     </div>
                     <p className={styles.p}>{product.producto}</p>
@@ -75,6 +77,7 @@ const ContentProducts = () => {
             <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected}/>
 
         </section>
+        </div>
     </>
     )
 }

@@ -1,4 +1,5 @@
-import  styles from '../styles/producto.module.css'
+import styles from '../../styles/producto.module.css'
+
 const HeaderProducts = () => {
     return (
         <section className={styles.section}>
