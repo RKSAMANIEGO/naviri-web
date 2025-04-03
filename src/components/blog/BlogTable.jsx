@@ -1,92 +1,70 @@
+import React from 'react';
+import { Table, Button, Popconfirm } from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-import React, { useMemo } from 'react';
-import DataTable from 'react-data-table-component';
-import useBlogs from '../../hooks/blog/useBlog';
-import useBlogActions from '../../hooks/blog/useBlogActions';
-import BlogActions from './BlogActions';
-import styles from './blogAdmin.module.css';
-
-const BlogTable = () => {
-  const { blogs, deleteBlog } = useBlogs();
-  const { handleView, handleEdit, handleDelete } = useBlogActions(deleteBlog);
-
-  const columns = useMemo(() => [
+const BlogTable = ({ blogs, onEdit, onDelete }) => {
+  const columns = [
     {
-      name: 'Título',
-      selector: row => row.titulo,
-      sortable: true,
-      wrap: true,
+      title: 'Título',
+      dataIndex: 'titulo',
+      sorter: (a, b) => a.titulo.localeCompare(b.titulo),
     },
     {
-      name: 'Descripción',
-      cell: row => <div className={styles.descriptionCell}>{row.descripcion}</div>,
-      wrap: true,
+      title: 'Descripción',
+      dataIndex: 'descripcion',
     },
     {
-      name: 'Categoría',
-      selector: row => row.categoria,
-      sortable: true,
-      width: '150px',
+      title: 'Categoría',
+      dataIndex: 'categoria',
+      filters: [
+        { text: 'Tutoriales', value: 'Tutoriales' },
+        { text: 'Tecnología', value: 'Tecnología' },
+      ],
+      onFilter: (value, record) => record.categoria === value,
     },
     {
-      name: 'Imagen',
-      cell: row => (
+      title: 'Imagen',
+      dataIndex: 'imagen',
+      render: (imagen) => (
         <img 
-          src={row.imagen} 
-          alt="Miniatura" 
-          className={styles.imageThumbnail}
+          src={imagen} 
+          alt="Thumbnail" 
+          className="w-12 h-12 object-cover rounded"
+          onError={(e) => {
+            e.target.onerror = null; 
+            e.target.src = 'https://via.placeholder.com/150';
+          }}
         />
       ),
-      width: '120px',
     },
     {
-      name: 'Acciones',
-      cell: (row) => (
-        <BlogActions
-          blog={row}
-          onView={handleView}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
+      title: 'Acciones',
+      render: (_, record) => (
+        <div className="flex gap-2">
+          <Button 
+            icon={<EditOutlined />}
+            onClick={() => onEdit(record)}
+          />
+          <Popconfirm
+            title="¿Eliminar esta entrada?"
+            onConfirm={() => onDelete(record.id)}
+          >
+            <Button danger icon={<DeleteOutlined />} />
+          </Popconfirm>
+        </div>
       ),
-      width: '150px',
-      ignoreRowClick: true,
     },
-  ], [handleView, handleEdit, handleDelete]);
+  ];
 
   return (
-    <div className={styles.tableContainer}>
-      <DataTable
-        title="Gestión de Entradas"
-        columns={columns}
-        data={blogs}
-        pagination
-        paginationPerPage={10}
-        paginationRowsPerPageOptions={[5, 10, 15]}
-        highlightOnHover
-        responsive
-        noDataComponent={
-          <div className={styles.noData}>
-            No se encontraron entradas
-          </div>
-        }
-        customStyles={{
-          cells: {
-            style: {
-              fontSize: '0.9rem',
-              padding: '1rem',
-            },
-          },
-          headCells: {
-            style: {
-              backgroundColor: '#2c3e50',
-              color: 'white',
-              fontSize: '1rem',
-            },
-          },
-        }}
-      />
-    </div>
+    <Table
+      columns={columns}
+      dataSource={blogs}
+      rowKey="id"
+      pagination={{ pageSize: 5 }}
+      bordered
+      scroll={{ x: true }}
+    />
   );
 };
 
