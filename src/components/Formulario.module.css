@@ -1,0 +1,139 @@
+.formContainer {
+    background: linear-gradient(135deg, #c639c6 0%, #8a2be2 100%);
+    padding: 4rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .formContent {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .inputGroup {
+    display: flex;
+    width: 100%;
+    max-width: 550px;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  @media (max-width: 640px) {
+    .inputGroup {
+      flex-direction: column;
+    }
+  
+    .emailInput,
+    .submitButton {
+      width: 100%;
+    }
+  }
+  
+  .emailInput {
+    flex: 1;
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    border: none;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+  
+  .emailInput:focus {
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+  
+  .emailInput::placeholder {
+    color: #888;
+  }
+  
+  .submitButton {
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    border: none;
+    background-color: white;
+    color: #c639c6;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .submitButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .submitButton:active {
+    transform: translateY(0);
+  }
+  
+  .submitButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .message {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 550px;
+    font-size: 0.9rem;
+  }
+  
+  .success {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #2e7d32;
+  }
+  
+  .error {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #d32f2f;
+  }
+  
+  .privacyNote {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1rem;
+  }
+  
+  .privacyLink {
+    color: white;
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
+  }
+  
+  .privacyLink:hover {
+    opacity: 0.8;
+  }
+  
+  

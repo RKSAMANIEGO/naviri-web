@@ -37,7 +37,7 @@ const ContentProducts = () => {
     return (
     <>
         <SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} products={products}/>
-        
+        <div className={styles.containerProducts}>
         <section className={styles.contentProducts} >
 
             {/*FILTRO DE PRODUCTOS */}
@@ -77,6 +77,7 @@ const ContentProducts = () => {
             <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected}/>
 
         </section>
+        </div>
     </>
     )
 }
