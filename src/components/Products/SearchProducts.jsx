@@ -46,7 +46,7 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
                             console.log(e.target.value);
                         }}>
                             <option value={''}>Todos los precios</option>
-                        { [...listPrecios].map(precio => (
+                        { [...listPrecios].sort((a,b) => a-b).map(precio => (
                             <option  key={precio} value={precio}>{precio}</option>     
                         ))}
                         </select>
