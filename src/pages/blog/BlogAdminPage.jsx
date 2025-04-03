@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useDebugValue, useEffect, useState } from 'react';
 import { Form, Input, Button, Upload, Modal, Table, Select, FloatButton } from 'antd';
 import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 import { useBlogAdmin } from '../../hooks/blog/useBlogAdmin'; 
@@ -8,6 +8,7 @@ const BlogAdminPage = () => {
   const [form] = Form.useForm();
   const {
     blogs,
+    loadBlogs,
     isModalVisible,
     currentBlog,
     showModal,
@@ -16,14 +17,33 @@ const BlogAdminPage = () => {
     setIsModalVisible,
   } = useBlogAdmin(form);
 
+  const [pagination, setPagination] = useState({
+    current: 1,
+    pageSize: 5,
+    total: 0,
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await loadBlogs(pagination.current);
+      if (data) {
+        setPagination(prev => ({
+          ...prev,
+          total: data.total,
+        }));
+      }
+    };
+    fetchData();
+  }, [pagination.current]);
+
+  // Manejo de paginación
+  const handlePagination = (page) => {
+    setPagination(prev => ({ ...prev, current: page }));
+  };
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 2; // Cantidad de items por página
-
-  const paginatedBlogs = blogs.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize
-  );
 
   const uploadProps = {
     beforeUpload: (file) => {
@@ -47,7 +67,7 @@ const BlogAdminPage = () => {
       {/* tabla */}
       <Table
         columns={columns}
-        dataSource={paginatedBlogs}
+        dataSource={blogs}
         rowKey="id"
         pagination={false}
         scroll={{ x: true }}
@@ -62,19 +82,25 @@ const BlogAdminPage = () => {
       />
 
       {/* seccion de paginado */}
-      <div className="flex justify-end gap-2 mt-4">
-        <Button 
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage(currentPage - 1)}
-        >
-          Anterior
-        </Button>
-        <Button 
-          disabled={currentPage * pageSize >= blogs.length}
-          onClick={() => setCurrentPage(currentPage + 1)}
-        >
-          Siguiente
-        </Button>
+      <div className="flex justify-between items-center mt-4">
+        <span>
+          Mostrando {(pagination.current - 1) * pagination.pageSize + 1} - 
+          {Math.min(pagination.current * pagination.pageSize, pagination.total)} de {pagination.total}
+        </span>
+        <div className="flex gap-2">
+          <Button 
+            disabled={pagination.current === 1}
+            onClick={() => handlePagination(pagination.current - 1)}
+          >
+            Anterior
+          </Button>
+          <Button 
+            disabled={pagination.current * pagination.pageSize >= pagination.total}
+            onClick={() => handlePagination(pagination.current + 1)}
+          >
+            Siguiente
+          </Button>
+        </div>
       </div>
 
       {/* modal para editar y registrar */}
@@ -90,25 +116,24 @@ const BlogAdminPage = () => {
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item
             label="Título"
-            name="titulo"
+            name="title"
             rules={[{ required: true, message: '¡Por favor ingresa el título!' }]}
           >
             <Input placeholder="Título del blog" />
           </Form.Item>
 
-          <Form.Item label="Descripción" name="descripcion">
+          <Form.Item label="Descripción" name="description">
             <Input.TextArea rows={4} />
           </Form.Item>
 
           <Form.Item
             label="Categoría"
-            name="categoria"
+            name="category"
             rules={[{ required: true, message: '¡Selecciona una categoría!' }]}
           >
             <Select placeholder="Selecciona una categoría">
-              <Option value="Tutoriales">Tutoriales</Option>
-              <Option value="Tecnología">Tecnología</Option>
-              <Option value="Desarrollo">Desarrollo</Option>
+              <Option value={1}>Aceites</Option>
+              <Option value={2}>Aromas</Option>
             </Select>
           </Form.Item>
 

@@ -1,36 +1,54 @@
 
 import { useState } from 'react';
-import { message, Button } from 'antd';
+import { message, Button, Image, Modal } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import React from 'react';
+import { createBlog, deleteBlog, getBlogs, updateBlog } from '../../services/blogService';
 
 export const useBlogAdmin = (form) => {
   const [blogs, setBlogs] = useState([
     {
       id: 1,
-      titulo: 'Introducción a React',
-      descripcion: 'Conceptos básicos...',
-      categoria: 'Tutoriales',
-      imagen: 'https://via.placeholder.com/150',
+      title: '¿ Sabias Que ?',
+      description: 'Conceptos básicos...',
+      categoria: {
+        id: 1,
+        name: "Aromas"
+      },
+      image: {
+        url: "https://example.com"
+      },
     },
   ]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentBlog, setCurrentBlog] = useState(null);
 
+  const loadBlogs = async (page = 1) => {
+    try {
+      const response = await getBlogs(page);
+      if (response?.data) {
+        setBlogs(response.data.data);
+        return response.data;
+      }
+    } catch (error) {
+      message.error('Error al cargar los blogs');
+    }
+  };
+
   const handleEdit = (blog) => {
     setCurrentBlog(blog);
     form.setFieldsValue({
-      ...blog,
-      imagen: blog.imagen
-        ? [
-            {
-              uid: '-1',
-              name: 'imagen',
-              status: 'done',
-              url: blog.imagen,
-            },
-          ]
-        : [],
+      title: blog.title,
+      description: blog.description,
+      category: blog.category?.id,
+      imagen: blog.image?.url ? [
+        {
+          uid: '-1',
+          name: 'image',
+          status: 'done',
+          url: blog.image.url,
+        }
+      ] : []
     });
     setIsModalVisible(true);
   };
@@ -40,17 +58,17 @@ export const useBlogAdmin = (form) => {
     setIsModalVisible(true);
     if (blog) {
       form.setFieldsValue({
-        ...blog,
-        imagen: blog.imagen
-          ? [
-              {
-                uid: '-1',
-                name: 'imagen',
-                status: 'done',
-                url: blog.imagen,
-              },
-            ]
-          : [],
+        title: blog.title,
+        description: blog.description,
+        category: blog.category?.id,
+        imagen: blog.image?.url ? [
+          {
+            uid: '-1',
+            name: 'image',
+            status: 'done',
+            url: blog.image.url,
+          }
+        ] : []
       });
     } else {
       form.resetFields();
@@ -67,61 +85,90 @@ export const useBlogAdmin = (form) => {
 
   const handleSubmit = async (values) => {
     try {
-      const imagenUrl =
-        values.imagen?.[0]?.url ||
-        (await convertFileToUrl(values.imagen?.[0]?.originFileObj));
-      const blogData = { ...values, imagen: imagenUrl };
-
+      const imagenUrl = values.imagen?.[0]?.url || 
+                      await convertFileToUrl(values.imagen?.[0]?.originFileObj);
+  
+      const blogData = {
+        title: values.title,
+        description: values.description, 
+        category_id: values.category, 
+        image: imagenUrl
+      };
+  
+      let response;
       if (currentBlog) {
-        setBlogs((prev) =>
-          prev.map((b) => (b.id === currentBlog.id ? { ...blogData, id: b.id } : b))
-        );
+        response = await updateBlog(currentBlog.id, blogData);
       } else {
-        setBlogs((prev) => [...prev, { ...blogData, id: Date.now() }]);
+        response = await createBlog(blogData);
       }
-
-      setIsModalVisible(false);
-      form.resetFields();
-      message.success('¡Entrada guardada exitosamente!');
+  
+      if (response.data) {
+        await loadBlogs(pagination.current); 
+        message.success(`¡Entrada ${currentBlog ? 'actualizada' : 'creada'}!`);
+        setIsModalVisible(false);
+        form.resetFields();
+      }
     } catch (error) {
-      message.error('Error al guardar la entrada');
+      message.error(error.response?.data?.message || 'Error al guardar');
     }
   };
 
-  const handleDelete = (id) => {
-    setBlogs((prev) => prev.filter((blog) => blog.id !== id));
-    message.success('¡Entrada eliminada!');
+
+  const handleDelete = async (id) => {
+    Modal.confirm({
+      title: '¿Eliminar Blog?',
+      content: 'Esta acción no se puede deshacer',
+      okText: 'Eliminar',
+      okType: 'danger',
+      cancelText: 'Cancelar',
+      async onOk() {
+        try {
+          await deleteBlog(id);
+          setBlogs(prev => prev.filter(blog => blog.id !== id));
+          message.success('¡Entrada eliminada!');
+        } catch (error) {
+          message.error(error.message);
+        }
+      }
+    });
   };
 
   const columns = [
     {
       title: 'Título',
-      dataIndex: 'titulo',
-      sorter: (a, b) => a.titulo.localeCompare(b.titulo),
+      dataIndex: 'title',
+      sorter: (a, b) => a.title.localeCompare(b.title),
+      width: "20%"
     },
     {
       title: 'Descripción',
-      dataIndex: 'descripcion',
+      dataIndex: 'description',
+      render: (_, record) =>(
+        <p className='line-clamp-3 '>
+          {record.description}
+        </p>
+      ),
+      width: "35%"
     },
     {
       title: 'Categoría',
-      dataIndex: 'categoria',
+      render: (_, record) => record.category?.name,
       filters: [
-        { text: 'Tutoriales', value: 'Tutoriales' },
-        { text: 'Tecnología', value: 'Tecnología' },
+        { text: 'Aceites', value: 'Aceites' },
+        // Agrega más categorías según tu API
       ],
-      onFilter: (value, record) => record.categoria === value,
+      onFilter: (value, record) => record.category.name === value,
+      width: "10%"
     },
     {
       title: 'Imagen',
-      dataIndex: 'imagen',
-      render: (imagen) => (
-        <img
-          src={imagen}
-          alt="thumbnail"
-          style={{ width: 50, height: 50, objectFit: 'cover' }}
+      render: (_, record) => (
+        <Image
+          src={record.image?.url || 'https://via.placeholder.com/150'}
+          style={{ width: 90, height: 80, objectFit: 'cover' }}
         />
       ),
+      width: "10%"
     },
     {
       title: 'Acciones',
@@ -131,6 +178,7 @@ export const useBlogAdmin = (form) => {
           <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)} />
         </div>
       ),
+      width: "15%"
     },
   ];
 
@@ -138,6 +186,7 @@ export const useBlogAdmin = (form) => {
     blogs,
     isModalVisible,
     currentBlog,
+    loadBlogs,
     showModal,
     handleEdit,
     handleSubmit,
