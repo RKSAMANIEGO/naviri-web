@@ -1,5 +1,6 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import styles from "./footer.module.css";
+import { Link } from "react-router-dom";
+import styles from "../../styles/footer.module.css"
 
 
 const Footer = () => {
@@ -8,10 +9,10 @@ const Footer = () => {
         <div className={styles.container}>
             <div className={styles.sectionfooter}>
                 <img src ="/src/assets/image/logo-navi.png" className={styles.logo}/>
-                <p className={styles.footerdescrip}>
-                    Tu destino de belleza integral, donde la calidad y los mejores productos
-                    se unen para realzar tu belleza natural.
-                </p>
+                <h1 className={styles.footerdescrip}>
+                    <p>Tu destino de belleza integral, donde la calidad y los mejores productos
+                    se unen para realzar tu belleza natural.</p>
+                </h1>
             </div>
 
             <div className={styles.sectionfooter}>
@@ -32,6 +33,8 @@ const Footer = () => {
                     <li><a href="#">Más vendidos</a></li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Productos Naturales</a></li>
+                    <li><Link to="/policity">Politicas</Link></li>
+                    <li><Link to="/blog">Blogs</Link></li>
                 </ul>
             </div>
 
