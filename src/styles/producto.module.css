@@ -33,18 +33,27 @@
 	justify-content: center;
 	gap: 100px;
 	padding: 20px;
+	transition: all 0.3s ease-in-out;
 }
+
 
 .options a {
 	height: 40px;
-	width: 40px;
-	min-width: 40px;
+	width: 100%;
+	min-width: 20px;
+	max-width: 40px;
 	background-color: rgba(255, 221, 240, 1);
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+}
+
+.options {
+	max-width: 100%;
+	min-width: 350px;
+
 }
 
 .options a:hover {
@@ -56,6 +65,8 @@
 	color: rgba(255, 107, 188, 1);
 	font-weight: bold;
 }
+
+
 
 
 /*SEARCH TITLE*/
@@ -137,10 +148,12 @@
 
 .search div {
 	display: flex;
-	justify-content: center;
 	flex-wrap: wrap;
 	gap: 20px;
+
 }
+
+
 
 .search div section {
 	min-width: 100px;
@@ -151,6 +164,34 @@
 	font-size: 18px;
 	font-weight: 600;
 	padding: 10px 0;
+}
+
+@media(max-width:850px) {
+	.options {
+		gap: 80px;
+	}
+
+	.search div section {
+		min-width: 100%;
+	}
+}
+
+@media(max-width:650px) {
+	.options {
+		gap: 60px;
+	}
+}
+
+@media(max-width:520px) {
+	.options {
+		gap: 40px;
+	}
+}
+
+@media(max-width:400px) {
+	.options {
+		gap: 20px;
+	}
 }
 
 .search div section select {

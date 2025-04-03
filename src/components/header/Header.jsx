@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {FaShoppingCart, FaSearch, FaChevronDown } from 'react-icons/fa';
+import logo from '../../assets/image/logo-navi.png'
 import styles from "../../styles/header.module.css";
 import { Link } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const Header = () => {
 
     <header className={styles.header}>
         <div className={styles.logo}>
-            <img src="/src/assets/image/logo-navi.png" alt="logo"/>
+            <img src={logo} alt="logo"/>
         </div>
 
         <nav className={styles.nav}>
