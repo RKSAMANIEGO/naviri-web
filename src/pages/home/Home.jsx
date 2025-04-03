@@ -3,6 +3,9 @@ import BlogCard from "../../components/blog/BlogCard";
 import SectionPrincipal from "../../pages/sectionPrincipal/SectionPrincipal";
 import SectionCategorias from "../sectionCategorias/sectionCategorias";
 import SectionRecomendacion from "../sectionRecomendacion/sectionRecomendacion";
+import Sectionaboutushome from "../sectionAboutUshome/Sectionaboutushome";
+import Sectionaboutus from "../sectionAboutUs/sectionaboutus";
+
 
 export const Home = () => {
    
@@ -59,7 +62,9 @@ const blogsMock = [
       <SectionPrincipal/>
        <hr className=" text-gray-50"/>
        <div className="max-w-7xl mx-auto">
+      <Sectionaboutushome/>
       <SectionCategorias/>
+      <Sectionaboutus/>
       <SectionRecomendacion/>      
 
          <div className="w-full text-end my-4">

@@ -40,7 +40,7 @@ const Carousel = () => {
                     </div>
                 </div>
                 <div className={styles.imaged}>
-                <img src="/src/assets/image/mujer2.png" alt="Belleza" />
+                <img src="/src/assets/image/mujer4.png" alt="Belleza" />
                 </div>
             </SwiperSlide>
           
