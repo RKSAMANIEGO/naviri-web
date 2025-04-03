@@ -15,7 +15,8 @@
     "@headlessui/react": "^2.2.0",
     "@mui/material": "^7.0.1",
     "@tailwindcss/vite": "^4.0.17",
-    "@tanstack/react-query": "^5.71.5",
+
+    "@tanstack/react-query": "^5.69.0",
     "axios": "^1.8.4",
     "lucide-react": "^0.484.0",
     "react": "^18.2.0",
@@ -26,8 +27,6 @@
     "react-router-dom": "^7.4.0",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.16",
-    "sweetalert2": "^11.17.2",
     "swiper": "^11.2.6",
     "tailwindcss": "^4.0.17",
     "zustand": "^5.0.3"
