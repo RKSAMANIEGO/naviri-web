@@ -4,7 +4,7 @@ import BlogCard from "../../components/blog/BlogCard";
 import SectionPrincipal from "../../pages/sectionPrincipal/SectionPrincipal";
 import SectionCategorias from "../sectionCategorias/sectionCategorias";
 import RecommendedSection from "../../components/cards/RecommendedSection";
-import Testimonios from '../SectionTestimonios/TestimonioPrincipal'
+
 
 
 export const Home = () => {
@@ -88,7 +88,7 @@ const blogsMock = [
          </div>
           */}
          
- 
+
       </>
    )
 }

@@ -29,18 +29,12 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
 
             <div>   
                 <section >
-                    <p>Categorias</p>
+                    <p>Sub categorias</p>
                     <select>
                         <option>Todas las categorias</option>
                     </select>
                 </section>
 
-                <section >
-                    <p>Sub Categorias</p>
-                    <select>
-                        <option>Todas las subCategorias</option>
-                    </select>
-                </section>
 
 
                 <section>
