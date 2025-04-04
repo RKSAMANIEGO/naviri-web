@@ -1,13 +1,20 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import {PolicyPage, HomePage, MainLayout, BlogPage, BlogDetailsPage}  from '../pages/index';
+import {
+  PolicyPage, 
+  HomePage, 
+  AdminLayout, 
+  MainLayout, 
+  BlogPage, 
+  BlogDetailsPage, 
+  BlogAdminPage
+}  from '../pages/index';
+
 import LoginPage from '../pages/LoginPage';
 import Products from '../pages/Products';
-import AdminLayout from '../pages/layout/AdminLayout'
 import RequireAuth from './RequireAuth';
 import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
-import BlogAdminPage from '../pages/blog/BlogAdminPage';
 
 const Router = () => {
    const { initialize } = useAuthStore();
