@@ -5,7 +5,7 @@ import SectionCategorias from "../sectionCategorias/sectionCategorias";
 import SectionRecomendacion from "../sectionRecomendacion/sectionRecomendacion";
 import Sectionaboutushome from "../sectionAboutUshome/Sectionaboutushome";
 import Sectionaboutus from "../sectionAboutUs/sectionaboutus";
-
+import Sectionservices from "../sectionServices/sectionservices";
 
 export const Home = () => {
    
@@ -63,8 +63,9 @@ const blogsMock = [
        <hr className=" text-gray-50"/>
        <div className="max-w-7xl mx-auto">
       <Sectionaboutushome/>
-      <SectionCategorias/>
       <Sectionaboutus/>
+      <SectionCategorias/> 
+      <Sectionservices/>
       <SectionRecomendacion/>      
 
          <div className="w-full text-end my-4">
