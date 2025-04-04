@@ -19,12 +19,16 @@ const sectionaboutus = () => {
 
 
     return (
-        <div>
+        <div className={styles.section}>
         {aboutUs ? (
+          <>
+          <div className={styles.container}>
+            <h1 className={styles.title}>Valores de la empresa</h1>
+          </div>
           <div className={styles.containerabout}>
             <div className={styles.leftColumn}>
               {aboutUs.images ? (
-                <img className={styles.image} src={aboutUs.images} alt="Imagen sobre nosotros" />
+                <img className={styles.image} src={aboutUs.images.url} alt="Imagen sobre nosotros" />
               ) : (
                 <p>No hay imágenes disponibles</p>
               )}
@@ -44,6 +48,8 @@ const sectionaboutus = () => {
               </div>
             </div>
           </div>
+          </>
+        
         ) : (
           <p>Cargando datos...</p>
         )}
