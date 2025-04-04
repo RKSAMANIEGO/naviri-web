@@ -1,14 +1,19 @@
 import { useState } from 'react'
 import styles from '../../styles/producto.module.css'
 
-const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
+const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,products}) => {
 
     const[searchText,setSearchText]=useState("");
     const[valuePrecio,setValuePrecio]=useState(0);
+    const[valueCategorie,setValueCategorie]=useState("");
 
     //PRECIOS
-    const precios= products.map(obj => obj.precio);
+    const precios= products?.map(obj => obj.price);
     const listPrecios= new Set(precios);
+
+    //SUB CATEGORIAS 
+    const categories= products?.map(obj => obj.sub_categories[0].name);
+    const listCat=new Set(categories);
 
     const searchProducts = () =>{
             recibirTextInput(searchText);
@@ -30,8 +35,19 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
             <div>   
                 <section >
                     <p>Sub categorias</p>
-                    <select>
-                        <option>Todas las categorias</option>
+                    <select value={valueCategorie} onChange={(e)=>{
+                                setValueCategorie(e.target.value);
+                                recibirCategories(e.target.value);
+                            }} style={{textTransform:"capitalize"}}>
+                        
+                        <option value=''>Todas las sub categorias</option>
+
+                        {[...listCat].map( (cat,index)=> (
+                            <option key={index} >
+                                {cat}
+                            </option>
+                        ))}
+                        
                     </select>
                 </section>
 
@@ -43,7 +59,6 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,products}) => {
                         <select value={valuePrecio} onChange={(e)=>{
                             setValuePrecio(e.target.value)
                             recibirValuePrecio(e.target.value)
-                            console.log(e.target.value);
                         }}>
                             <option value={''}>Todos los precios</option>
                         { [...listPrecios].sort((a,b) => a-b).map(precio => (
