@@ -23,7 +23,8 @@
     align-items: center;
     justify-content: space-between;
 }
-.productSearch div label{
+
+.productSearch div label {
     position: relative;
     width: 100%;
 }
@@ -42,16 +43,18 @@
     background-position: calc(3% - 15px) center;
     */
 }
-.productSearch div label i{
+
+.productSearch div label i {
     position: absolute;
     left: 12px;
     top: 3px;
     border: none;
     padding: 5px;
     color: rgb(66, 63, 63);
- 
+
 }
-.productSearch div label i:hover{
+
+.productSearch div label i:hover {
     color: rgb(66, 63, 63);
     background-color: white;
     border: none;
@@ -66,7 +69,7 @@
     cursor: pointer;
 }
 
-.productSearch  i:hover {
+.productSearch i:hover {
     background-color: #c52e84;
     color: rgb(255, 255, 255);
 }
@@ -113,14 +116,14 @@
 /***BTN ADD PRODUCT**/
 .addProduct {
     background-color: rgba(255, 107, 188, 1);
-    border: 5px solid white;
+    border: 3px solid white;
     color: white;
     width: 45px;
     height: 45px;
     border-radius: 50%;
     position: fixed;
     right: 40px;
-    bottom: 20px;
+    bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,8 +167,7 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 0 20px;
-    padding-bottom: 30px;
-    margin-block: 30px;
+    padding-bottom: 10px;
 }
 
 .sectionProducts {
@@ -176,9 +178,10 @@
     transition: all 0.3s ease-in-out;
 
 }
-.sectionProducts:hover{
+
+.sectionProducts:hover {
     transform: scale(0.9);
-    box-shadow:  0 0 15px rgba(255, 68, 171, 1);
+    box-shadow: 0 0 15px rgba(255, 68, 171, 1);
 }
 
 .sectionProducts p {
@@ -284,24 +287,26 @@
     font-weight: 600;
 }
 
-.productoAdminCrud form .sectionLast .wrapperBtnProducts{  
+.productoAdminCrud form .sectionLast .wrapperBtnProducts {
     display: flex;
     justify-content: end;
     align-items: center;
     gap: 10px;
     margin-block: 10px;
 }
-.productoAdminCrud form .sectionLast .wrapperBtnProducts button{
+
+.productoAdminCrud form .sectionLast .wrapperBtnProducts button {
     height: 30px;
-    border:1px solid rgb(255, 255, 255);
-    padding:0 15px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 0 15px;
     border-radius: 5px;
     font-size: 14px;
     background-color: #c52e84;
     color: white;
     cursor: pointer;
 }
-.productoAdminCrud form .sectionLast .wrapperBtnProducts button:hover{
+
+.productoAdminCrud form .sectionLast .wrapperBtnProducts button:hover {
     background-color: #5128da;
 }
 
@@ -322,7 +327,7 @@ select {
 
 .productoAdminCrud form .sectionLast label div {
     border: 1px solid rgb(173, 170, 170);
-    border-radius:5px;
+    border-radius: 5px;
     font-size: 12px;
     padding: 10px;
     display: flex;
@@ -330,30 +335,38 @@ select {
     align-items: center;
     cursor: pointer;
 }
-.productoAdminCrud form .sectionLast label div i{
+
+.productoAdminCrud form .sectionLast label div i {
     font-size: 21px;
     padding-block: 10px;
 }
-.productoAdminCrud form .sectionLast label div input{
+
+.productoAdminCrud form .sectionLast label div input {
     display: none;
 }
-.productoAdminCrud form .sectionLast label div p{
-    color:rgb(173, 170, 170); 
+
+.productoAdminCrud form .sectionLast label div p {
+    color: rgb(173, 170, 170);
 }
-.productoAdminCrud form .sectionLast label div label{
+
+.productoAdminCrud form .sectionLast label div label {
     padding: 5px 10px;
     border: 1px solid rgb(173, 170, 170);
     border-radius: 5px;
     margin-block: 10px;
     cursor: pointer;
 }
-.productoAdminCrud form .sectionLast label div label:hover{
+
+.productoAdminCrud form .sectionLast label div label:hover {
     background-color: black;
     color: white;
 }
-input,textarea::placeholder{
+
+input,
+textarea::placeholder {
     font-size: 14px;
 }
+
 .productoAdminCrud form .sectionLast .descripcion {
     display: flex;
     flex-direction: column;
@@ -365,7 +378,8 @@ input,textarea::placeholder{
     padding: 10px;
     resize: none;
 }
-.closeModal{
+
+.closeModal {
     position: absolute;
     top: 20px;
     right: 40px;
@@ -373,6 +387,7 @@ input,textarea::placeholder{
     cursor: pointer;
     font-weight: 600;
 }
-.closeModal:hover{
+
+.closeModal:hover {
     color: #c52e84;
 }
