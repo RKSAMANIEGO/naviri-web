@@ -7,6 +7,7 @@ const Sidebar = () => {
             
             <section className={styles.wrapperSidebar}>
                 <ul>
+                    <li><i className="fa-solid fa-hand-holding-droplet"></i>Administrador</li>
                     <li><i className="fa-solid fa-hand-holding-droplet"></i>Productos</li>
                     <li><i className="fa-solid fa-handshake"></i> Clientes</li>
                     <li><i className="fa-solid fa-comments"></i> Comentarios</li>
