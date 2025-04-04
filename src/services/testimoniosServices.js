@@ -56,6 +56,41 @@ export const getTestimoniosPage = async(page=1, limit=5) => {
   
 }
 
+export const deleteTestimonio = async(id) => {
+    
+    try {
+        const response=await api.delete(`/testimonies/${id}`);
+        console.log(response)
+
+        return response.data;
+        
+    // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+        console.log("Error")
+        return null
+    }
+  
+}
+
+
+
+
+
+export const updateTestimonio = async(id,data) => {
+    console.log(data)
+    try {
+        const response=await api.put(`/testimonies/${id}`, data);
+        console.log(response)
+
+        return response.data;
+        
+    // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+        console.log("Error")
+        return null
+    }
+  
+}
 
 
 

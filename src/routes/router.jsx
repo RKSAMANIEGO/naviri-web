@@ -16,6 +16,7 @@ import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
 
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
+import ComentAdminPage from '../pages/ComentsAdmin/ComentAdminPage';
 
 const Router = () => {
    const { initialize } = useAuthStore();
