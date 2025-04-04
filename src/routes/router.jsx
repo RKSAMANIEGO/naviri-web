@@ -7,6 +7,7 @@ import RequireAuth from './RequireAuth';
 import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
+import BlogAdminPage from '../pages/blog/BlogAdminPage';
 
 const Router = () => {
    const { initialize } = useAuthStore();
@@ -32,6 +33,7 @@ const Router = () => {
               <Route path="/admin/panel/products" element={<ProductAdmin/>} />
               <Route path="/admin/panel/customers" element={<h1>Clientes</h1>} />
               <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
+              <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
             </Route>
           </Route>
 
