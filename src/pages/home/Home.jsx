@@ -1,8 +1,9 @@
+
 import { useNavigate } from "react-router-dom";
 import BlogCard from "../../components/blog/BlogCard";
 import SectionPrincipal from "../../pages/sectionPrincipal/SectionPrincipal";
 import SectionCategorias from "../sectionCategorias/sectionCategorias";
-import SectionRecomendacion from "../sectionRecomendacion/sectionRecomendacion";
+import SectionRecomendacion from "../../pages/sectionRecomendacion/sectionRecomendacion";
 import Sectionaboutushome from "../sectionAboutUshome/Sectionaboutushome";
 import Sectionaboutus from "../sectionAboutUs/sectionaboutus";
 import Sectionservices from "../sectionServices/sectionservices";
@@ -12,7 +13,8 @@ export const Home = () => {
    const navigate = useNavigate();
    const handleBlogMore = () => {
       navigate('/blog');
-    }
+   }
+
 
 const blogsMock = [
    {
@@ -62,23 +64,32 @@ const blogsMock = [
       <SectionPrincipal/>
        <hr className=" text-gray-50"/>
        <div className="max-w-7xl mx-auto">
-      <Sectionaboutushome/>
-      <Sectionaboutus/>
-      <SectionCategorias/> 
-      <Sectionservices/>
-      <SectionRecomendacion/>      
+       <Sectionaboutushome/>
+       <Sectionaboutus/>
+       <SectionCategorias/>
+       <Sectionservices/>
+       <SectionRecomendacion/>   
+      
 
          <div className="w-full text-end my-4">
             <button className=" p-2 rounded-full cursor-pointer"
                onClick={handleBlogMore}
             >Explorar</button>
          </div>
-          <div className="grid md:grid-cols-4 gap-8">
+            <div className="grid md:grid-cols-4 gap-8">
             {blogsMock.map((blog) => (
             <BlogCard key={blog.id} blog={blog} />
             ))}   
-          </div>
-       </div>
+            </div>
+         </div> 
+         
+         {/*
+         <div id="testimonio">
+            <Testimonios/>
+         </div>
+          */}
+         
+
       </>
    )
 }

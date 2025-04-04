@@ -1,14 +1,15 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/footer.module.css"
+import logo from '../../assets/image/logo-navi.png'
 
 
 const Footer = () => {
-   return (
+  return (
       <footer className={styles.footer}>
         <div className={styles.container}>
             <div className={styles.sectionfooter}>
-                <img src ="/src/assets/image/logo-navi.png" className={styles.logo}/>
+                <img src ={logo} className={styles.logo}/>
                 <h1 className={styles.footerdescrip}>
                     <p>Tu destino de belleza integral, donde la calidad y los mejores productos
                     se unen para realzar tu belleza natural.</p>
@@ -58,7 +59,7 @@ const Footer = () => {
             </div>
         </div>
       </footer>
-   );
+    );
 
 };
 

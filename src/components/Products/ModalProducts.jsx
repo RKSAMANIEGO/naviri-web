@@ -3,10 +3,9 @@ import styles from '../../styles/producto.module.css'
 import { useEffect, useState } from 'react'
 
 Modal.setAppElement("#root")
-
+    
 const ModalProducts = ({isOpen,onClose,product}) => {
     const[stock,setStock]=useState(0);
-
 
     useEffect(()=>{
         setStock(0);
@@ -40,11 +39,11 @@ const ModalProducts = ({isOpen,onClose,product}) => {
                 }
             }}
             >
-
+            {(product && isOpen) &&
             <div className={styles.modalProducts}>
                 <section className={styles.section} style={
                     {
-                        backgroundImage: `url(${product.imagen})`,
+                        backgroundImage: `url(${product.image.url})`,
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }
@@ -52,10 +51,10 @@ const ModalProducts = ({isOpen,onClose,product}) => {
                     
                 </section>
                 <section className={styles.sectionLast}>
-                    <p className={styles.p}>{product.producto}</p>
-                    <h2 className={styles.h2}>{product.subCategoria}</h2>
-                    <p className={styles.precio}>S/{product.precio}</p>
-                    <p className={styles.descripcion}>{product.descripcion}</p>
+                    <p className={styles.p}>{product.sub_categories[0].name}</p>
+                    <h2 className={styles.h2}>{product.name.toUpperCase()}</h2>
+                    <p className={styles.precio}>S/{product.price}</p>
+                    <p className={styles.descripcion}>{product.name}</p>
                     <h3 className={styles.h3}>Cantidad</h3>
                     <div className={styles.stock}>
                         <button className={styles.button} onClick={decrementStock}>-</button>
@@ -86,6 +85,7 @@ const ModalProducts = ({isOpen,onClose,product}) => {
                     
                 </section>
             </div>
+            }
             </Modal>
 
 

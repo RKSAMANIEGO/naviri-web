@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import {FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
+import {FaShoppingCart, FaSearch, FaChevronDown } from 'react-icons/fa';
 import styles from "../../styles/header.module.css";
 import { Link } from 'react-router-dom';
+import logo from "../../assets/image/logo-navi.png";
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 const Header = () => {
 
@@ -18,7 +20,7 @@ const Header = () => {
 
     <header className={styles.header}>
         <div className={styles.logo}>
-            <img src="/src/assets/image/logo-navi.png" alt="logo"/>
+            <img src={logo} alt="logo"/>
         </div>
 
         <div className={styles.menuIcon} onClick={toggleMenu}>
