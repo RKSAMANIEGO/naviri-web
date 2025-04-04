@@ -30,8 +30,6 @@ const Sectionaboutushome = () => {
                 </div>
             ) : (
                 <p className={style.textcarg}>cargando datos..</p>
-            
-
             )}
         </div>
      
