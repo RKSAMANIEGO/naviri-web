@@ -1,7 +1,7 @@
 .aboutContainer {
-    background-color: #ffffff;
+    background-color: #fdf4f9;
     font-family: Inter, 'san-serif';
-    margin: 80px 0px 60px 0px;
+    padding: 80px 0px 80px 0px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -9,7 +9,7 @@
 }
   
 .title {
-    font-size: 40px;
+    font-size: 45px;
     color:rgb(182, 42, 105);
     font-weight: 700;
     text-align: center;
@@ -31,6 +31,13 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+image:hover {
+    opacity: 1;
 }
   
 .textcarg {
