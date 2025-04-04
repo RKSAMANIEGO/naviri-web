@@ -24,17 +24,17 @@ const Router = () => {
     }, [initialize]);
 
     return (
-        <Routes>
+      <Routes>
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
             <Route path="/policity" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
-            <Route path="/login" element={<LoginPage />} />  
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
 
+          <Route path="/login" element={<LoginPage />} />  
           <Route element={ <RequireAuth/> }>
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/products" element={<ProductAdmin/>} />
