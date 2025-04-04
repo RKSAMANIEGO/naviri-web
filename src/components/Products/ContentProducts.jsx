@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/producto.module.css'
-import {products} from '../../utils/products'
 import PaginationProducts from './PaginationProducts'
 import ModalProducts from './ModalProducts'
 import SearchProducts from './SearchProducts'
+import {listProducts} from '../../services/productService'
 
 const ContentProducts = () => {
 
@@ -11,45 +11,93 @@ const ContentProducts = () => {
     const [productSelected,setProductSelected]=useState({});
     const [textSearch,setTextSearch]=useState("");
     const [filterPrecio,setFilterPrecio]=useState("");
+    const [filterCategorie,setFilterCategorie]=useState("");
     const [productoFiltrado,setProductoFiltrado]=useState([]);
+    const [dataProducts,setDataProducts]=useState(null);
+    const [totalPages,setTotalPages]=useState(null);
+    const [numPage,setNumPage]=useState(null);
+    const [allProducts,setAllProducts]=useState([]);
+    const [totalProducts,setTotalProducts]=useState(null)
 
+    //recibir data de filtros productos, precio y categoria
     const recibirTextSearch =(data)=>{
         setTextSearch(data);
     }
     const recibirFiltroPrecio=(precio)=>{
         setFilterPrecio(precio);
     }
+    const recibirFiltroCat=(categorie)=>{
+        setFilterCategorie(categorie);
+    }
+
+    //recibir pagina
+    const recibirPagina=(pagina)=>{
+        setNumPage(pagina);
+    }
+
+    //siguiente pagina
+    const pageNext=()=>{
+        if(numPage<totalPages){
+            setNumPage(numPage+1);
+        }
+    }
     
+    //Consumir la lista de Productos
+    const listarProductos =async(nPage) => {
+        const productos= await listProducts(nPage);
+        if(productos){
+            setDataProducts(productos.data.data);
+            setTotalPages(productos.data.last_page);
+            setTotalProducts(productos.data.total);
+        }
+    
+    }
+    const listAllProducts =async(nPage,limit) => {
+        const productos= await listProducts(nPage,limit);
+        if(productos){
+            setAllProducts(productos.data.data);
+        }
+    } 
+
     useEffect(()=>{
-        if(textSearch) {
-            const productsFilter = products.filter(product => product.subCategoria.toLowerCase().includes(textSearch.toLowerCase()));
-            setProductoFiltrado(productsFilter);
+        listarProductos(numPage);
+        listAllProducts(1,totalProducts)
+    },[numPage,totalProducts]);
+
+    useEffect(()=>{
+        if(dataProducts){
+            if(textSearch) {
+                const productsFilter = allProducts.filter(product => product.name.toLowerCase().includes(textSearch.toLowerCase()));
+                setProductoFiltrado(productsFilter);
+            }
+            else if (filterPrecio){
+                const productsFilterPrecio= allProducts.filter(product =>Number(product.price)===Number(filterPrecio));
+                setProductoFiltrado(productsFilterPrecio);
+            }
+            else if (filterCategorie){
+                const productsFilterCat=allProducts.filter(product => product.sub_categories[0].name.toLowerCase()===filterCategorie.toLowerCase());
+                setProductoFiltrado(productsFilterCat);
+            }
+            else if(!textSearch || !filterPrecio){
+                setProductoFiltrado(dataProducts);
+            }     
         }
-        else if (filterPrecio){
-            const productsFilterPrecio= products.filter(product =>Number(product.precio)===Number(filterPrecio));
-            setProductoFiltrado(productsFilterPrecio);
-        }
-        else if(!textSearch || !filterPrecio){
-            setProductoFiltrado(products);
-        }
-    },[filterPrecio,textSearch])
+    },[dataProducts,filterPrecio,textSearch,filterCategorie,allProducts])
 
     return (
     <>
-        <SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} products={products}/>
+        <SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} recibirCategories={recibirFiltroCat} products={allProducts}/>
         <div className={styles.containerProducts}>
         <section className={styles.contentProducts} >
 
             {/*FILTRO DE PRODUCTOS */}
             { productoFiltrado.map((product) => (
-                <section 
-                className={styles.sectionProducts} key={product.id}
-                >
+                <section className={styles.sectionProducts} key={product.id}>
                     <div style={{
                         width:"100%",
                         height:"190px",
                         marginBottom:"10px",
-                        backgroundImage: `url(${product.imagen})`,  
+                        backgroundImage: `url(${product.image.url})`,  
                         backgroundSize: "80%",
                         backgroundPosition:"center 60%",
                         borderTopLeftRadius:"10px",
@@ -58,14 +106,19 @@ const ContentProducts = () => {
                     }}
                     onClick={()=>{
                         setIsOpen(true)  
-                        const productById= products.find((prod)=> prod.id===product.id);
-                        setProductSelected(productById);
+                        if(textSearch!=null || filterPrecio!=null || filterCategorie!=null){
+                            const productById=allProducts.find((prod)=> prod.id===product.id);
+                            setProductSelected(productById);
+                        }else{
+                            const productById=dataProducts.find((prod)=> prod.id===product.id);
+                            setProductSelected(productById);
+                        }
                     }}>
                     </div>
-                    <p className={styles.p}>{product.producto}</p>
-                    <h4 className={styles.h4}>{product.subCategoria}</h4>
-                    <p className={styles.p}>{product.descripcion}</p>
-                    <h5 className={styles.h5}>S/{product.precio}</h5>
+                    <p className={styles.p}>{product.sub_categories[0].name}</p>
+                    <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
+                    {/**<p className={styles.p}>{product.descripcion}</p>*/} 
+                    <h5 className={styles.h5}>S/{product.price}</h5>
                     <section>
                         <button className='btn btn-secondary'><i className="fa-solid fa-cart-shopping"></i> Añadir</button>
                         <button className='btn btn-primary'>Comprar</button>
@@ -73,8 +126,8 @@ const ContentProducts = () => {
                 </section>
             ))}
 
-            <PaginationProducts/>
-            <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected}/>
+            {totalPages && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext}/>}
+            {productSelected && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected}/> } 
 
         </section>
         </div>
