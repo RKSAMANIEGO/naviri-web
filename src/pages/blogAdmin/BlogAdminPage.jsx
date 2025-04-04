@@ -41,25 +41,20 @@ const BlogAdminPage = () => {
     setPagination(prev => ({ ...prev, current: page }));
   };
 
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 2; // Cantidad de items por página
-
-  const uploadProps = {
-    beforeUpload: (file) => {
-      const isImage = file.type.startsWith('image/');
-      if (!isImage){
-        message.error('Solo se permiten imágenes!');
-      }
-      return isImage ? false : Upload.LIST_IGNORE;
-    },
-    listType: 'picture-card',
-    maxCount: 1,
-    showUploadList: {
-      showPreviewIcon: false,
-      showRemoveIcon: true,
-    },
-  };
+const uploadProps = {
+  beforeUpload: (file) => {
+    const isImage = file.type.startsWith('image/');
+    console.log(file);
+    if (!isImage) {
+      message.error('Solo se permiten imágenes (JPG, PNG, WEBP)!');
+    }
+    return isImage ? false : Upload.LIST_IGNORE;
+  },
+  listType: "picture",
+  maxCount: 1,
+  accept: "image/jpeg,image/png,image/webp",
+  multiple: false,
+};
 
   return (
     <div className="p-6">
@@ -147,12 +142,16 @@ const BlogAdminPage = () => {
             }}
             rules={[{ required: true, message: '¡Debes subir una imagen!' }]}
           >
-            <Upload {...uploadProps}>
-              <div>
-                <UploadOutlined />
-                <p>Haz clic o arrastra para subir</p>
-              </div>
-            </Upload>
+            <Upload.Dragger {...uploadProps}>
+                <div >
+                  <UploadOutlined style={{ fontSize: '32px' }} />
+                  <p>Arrastra tu imagen aquí o haz clic para seleccionar</p>
+                  
+                  <p style={{fontSize: '12px',color: '#999'}}>
+                    Formatos soportados: JPG, PNG, WEBP
+                  </p>
+                </div>
+            </Upload.Dragger>
           </Form.Item>
 
           <div className="flex justify-end gap-2">

@@ -97,18 +97,24 @@ export const useBlogAdmin = (form) => {
   
       let response;
       if (currentBlog) {
+        console.log("Actualizando");
+        
         response = await updateBlog(currentBlog.id, blogData);
       } else {
+        console.log("Creando");
         response = await createBlog(blogData);
       }
   
+      console.log(response.data);
+
       if (response.data) {
-        await loadBlogs(pagination.current); 
+        // await loadBlogs(pagination.current); 
         message.success(`¡Entrada ${currentBlog ? 'actualizada' : 'creada'}!`);
         setIsModalVisible(false);
         form.resetFields();
       }
     } catch (error) {
+      console.log("error");
       message.error(error.response?.data?.message || 'Error al guardar');
     }
   };

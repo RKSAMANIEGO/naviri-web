@@ -36,7 +36,7 @@ export const createBlog = async (data) => {
 
 export const updateBlog = async (id, data) => {
 
-  console.log(data);
+  // console.log(data);
   
   try {
     const response = await api.put(`/blogs/${id}`,data)
