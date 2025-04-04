@@ -11,23 +11,9 @@ import {
   FiChevronRight 
 } from 'react-icons/fi';
 
-const Sidebar = () => {
+const Sidebar = ({isDarkMode, toggleTheme}) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const savedMode = localStorage.getItem('isDarkMode') === 'true';
-    setIsDarkMode(savedMode);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('isDarkMode', isDarkMode);
-  }, [isDarkMode]);
-
-  const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode);
-  };
 
   const menuItems = [
     { name: 'Inicio', path: '/admin/panel', icon: <FiHome /> },
