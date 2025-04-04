@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/Sidebar';
+import UserSettings from "../../components/AdminPanel/AdminConfi";
 
 const AdminLayout = () => { 
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -28,6 +29,7 @@ const AdminLayout = () => {
               ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
           <div className="flex items-center h-full px-6">
             <h1 className="text-xl font-semibold text-gray-800">Panel Admin</h1>
+            <UserSettings/>
           </div>
         </header>
 
