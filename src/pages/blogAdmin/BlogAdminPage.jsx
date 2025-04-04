@@ -106,7 +106,7 @@ const uploadProps = {
         onCancel={() => setIsModalVisible(false)}
         footer={null}
         destroyOnClose
-        width={800}
+        width={600}
       >
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Form.Item
