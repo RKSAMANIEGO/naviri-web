@@ -1,47 +1,57 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import styles from '../../styles/productAdmin.module.css'
-import {products} from '../../utils/products'
 import ModalCrudProduct from './Modal/ModalCrudProduct'
 import ModalProducts from '../../components/Products/ModalProducts'
-const ProductsCards = () => {
+import { productByName , deleteProduct } from '../../services/productService'
+const ProductsCards = ({products,productFilter,productDelete}) => {
 
     const [isOpenModal,setOpenModal] = useState(false)
     const [isOpenModalDetailsProduct,setOpenModalDetailsProduct] = useState(false)
     const [productSelected,setProductSelected]=useState({})
+    const [productsAll, setProductsAll]=useState(products);
+    const [confirmProductDelete,setConfirmProductDelete]=useState(false);
+    
+    useEffect(()=>{
+        const filterProduc= productFilter();
+        filterProduc ? setProductsAll(filterProduc) : setProductsAll(products)
+    },[productFilter,products])
+
+
     return (
 
-        <>
+        <> 
             <section className={styles.contentProductAdmin}>
-                { products.map((product) => (
+                { productsAll.map((product) => (
                     <section className={styles.sectionProducts} key={product.id} 
                     >
                         <div style={{
                             width:"100%",
                             height:"220px",
                             marginBottom:"10px",
-                            backgroundImage: `url(${product.imagen})`,  
+                            backgroundImage: `url(${product.image.url})`,  
                             backgroundSize: "100%",
                             backgroundPosition:"center",
                             borderTopLeftRadius:"10px",
                             borderTopRightRadius:"10px",
                             cursor:"pointer"
                         }}
-                        onClick={()=>{
-                            const productById= products.find((prod)=> prod.id===product.id);
+                        onClick={async()=>{
+
+                            const productById = await productByName(product.name);
+                            productById &&  setProductSelected(productById.data.data[0]);
                             setOpenModalDetailsProduct(true);
-                            setProductSelected(productById)
-                            console.log(productById);           
+
                         }}
                         >
                         
                         </div>
                                 
-                        <h4 className={styles.h4}>{product.subCategoria}</h4>
-                        
+                        <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
+                        <p className={styles.p}>{product.sub_categories[0].name}</p>
                         <section className={styles.productsData}>
                             <div>
-                                <p className={styles.p}>{product.producto}</p>
+                                
 
                                 {product.id >=5 ?
                                     <p className={styles.p}><span className={styles.stockValid}><strong>{String(product.id).padStart(2,'0')}</strong></span> Unidades</p>
@@ -50,7 +60,7 @@ const ProductsCards = () => {
                                 }   
                                 
                             </div>
-                            <h5 className={styles.h5}>S/{product.precio}</h5>
+                            <h5 className={styles.h5}>S/{product.price}</h5>
                         </section>
 
                         <section>
@@ -65,25 +75,32 @@ const ProductsCards = () => {
                                     cancelButtonText:"Cancelar",
                                     cancelButtonColor:"rgb(38, 86, 218)",
                                     confirmButtonColor:"rgb(228, 34, 170)",
-                                }).then(result => {
+                                }).then(async(result) => {
                                     if(result.value){
-                                        console.log("Se Elimino el Producto con ID "+product.id);
-                                    }else{
-                                        console.log("Nose Elimino el Producto con ID "+product.id);
+                                        const response = await deleteProduct(product.name)
+                                        if(response.status===200){
+                                            Swal.fire({
+                                                title: 'Producto Eliminado',
+                                                text:"Se Elimino con exito",
+                                                icon:"success",
+                                                timer: 2000
+                                            })
+                                            setConfirmProductDelete(!confirmProductDelete);
+                                            productDelete(!confirmProductDelete);
+                                        }
                                     }
                                 })
                             }}><i className="fa-solid fa-trash-can"></i> Eliminar</button>
                         </section>
-
-                       
                     </section>
                     
             ))}
             
             </section>
             <ModalCrudProduct isOpen={isOpenModal} onClose={()=>setOpenModal(false)} titleModal="updateProduct"/>
-            <ModalProducts isOpen={isOpenModalDetailsProduct} onClose={()=>setOpenModalDetailsProduct(false)} product={productSelected}/>
-        </>
+            <ModalProducts isOpen={isOpenModalDetailsProduct} onClose={()=>setOpenModalDetailsProduct(false)} product={productSelected} title="productAdmin"/>
+        
+            </>
     )
 }
 

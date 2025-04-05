@@ -172,7 +172,7 @@
 
 .sectionProducts {
     width: 245px;
-    height: 370px;
+    height: 380px;
     border-radius: 12px;
     border: 1px solid rgb(241, 239, 239);
     transition: all 0.3s ease-in-out;
@@ -185,14 +185,15 @@
 }
 
 .sectionProducts p {
-    font-size: 12px;
+    font-size: 11px;
     color: rgb(137, 135, 135);
     font-weight: 600;
     padding-inline: 10px;
+    text-transform: capitalize;
 }
 
 .sectionProducts h4 {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     padding-inline: 10px;
 }

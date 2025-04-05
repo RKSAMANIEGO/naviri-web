@@ -166,33 +166,6 @@
 	padding: 10px 0;
 }
 
-@media(max-width:850px) {
-	.options {
-		gap: 80px;
-	}
-
-	.search div section {
-		min-width: 100%;
-	}
-}
-
-@media(max-width:650px) {
-	.options {
-		gap: 60px;
-	}
-}
-
-@media(max-width:520px) {
-	.options {
-		gap: 40px;
-	}
-}
-
-@media(max-width:400px) {
-	.options {
-		gap: 20px;
-	}
-}
 
 .search div section select {
 	width: 100%;
@@ -242,6 +215,7 @@
 	color: rgb(137, 135, 135);
 	font-weight: 600;
 	padding-inline: 10px;
+	text-transform: capitalize;
 }
 
 .sectionProducts h4 {
@@ -343,6 +317,7 @@
 
 .modalProducts .sectionLast p {
 	color: rgb(121, 121, 121);
+	text-transform: capitalize;
 }
 
 .modalProducts .sectionLast h2 {
@@ -454,4 +429,38 @@
 	color: rgb(118, 114, 114);
 	border-bottom: 1px solid rgb(118, 114, 114);
 	border-top: 1px solid rgb(118, 114, 114);
+}
+
+.beneficios ul li {
+	font-size: 11px;
+}
+
+
+
+@media(max-width:850px) {
+	.options {
+		gap: 80px;
+	}
+
+	.search div section {
+		min-width: 100%;
+	}
+}
+
+@media(max-width:650px) {
+	.options {
+		gap: 60px;
+	}
+}
+
+@media(max-width:520px) {
+	.options {
+		gap: 40px;
+	}
+}
+
+@media(max-width:400px) {
+	.options {
+		gap: 20px;
+	}
 }
