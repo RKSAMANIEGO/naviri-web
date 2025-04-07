@@ -36,7 +36,7 @@ const Carousel = () => {
                         <img src={image1} alt="Logo" />
                     </div>
                     <h1>¡Piel perfecta al instante!🌿</h1>
-                    <p>Consigue un acabado profesiona con nuestro nuevo Serum iluminador. ¡Oferta exclusiva por lanzamiento</p>
+                    <p>Consigue un acabado profesiona con nuestro nuevo Serum iluminador. ¡Oferta exclusiva por lanzamiento!</p>
                     <div className={styles.buttons}>
                         <button className={styles.primary}>Comprar ahora</button>
                         <button className={styles.secondary}>Conócenos</button>
