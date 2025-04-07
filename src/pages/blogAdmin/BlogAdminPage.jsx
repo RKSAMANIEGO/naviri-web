@@ -1,7 +1,10 @@
 import React, { useDebugValue, useEffect, useState } from 'react';
 import { Form, Input, Button, Upload, Modal, Table, Select, FloatButton } from 'antd';
-import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
+import { UploadOutlined, PlusOutlined, ProductOutlined } from '@ant-design/icons';
 import { useBlogAdmin } from '../../hooks/blog/useBlogAdmin'; 
+import Search from 'antd/es/input/Search';
+import BlogModalAdmin from '../../components/blogAdmin/BlogModalAdmin';
+import BlogAdminCard from '../../components/blogAdmin/BlogCardAdmin';
 const { Option } = Select;
 
 const BlogAdminPage = () => {
@@ -12,16 +15,21 @@ const BlogAdminPage = () => {
     isModalVisible,
     currentBlog,
     showModal,
+    handleDelete,
+    handleEdit,
     handleSubmit,
     columns,
     setIsModalVisible,
   } = useBlogAdmin(form);
+
+  const [gridView, setGridView] = useState(false)
 
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 5,
     total: 0,
   });
+  const onSearch = (value, _e, info) => console.log(value);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,9 +66,24 @@ const uploadProps = {
 
   return (
     <div className="p-6">
-
-      {/* tabla */}
-      <Table
+      <h1 className='text-4xl'>Gestion de Blogs</h1>
+      {/* buscar */}
+      <div className="flex gap-2 my-5">
+        <Search  placeholder="input search text" onSearch={onSearch} />
+        <Button icon={<ProductOutlined/>} onClick={() => setGridView(!gridView)} />
+      </div>
+      
+      {gridView ? 
+        // grid
+        <div className='grid md:grid-cols-4'>
+          {blogs.map((blog) => (
+            <BlogAdminCard blog={blog} onEdit={handleEdit} onDelete={handleDelete}></BlogAdminCard>
+          ))}
+        </div>
+        
+        :
+        // tabla
+        <Table
         columns={columns}
         dataSource={blogs}
         rowKey="id"
@@ -75,6 +98,7 @@ const uploadProps = {
           }
         }}
       />
+      }     
 
       {/* seccion de paginado */}
       <div className="flex justify-between items-center mt-4">
@@ -99,69 +123,14 @@ const uploadProps = {
       </div>
 
       {/* modal para editar y registrar */}
-
-      <Modal
-        title={currentBlog ? 'Editar Entrada' : 'Nueva Entrada'}
-        open={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        footer={null}
-        destroyOnClose
-        width={800}
-      >
-        <Form form={form} layout="vertical" onFinish={handleSubmit}>
-          <Form.Item
-            label="Título"
-            name="title"
-            rules={[{ required: true, message: '¡Por favor ingresa el título!' }]}
-          >
-            <Input placeholder="Título del blog" />
-          </Form.Item>
-
-          <Form.Item label="Descripción" name="description">
-            <Input.TextArea rows={4} />
-          </Form.Item>
-
-          <Form.Item
-            label="Categoría"
-            name="category"
-            rules={[{ required: true, message: '¡Selecciona una categoría!' }]}
-          >
-            <Select placeholder="Selecciona una categoría">
-              <Option value={1}>Aceites</Option>
-              <Option value={2}>Aromas</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item
-            label="Imagen"
-            name="imagen"
-            valuePropName="fileList"
-            getValueFromEvent={(e) => {
-              if (Array.isArray(e)) return e;
-              return e?.fileList;
-            }}
-            rules={[{ required: true, message: '¡Debes subir una imagen!' }]}
-          >
-            <Upload.Dragger {...uploadProps}>
-                <div >
-                  <UploadOutlined style={{ fontSize: '32px' }} />
-                  <p>Arrastra tu imagen aquí o haz clic para seleccionar</p>
-                  
-                  <p style={{fontSize: '12px',color: '#999'}}>
-                    Formatos soportados: JPG, PNG, WEBP
-                  </p>
-                </div>
-            </Upload.Dragger>
-          </Form.Item>
-
-          <div className="flex justify-end gap-2">
-            <Button onClick={() => setIsModalVisible(false)}>Cancelar</Button>
-            <Button type="primary" htmlType="submit">
-              {currentBlog ? 'Guardar Cambios' : 'Crear Entrada'}
-            </Button>
-          </div>
-        </Form>
-      </Modal>
+      <BlogModalAdmin 
+        isModalVisible={isModalVisible} 
+        setIsModalVisible={setIsModalVisible}
+        form={form}
+        handleSubmit={handleSubmit}
+        uploadProps={uploadProps}
+        currentBlog={currentBlog}
+      />
 
       <FloatButton 
           icon={<PlusOutlined/>} 
