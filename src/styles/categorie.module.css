@@ -1,0 +1,88 @@
+.gestionCategorie {
+    margin-inline: 40px;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 5px;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+.gestionCategorie h2 {
+    padding: 5px;
+    font-weight: bold;
+}
+
+.gestionCategorie section {
+    display: flex;
+    width: 100%;
+
+}
+
+.gestionCategorie div {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.gestionCategorie div input {
+    flex: 1;
+    padding: 2px 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(172, 172, 172);
+}
+
+.gestionCategorie div input::placeholder {
+    font-size: 12px;
+}
+
+.gestionCategorie div .optionCategorie {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+
+}
+
+.optionCategorie i {
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: rgb(57, 180, 57);
+}
+
+/*TABLA CATEGORIA */
+.tablaCategoria {
+    padding: 10px 40px;
+}
+
+.optionCategorieTable {
+    display: flex;
+    gap: 5px;
+}
+
+.optionCategorieTable i {
+    padding: 5px 6px;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.optionCategorieTable i:last-child {
+    background-color: rgb(3, 57, 132);
+
+}
+
+.optionCategorieTable i:first-child {
+    background-color: #d8a713;
+}
+
+.optionCategorieTable i:nth-child(2) {
+    background-color: rgb(231, 72, 72);
+}
+
+.optionCategorieTable i:hover {
+    background-color: #c52e84;
+}
