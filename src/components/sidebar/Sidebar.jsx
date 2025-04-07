@@ -1,104 +1,156 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Layout, Menu, Button } from 'antd';
 import logo from '../../assets/image/logo-navi.png';
-import { 
-  FiHome, 
-  FiUsers, 
-  FiSettings, 
-  FiMoon, 
-  FiSun, 
-  FiChevronLeft, 
-  FiChevronRight 
-} from 'react-icons/fi';
+import {
+  HomeOutlined,
+  ShoppingOutlined,
+  UserOutlined,
+  CommentOutlined,
+  FileTextOutlined,
+  SettingOutlined,
+  SunOutlined,
+  MoonOutlined,
+  LeftOutlined,
+  RightOutlined
+} from '@ant-design/icons';
 
-const Sidebar = ({isDarkMode, toggleTheme}) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+const { Sider } = Layout;
+
+const Sidebar = ({ isDarkMode, toggleTheme }) => {
+  const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
-
-  const menuItems = [
-    { name: 'Inicio', path: '/admin/panel', icon: <FiHome /> },
-    { name: 'Productos', path: '/admin/panel/products', icon: <FiUsers /> },
-    { name: 'Clientes', path: '/admin/panel/customers', icon: <FiUsers /> },
-    { name: 'Comentarios', path: '/admin/panel/coments', icon: <FiSettings /> },
-    { name: 'Blogs', path: '/admin/panel/blogs', icon: <FiSettings /> },
-  ];
-
+  
+  const handleMenuClick = (e) => {
+    navigate(e.key);
+  };
+  
   return (
-    <div className={`h-screen flex flex-col transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-55'} 
-      ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} shadow-lg relative`}>
-      
+    <div className="relative">
+
       {/* Botón de colapso */}
       <button
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        className="absolute -right-3 top-14 bg-white dark:bg-gray-700 p-1.5 rounded-full shadow-lg
-                  border-2 border-gray-200 dark:border-gray-600 hover:scale-105 transition-transform"
+        onClick={() => setCollapsed(!collapsed)}
+        className="absolute -right-3 top-16 bg-white cursor-pointer dark:bg-gray-700 p-1.5 rounded-full shadow-lg border-2 border-gray-200 dark:border-gray-600 hover:scale-105 transition-transform z-10"
+        style={{ 
+          backgroundColor: isDarkMode ? '#1f2937' : 'white',
+          borderColor: isDarkMode ? '#4b5563' : '#e5e7eb'
+        }}
       >
-        {isCollapsed ? (
-          <FiChevronRight className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+        {collapsed ? (
+          <RightOutlined style={{ color: isDarkMode ? '#d1d5db' : '#4b5563', fontSize: '14px' }} />
         ) : (
-          <FiChevronLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+          <LeftOutlined style={{ color: isDarkMode ? '#d1d5db' : '#4b5563', fontSize: '14px' }} />
         )}
       </button>
-
-      {/* Logo */}
-      <div className="p-4 pb-2">
-        <div className="flex justify-center">
-          <img src={logo} alt='logo' width='80px' />
+      
+      <Sider 
+        collapsed={collapsed}
+        trigger={null}
+        theme={isDarkMode ? 'dark' : 'light'}
+        width={240}
+        collapsedWidth={80}
+        className="min-h-screen shadow-lg"
+        style={{ 
+          backgroundColor: isDarkMode ? '#1f2937' : 'white',
+          color: isDarkMode ? 'white' : '#1f2937',
+        }}
+      >
+        {/* Logo */}
+        <div className="p-4 py-8">
+          <div className="flex justify-center">
+            <img src={logo} alt="logo" width="80px" />
+          </div>
         </div>
-        <h1 className={`text-x font-bold overflow-hidden transition-all text-center
-          ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-full'}
-          ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-          Panel Administrativo
-        </h1>
-      </div>
-
-      {/* Menú */}
-      <nav className="flex-1 px-2">
-        {menuItems.map((item) => (
-          <Link
-            key={item.name}
-            to={item.path}
-            className={`flex items-center p-3 rounded-lg mb-1 group transition-colors text-xs
-              ${location.pathname === item.path 
-                ? 'bg-blue-500 text-white' 
-                : isDarkMode 
-                  ? 'hover:bg-gray-700' 
-                  : 'hover:bg-gray-100 text-gray-700'}
-              ${isCollapsed ? 'justify-center' : ''}`}
-          >
-            <span className="text-xl">{item.icon}</span>
-            <span className={`ml-3 transition-all ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-full'}`}>
-              {item.name}
-            </span>
-            {isCollapsed && (
-              <div className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded
-                opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-                {item.name}
-              </div>
-            )}
-          </Link>
-        ))}
-      </nav>
-
-      {/* Toggle de tema del Sidebar */}
-      <div className={`p-4 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} flex ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-        >
-          {isDarkMode ? (
-            <FiSun className="w-6 h-6 text-yellow-400" />
-          ) : (
-            <FiMoon className="w-6 h-6 text-gray-600" />
-          )}
-        </button>
         
-        {!isCollapsed && (
-          <span className={`text-sm self-center ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-            {isDarkMode ? 'Oscuro' : 'Claro'}
-          </span>
-        )}
-      </div>
+        {/* Menú */}
+        <Menu
+          theme={isDarkMode ? 'dark' : 'light'}
+          mode="inline"
+          selectedKeys={[location.pathname]}
+          onClick={handleMenuClick}
+          style={{ 
+            marginTop: 20,
+            borderRight: 0,
+            backgroundColor: isDarkMode ? '#1f2937' : 'white',
+          }}
+          items={[
+            {
+              key: '/admin/panel',
+              icon: <HomeOutlined />,
+              label: 'Inicio',
+            },
+            {
+              key: '/admin/panel/products',
+              icon: <ShoppingOutlined />,
+              label: 'Productos',
+            },
+            {
+              key: '/admin/panel/customers',
+              icon: <UserOutlined />,
+              label: 'Clientes',
+            },
+            {
+              key: '/admin/panel/coments',
+              icon: <CommentOutlined />,
+              label: 'Comentarios',
+            },
+            {
+              key: '/admin/panel/blogs',
+              icon: <FileTextOutlined />,
+              label: 'Blogs',
+            },
+            {
+              key: 'page',
+              icon: <SettingOutlined />,
+              label: 'Página',
+              children: [
+                {
+                  key: '/admin/panel/page/policy',
+                  label: 'Política',
+                },
+                {
+                  key: '/admin/panel/page/service',
+                  label: 'Servicios',
+                },
+              ],
+            },
+          ]}
+        />
+        
+        {/* Botón de cambio de tema al final del sidebar */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 p-4 border-t flex justify-center"
+          style={{ 
+            borderColor: isDarkMode ? '#374151' : '#e5e7eb',
+            paddingBottom: '16px', 
+            paddingTop: '16px'
+          }}
+        >
+          <Button
+            type="text"
+            onClick={toggleTheme}
+            icon={isDarkMode ? (
+              <SunOutlined style={{ fontSize: '20px', color: '#fbbf24' }} />
+            ) : (
+              <MoonOutlined style={{ fontSize: '20px', color: '#4b5563' }} />
+            )}
+            size="large"
+          />
+          {!collapsed && (
+            <span
+              style={{ 
+                marginLeft: '8px',
+                color: isDarkMode ? '#9ca3af' : '#4b5563',
+                alignSelf: 'center'
+              }}
+            >
+              {isDarkMode ? 'Claro' : 'Oscuro'}
+            </span>
+          )}
+        </div>
+      </Sider>
     </div>
   );
 };
