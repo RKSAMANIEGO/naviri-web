@@ -34,7 +34,7 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,p
 
             <div>   
                 <section >
-                    <p>Sub categorias</p>
+                    <p>Categorias</p>
                     <select value={valueCategorie} onChange={(e)=>{
                                 setValueCategorie(e.target.value);
                                 recibirCategories(e.target.value);

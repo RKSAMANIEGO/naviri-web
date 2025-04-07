@@ -13,11 +13,13 @@ const ProductAdmin = () => {
     const[totalProduct,setTotalProducts]=useState(0);
     const[textSearch,setTextSearch]=useState(null)
     const[isProductDelete,setProductDelete]=useState(false);
+    const[isProductUpdate,setProductUpdate]=useState(false);
+
 
     useEffect(()=>{
         totalProd();
         totalProduct && listAllProducts(1,totalProduct);   
-    },[totalProduct,isProductDelete]);
+    },[totalProduct,isProductDelete,isProductUpdate]);
 
     //total de productos a listar
     const totalProd=async() => {
@@ -36,12 +38,14 @@ const ProductAdmin = () => {
         console.log(dataSearch);
         setTextSearch(dataSearch);
     }
-    // recibir confirmacion del producto eliminado
-    const recibirProductDelete=(confirm)=>{
+    // recibir confirmacion del producto eliminado para Actualizar la lista de Productos
+    const updateListProducts=(confirm)=>{
         if(confirm === isProductDelete){
             setProductDelete(!confirm);
+            setProductUpdate(!confirm);
         }else{
             setProductDelete(confirm);
+            setProductUpdate(confirm);
         }
     }
     //  
@@ -58,19 +62,21 @@ const ProductAdmin = () => {
                     <ProductsCards products={allProducts} 
                                 productFilter={()=>{
                                     if(textSearch) return allProducts.filter(obj => obj.name.toLowerCase().includes(textSearch.toLowerCase()) || obj.sub_categories[0].name.toLowerCase().includes(textSearch.toLowerCase()) );}}  
-                                productDelete={recibirProductDelete}
+                                productDelete={updateListProducts}
+                                isUpdateProduct={updateListProducts}
                     /> 
                     : 
                     <ProductsTable products={allProducts}
                                 productFilter={()=>{
                                     if(textSearch) return allProducts.filter(obj => obj.name.toLowerCase().includes(textSearch.toLowerCase())  || obj.sub_categories[0].name.toLowerCase().includes(textSearch.toLowerCase()) );}}
-                                productDelete={recibirProductDelete}
+                                productDelete={updateListProducts}
+                                isUpdateProduct ={updateListProducts} 
                             
                     /> 
             )}
             
             <div className={styles.addProduct} onClick={()=> setOpenModal(true)}>  <i className="fa-solid fa-plus"></i>  </div>
-            <ModalCrudProduct isOpen={isOpenModal} onClose={()=> setOpenModal(false)}/>
+            <ModalCrudProduct isOpen={isOpenModal} onClose={()=> setOpenModal(false)} titleModal="productoAdmin" confirmAddProduct={updateListProducts} />
         </>
     )
 }

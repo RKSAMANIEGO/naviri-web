@@ -261,19 +261,41 @@
 }
 
 /*MODAL PRODUCT ADMIN*/
+.productoAdminCrud {
+    height: 80%;
+}
+
 .productoAdminCrud h3 {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
 }
 
 .productoAdminCrud form {
     display: flex;
     border: 1px solid rgba(213, 213, 213, 1);
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 20px;
+    border-bottom: none;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
     gap: 20px;
     width: 100%;
+    font-size: 14px;
+    height: 90%;
+}
+
+.productoAdminCrud form input,
+textarea,
+select {
+    font-size: 12px;
+}
+
+.productoAdminCrud form input::placeholder {
+    font-size: 12px;
+}
+
+.productoAdminCrud form textarea::placeholder {
+    font-size: 12px;
 }
 
 .productoAdminCrud form .sectionFirts {
@@ -314,7 +336,7 @@
 .productoAdminCrud form .sectionFirts label input,
 select {
     border: 1px solid rgb(173, 170, 170);
-    padding: 3px 10px;
+    padding: 7px 10px;
     border-radius: 5px;
     font-weight: normal;
     width: 100%;
@@ -330,11 +352,50 @@ select {
     border: 1px solid rgb(173, 170, 170);
     border-radius: 5px;
     font-size: 12px;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    height: 78%;
+    transition: all 0.1s ease-in-out;
+    position: relative;
+}
+
+.productoAdminCrud form .sectionLast label div div:first-child {
+    order: 1;
+    display: flex;
+    border: none;
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+}
+
+.deleteImage {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    position: absolute;
+    right: 130px;
+    bottom: -15px;
+    background: linear-gradient(to right, transparent 50%, rgb(225, 41, 139)50%);
+    background-size: 200%;
+    background-position: left;
+    transition: all 0.6s ease-in-out;
+    color: white;
+    border: 1px solid white;
+}
+
+.deleteImage {
+    background-color: black;
+}
+
+.deleteImage:hover {
+    background-position: right;
+}
+
+.productoAdminCrud form .sectionLast label div div:last-child {
+    flex: 2;
+    border: none;
 }
 
 .productoAdminCrud form .sectionLast label div i {
@@ -347,7 +408,7 @@ select {
 }
 
 .productoAdminCrud form .sectionLast label div p {
-    color: rgb(173, 170, 170);
+    color: rgb(72, 68, 68);
 }
 
 .productoAdminCrud form .sectionLast label div label {
@@ -368,12 +429,12 @@ textarea::placeholder {
     font-size: 14px;
 }
 
-.productoAdminCrud form .sectionLast .descripcion {
+.productoAdminCrud form .sectionFirts .descripcion {
     display: flex;
     flex-direction: column;
 }
 
-.productoAdminCrud form .sectionLast label textarea {
+.productoAdminCrud form .sectionFirts label textarea {
     border: 1px solid rgb(173, 170, 170);
     border-radius: 5px;
     padding: 10px;

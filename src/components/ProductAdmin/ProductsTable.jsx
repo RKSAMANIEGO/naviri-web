@@ -6,12 +6,13 @@ import ModalCrudProduct from './Modal/ModalCrudProduct';
 import ModalProducts from '../Products/ModalProducts';
 import {productByName,deleteProduct} from '../../services/productService'
 
-const ProductsTable = ({products,productFilter,productDelete}) => {
+const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [isOpenModalProducts,setOpenModalProducts]=useState(false);
     const [productSelect,setProductSelect]=useState({});
+    const [productPutSelect,setProductPutSelect]=useState(null);
     const [openModalDetailsProduct,setOpenModalDetailsProduct]=useState(false)
     const [productsAll, setProductsAll]=useState(products);
     const [confirmProductDelete,setConfirmProductDelete]=useState(false);
@@ -26,6 +27,7 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
         setTotalPages(Math.ceil(productsAll.length / rowsPerPage));
     }, [productsAll.length,rowsPerPage]);
 
+    //Cambiar Pagina
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
@@ -35,7 +37,7 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
         setCurrentPage(0);
     };
 
-
+    //Columnas de la Tabla
     const columns=[
     {
         name:"Imagen",
@@ -64,7 +66,7 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
     },
     {
         name:"Stock",
-        selector:row=>row.id,
+        selector:row=>row.stock,
         sortable:true,
         width:"10%"
     },
@@ -79,7 +81,12 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
                 setOpenModalDetailsProduct(true);
 
                 }}></i>
-                <i className="fa-solid fa-pencil" onClick={()=>setOpenModalProducts(true)}></i>
+                <i className="fa-solid fa-pencil" onClick={async()=>{
+                    localStorage.setItem("nameProduct",row.name);
+                    const productById = await productByName(row.name);
+                    productById &&  setProductPutSelect(productById.data.data[0]);
+                    setOpenModalProducts(true)
+                }}></i>
                 <i className="fa-solid fa-trash-can" onClick={()=>{
 
                     Swal.fire({
@@ -111,6 +118,7 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
         width:"15%"
     } ]
 
+    //Estilos de la Tabla
     const customStyle ={
         headCells:{
             style:{
@@ -130,7 +138,7 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
         }
 
     }
-
+    //Paginacion Personalizado
     const CustomPagination = ({ page, totalPages, onChangePage,totalRows }) => {
         return (
             <div style={{ display: 'flex', justifyContent: 'space-between',alignItems:"center", padding:"20px 40px"}}>
@@ -150,6 +158,11 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
             </div>
         );
     };
+
+    ///CONFIRMACION DE LA ACTUALIZACION DEL PRODUCTO PARA PASARLO AL ADMIN Y ACTUALIZAR LA LISTA DE PRODUCTOS
+    const confirmaActualizacionProduct=(confirm)=>{
+            isUpdateProduct(confirm);    
+    }
 
     return (
     <>
@@ -175,7 +188,10 @@ const ProductsTable = ({products,productFilter,productDelete}) => {
             )}
             onChangeRowsPerPage={handleRowsPerPageChange} 
         />
-        <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct"/>
+        {productPutSelect ? <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct" confirmActualizacionProducto={confirmaActualizacionProduct}  productPutTable={productPutSelect}/>
+                        :
+                        <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct"/>
+        }
         <ModalProducts isOpen={openModalDetailsProduct}  onClose={()=> setOpenModalDetailsProduct(false)} product={productSelect} title="productAdmin"/>
     </div>
     </>

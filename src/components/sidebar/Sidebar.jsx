@@ -32,6 +32,7 @@ const Sidebar = () => {
   const menuItems = [
     { name: 'Inicio', path: '/admin/panel', icon: <FiHome /> },
     { name: 'Productos', path: '/admin/panel/products', icon: <FiUsers /> },
+    { name: 'Categoria', path: '/admin/panel/categories', icon: <FiSettings /> },
     { name: 'Clientes', path: '/admin/panel/customers', icon: <FiUsers /> },
     { name: 'Comentarios', path: '/admin/panel/comentary', icon: <FiSettings /> },
     { name: 'Blogs', path: '/admin/panel/blogs', icon: <FiSettings /> },

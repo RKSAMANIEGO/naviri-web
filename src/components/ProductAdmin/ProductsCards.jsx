@@ -4,7 +4,7 @@ import styles from '../../styles/productAdmin.module.css'
 import ModalCrudProduct from './Modal/ModalCrudProduct'
 import ModalProducts from '../../components/Products/ModalProducts'
 import { productByName , deleteProduct } from '../../services/productService'
-const ProductsCards = ({products,productFilter,productDelete}) => {
+const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) => {
 
     const [isOpenModal,setOpenModal] = useState(false)
     const [isOpenModalDetailsProduct,setOpenModalDetailsProduct] = useState(false)
@@ -53,10 +53,10 @@ const ProductsCards = ({products,productFilter,productDelete}) => {
                             <div>
                                 
 
-                                {product.id >=5 ?
-                                    <p className={styles.p}><span className={styles.stockValid}><strong>{String(product.id).padStart(2,'0')}</strong></span> Unidades</p>
+                                {product.stock >15 ?
+                                    <p className={styles.p}><span className={styles.stockValid}><strong>{String(product.stock).padStart(2,'0')}</strong></span> Unidades</p>
                                 :
-                                    <p className={styles.p}><span><strong>{String(product.id).padStart(2,'0')}</strong></span> Unidades</p>
+                                    <p className={styles.p}><span><strong>{String(product.stock).padStart(2,'0')}</strong></span> Unidades</p>
                                 }   
                                 
                             </div>
@@ -64,7 +64,15 @@ const ProductsCards = ({products,productFilter,productDelete}) => {
                         </section>
 
                         <section>
-                            <button onClick={()=> setOpenModal(true)}><i className="fa-regular fa-pen-to-square"></i> Editar</button>
+                            {/** BOTON ACTUALIZAR */}
+                            <button onClick={async()=> {
+                                localStorage.setItem("nameProduct",product.name);
+                                const productById = await productByName(product.name);
+                                productById &&  setProductSelected(productById.data.data[0]);
+                                setOpenModal(true)
+                            }}><i className="fa-regular fa-pen-to-square"></i> Editar</button>
+
+                            {/** BOTON ELIMINAR */}
                             <button onClick={()=>{
                                 Swal.fire({
                                     title: '¿Estás seguro de eliminar este producto?',
@@ -97,7 +105,7 @@ const ProductsCards = ({products,productFilter,productDelete}) => {
             ))}
             
             </section>
-            <ModalCrudProduct isOpen={isOpenModal} onClose={()=>setOpenModal(false)} titleModal="updateProduct"/>
+            {(isOpenModal) && <ModalCrudProduct isOpen={isOpenModal} onClose={()=>setOpenModal(false)} titleModal="updateProduct" confirmActualizacionProducto={(confirm)=> isUpdateProduct(confirm) }  productPutTable={productSelected}/>} 
             <ModalProducts isOpen={isOpenModalDetailsProduct} onClose={()=>setOpenModalDetailsProduct(false)} product={productSelected} title="productAdmin"/>
         
             </>
