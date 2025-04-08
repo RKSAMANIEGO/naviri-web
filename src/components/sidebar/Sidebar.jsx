@@ -25,7 +25,7 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
   const handleMenuClick = (e) => {
     navigate(e.key);
   };
-  
+
   return (
     <div className="relative">
 
@@ -85,6 +85,11 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               key: '/admin/panel/products',
               icon: <ShoppingOutlined />,
               label: 'Productos',
+            },
+            {
+              key: '/admin/panel/categories',
+              icon: <ShoppingOutlined /> ,
+              label: 'Pedidos',
             },
             {
               key: '/admin/panel/customers',

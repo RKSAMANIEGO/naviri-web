@@ -1,23 +1,33 @@
 import TableProducts from 'react-data-table-component';
-import { products } from '../../utils/products';
 import styles from '../../styles/productAdmin.module.css'
 import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
 import ModalCrudProduct from './Modal/ModalCrudProduct';
 import ModalProducts from '../Products/ModalProducts';
+import {productByName,deleteProduct} from '../../services/productService'
 
-const ProductsTable = () => {
+const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [isOpenModalProducts,setOpenModalProducts]=useState(false);
     const [productSelect,setProductSelect]=useState({});
+    const [productPutSelect,setProductPutSelect]=useState(null);
     const [openModalDetailsProduct,setOpenModalDetailsProduct]=useState(false)
+    const [productsAll, setProductsAll]=useState(products);
+    const [confirmProductDelete,setConfirmProductDelete]=useState(false);
+
+    useEffect(()=>{
+            const filterProduc= productFilter();
+            filterProduc ? setProductsAll(filterProduc) : setProductsAll(products)
+    },[productFilter,products])
+    
 
     useEffect(() => {
-        setTotalPages(Math.ceil(products.length / rowsPerPage));
-    }, [rowsPerPage]);
+        setTotalPages(Math.ceil(productsAll.length / rowsPerPage));
+    }, [productsAll.length,rowsPerPage]);
 
+    //Cambiar Pagina
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
@@ -27,36 +37,36 @@ const ProductsTable = () => {
         setCurrentPage(0);
     };
 
-
+    //Columnas de la Tabla
     const columns=[
     {
         name:"Imagen",
         cell:row=>(
-            <img src={row.imagen} alt={row.subCategoria} className={styles.productImage} width="35px"/>
+            <img src={row.image.url} alt={row.name} className={styles.productImage} width="35px"/>
         ),
-        width:"15%"
+        width:"10%"
     },
     {
-        name:"Titulo",
-        selector:row=>row.subCategoria,
+        name:"Productos",
+        selector:row=>row.name,
         sortable:true,
-        width:"40%"
+        width:"30%"
     },
     {
         name:"Categoria",
-        selector:row=>row.producto,
+        selector:row=>row.sub_categories[0].name,
         sortable:true,
-        width:"10%"
+        width:"20%"
     },
     {
         name:"Precio",
-        selector:row=>"S/."+ Number(row.precio).toFixed(2),
+        selector:row=>"S/."+ Number(row.price).toFixed(2),
         sortable:true,
-        width:"10%"
+        width:"15%"
     },
     {
         name:"Stock",
-        selector:row=>row.id,
+        selector:row=>row.stock,
         sortable:true,
         width:"10%"
     },
@@ -64,13 +74,19 @@ const ProductsTable = () => {
         name:"Acciones",
         cell:row=>(
             <div className={styles.wrapperOptions}>
-                <i className="fa-solid fa-eye" onClick={()=>{
-                    const productById= products.find(product => product.id === row.id)
-                    setProductSelect(productById);
-                    setOpenModalDetailsProduct(true);
+                <i className="fa-solid fa-eye" onClick={ async()=>{
+                    
+                const productById = await productByName(row.name);
+                productById &&  setProductSelect(productById.data.data[0]);
+                setOpenModalDetailsProduct(true);
 
                 }}></i>
-                <i className="fa-solid fa-pencil" onClick={()=>setOpenModalProducts(true)}></i>
+                <i className="fa-solid fa-pencil" onClick={async()=>{
+                    localStorage.setItem("nameProduct",row.name);
+                    const productById = await productByName(row.name);
+                    productById &&  setProductPutSelect(productById.data.data[0]);
+                    setOpenModalProducts(true)
+                }}></i>
                 <i className="fa-solid fa-trash-can" onClick={()=>{
 
                     Swal.fire({
@@ -82,38 +98,47 @@ const ProductsTable = () => {
                         confirmButtonColor:"rgb(228, 34, 170)",
                         confirmButtonText: 'Sí, eliminar',
                         cancelButtonText:"Cancelar"
-                    }).then((result)=>{
+                    }).then(async(result)=>{
                         if(result.value){
-                            console.log(row.id);
-                        }else{
-                            console.log("No se eliminó el Producto con ID "+row.id);
-                        }
-                    })
+                            const response = await deleteProduct(row.name);
+                            if(response.status === 200){
+                                Swal.fire({
+                                    title: 'Producto eliminado',
+                                    text: 'El producto ha sido eliminado con éxito',
+                                    icon:"success",
+                                    timer: 3000
+                                })
+                                setConfirmProductDelete(!confirmProductDelete);
+                                productDelete(!confirmProductDelete);
+                            }
+                    }})
                 }}></i>
             </div>
         ),
         width:"15%"
     } ]
 
+    //Estilos de la Tabla
     const customStyle ={
         headCells:{
             style:{
                 backgroundColor:"rgba(255, 241, 249, 1)", 
                 color: 'rgba(255, 107, 188, 1)',            
                 fontWeight: 'bold',
-                fontSize:"13px"          
+                fontSize:"13px",         
             }
         },
         cells:{
             style:{
                 padding:"5px 15px",
                 fontWeight:"600",
-                fontSize:"12px" 
+                fontSize:"12px",
+                textTransform:"Capitalize"
             }
         }
 
     }
-
+    //Paginacion Personalizado
     const CustomPagination = ({ page, totalPages, onChangePage,totalRows }) => {
         return (
             <div style={{ display: 'flex', justifyContent: 'space-between',alignItems:"center", padding:"20px 40px"}}>
@@ -134,32 +159,40 @@ const ProductsTable = () => {
         );
     };
 
+    ///CONFIRMACION DE LA ACTUALIZACION DEL PRODUCTO PARA PASARLO AL ADMIN Y ACTUALIZAR LA LISTA DE PRODUCTOS
+    const confirmaActualizacionProduct=(confirm)=>{
+            isUpdateProduct(confirm);    
+    }
+
     return (
     <>
     <div className={styles.container}>
         <TableProducts
             className={styles.dataTable}
             columns={columns}
-            data={products.slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage)}
+            data={productsAll.slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage)}
             highlightOnHover
             pointerOnHover
             pagination
             paginationPerPage={rowsPerPage}
             paginationRowsPerPageOptions={[5, 10, 15]}
-            paginationTotalRows={products.length}
+            paginationTotalRows={productsAll.length}
             customStyles={customStyle}
             paginationComponent={() => (
                 <CustomPagination
                     page={currentPage}
                     totalPages={totalPages}
                     onChangePage={handlePageChange}
-                    totalRows={products.length}
+                    totalRows={productsAll.length}
                 />
             )}
             onChangeRowsPerPage={handleRowsPerPageChange} 
         />
-        <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct"/>
-        <ModalProducts isOpen={openModalDetailsProduct}  onClose={()=> setOpenModalDetailsProduct(false)} product={productSelect}/>
+        {productPutSelect ? <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct" confirmActualizacionProducto={confirmaActualizacionProduct}  productPutTable={productPutSelect}/>
+                        :
+                        <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct"/>
+        }
+        <ModalProducts isOpen={openModalDetailsProduct}  onClose={()=> setOpenModalDetailsProduct(false)} product={productSelect} title="productAdmin"/>
     </div>
     </>
     )

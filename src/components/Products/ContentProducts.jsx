@@ -3,19 +3,19 @@ import styles from '../../styles/producto.module.css'
 import PaginationProducts from './PaginationProducts'
 import ModalProducts from './ModalProducts'
 import SearchProducts from './SearchProducts'
-import {listProducts} from '../../services/productService'
+import {listProducts,productByName} from '../../services/productService'
 
 const ContentProducts = () => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [productSelected,setProductSelected]=useState({});
+    const [productSelected,setProductSelected]=useState(null);
     const [textSearch,setTextSearch]=useState("");
     const [filterPrecio,setFilterPrecio]=useState("");
     const [filterCategorie,setFilterCategorie]=useState("");
     const [productoFiltrado,setProductoFiltrado]=useState([]);
     const [dataProducts,setDataProducts]=useState(null);
     const [totalPages,setTotalPages]=useState(null);
-    const [numPage,setNumPage]=useState(null);
+    const [numPage,setNumPage]=useState(1);
     const [allProducts,setAllProducts]=useState([]);
     const [totalProducts,setTotalProducts]=useState(null)
 
@@ -104,14 +104,16 @@ const ContentProducts = () => {
                         borderTopRightRadius:"10px",
                         cursor:"pointer"
                     }}
-                    onClick={()=>{
+                    onClick={async ()=>{
                         setIsOpen(true)  
                         if(textSearch!=null || filterPrecio!=null || filterCategorie!=null){
-                            const productById=allProducts.find((prod)=> prod.id===product.id);
-                            setProductSelected(productById);
+                    
+                            const productById = await productByName(product.name);
+                            productById &&  setProductSelected(productById.data.data[0]);
                         }else{
-                            const productById=dataProducts.find((prod)=> prod.id===product.id);
-                            setProductSelected(productById);
+                            const productById = await productByName(product.name);
+                            productById &&  setProductSelected(productById.data.data[0]);
+
                         }
                     }}>
                     </div>
@@ -127,7 +129,7 @@ const ContentProducts = () => {
             ))}
 
             {totalPages && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext}/>}
-            {productSelected && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected}/> } 
+            {productSelected!=null && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected} title="productCustomer"/> } 
 
         </section>
         </div>
