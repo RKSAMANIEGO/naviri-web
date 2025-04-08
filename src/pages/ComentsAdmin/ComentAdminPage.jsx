@@ -48,7 +48,6 @@ const ComentAdminPage = () => {
   return (
     <div className="p-6">
 
-      {/* tabla */}
       <Table
         columns={columns}
         dataSource={comments}
@@ -65,7 +64,6 @@ const ComentAdminPage = () => {
         }}
       />
 
-      {/* seccion de paginado */}
      <div className="flex justify-between items-center mt-4">
             <span>
               Mostrando {(pagination.current - 1) * pagination.pageSize + 1} - 
@@ -87,7 +85,7 @@ const ComentAdminPage = () => {
             </div>
           </div>
 
-      {/* modal para editar y registrar */}
+   
 
       <Modal
         title={currentComment ? 'Editar Entrada' : 'Nueva Entrada'}
@@ -120,26 +118,23 @@ const ComentAdminPage = () => {
 
 
           <Form.Item
-  label="Fecha"
-  name="date"
-  rules={[{ required: true, message: '¡Selecciona una fecha!' }]}
->
-  <DatePicker 
-    onChange={(date) =>{
-      console.log(date)
-      if (date) {
-        form.setFieldValue('fecha', date.format('YYYY-MM-DD'));
-      } else {
-        form.setFieldValue('fecha', null);
-      }
-    } }
-    format="YYYY-MM-DD"
-    value={form.getFieldValue('fecha') ? dayjs(form.getFieldValue('fecha')) : null}
-  />
-</Form.Item>
-
-
-        
+        label="Fecha"
+        name="date"
+        rules={[{ required: true, message: '¡Selecciona una fecha!' }]}
+        >
+       <DatePicker 
+        onChange={(date) =>{
+        console.log(date)
+        if (date) {
+          form.setFieldValue('fecha', date.format('YYYY-MM-DD'));
+       } else {
+          form.setFieldValue('fecha', null);
+        }
+      } }
+        format="YYYY-MM-DD"
+        value={form.getFieldValue('fecha') ? dayjs(form.getFieldValue('fecha')) : null}
+       />
+      </Form.Item>
 
           <div className="flex justify-end gap-2">
             <Button onClick={() => setIsModalVisible(false)}>Cancelar</Button>

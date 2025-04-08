@@ -18,6 +18,8 @@ import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 import ComentAdminPage from '../pages/ComentsAdmin/ComentAdminPage';
+import ServiceAdminPage from '../pages/ServicesAdmin/ServicesAdminPagee';
+
 
 const Router = () => {
    const { initialize } = useAuthStore();
@@ -46,7 +48,7 @@ const Router = () => {
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
-              <Route path="/admin/panel/page/service" element={ <h1>Administracion de Servicios</h1> } />
+              <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
             </Route>
           </Route>
 
