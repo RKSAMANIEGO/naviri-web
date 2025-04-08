@@ -1,34 +1,46 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import {PolicyPage, HomePage, MainLayout, BlogPage, BlogDetailsPage}  from '../pages/index';
+import {
+  PolicyPage, 
+  HomePage, 
+  AdminLayout, 
+  MainLayout, 
+  BlogPage, 
+  BlogDetailsPage, 
+  BlogAdminPage,
+  PolicyAdminPage
+}  from '../pages/index';
+
 import LoginPage from '../pages/LoginPage';
 import Products from '../pages/Products';
-import AdminLayout from '../pages/layout/AdminLayout'
 import RequireAuth from './RequireAuth';
 import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
+
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
-import BlogAdminPage from '../pages/blog/BlogAdminPage';
+//import BlogAdminPage from '../pages/blog/BlogAdminPage';
 import CategoriaPage from '../pages/categoria/CategoriaPage';
+import ComentAdminPage from '../pages/ComentsAdmin/ComentAdminPage';
+
 
 const Router = () => {
-   const { initialize } = useAuthStore();
+  const { initialize } = useAuthStore();
   
     useEffect(() => {
       initialize();
     }, [initialize]);
 
     return (
-        <Routes>
+      <Routes>
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
             <Route path="/policity" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
-            <Route path="/login" element={<LoginPage />} />  
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
 
+          <Route path="/login" element={<LoginPage />} />  
           <Route element={ <RequireAuth/> }>
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/products" element={<ProductAdmin/>} />
@@ -36,6 +48,9 @@ const Router = () => {
               <Route path="/admin/panel/customers" element={<h1>Clientes</h1>} />
               <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
+              <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
+              <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
+              <Route path="/admin/panel/page/service" element={ <h1>Administracion de Servicios</h1> } />
             </Route>
           </Route>
 

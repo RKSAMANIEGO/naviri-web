@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../components/Sidebar/Sidebar'
 import styles from '../styles/dashboard.module.css'
-import ProductAdmin from './PageProductAdmin/ProductAdmin'
+import AdminConfi from './PageConfigAdmin/ConfigAdmin'
 const Dashboard = () => {
     return (
         <section className={styles.dashboard}>
@@ -10,7 +10,7 @@ const Dashboard = () => {
             </div> 
 
             <div className={styles.divContent}>
-                <ProductAdmin/>
+                <AdminConfi/>
             </div>
             
         </section>
