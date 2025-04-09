@@ -54,7 +54,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
     },
     {
         name:"Categoria",
-        selector:row=>row.sub_categories[0].name,
+        selector:row=>row.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name).join()),
         sortable:true,
         width:"20%"
     },
