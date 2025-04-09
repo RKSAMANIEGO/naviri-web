@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { message, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'; 
-import { getServicesPage, createService, updateService, deleteService } from '../../services/secServices';
+import { getServicesPage, createService, updateService, deleteService } from "../../services/secServices";
 
 export const useServicesAdmin = (form) => {
   const [services, setServices] = useState([]);
