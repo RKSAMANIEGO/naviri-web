@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import BlogCard from "../../components/blog/BlogCard";
 import SectionPrincipal from "../../pages/sectionPrincipal/SectionPrincipal";
 import SectionCategorias from "../sectionCategorias/sectionCategorias";
-import RecommendedSection from "../../components/cards/RecommendedSection";
-
-
+import SectionRecomendacion from "../../pages/sectionRecomendacion/sectionRecomendacion";
+import Sectionaboutushome from "../sectionAboutUshome/Sectionaboutushome";
+import Sectionaboutus from "../sectionAboutUs/sectionaboutus";
+import Sectionservices from "../sectionServices/sectionservices";
 
 export const Home = () => {
    
@@ -59,11 +60,15 @@ const blogsMock = [
 ]
 
    return (
-      <>
-         <SectionPrincipal/>
-         <hr className=" text-gray-50"/>
-         <div className="max-w-7xl mx-auto">
-         <SectionCategorias/>
+     <>
+      <SectionPrincipal/>
+       <hr className=" text-gray-50"/>
+       <div className="max-full mx-auto">
+       <Sectionaboutushome/>
+       <Sectionaboutus/>
+       <SectionCategorias/>
+       <Sectionservices/>
+       <SectionRecomendacion/>   
       
 
          <div className="w-full text-end my-4">
@@ -76,11 +81,7 @@ const blogsMock = [
             <BlogCard key={blog.id} blog={blog} />
             ))}   
             </div>
-         </div>
-         
-         <div id="recomendados">
-            <RecommendedSection/>
-         </div>
+         </div> 
          
          {/*
          <div id="testimonio">
