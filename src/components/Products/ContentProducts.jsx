@@ -87,7 +87,6 @@ const ContentProducts = () => {
                 setProductoFiltrado(productsFilterPrecio);
             }
             else if (filterCategorie){
-                //const productsFilterCat=allProducts.filter(product => product.sub_categories[0].name.toLowerCase()===filterCategorie.toLowerCase());
                 const productsFilterCat=allProducts.filter(product => product.categories.some(subCat=>subCat.sub_categories.some(obj=> obj.name.toLowerCase()=== filterCategorie.toLowerCase())))
                 console.log(productsFilterCat);
                 setProductoFiltrado(productsFilterCat);
@@ -131,7 +130,7 @@ const ContentProducts = () => {
                         }
                     }}>
                     </div>
-                    {/**  <p className={styles.p}>{product.sub_categories[0].name}</p>*/}
+                    <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                     <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
                     {/**<p className={styles.p}>{product.descripcion}</p>*/} 
                     <h5 className={styles.h5}>S/{product.price}</h5>
