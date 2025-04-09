@@ -2,9 +2,11 @@ import {deleteCategorie} from '../../services/categoriesService'
 import TableCategoria from 'react-data-table-component'
 import styles from '../../styles/categorie.module.css'
 import Swal from 'sweetalert2'
-const CategorieTable = ({dataCategorie}) => {
+import { useState } from 'react'
+const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) => {
 
-    
+    const[isConfirmDelete,setConfirmDelete]=useState(false);
+    const[isConfirmUpdate,setConfirmUpdate]=useState(false);
 
     const customStyle ={
         headCells:{
@@ -27,11 +29,7 @@ const CategorieTable = ({dataCategorie}) => {
     }
 
     const column=[
-        {
-            name: 'ID',
-            selector:row=>row.id,
-            sortable:true
-        },
+
         {
             name: 'Categoria',
             selector:row=>row.name,
@@ -41,26 +39,10 @@ const CategorieTable = ({dataCategorie}) => {
             name: 'Opciones',
             cell:row=>(
                 <div className={styles.optionCategorieTable}>
-                    <i className="fa-solid fa-pencil" onClick={async()=>{
-                        
+                    <i className="fa-solid fa-pencil" onClick={async()=>{              
                         localStorage.setItem("idCat",row.id);
-                        const res ="a";
-                        //const res = await putCategorie(row.id);
-                        if(res){
-                            Swal.fire({
-                                title: 'Categoria Actualizada',
-                                text: 'La categoria ha sido actualizada con exito',
-                                icon: 'success',
-                                timer: 2000
-                            })
-                        }else{
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'La categoria no ha sido actualizada',
-                                icon: 'error',
-                                timer: 2000
-                            })
-                        }
+                        setConfirmUpdate(!isConfirmUpdate);
+                        optionPutCategorie(!isConfirmUpdate);
                     }}/>    
                     <i className="fa-solid fa-trash-can" onClick={async()=>{
                         Swal.fire({
@@ -81,7 +63,11 @@ const CategorieTable = ({dataCategorie}) => {
                                                 text: 'La categoria ha sido eliminada con exito',
                                                 icon: 'success',
                                                 timer: 2000
-                                            })
+                                            });
+                                            setConfirmDelete(!isConfirmDelete);
+                                            updateListCategorie(!isConfirmDelete);
+
+
                                         }else{
                                             Swal.fire({
                                                 title: 'Error',
@@ -108,6 +94,10 @@ const CategorieTable = ({dataCategorie}) => {
             data={dataCategorie}
             customStyles={customStyle}
             pagination
+            pointerOnHover
+            highlightOnHover
+            paginationPerPage={5}
+            paginationRowsPerPageOptions={[5,10,15]}
         />
     )
 }

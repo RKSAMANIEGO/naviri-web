@@ -38,9 +38,10 @@ export const addCategorie = async (form) => {
 export const deleteCategorie = async (idCategorie) => {
 	try {
 		const response = await api.delete(`categories/${idCategorie}`);
+		console.log(response);
 		return response;
 	} catch (error) {
-		console.error("Ocurrio un Error al Eliminar " + error);
+		console.error("Ocurrio un Error al Eliminar " + error.message);
 		return null;
 	}
 };

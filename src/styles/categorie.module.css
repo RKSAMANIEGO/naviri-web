@@ -1,60 +1,78 @@
+/*CONTENT CATEGORIA*/
 .gestionCategorie {
     margin-inline: 40px;
-    border: 1px solid rgb(211, 211, 211);
-    border-radius: 5px;
-    padding: 10px;
-    padding-bottom: 20px;
+    box-shadow: 0 0 5px #c52e84;
+    border-radius: 10px;
+    padding: 20px;
+    height: 310px;
 }
 
 .gestionCategorie h2 {
-    padding: 5px;
+    font-size: 1.3rem;
+    text-decoration: underline;
     font-weight: bold;
+    color: #d44b99;
 }
 
 .gestionCategorie section {
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     width: 100%;
-
+    padding-block: 20px;
 }
 
-.gestionCategorie div {
-    width: 100%;
+
+.gestionCategorie section label {
     display: flex;
-    justify-content: space-evenly;
+    font-weight: 600;
+    font-size: 12px;
+    flex-direction: column;
+
+    gap: 5px;
 }
 
-.gestionCategorie div input {
-    flex: 1;
-    padding: 2px 20px;
+.gestionCategorie section input {
+    padding: 5px 10px;
     border-radius: 5px;
     border: 1px solid rgb(172, 172, 172);
 }
 
-.gestionCategorie div input::placeholder {
-    font-size: 12px;
+.gestionCategorie section input::placeholder {
+    font-size: 11px;
 }
 
-.gestionCategorie div .optionCategorie {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 10px;
-
-}
-
-.optionCategorie i {
-    padding: 8px 10px;
-    border-radius: 8px;
-    color: white;
+.gestionCategorie section button {
+    width: 40%;
+    padding: 5px 10px;
     font-size: 12px;
+    background: linear-gradient(to right, transparent 50%, #c52e84 50%);
+    background-size: 200%;
+    background-position: left;
+    transition: all 0.4s ease-in-out;
+    border-radius: 3px;
+    font-weight: 700;
     cursor: pointer;
-    background-color: rgb(57, 180, 57);
+}
+
+.gestionCategorie section button {
+    background-color: rgb(3, 57, 132);
+    color: white;
+}
+
+.gestionCategorie section button:hover {
+    background-position: right;
+    color: white;
+
 }
 
 /*TABLA CATEGORIA */
 .tablaCategoria {
-    padding: 10px 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 40px;
+    padding-top: 5px;
+
 }
 
 .optionCategorieTable {
@@ -85,4 +103,18 @@
 
 .optionCategorieTable i:hover {
     background-color: #c52e84;
+}
+
+/*PAGE CATEGORIA */
+.pageCategoria {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pageCategoria .catContent {
+    flex: 1;
+}
+
+.pageCategoria .sectionTable {
+    flex: 2;
 }

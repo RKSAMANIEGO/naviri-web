@@ -163,9 +163,9 @@
 .contentProductAdmin {
     width: 100%;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-around;
     gap: 20px;
+    flex-wrap: wrap;
     padding: 0 20px;
     padding-bottom: 10px;
 }
@@ -324,13 +324,13 @@ select {
     padding: 0 15px;
     border-radius: 5px;
     font-size: 14px;
-    background-color: #c52e84;
+    background-color: rgb(225, 41, 139);
     color: white;
     cursor: pointer;
 }
 
 .productoAdminCrud form .sectionLast .wrapperBtnProducts button:hover {
-    background-color: #5128da;
+    background-color: rgb(18, 47, 207);
 }
 
 .productoAdminCrud form .sectionFirts label input,
@@ -371,25 +371,27 @@ select {
 }
 
 .deleteImage {
-    font-size: 20px;
-    padding: 10px;
-    border-radius: 50%;
+    font-size: 15px;
+    padding: 6px;
+    border-radius: 5px;
     position: absolute;
-    right: 130px;
-    bottom: -15px;
-    background: linear-gradient(to right, transparent 50%, rgb(225, 41, 139)50%);
+    right: -15px;
+    bottom: -40px;
+    background: linear-gradient(to right, transparent 50%, rgb(11, 11, 11)50%);
     background-size: 200%;
     background-position: left;
     transition: all 0.6s ease-in-out;
     color: white;
     border: 1px solid white;
+
 }
 
 .deleteImage {
-    background-color: black;
+    background-color: rgb(193, 31, 19);
 }
 
 .deleteImage:hover {
+
     background-position: right;
 }
 

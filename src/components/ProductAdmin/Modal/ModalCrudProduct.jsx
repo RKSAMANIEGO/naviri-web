@@ -294,10 +294,10 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                     <label>Imagen del Producto
                     
                     {imageUrl ? 
-                        <div style={{border:"none"}}>
-                            <div>
+                        <div>
+                            <div styles={{background:"red"}}>
                                 <Upload {...props} showUploadList={false} customStyles={{padding:"0",margin:"0",boxSizing:"border-box", border:"none"}} />
-                                <DeleteOutlined className={styles.deleteImage} onClick={()=> setImageUrl(null)} />  
+                                <DeleteOutlined className={styles.deleteImage} onClick={()=> setImageUrl(null)}/>
                             </div>
 
                             {imageUrl && (

@@ -15,7 +15,7 @@ const CategorieSearch = () => {
                         <i className="fa-solid fa-magnifying-glass iconSearch"></i>
                     </label>
                 
-                    <i className="fa-solid fa-magnifying-glass iconSearch"></i>
+                    {/*<i className="fa-solid fa-magnifying-glass iconSearch"></i>*/}
                 </div>
             </div>
         </div>
