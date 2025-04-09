@@ -9,7 +9,9 @@ const Footer = () => {
       <footer className={styles.footer}>
         <div className={styles.container}>
             <div className={styles.sectionfooter}>
-                <img src ={logo} className={styles.logo}/>
+                <div className={styles.logoContainer}>
+                  <img src ={logo} className={styles.logo}/>
+                </div>
                 <h1 className={styles.footerdescrip}>
                     <p>Tu destino de belleza integral, donde la calidad y los mejores productos
                     se unen para realzar tu belleza natural.</p>

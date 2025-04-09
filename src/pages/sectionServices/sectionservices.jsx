@@ -1,6 +1,6 @@
 import { useEffect, useState} from "react";
 import { getServices } from "../../services/secServices"
-import styles from "../../styles/SectionServices.module.css";
+import styles from "../../styles/Sectionservices.module.css";
 
 const sectionservices = () => {
     const [services, setServices] = useState([]);
@@ -22,7 +22,7 @@ const sectionservices = () => {
         <div className={styles.container}>
          <h1>Servicios especiales</h1>
          <p>Ofrecemos una variedad de servicios para satisfacer tus necesidades.</p>
-          <div className={styles.containerCards}>
+          <div className="flex flex-row justify-center gap-6">
            {services.map(service => (
             <div key={service.id} className={styles.servicecard}>
              <h3>{service.title}</h3>

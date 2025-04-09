@@ -7,7 +7,8 @@ import {
   BlogPage, 
   BlogDetailsPage, 
   BlogAdminPage,
-  PolicyAdminPage
+  PolicyAdminPage,
+  ServiceAdmin
 }  from '../pages/index';
 
 import LoginPage from '../pages/LoginPage';
@@ -50,7 +51,7 @@ const Router = () => {
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
-              <Route path="/admin/panel/page/service" element={ <h1>Administracion de Servicios</h1> } />
+              <Route path="/admin/panel/page/service" element={ <ServiceAdmin/>} />
             </Route>
           </Route>
 
