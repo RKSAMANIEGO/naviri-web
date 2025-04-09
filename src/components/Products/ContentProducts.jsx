@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom';
 import styles from '../../styles/producto.module.css'
 import PaginationProducts from './PaginationProducts'
 import ModalProducts from './ModalProducts'
@@ -19,10 +20,21 @@ const ContentProducts = () => {
     const [allProducts,setAllProducts]=useState([]);
     const [totalProducts,setTotalProducts]=useState(null)
 
-    //recibir data de filtros productos, precio y categoria
+    // Obtener parámetros de búsqueda
+    const [searchParams] = useSearchParams();
+
+    // Recibir data de filtros productos, precio y categoria
     const recibirTextSearch =(data)=>{
         setTextSearch(data);
     }
+
+    // Actualizar búsqueda cuando cambia el parámetro de URL
+    useEffect(() => {
+        const searchQuery = searchParams.get('search');
+        if (searchQuery) {
+            setTextSearch(searchQuery);
+        }
+    }, [searchParams]);
     const recibirFiltroPrecio=(precio)=>{
         setFilterPrecio(precio);
     }
