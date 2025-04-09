@@ -8,34 +8,31 @@ import {
   BlogDetailsPage, 
   BlogAdminPage,
   PolicyAdminPage,
-  ServiceAdmin
+  ServiceAdmin,
+  LoginPage,
+  Products,
+  ProductAdmin,
+  CategoriaPage,
+  ComentAdminPage
 }  from '../pages/index';
 
-import LoginPage from '../pages/LoginPage';
-import Products from '../pages/Products';
 import RequireAuth from './RequireAuth';
-import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
-
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
-import CategoriaPage from '../pages/categoria/CategoriaPage';
-import ComentAdminPage from '../pages/ComentsAdmin/ComentAdminPage';
 
 
 const Router = () => {
-  const { initialize } = useAuthStore();
+  useEffect(() => {
+    useAuthStore.getState().initialize();
+  }, []);
   
-    useEffect(() => {
-      initialize();
-    }, [initialize]);
-
     return (
       <Routes>
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/policity" element={<PolicyPage />} />
+            <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
             <Route path="*" element={<Navigate to="/" />} />
