@@ -19,6 +19,9 @@ import {
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
+import ServicesAdminPage from '../pages/ServicesAdmin/ServicesAdminpage';
+//import BlogAdminPage from '../pages/blog/BlogAdminPage';
+ 
 import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 
 
@@ -50,7 +53,7 @@ const Router = () => {
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
-              <Route path="/admin/panel/page/service" element={ <ServiceAdmin/>} />
+              <Route path="/admin/panel/page/service" element={ <ServicesAdminPage/>} />
             </Route>
           </Route>
 
