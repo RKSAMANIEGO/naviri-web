@@ -7,7 +7,7 @@ const RequireAuth = () => {
   console.log(isAuthenticate);
   
   if (loading) {
-    return <div className="text-center p-4">Cargando...</div>;
+    return <></>;
   }
 
   return isAuthenticate ? (

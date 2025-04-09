@@ -58,15 +58,33 @@
   
 .buttons {
     display: flex;
-    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+    
 }
-  
-.primary, .secondary {
-    padding: 0.8rem 1.8rem;
-    font-size: 1rem;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+
+.image img {
+    width: 450px;
+    height: auto;
+    object-fit: cover; 
+}
+
+.imaged {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.imaged img {
+    width: 600px;
+    height: auto;
+    object-fit: cover; 
+ 
+}
+.buttons {
+    margin-top: 20px;
 }
   
 .primary {

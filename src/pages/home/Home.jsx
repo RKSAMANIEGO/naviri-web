@@ -63,7 +63,7 @@ const blogsMock = [
      <>
       <SectionPrincipal/>
        <hr className=" text-gray-50"/>
-       <div className="max-w-7xl mx-auto">
+       <div className="max-full mx-auto">
        <Sectionaboutushome/>
        <Sectionaboutus/>
        <SectionCategorias/>

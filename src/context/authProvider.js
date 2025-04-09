@@ -35,6 +35,12 @@ export const useAuthStore = create((set, get) => ({
     initialize: async () => {
         try {
             const accessToken = localStorage.getItem('accessToken');
+            if (accessToken) {
+                // Aquí podrías hacer una llamada a la API para validar el token, si quieres.
+                set({ isAuthenticate: true });
+            } else {
+                set({ isAuthenticate: false });
+            }
         } catch (error) {
             console.error('Error inicializando auth:', error);
             get().logout();
