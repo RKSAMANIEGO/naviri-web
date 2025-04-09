@@ -120,6 +120,7 @@
     transform: rotate(180deg);
 }
 
+
 .dropdown {
     display: grid;
     grid-template-columns: 1fr 1fr;

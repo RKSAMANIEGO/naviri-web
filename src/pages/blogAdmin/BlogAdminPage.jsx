@@ -49,20 +49,7 @@ const BlogAdminPage = () => {
     setPagination(prev => ({ ...prev, current: page }));
   };
 
-const uploadProps = {
-  beforeUpload: (file) => {
-    const isImage = file.type.startsWith('image/');
-    console.log(file);
-    if (!isImage) {
-      message.error('Solo se permiten imágenes (JPG, PNG, WEBP)!');
-    }
-    return isImage ? false : Upload.LIST_IGNORE;
-  },
-  listType: "picture",
-  maxCount: 1,
-  accept: "image/jpeg,image/png,image/webp",
-  multiple: false,
-};
+
 
   return (
     <div className="p-6">
@@ -128,7 +115,6 @@ const uploadProps = {
         setIsModalVisible={setIsModalVisible}
         form={form}
         handleSubmit={handleSubmit}
-        uploadProps={uploadProps}
         currentBlog={currentBlog}
       />
 

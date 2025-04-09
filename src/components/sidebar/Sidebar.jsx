@@ -76,11 +76,11 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             backgroundColor: isDarkMode ? '#1f2937' : 'white',
           }}
           items={[
-            {
-              key: '/admin/panel',
-              icon: <HomeOutlined />,
-              label: 'Inicio',
-            },
+            // {
+            //   key: '/admin/panel',
+            //   icon: <HomeOutlined />,
+            //   label: 'Inicio',
+            // },
             {
               key: '/admin/panel/products',
               icon: <ShoppingOutlined />,

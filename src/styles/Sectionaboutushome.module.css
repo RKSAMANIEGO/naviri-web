@@ -1,0 +1,46 @@
+.aboutContainer {
+    background-color: #fdf4f9;
+    font-family: Inter, 'san-serif';
+    padding: 80px 0px 80px 0px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+  
+.title {
+    font-size: 45px;
+    color:rgb(182, 42, 105);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+  
+.subtitle {
+    font-size: 20px;
+    color: rgb(146, 146, 146);
+    font-weight: 700;
+    text-align: center;
+}
+  
+.image {
+    width: 350px;
+    max-width: 400px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+image:hover {
+    opacity: 1;
+}
+  
+.textcarg {
+    color: #888;
+}
+  
