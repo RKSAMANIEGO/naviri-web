@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import styles from '../../styles/productAdmin.module.css'
-const ProductSearch = ({setRecibirEstilo}) => {
+const ProductSearch = ({setRecibirEstilo,recibirTextSearch}) => {
 
     const [onChangeStyle,setOnChangeStyle]=useState(false);
+    const [searchProduct,setSearchProduct]=useState('');
 
     const cambiarEstilo =()=>{
         setRecibirEstilo(!onChangeStyle);
@@ -15,8 +16,11 @@ const ProductSearch = ({setRecibirEstilo}) => {
             <p>Administra tu catálogo de productos naturales. Puedes agregar, editar, eliminar y buscar productos.</p>
             <div>
                 <label>
-                    <input className={styles.input} type='text' placeholder='Buscar productos'/> 
-                    <i className="fa-solid fa-magnifying-glass iconSearch"></i>
+                    <input className={styles.input} type='text' value={searchProduct} onChange={(e)=>{
+                        setSearchProduct(e.target.value);
+                        
+                    }} placeholder='Buscar por Productos o Categorias'/> 
+                    <i className="fa-solid fa-magnifying-glass iconSearch" onClick={()=>  recibirTextSearch(searchProduct)}></i>
                 </label>
                 
                 <i className="fa-solid fa-grip" onClick={cambiarEstilo}></i>

@@ -6,31 +6,33 @@ import {
   MainLayout, 
   BlogPage, 
   BlogDetailsPage, 
-  BlogAdminPage
+  BlogAdminPage,
+  PolicyAdminPage,
+  ServiceAdmin,
+  LoginPage,
+  Products,
+  ProductAdmin,
+  CategoriaPage,
+  ComentAdminPage
 }  from '../pages/index';
 
-import LoginPage from '../pages/LoginPage';
-import Products from '../pages/Products';
 import RequireAuth from './RequireAuth';
-import ProductAdmin from '../pages/PageProductAdmin/ProductAdmin'
-
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
-import ComentAdminPage from '../pages/ComentsAdmin/ComentAdminPage';
+//import BlogAdminPage from '../pages/blog/BlogAdminPage';
+
 
 const Router = () => {
-   const { initialize } = useAuthStore();
+  useEffect(() => {
+    useAuthStore.getState().initialize();
+  }, []);
   
-    useEffect(() => {
-      initialize();
-    }, [initialize]);
-
     return (
       <Routes>
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
-            <Route path="/policity" element={<PolicyPage />} />
+            <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
             <Route path="*" element={<Navigate to="/" />} />
@@ -40,10 +42,13 @@ const Router = () => {
           <Route element={ <RequireAuth/> }>
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/products" element={<ProductAdmin/>} />
-              <Route path="/admin/panel/customers" element={<h1>Hola</h1>} />
+              <Route path="/admin/panel/categories" element={<CategoriaPage/>} />
+              <Route path="/admin/panel/customers" element={<h1>Clientes</h1>} />
               <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
+              <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
+              <Route path="/admin/panel/page/service" element={ <ServiceAdmin/>} />
             </Route>
           </Route>
 

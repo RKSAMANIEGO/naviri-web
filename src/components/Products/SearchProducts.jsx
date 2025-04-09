@@ -12,8 +12,11 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,p
     const listPrecios= new Set(precios);
 
     //SUB CATEGORIAS 
-    const categories= products?.map(obj => obj.sub_categories[0].name);
-    const listCat=new Set(categories);
+    //const categories= products?.map(obj => obj.sub_categories[0].name);
+    const categorie= products.map(obj=> obj.categories.map(subCat=>subCat.sub_categories.map(objSub=> objSub.name).join()));
+    const listCategorie= new Set(categorie.flat());
+    console.log(listCategorie)
+    //const listCat=new Set(categories);
 
     const searchProducts = () =>{
             recibirTextInput(searchText);
@@ -34,15 +37,16 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,p
 
             <div>   
                 <section >
-                    <p>Sub categorias</p>
+                    <p>Categorias</p>
                     <select value={valueCategorie} onChange={(e)=>{
                                 setValueCategorie(e.target.value);
                                 recibirCategories(e.target.value);
                             }} style={{textTransform:"capitalize"}}>
                         
                         <option value=''>Todas las sub categorias</option>
-
-                        {[...listCat].map( (cat,index)=> (
+                        
+                        
+                        {[...listCategorie]?.map( (cat,index)=> (
                             <option key={index} >
                                 {cat}
                             </option>

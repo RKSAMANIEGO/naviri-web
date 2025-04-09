@@ -1,28 +1,40 @@
 import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom';
 import styles from '../../styles/producto.module.css'
 import PaginationProducts from './PaginationProducts'
 import ModalProducts from './ModalProducts'
 import SearchProducts from './SearchProducts'
-import {listProducts} from '../../services/productService'
+import {listProducts,productByName} from '../../services/productService'
 
 const ContentProducts = () => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const [productSelected,setProductSelected]=useState({});
+    const [productSelected,setProductSelected]=useState(null);
     const [textSearch,setTextSearch]=useState("");
     const [filterPrecio,setFilterPrecio]=useState("");
     const [filterCategorie,setFilterCategorie]=useState("");
     const [productoFiltrado,setProductoFiltrado]=useState([]);
     const [dataProducts,setDataProducts]=useState(null);
     const [totalPages,setTotalPages]=useState(null);
-    const [numPage,setNumPage]=useState(null);
+    const [numPage,setNumPage]=useState(1);
     const [allProducts,setAllProducts]=useState([]);
     const [totalProducts,setTotalProducts]=useState(null)
 
-    //recibir data de filtros productos, precio y categoria
+    // Obtener parámetros de búsqueda
+    const [searchParams] = useSearchParams();
+
+    // Recibir data de filtros productos, precio y categoria
     const recibirTextSearch =(data)=>{
         setTextSearch(data);
     }
+
+    // Actualizar búsqueda cuando cambia el parámetro de URL
+    useEffect(() => {
+        const searchQuery = searchParams.get('search');
+        if (searchQuery) {
+            setTextSearch(searchQuery);
+        }
+    }, [searchParams]);
     const recibirFiltroPrecio=(precio)=>{
         setFilterPrecio(precio);
     }
@@ -75,7 +87,8 @@ const ContentProducts = () => {
                 setProductoFiltrado(productsFilterPrecio);
             }
             else if (filterCategorie){
-                const productsFilterCat=allProducts.filter(product => product.sub_categories[0].name.toLowerCase()===filterCategorie.toLowerCase());
+                const productsFilterCat=allProducts.filter(product => product.categories.some(subCat=>subCat.sub_categories.some(obj=> obj.name.toLowerCase()=== filterCategorie.toLowerCase())))
+                console.log(productsFilterCat);
                 setProductoFiltrado(productsFilterCat);
             }
             else if(!textSearch || !filterPrecio){
@@ -104,18 +117,20 @@ const ContentProducts = () => {
                         borderTopRightRadius:"10px",
                         cursor:"pointer"
                     }}
-                    onClick={()=>{
+                    onClick={async ()=>{
                         setIsOpen(true)  
                         if(textSearch!=null || filterPrecio!=null || filterCategorie!=null){
-                            const productById=allProducts.find((prod)=> prod.id===product.id);
-                            setProductSelected(productById);
+                    
+                            const productById = await productByName(product.name);
+                            productById &&  setProductSelected(productById.data.data[0]);
                         }else{
-                            const productById=dataProducts.find((prod)=> prod.id===product.id);
-                            setProductSelected(productById);
+                            const productById = await productByName(product.name);
+                            productById &&  setProductSelected(productById.data.data[0]);
+
                         }
                     }}>
                     </div>
-                    <p className={styles.p}>{product.sub_categories[0].name}</p>
+                    <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                     <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
                     {/**<p className={styles.p}>{product.descripcion}</p>*/} 
                     <h5 className={styles.h5}>S/{product.price}</h5>
@@ -127,7 +142,7 @@ const ContentProducts = () => {
             ))}
 
             {totalPages && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext}/>}
-            {productSelected && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected}/> } 
+            {productSelected!=null && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected} title="productCustomer"/> } 
 
         </section>
         </div>

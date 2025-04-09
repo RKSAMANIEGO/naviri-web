@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 
 Modal.setAppElement("#root")
     
-const ModalProducts = ({isOpen,onClose,product}) => {
+const ModalProducts = ({isOpen,onClose,product,title}) => {
+
     const[stock,setStock]=useState(0);
 
     useEffect(()=>{
@@ -51,16 +52,30 @@ const ModalProducts = ({isOpen,onClose,product}) => {
                     
                 </section>
                 <section className={styles.sectionLast}>
-                    <p className={styles.p}>{product.sub_categories[0].name}</p>
                     <h2 className={styles.h2}>{product.name.toUpperCase()}</h2>
+                    <p className={styles.p}>{product.subcategories[0].name}</p>
                     <p className={styles.precio}>S/{product.price}</p>
-                    <p className={styles.descripcion}>{product.name}</p>
-                    <h3 className={styles.h3}>Cantidad</h3>
+                    <p className={styles.descripcion}>{product.compatibility}</p>
+                    
+                    {title==="productCustomer" ?
+                    <h3 className={styles.h3}>Cantidad</h3> :
+                    <h3 className={styles.h3}>Beneficios</h3> }
+
+                    {title==="productCustomer" ?
                     <div className={styles.stock}>
                         <button className={styles.button} onClick={decrementStock}>-</button>
                         <input className={styles.input} type='text' value={stock} readOnly/>
                         <button className={styles.button}  onClick={incrementStock}>+</button>
                     </div>
+                    :
+                    <div className={styles.beneficios}>
+                        <ul className={styles.ul}>
+                            {product.benefits.map((obj,index)=>(
+                                <li key={index} className={styles.li}>{obj}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    }
 
                     <hr className={styles.hr}/>
                     <div className={styles.info}>
@@ -78,11 +93,12 @@ const ModalProducts = ({isOpen,onClose,product}) => {
                         </section>
                     </div>
                     <hr/>
+                    {title==="productCustomer" &&
                     <div className={styles.wrapperBtn}>
                         <button className={styles.button}><i className="fa-solid fa-cart-shopping"></i> Añadir al Carrito</button>
                         <button className={styles.button}>Comprar por WhatsApp</button>
                     </div>
-                    
+                    }
                 </section>
             </div>
             }
