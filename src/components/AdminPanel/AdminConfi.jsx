@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './../../styles/adminconfi.css';
-import { FaUser, FaCheckCircle } from 'react-icons/fa';
+import { FaUser, FaCheckCircle, FaTimes } from 'react-icons/fa';
 
 const EditProfile = () => {
   const [email, setEmail] = useState('');
@@ -14,10 +14,8 @@ const EditProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Obtener el token de localStorage
     const token = localStorage.getItem('accessToken');
     if (token) {
-      // Llamar a la API para obtener los datos del usuario
       fetch('https://api.navinatubelleza.com/api/user', {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -27,7 +25,7 @@ const EditProfile = () => {
         .then(response => response.json())
         .then(data => {
           if (data.email) {
-            setEmail(data.email); // Establecer el correo en el estado
+            setEmail(data.email);
           }
         })
         .catch(err => {
@@ -132,6 +130,29 @@ const EditProfile = () => {
       {isModalOpen && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
+            {/* Ícono de cerrar dentro de un círculo negro */}
+            <div
+              className="close-icon-container"
+              onClick={() => setIsModalOpen(false)}
+              style={{
+                position: 'fixed', // Fija el icono en la parte inferior
+                left: '79%', // Centrado horizontalmente
+                bottom: '20px', // Separado del borde inferior
+                transform: 'translateX(-50%)', // Centrado exacto en el medio
+                backgroundColor: 'rgba(255, 107, 188, 1)',
+                color: 'white',
+                borderRadius: '50%',
+                padding: '10px', // Tamaño del círculo
+                fontSize: '1rem', // Tamaño de la X
+                cursor: 'pointer',
+                zIndex: '10',
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.4)',
+                transition: 'background-color 0.2s ease',
+              }}
+            >
+              <FaTimes style={{ fontSize: '1.8rem' }} />
+            </div>
+
             <h2>Cambiar contraseña</h2>
             <form onSubmit={handleSubmit} className="form">
               <div className="inputGroup">
