@@ -1,26 +1,28 @@
-import React, { useDebugValue, useEffect, useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Upload, Modal, Table, Select, FloatButton } from 'antd';
-import { UploadOutlined, PlusOutlined, ProductOutlined } from '@ant-design/icons';
-import { useBlogAdmin } from '../../hooks/blog/useBlogAdmin'; 
+import { UploadOutlined, PlusOutlined, ProductOutlined } from "@ant-design/icons";
+import { useServicesadmin }  from "../../hooks/serviceshook/useServicesadmin";
 import Search from 'antd/es/input/Search';
-import BlogModalAdmin from '../../components/blogAdmin/BlogModalAdmin';
-import BlogAdminCard from '../../components/blogAdmin/BlogCardAdmin';
+import ServiceModalAdmin from '../../components/ServicesAdmin/ServiceModalAdmin';
+import ServicesCardAdmin from '../../components/ServicesAdmin/ServicesCardAdmin';
+
+
 const { Option } = Select;
 
-const BlogAdminPage = () => {
+const ServiceAdminPage = () => {
   const [form] = Form.useForm();
   const {
-    blogs,
-    loadBlogs,
+    services,
+    loadServices,
     isModalVisible,
-    currentBlog,
+    currentService,
     showModal,
-    handleDelete,
     handleEdit,
     handleSubmit,
+    handleDelete,
     columns,
     setIsModalVisible,
-  } = useBlogAdmin(form);
+  } = useServicesadmin(form);
 
   const [gridView, setGridView] = useState(false)
 
@@ -31,11 +33,12 @@ const BlogAdminPage = () => {
   });
   const onSearch = (value, _e, info) => console.log(value);
 
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await loadBlogs(pagination.current);
+      const data = await loadServices(pagination.current);
       if (data) {
-        setPagination(prev => ({
+        setPagination((prev) => ({
           ...prev,
           total: data.total,
         }));
@@ -44,35 +47,33 @@ const BlogAdminPage = () => {
     fetchData();
   }, [pagination.current]);
 
-  // Manejo de paginación
   const handlePagination = (page) => {
-    setPagination(prev => ({ ...prev, current: page }));
+    setPagination((prev) => ({ ...prev, current: page }));
   };
 
 
-
-  return (
+   return (
     <div className="p-6">
-      <h1 className='text-4xl'>Gestion de Blogs</h1>
-
+      <h1 className='text-4xl'>Gestion de Servicios</h1>
+      {/* buscar */}
       <div className="flex gap-2 my-5">
         <Search  placeholder="input search text" onSearch={onSearch} />
         <Button icon={<ProductOutlined/>} onClick={() => setGridView(!gridView)} />
       </div>
       
       {gridView ? 
-
+        // grid
         <div className='grid md:grid-cols-4'>
-          {blogs.map((blog) => (
-            <BlogAdminCard blog={blog} onEdit={handleEdit} onDelete={handleDelete}></BlogAdminCard>
+          {services.map((services) => (
+            <ServicesCardAdmin services={services} onEdit={handleEdit} onDelete={handleDelete}></ServicesCardAdmin>
           ))}
         </div>
         
         :
-
+        // tabla
         <Table
         columns={columns}
-        dataSource={blogs}
+        dataSource={services}
         rowKey="id"
         pagination={false}
         scroll={{ x: true }}
@@ -108,13 +109,12 @@ const BlogAdminPage = () => {
         </div>
       </div>
 
-
-      <BlogModalAdmin 
+      <ServiceModalAdmin 
         isModalVisible={isModalVisible} 
         setIsModalVisible={setIsModalVisible}
-        form={form}
         handleSubmit={handleSubmit}
-        currentBlog={currentBlog}
+        currentServices={currentService}
+        form={form}
       />
       
 
@@ -130,4 +130,5 @@ const BlogAdminPage = () => {
   );
 };
 
-export default BlogAdminPage;
+
+export default ServiceAdminPage;

@@ -7,7 +7,7 @@ export { default as BlogPage } from "./blog/BlogPage";
 export { default as BlogDetailsPage } from "./blog/BlogDetailsPage";
 export { default as BlogAdminPage } from "./blogAdmin/BlogAdminPage";
 export { default as PolicyAdminPage } from "./policyAdmin/PolicyAdminPage";
-export { default as ServiceAdmin } from "./serviceAdmin/ServiceAdmin";
+export { default as ServiceAdminPage } from "./serviceAdmin/ServiceAdminPage";
 export { default as Products } from "./PageProductLanding/Products";
 export { default as ProductAdmin } from "./PageProductAdmin/ProductAdmin";
 export { default as CategoriaPage } from "./PageCategoriaAdmin/CategoriaPage";

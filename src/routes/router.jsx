@@ -8,7 +8,7 @@ import {
   BlogDetailsPage, 
   BlogAdminPage,
   PolicyAdminPage,
-  ServiceAdmin,
+  ServiceAdminPage,
   LoginPage,
   Products,
   ProductAdmin,
@@ -50,7 +50,7 @@ const Router = () => {
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
-              <Route path="/admin/panel/page/service" element={ <ServiceAdmin/>} />
+              <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
             </Route>
           </Route>
 

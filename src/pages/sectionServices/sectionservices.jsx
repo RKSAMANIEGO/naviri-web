@@ -32,7 +32,7 @@ const sectionservices = () => {
                <li key={index}>{feature}</li>
                ))}
              </ul>
-            {service.image ? <img src={service.image} alt={service.title}/> : null}
+            {service.image ? <img src={service.image.url} alt={service.title}/> : null}
           </div>
           ))}
        </div>
