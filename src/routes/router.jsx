@@ -22,7 +22,7 @@ import { useEffect } from 'react';
 
 import InfoContact from '../pages/contactoadmin/InfoContact';
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
-
+import InfoEmails from '../pages/formClient/InfoEmails';
 
 const Router = () => {
   useEffect(() => {
@@ -51,6 +51,7 @@ const Router = () => {
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
               <Route path="/admin/panel/page/service" element={ <ServiceAdmin/>} />
+              <Route path="/admin/panel/page/mail" element={ <InfoEmails/>} />
             </Route>
           </Route>
 

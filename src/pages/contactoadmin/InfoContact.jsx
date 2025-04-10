@@ -42,7 +42,7 @@ const InfoContact= () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Políticas de la Empresa</h2>
+      <h2 className="text-2xl font-bold mb-6">Información de la Empresa</h2>
       <Row gutter={32}>
         {/* Formulario */}
 
