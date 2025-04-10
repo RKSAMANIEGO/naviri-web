@@ -3,33 +3,19 @@ import TableCategoria from 'react-data-table-component'
 import styles from '../../styles/categorie.module.css'
 import Swal from 'sweetalert2'
 import { useState } from 'react'
+import ModalSubCategorie from './modalSubCategorie/ModalSubCategorie'
+import {getSubCategorie} from '../../services/subCategories'
+
 const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) => {
 
     const[isConfirmDelete,setConfirmDelete]=useState(false);
     const[isConfirmUpdate,setConfirmUpdate]=useState(false);
-
-    const customStyle ={
-        headCells:{
-            style:{
-                backgroundColor:"rgba(255, 241, 249, 1)", 
-                color: 'rgba(255, 107, 188, 1)',            
-                fontWeight: 'bold',
-                fontSize:"13px",         
-            }
-        },
-        cells:{
-            style:{
-                padding:"5px 15px",
-                fontWeight:"600",
-                fontSize:"12px",
-                textTransform:"Capitalize"
-            }
-        }
-
-    }
-
+    const[isModalSubCategorie,setModalSubCategorie]=useState(false)
+    const[dataSubCategoria,setDataSubCategoria]=useState([]);
+    const[nameCategorie,setNameCategorie]=useState('');
+    
+    //COLUMNAS DE LA TABLA CATEGORIA
     const column=[
-
         {
             name: 'Categoria',
             selector:row=>row.name,
@@ -79,7 +65,14 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) 
                                     }
                                 })}}
                     />
-                    <i className="fa-solid fa-eye" onClick={()=> console.log(row.name)}/>
+                    <i className="fa-solid fa-eye" onClick={async()=> {
+                        setModalSubCategorie(true);
+                        const response = await getSubCategorie(row.name);
+                        if(response) {
+                            setDataSubCategoria(response.data);
+                            setNameCategorie(row.name);
+                        } 
+                    }}/>
                     
                 </div>
             )
@@ -87,8 +80,29 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) 
 
     ]
 
+    //ESTILOS DE LA TABLA CATEGORIA
+    const customStyle ={
+            headCells:{
+                style:{
+                    backgroundColor:"rgba(255, 241, 249, 1)", 
+                    color: 'rgba(255, 107, 188, 1)',            
+                    fontWeight: 'bold',
+                    fontSize:"13px",         
+                }
+            },
+            cells:{
+                style:{
+                    padding:"5px 15px",
+                    fontWeight:"600",
+                    fontSize:"12px",
+                    textTransform:"Capitalize"
+                }
+            }
+    
+    }
     return (
-        <TableCategoria
+        <>
+            <TableCategoria
             className={styles.tablaCategoria}
             columns={column}
             data={dataCategorie}
@@ -98,7 +112,11 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) 
             highlightOnHover
             paginationPerPage={5}
             paginationRowsPerPageOptions={[5,10,15]}
-        />
+            />
+            {dataSubCategoria   ? <ModalSubCategorie isOpen={isModalSubCategorie} onClose={()=> setModalSubCategorie(false)} dataSubCategorie={dataSubCategoria} nameCategorie={nameCategorie}/>
+                                : <ModalSubCategorie isOpen={isModalSubCategorie} onClose={()=> setModalSubCategorie(false)}/>} 
+        </>
+
     )
 }
 
