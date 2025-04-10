@@ -122,7 +122,7 @@ const BlogPage = () => {
                   {/* Imagen del artículo */}
                   <div className="aspect-video bg-gray-100 rounded-xl overflow-hidden">
                     <img
-                      src={blog.image || 'https://api.navinatubelleza.com/storage/policies/d888a4d2-8a4b-4d1c-a795-1e9e31166860.jpeg'}
+                      src={blog.image.url || 'https://api.navinatubelleza.com/storage/policies/d888a4d2-8a4b-4d1c-a795-1e9e31166860.jpeg'}
                       className="w-full h-full object-cover hover:scale-105 transition-transform"
                       alt={blog.title}
                     />
