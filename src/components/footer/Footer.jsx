@@ -45,18 +45,18 @@ const Footer = () => {
             <div className={styles.sectionfooter}>
                 <h3>Contacto</h3>
                 <ul>
-                  <li className={styles.contactItem}>
-                    <MapPin className={styles.icon} size={18} /> Av. Principal 123, Ciudad
-                  </li>
-                    <li className={styles.contactItem}>
-                      <Phone className={styles.icon} size={18} /> +234 456 789
-                    </li>
-                    <li className={styles.contactItem}>
-                      <Mail className={styles.icon} size={18} /> info@beautyglow.com
-                    </li>
-                    <li className={styles.contactItem}>
-                      <Clock className={styles.icon} size={18} /> Lun-Sáb: 9:00 - 20:00
-                    </li>
+                   <li className={styles.contactItem}><a>
+                     <MapPin className={styles.icon} size={18} /> Av. Principal 123, Ciudad
+                   </a></li>
+                   <li className={styles.contactItem}><a>
+                     <Phone className={styles.icon} size={18} /> +234 456 789
+                   </a></li>
+                   <li className={styles.contactItem}><a>
+                     <Mail className={styles.icon} size={18} /> info@beautyglow.com
+                  </a></li>
+                   <li className={styles.contactItem}><a>
+                     <Clock className={styles.icon} size={18} /> Lun-Sáb: 9:00 - 20:00
+                  </a></li>
                 </ul>
             </div>
         </div>

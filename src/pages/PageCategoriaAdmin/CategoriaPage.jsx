@@ -20,7 +20,7 @@ const CategoriaPage = () => {
 
     useEffect(()=>{
         if(textSearchCat){
-            const filtroCategoria = dataCat.filter(categorie  => categorie.name.toLowerCase() === textSearchCat.toLowerCase());
+            const filtroCategoria = dataCat.filter(categorie  => categorie.name.toLowerCase().includes(textSearchCat.toLowerCase()));
             console.log(filtroCategoria);
             setFilterCategoriew(filtroCategoria);
         }else{

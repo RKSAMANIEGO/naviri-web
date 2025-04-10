@@ -49,6 +49,7 @@
 
 .navContainer {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     align-items: center;
     max-width: var(--container-max-width);
@@ -71,7 +72,7 @@
     width: auto;
     display: block;
 }
-
+  
 .nav {
     display: flex;
     align-items: center;
@@ -238,11 +239,15 @@
     gap: 15px;
     flex-shrink: 0;
 }
-
+  
 .searchbar {
-    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fde6f0;
+    border-radius: 12px;
+    padding: 0 0.5rem;
 }
-
+  
 .searchbar input {
     padding: 9px 35px 9px 15px;
     border: 1px solid #ddd;
@@ -283,7 +288,7 @@
     transition: color 0.3s ease;
     font-size: var(--font-size-base);
 }
-
+  
 .cart {
     position: relative;
     cursor: pointer;
@@ -296,12 +301,12 @@
 .cart:hover {
     color: var(--primary-color);
 }
-
+  
 .carticon {
     font-size: 24px;
     transition: color 0.2s ease;
 }
-
+  
 .cartcount {
     position: absolute;
     top: 0px;
