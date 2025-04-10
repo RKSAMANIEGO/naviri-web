@@ -9,11 +9,6 @@ import Sectionaboutus from "../sectionAboutUs/sectionaboutus";
 import Sectionservices from "../sectionServices/sectionservices";
 
 export const Home = () => {
-   
-   const navigate = useNavigate();
-   const handleBlogMore = () => {
-      navigate('/blog');
-   }
 
 
 const blogsMock = [
@@ -72,9 +67,7 @@ const blogsMock = [
       
 
          <div className="w-full text-end my-4">
-            <button className=" p-2 rounded-full cursor-pointer"
-               onClick={handleBlogMore}
-            >Explorar</button>
+            <a href="/blog"><button className=" p-2 rounded-full cursor-pointer">Explorar</button></a>
          </div>
             <div className="grid md:grid-cols-4 gap-8">
             {blogsMock.map((blog) => (
