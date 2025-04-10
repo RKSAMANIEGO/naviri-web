@@ -28,7 +28,7 @@ const AdminLayout = () => {
         <header className={`sticky top-0 h-14 z-10 duration-300
               ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
           <div className="flex items-center h-full px-6">
-            <h1 className="text-xl font-semibold text-gray-800">Panel Admin</h1>
+            <h1 className={`text-xl font-semibold ${isDarkMode ? 'text-white' : 'text-gray-800'} `}>Panel Admin</h1>
             <UserSettings/>
           </div>
         </header>
