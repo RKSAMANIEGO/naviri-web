@@ -116,7 +116,7 @@ const CategorieContent = ({updateListCategorie,categoriaSelect}) => {
                                                 <button onClick={handlerCleanCategorie}><i className="fa-solid fa-plus" />Limpiar</button>  
                                             </div>
  
-                                        :   <button onClick={handlerAddCategorie}><i className="fa-solid fa-plus" />Crear</button>}
+                                        :   <button onClick={handlerAddCategorie}><i className="fa-solid fa-plus" /> Crear</button>}
             </section>
         </section>
     )

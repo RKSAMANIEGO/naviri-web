@@ -1,28 +1,20 @@
 import { useEffect, useState } from "react";
 import styles from "./TestimonioPrincipal.module.css";
 import img from '../../assets/image/logo-navi.png'
-import {getTestimonios} from '../../services/testimoniosServices.js'
+import { getTestimonios } from '../../services/testimoniosServices.js'
 
 export default function Testi() {
-
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [testimonios, setTestimonios] = useState({})
 
   useEffect(() => {
-    
-  
-  const fetchData = async() => {
-
-        const dataTestimonio =await getTestimonios();
-        console.log(dataTestimonio);
-        
-        setTestimonios(dataTestimonio)
-
+    const fetchData = async () => {
+      const dataTestimonio = await getTestimonios();
+      console.log(dataTestimonio);
+      setTestimonios(dataTestimonio)
     }
     fetchData();
   }, [])
-  
 
   /* const testimonios = [
     {

@@ -53,6 +53,12 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
         width:"30%"
     },
     {
+        name:"Categoria",
+        selector:row=>row.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name).join()),
+        sortable:true,
+        width:"20%"
+    },
+    {
         name:"Precio",
         selector:row=>"S/."+ Number(row.price).toFixed(2),
         sortable:true,

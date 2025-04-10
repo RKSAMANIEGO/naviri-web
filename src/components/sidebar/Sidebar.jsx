@@ -89,7 +89,7 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             {
               key: '/admin/panel/categories',
               icon: <ShoppingOutlined /> ,
-              label: 'Pedidos',
+              label: 'Categorias',
             },
             {
               key: '/admin/panel/customers',

@@ -26,8 +26,8 @@ const ModalProducts = ({isOpen,onClose,product,title}) => {
             onRequestClose={onClose}
             style={{
                 overlay: {
-                    background:"rgb(0,0,0,0.5)"
-
+                    background:"rgb(0,0,0,0.5)",
+                    zIndex: 100
                 },
                 content:{
                     top: '50%',

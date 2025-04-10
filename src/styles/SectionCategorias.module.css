@@ -1,4 +1,4 @@
-*{
+* {
     font-family: Inter, 'san-serif';
 }
 
@@ -19,10 +19,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FFDDF0; 
-    border-radius: 50%; 
+    background-color: #FFDDF0;
+    border-radius: 50%;
     width: 50px;
-    height: 50px; 
+    height: 50px;
     transition: transform 0.3s ease;
 }
 
@@ -92,12 +92,12 @@
     align-items: center;
     justify-content: center;
     background-color: #FFDDF0;
-    border-radius: 50%; 
+    border-radius: 50%;
     width: 50px;
     height: 50px;
     margin: 0 auto;
-  }
-  
+}
+
 
 
 .card h3 {
@@ -120,6 +120,10 @@
 }
 
 .card li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     font-size: 16px;
     color: #929292;
     margin: 5px 0;
@@ -133,110 +137,111 @@
     align-items: flex-end;
     margin-top: 30px;
     transition: 0.2s ease-in-out;
+    cursor: pointer;
 }
 
-.buttoncard:hover{
+.buttoncard:hover {
     color: rgb(0, 0, 0);
 }
 
 /*RESPONSIVE*/
 
 @media (max-width: 1025px) {
-.headerIcons {
-    gap: 70px;
-}
+    .headerIcons {
+        gap: 70px;
+    }
 
-.categoriestitle h2 {
-    font-size: 32px; 
-}
+    .categoriestitle h2 {
+        font-size: 32px;
+    }
 
-.categoriestitle p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
+    .categoriestitle p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
 
-.sectioncategories {
-    gap: 20px;
-}
+    .sectioncategories {
+        gap: 20px;
+    }
 
-.card {
-    width: 45%; 
-}
+    .card {
+        width: 45%;
+    }
 
-.iconCircle {
-    width: 45px;
-    height: 45px;
-}
+    .iconCircle {
+        width: 45px;
+        height: 45px;
+    }
 
-.icons span {
-    font-size: 26px;
-}
+    .icons span {
+        font-size: 26px;
+    }
 
-.icons p {
-    font-size: 15px;
-}
+    .icons p {
+        font-size: 15px;
+    }
 
-.card h3 {
-    font-size: 22px;
-}
+    .card h3 {
+        font-size: 22px;
+    }
 
-.card p {
-    font-size: 15px;
-}
+    .card p {
+        font-size: 15px;
+    }
 
-.buttoncard {
-    font-size: 15px;
-}
+    .buttoncard {
+        font-size: 15px;
+    }
 }
 
 
 
 @media (max-width: 768px) {
 
-.headerIcons {
-    gap: 30px; 
-}
+    .headerIcons {
+        gap: 30px;
+    }
 
-.categoriestitle h2 {
-    font-size: 28px; 
-}
+    .categoriestitle h2 {
+        font-size: 28px;
+    }
 
-.categoriestitle p {
-    font-size: 12px;
-    margin-bottom: 50px;
-}
+    .categoriestitle p {
+        font-size: 12px;
+        margin-bottom: 50px;
+    }
 
-.sectioncategories {
-    gap: 20px;
-}
+    .sectioncategories {
+        gap: 20px;
+    }
 
-.card {
-    width: 50%; 
-}
+    .card {
+        width: 50%;
+    }
 
-.iconCircle {
-    width: 40px;
-    height: 40px;
-}
+    .iconCircle {
+        width: 40px;
+        height: 40px;
+    }
 
-.icons span {
-    font-size: 24px;
-}
+    .icons span {
+        font-size: 24px;
+    }
 
-.icons p {
-    font-size: 14px;
-}
+    .icons p {
+        font-size: 14px;
+    }
 
-.card h3 {
-    font-size: 20px;
-}
+    .card h3 {
+        font-size: 20px;
+    }
 
-.card p {
-    font-size: 14px;
-}
+    .card p {
+        font-size: 14px;
+    }
 
-.buttoncard {
-    font-size: 14px;
+    .buttoncard {
+        font-size: 14px;
 
-}
+    }
 }

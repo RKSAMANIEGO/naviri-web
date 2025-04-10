@@ -61,14 +61,14 @@ const ProductAdmin = () => {
             {(allProducts)  &&   ( (onChangeStyleProducts) ? 
                     <ProductsCards products={allProducts} 
                                 productFilter={()=>{
-                                    if(textSearch) return allProducts.filter(obj => obj.name.toLowerCase().includes(textSearch.toLowerCase()) || obj.sub_categories[0].name.toLowerCase().includes(textSearch.toLowerCase()) );}}  
+                                    if(textSearch) return allProducts.filter(obj => obj.name.toLowerCase().includes(textSearch.toLowerCase()) || obj.categories.some(subCat => subCat.sub_categories.some(obj=> obj.name.toLowerCase().includes(textSearch.toLowerCase()))) );}}  
                                 productDelete={updateListProducts}
                                 isUpdateProduct={updateListProducts}
                     /> 
                     : 
                     <ProductsTable products={allProducts}
                                 productFilter={()=>{
-                                    if(textSearch) return allProducts.filter(obj => obj.name.toLowerCase().includes(textSearch.toLowerCase())  || obj.sub_categories[0].name.toLowerCase().includes(textSearch.toLowerCase()) );}}
+                                    if(textSearch) return allProducts.filter(obj => obj.name.toLowerCase().includes(textSearch.toLowerCase())  || obj.categories.some(subCat => subCat.sub_categories.some(obj=> obj.name.toLowerCase().includes(textSearch.toLowerCase()))) );}}
                                 productDelete={updateListProducts}
                                 isUpdateProduct ={updateListProducts} 
                             

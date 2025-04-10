@@ -19,8 +19,9 @@ import {
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
-//import BlogAdminPage from '../pages/blog/BlogAdminPage';
- 
+import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
+
+
 
 const Router = () => {
   useEffect(() => {
@@ -32,6 +33,7 @@ const Router = () => {
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
+            <Route path='/categories' element={<PageCategorie/>}/> 
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 

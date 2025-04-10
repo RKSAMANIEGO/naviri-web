@@ -48,7 +48,7 @@ const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) =
                         </div>
                                 
                         <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
-                        <p className={styles.p}>{product.sub_categories[0].name}</p>
+                        <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                         <section className={styles.productsData}>
                             <div>
                                 

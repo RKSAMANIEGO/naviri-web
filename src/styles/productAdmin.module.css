@@ -7,13 +7,17 @@
 
 .productSearch h2 {
     padding-top: 20px;
-    font-size: 28px;
-    font-weight: 500;
+    font-size: 3rem;
+    font-family: "Great Vibes", cursive;
+    font-weight: 600;
+    font-style: normal;
+
 }
 
 .productSearch p {
     color: rgba(167, 167, 167, 1);
-    font-size: 13px;
+    font-size: 12px;
+
 }
 
 .productSearch div {
@@ -33,7 +37,7 @@
 .productSearch div label input {
     width: 100%;
     border: 1px solid rgb(220, 220, 220, 1);
-    padding: 5px 50px;
+    padding: 10px 50px;
     border-radius: 8px;
 
     /*
@@ -47,7 +51,7 @@
 .productSearch div label i {
     position: absolute;
     left: 12px;
-    top: 3px;
+    top: 10px;
     border: none;
     padding: 5px;
     color: rgb(66, 63, 63);

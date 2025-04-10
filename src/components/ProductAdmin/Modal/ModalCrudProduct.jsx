@@ -198,6 +198,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         },
         overlay:{
             backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 100
         }
         
     }

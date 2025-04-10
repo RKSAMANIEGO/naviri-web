@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import CategorieContent from '../../components/categoria/CategorieContent'
-import CategorieSearch from '../../components/categoria/CategorieSearch'
-import CategorieTable from '../../components/categoria/CategorieTable'
+import CategorieContent from '../../components/categoriaAdmin/CategorieContent'
+import CategorieSearch from '../../components/categoriaAdmin/CategorieSearch'
+import CategorieTable from '../../components/categoriaAdmin/CategorieTable'
 import { getCategories } from '../../services/categoriesService'
 import styles from '../../styles/categorie.module.css';
 const CategoriaPage = () => {
@@ -10,6 +10,24 @@ const CategoriaPage = () => {
     const [categorieSelected,setCategorieSelected]=useState(null)
     const [isConfirmAdd , setConfirmAdd]=useState(false);
     const [isConfirmPut , setConfirmPut]=useState(false);
+    const [textSearchCat, setTextSearchCat]=useState('');
+    const [filterCategorie, setFilterCategoriew]=useState(null)
+    
+    useEffect(()=>{
+        listCategories();
+    },[isConfirmAdd])
+
+
+    useEffect(()=>{
+        if(textSearchCat){
+            const filtroCategoria = dataCat.filter(categorie  => categorie.name.toLowerCase().includes(textSearchCat.toLowerCase()));
+            console.log(filtroCategoria);
+            setFilterCategoriew(filtroCategoria);
+        }else{
+            setFilterCategoriew(null);
+        }
+    },[dataCat,textSearchCat])
+
     //LISTAR CATEGORIA
     const listCategories=async()=>{
         const response = await getCategories();
@@ -40,21 +58,22 @@ const CategoriaPage = () => {
         } 
     }
 
-    useEffect(()=>{
-        listCategories();
-    },[isConfirmAdd])
-
+    //OBTENIENDO EL TEXTO DE BUSCAR CATEGORIA 
+    const getTextSearch = (textSearch)=>{
+        console.log(textSearch);
+        textSearch!==null ?  setTextSearchCat(textSearch) : setTextSearchCat(null) ;
+    }
 
     return (
         <>
-                <CategorieSearch/>
+                <CategorieSearch getTextSerch={getTextSearch}/>
                 
                 <div className={styles.pageCategoria}>
                     {categorieSelected ? <CategorieContent className={styles.catContent} updateListCategorie={getConfirmAdd} categoriaSelect={categorieSelected}/> 
                     : <CategorieContent className={styles.catContent} updateListCategorie={getConfirmAdd}/>}
 
                     <section className={styles.sectionTable}>
-                        {dataCat && <CategorieTable dataCategorie={dataCat} updateListCategorie={getConfirmAdd} optionPutCategorie={getConfirmOptionPut}/> } 
+                        {dataCat && <CategorieTable dataCategorie={dataCat} updateListCategorie={getConfirmAdd} optionPutCategorie={getConfirmOptionPut} categorieFilter={filterCategorie}/> } 
                     </section>
                 </div>
         </>
