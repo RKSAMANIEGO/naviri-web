@@ -34,7 +34,7 @@ const sectionRecomendacion = () => {
                     </div>
                 ))}
                     </div>
-                       <button className={styles.buttonprod}>Ver más productos</button>
+                       <a href="/products"><button className={styles.buttonprod}>Ver más productos</button></a>
                     </div>
     );
 

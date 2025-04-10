@@ -1,5 +1,6 @@
+/*
 import React from 'react'
-import Sidebar from '../components/Sidebar/Sidebar'
+//import Sidebar from '../components/Sidebar/Sidebar'
 import styles from '../styles/dashboard.module.css'
 import AdminConfi from './PageConfigAdmin/ConfigAdmin'
 const Dashboard = () => {
@@ -18,3 +19,4 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+*/

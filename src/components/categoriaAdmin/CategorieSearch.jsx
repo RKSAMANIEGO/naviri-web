@@ -14,8 +14,6 @@ const CategorieSearch = () => {
                                 placeholder='Buscar Categoria...'/> 
                         <i className="fa-solid fa-magnifying-glass iconSearch"></i>
                     </label>
-                
-                    {/*<i className="fa-solid fa-magnifying-glass iconSearch"></i>*/}
                 </div>
             </div>
         </div>

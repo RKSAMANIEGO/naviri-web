@@ -16,7 +16,7 @@ const BlogDetailsPage = () => {
         {/* Hero Image Section */}
         <div className="relative h-[400px] overflow-hidden">
           <img 
-            src="https://api.navinatubelleza.com/storage/policies/d888a4d2-8a4b-4d1c-a795-1e9e31166860.jpeg"
+            src={blog.image.url || " "}
             alt={blog.title}
             className="w-full h-full object-cover absolute inset-0 transform transition-transform duration-500 hover:scale-105"
           />

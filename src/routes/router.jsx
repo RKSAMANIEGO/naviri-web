@@ -8,9 +8,9 @@ import {
   BlogDetailsPage, 
   BlogAdminPage,
   PolicyAdminPage,
-  ServiceAdmin,
   LoginPage,
   Products,
+  ServicesAdminpage,
   ProductAdmin,
   CategoriaPage,
   ComentAdminPage
@@ -20,6 +20,9 @@ import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
+ 
+import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
+
 
 
 const Router = () => {
@@ -32,6 +35,7 @@ const Router = () => {
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
+            <Route path='/categories' element={<PageCategorie/>}/> 
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
@@ -48,7 +52,7 @@ const Router = () => {
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
-              <Route path="/admin/panel/page/service" element={ <ServiceAdmin/>} />
+              <Route path="/admin/panel/page/service" element={ <ServicesAdminpage/>} />
             </Route>
           </Route>
 

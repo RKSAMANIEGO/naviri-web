@@ -10,6 +10,7 @@ const CategoriaPage = () => {
     const [categorieSelected,setCategorieSelected]=useState(null)
     const [isConfirmAdd , setConfirmAdd]=useState(false);
     const [isConfirmPut , setConfirmPut]=useState(false);
+    
     //LISTAR CATEGORIA
     const listCategories=async()=>{
         const response = await getCategories();
