@@ -2,18 +2,22 @@ import {deleteCategorie} from '../../services/categoriesService'
 import TableCategoria from 'react-data-table-component'
 import styles from '../../styles/categorie.module.css'
 import Swal from 'sweetalert2'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ModalSubCategorie from './modalSubCategorie/ModalSubCategorie'
 import {getSubCategorie} from '../../services/subCategories'
 
-const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) => {
+const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie,categorieFilter}) => {
 
     const[isConfirmDelete,setConfirmDelete]=useState(false);
     const[isConfirmUpdate,setConfirmUpdate]=useState(false);
     const[isModalSubCategorie,setModalSubCategorie]=useState(false)
     const[dataSubCategoria,setDataSubCategoria]=useState([]);
     const[nameCategorie,setNameCategorie]=useState('');
-    
+    const[dataCategorieFilter,setDataCategorieFilter]=useState(null);
+
+    useEffect(()=>{
+            setDataCategorieFilter(categorieFilter)
+    },[categorieFilter])
     //COLUMNAS DE LA TABLA CATEGORIA
     const column=[
         {
@@ -114,7 +118,7 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) 
             <TableCategoria
             className={styles.tablaCategoria}
             columns={column}
-            data={dataCategorie}
+            data={(dataCategorieFilter ===null ) ? dataCategorie : dataCategorieFilter}
             customStyles={customStyle}
             pagination
             pointerOnHover
