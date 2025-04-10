@@ -1,39 +1,58 @@
 import { useState } from 'react';
-import { message, Button } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons'; 
-import { getServicesPage, createService, updateService, deleteService } from "../../services/secServices";
+import { message, Image, Modal, Button} from 'antd';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { getServices, createService, updateService, deleteService } from "../../services/secServices";
 
-export const useServicesAdmin = (form) => {
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(false);
+export const useServicesadmin = (form) => {
+  const [services, setServices] = useState([
+  {
+    id: 1,
+    title: 'Tratamiento de piel',
+    description: 'Se ofrece el servicio de hidratación y nutrición de piel',
+    features:[
+      "Hidratación profunda",
+      "Rapido"
+    ],
+    image: {
+      url: "https://example.com"
+    },
+  },
+  ]);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentService, setCurrentService] = useState(null);
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 5,
-    total: 0
-  });
 
   const loadServices = async (page = 1) => {
-    try {
-      setLoading(true);
-      const response = await getServicesPage(page, pagination.pageSize);
-      
-      if (response?.data) {
-        setServices(response.data);
-        setPagination(prev => ({
-          ...prev,
-          total: response.total || 0,
-          current: page,
-        }));
+      try {
+        const response = await getServices(page);
+        if (response?.data) {
+          setServices(response.data.data);
+          return response.data;
+        }
+      } catch (error) {
+        message.error('Error al cargar los servicios');
       }
-    } catch (error) {
-      message.error('Error al cargar servicios');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
+
+    const handleEdit = (services) => {
+      setCurrentService(services);
+      form.setFieldsValue({
+        title: services.title,
+        description: services.description,
+        features: services.features, 
+        imagen: services.image?.url ? [
+          {
+            uid: '-1',
+            name: 'image',
+            status: 'done',
+            url: services.image.url,
+          }
+        ] : []
+      });
+      setIsModalVisible(true);
+    };
+  
 
   const showModal = (service = null) => {
     setCurrentService(service);
@@ -42,7 +61,16 @@ export const useServicesAdmin = (form) => {
       form.setFieldsValue({
         title: service.title,
         description: service.description,
-        features: service.features?.join('\n') || '',
+        features: service.features,
+        images: service.images?.url?[{
+          uid: '-1',
+          name: 'image',
+          status: 'done',
+          url: service.images?.url,
+
+        },
+      ] : [],
+
       });
     } else {
       form.resetFields();
@@ -50,115 +78,136 @@ export const useServicesAdmin = (form) => {
   };
 
 
+  const convertFileToUrl = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+    });
+  };
+
   const handleSubmit = async (values) => {
     try {
-      setLoading(true);
+      const imagenUrl = values.imagen?.[0]?.url || 
+                      await convertFileToUrl(values.imagen?.[0]?.originFileObj);
+
       const serviceData = {
-        ...values,
-        features: values.features.split('\n').filter(item => item.trim() !== '')
+        title: values.title,
+        description: values.description,
+        features: values.features,
+        image: imagenUrl,
       };
 
-      if (currentService) {
-        await updateService(currentService.id, serviceData);
-        message.success('Servicio actualizado correctamente');
-      } else {
-        await createService(serviceData);
-        message.success('Servicio creado correctamente');
-      }
+      let response;
+            if (currentService) {
+              console.log("Actualizando");
+              
+              response = await updateService(currentService.id, serviceData);
+            } else {
+              console.log("Creando");
+              response = await createService(serviceData);
+            }
 
-      setIsModalVisible(false);
-      form.resetFields();
-      loadServices(pagination.current);
+            console.log(response.data);
+
+      if (response.data) {
+              message.success(`Servicio ${currentService ? 'actualizado' : 'creado'} correctamente!`);
+              setIsModalVisible(false);
+              form.resetFields();
+            }
     } catch (error) {
-      console.error("Error saving service:", error);
-      message.error(error.response?.data?.message || 'Error al guardar el servicio');
-    } finally {
-      setLoading(false);
+      console.log("error");
+      message.error(error.response?.data?.message || "Error al guardar el servicio");
     }
   };
-
-
+  
   const handleDelete = async (id) => {
-    try {
-      await deleteService(id);
-      message.success('Servicio eliminado correctamente');
-      loadServices(pagination.current);
-    } catch (error) {
-      message.error('Error al eliminar el servicio');
-    }
-  };
+      Modal.confirm({
+        title: '¿Eliminar Servicio?',
+        content: 'Esta acción no se puede deshacer',
+        okText: 'Eliminar',
+        okType: 'danger',
+        cancelText: 'Cancelar',
+        async onOk() {
+          try {
+            await deleteService(id);
+            setServices(prev => prev.filter(services => services.id !== id));
+            message.success('Servicio eliminado!');
+          } catch (error) {
+            message.error(error.message);
+          }
+        }
+      });
+    };
 
-
+    
   const columns = [
     {
-        title: 'Imágenes',
-        dataIndex: 'images',
-        key: 'images',
-        width: 200,
-        render: (images) => (
-          images?.length > 0 ? (
-            <Image.PreviewGroup>
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                {images.map((image, index) => (
-                  <Image
-                    key={index}
-                    src={image.url}
-                    width={50}
-                    height={50}
-                    style={{
-                      borderRadius: '4px',
-                      objectFit: 'cover'
-                    }}
-                    preview={{
-                      mask: <EyeOutlined style={{ color: '#fff' }} />
-                    }}
-                  />
-                ))}
-              </div>
-            </Image.PreviewGroup>
-          ) : (
-            <span>Sin imágenes</span>
-          )
-        )
-    },
-    {
-      title: 'Título',
-      dataIndex: 'title',
+      title: "Título",
+      dataIndex: "title",
       sorter: (a, b) => a.title.localeCompare(b.title),
+      width: "20%",
     },
     {
-      title: 'Descripción',
-      dataIndex: 'description',
-      render: (text) => text?.substring(0, 50) + (text?.length > 50 ? '...' : ''),
+      title: "Descripción",
+      dataIndex: "description",
+      width: "40%",
+      render: (_, record) => (
+        <p className="line-clamp-3">
+          {record.description}
+        </p>
+      ),
     },
     {
       title: 'Características',
       dataIndex: 'features',
-      render: (features) => features?.join(', ').substring(0, 50) + '...',
+      render: (_, record) =>
+      record.features?.length > 0 ? (
+         <ul className="list-disc pl-4">
+           {record.features.map((feature, idx) => (
+             <li key={idx}>{feature}</li>
+           ))}
+         </ul>
+        ) : (
+        <span>—</span>
+        ),
+      width: "20%",
     },
+    {
+      title: 'Imagen',
+      render: (_, record) => (
+      <Image
+        src={record.image?.url || 'https://via.placeholder.com/150'}
+        style={{ width: 90, height: 80, objectFit: 'cover' }}
+      />
+      ),
+        width: "10%"
+    },
+
     {
       title: 'Acciones',
       render: (_, record) => (
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <Button icon={<EditOutlined />} onClick={() => showModal(record)} />
+        <div className="flex gap-2">
+          <Button icon={<EditOutlined />} onClick={() => handleEdit(record)} />
           <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)} />
         </div>
       ),
+      width: "15%",
     },
   ];
 
   return {
     services,
-    loading,
     isModalVisible,
     currentService,
-    pagination,
-    columns,
     loadServices,
     showModal,
-    handleSubmit, 
+    handleEdit,
+    handleSubmit,
     handleDelete,
+    columns,
     setIsModalVisible,
-    setPagination
   };
 };
+
+export default useServicesadmin;
