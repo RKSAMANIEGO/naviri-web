@@ -23,7 +23,9 @@ const CategoriaPage = () => {
             const filtroCategoria = dataCat.filter(categorie  => categorie.name.toLowerCase() === textSearchCat.toLowerCase());
             console.log(filtroCategoria);
             setFilterCategoriew(filtroCategoria);
-        } 
+        }else{
+            setFilterCategoriew(null);
+        }
     },[dataCat,textSearchCat])
 
     //LISTAR CATEGORIA
@@ -59,7 +61,7 @@ const CategoriaPage = () => {
     //OBTENIENDO EL TEXTO DE BUSCAR CATEGORIA 
     const getTextSearch = (textSearch)=>{
         console.log(textSearch);
-        setTextSearchCat(textSearch);
+        textSearch!==null ?  setTextSearchCat(textSearch) : setTextSearchCat(null) ;
     }
 
     return (
