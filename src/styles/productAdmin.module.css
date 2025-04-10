@@ -7,13 +7,16 @@
 
 .productSearch h2 {
     padding-top: 20px;
-    font-size: 28px;
-    font-weight: 500;
+    font-size: 3rem;
+    font-family: "Great Vibes", cursive;
+    font-weight: 600;
+    font-style: normal;
 }
 
 .productSearch p {
     color: rgba(167, 167, 167, 1);
-    font-size: 13px;
+    font-size: 12px;
+
 }
 
 .productSearch div {
