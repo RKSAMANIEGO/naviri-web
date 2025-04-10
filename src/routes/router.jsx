@@ -15,6 +15,7 @@ import {
   CategoriaPage,
   ComentAdminPage
 }  from '../pages/index';
+import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
@@ -51,7 +52,7 @@ const Router = () => {
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
-              <Route path="/admin/panel/page/service" element={ <ServiceAdmin/>} />
+              <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
               <Route path="/admin/panel/page/mail" element={ <InfoEmails/>} />
             </Route>
           </Route>
