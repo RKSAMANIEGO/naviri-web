@@ -1,74 +1,82 @@
-import {Leaf, Truck, CheckCircle, Handshake, Star} from "lucide-react";
+import { Leaf, Truck, CheckCircle, Handshake, Star, Check } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import styles from "../../styles/SectionCategorias.module.css";
 
 const SectionCategorias = () => {
-    return(
-    <section className={styles.categoriesSection}>
-      <div className={styles.headerIcons}>
-        <div className={styles.icons}>
-        <div className={styles.iconCircle}>
-            <Leaf size={25} color="#ff6bbc"/>
-        </div>
-            <p>Productos Naturales</p>
-        </div>
+    const navigate = useNavigate();
+    const features = [
+        { icon: <Leaf size={25} color="#ff6bbc" />, text: "Productos Naturales" },
+        { icon: <Truck size={25} color="#ff6bbc" />, text: "Envío gratis" },
+        { icon: <CheckCircle size={25} color="#ff6bbc" />, text: "Garantía de calidad" },
+        { icon: <Handshake size={25} color="#ff6bbc" />, text: "Atención Personalizada" }
+    ];
 
-        <div className={styles.icons}>
-        <div className={styles.iconCircle}>
-            <Truck size={25} color="#ff6bbc"/>
-        </div>
-            <p>Envió gratis</p>
-        </div>
+    const categories = [
+        {
+            title: "Cuidado Facial",
+            items: ["Limpiadores", "Sérums", "Mascarillas"],
+            description: "Productos especializados para el cuidado y protección de tu rostro."
+        },
+        {
+            title: "Maquillaje",
+            items: ["Bases y correctores", "Labiales y brillos", "Sombras y delineadores"],
+            description: "Cosméticos de alta calidad para realzar tu belleza natural."
+        },
+        {
+            title: "Cuidado Capilar",
+            items: ["Acondicionadores", "Mascarillas capilares", "Aceites y sérums"],
+            description: "Solución completa para un cabello saludable y brillante."
+        }
+    ];
 
-        <div className={styles.icons}>
-        <div className={styles.iconCircle}>
-            <CheckCircle size={25} color="#ff6bbc"/>
-        </div>
-            <p>Garantía de calidad</p>
-        </div>
+    return (
+        <section className={styles.categoriesSection} aria-label="Categorías de productos">
+            <header className={styles.headerIcons} aria-label="Beneficios">
+                {features.map((feature, index) => (
+                    <article key={index} className={styles.icons} aria-label={feature.text}>
+                        <div className={styles.iconCircle}>
+                            {feature.icon}
+                        </div>
+                        <p>{feature.text}</p>
+                    </article>
+                ))}
+            </header>
 
-        <div className={styles.icons}>
-        <div className={styles.iconCircle}>
-            <Handshake size={25} color="#ff6bbc"/>
-        </div>
-            <p>Atención Personalizada</p>
-        </div>
-      </div>
+            <div className={styles.categoriestitle}>
+                <h2>Categorías de Productos</h2>
+                <p>Descubre nuestra amplia gama de productos de belleza diseñados para realzar tu belleza natural</p>
 
-      <div className={styles.categoriestitle}>
-        <h2>Categorías de Productos</h2>
-        <p>Descubre nuestra amplia gama de produtos de belleza diseñados para realizar
-            tu belleza natural 
-        </p>
-
-       <div className={styles.sectioncategories}>
-       {[
-          { title: "Cuidado Facial", items: ["Limpiadores", "Sérums", "Mascarillas"] },
-          { title: "Maquillaje", items: ["Bases y correctores", "Labiales y brillos", "Sombras y delineadores"] },
-          { title: "Cuidado Capilar", items: ["Champús y acondicionadores", "Mascarillas capilares", "Aceites y sérums"] },
-        ].map((category, index) => (
-
-        <div key={index} className={styles.card}>
-             <div className={styles.iconCirclestar}>
-                <Star size={25} color="#ff6bbc" className={styles.cardIconstar} />
-             </div>
-                <h3>{category.title}</h3>
-                <p>Productos para mantener tu piel radiante y saludable.</p>
-             <ul>
-              {category.items.map((item, i) => (
-                <li key={i}>✔️ {item}</li>
-               ))}
-            </ul>
-            <button className={styles.buttoncard} href="#">Ver productos</button>
-        </div>
-          
-        ))}
-        
-
-       </div>
-
-      </div>
-
-    </section>
+                <div className={styles.sectioncategories}>
+                    {categories.map((category, index) => (
+                        <article key={index} className={styles.card}>
+                            <div className={styles.iconCirclestar}>
+                                <Star size={25} color="#ff6bbc" className={styles.cardIconstar} />
+                            </div>
+                            <h3>{category.title}</h3>
+                            <p>{category.description}</p>
+                            <ul>
+                                {category.items.map((item, i) => (
+                                    <li key={i}>
+                                        <Check color="#ff6bbc" aria-hidden="true" />
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <button
+                                className={styles.buttoncard}
+                                aria-label={`Ver productos de ${category.title}`}
+                                onClick={() => {
+                                    navigate('/products');
+                                    window.scrollTo(0, 0);
+                                }}
+                            >
+                                Ver productos
+                            </button>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 };
 
