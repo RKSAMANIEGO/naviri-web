@@ -7,9 +7,21 @@ import SectionRecomendacion from "../../pages/sectionRecomendacion/sectionRecome
 import Sectionaboutushome from "../sectionAboutUshome/Sectionaboutushome";
 import Sectionaboutus from "../sectionAboutUs/sectionaboutus";
 import Sectionservices from "../sectionServices/sectionservices";
+import { useEffect, useState } from "react";
+import { getBlogs } from "../../services/blogService";
 
 export const Home = () => {
 
+   const [blogs, setBlogs] = useState()
+
+   useEffect(() => {
+     const fetchData = async() => {
+       const { data } =  await getBlogs(1, 4, "");
+       setBlogs(data.data);
+     }
+     fetchData();
+   }, [])
+   
 
 const blogsMock = [
    {
@@ -66,11 +78,11 @@ const blogsMock = [
        <SectionRecomendacion/>   
       
 
-         <div className="w-full text-end my-4">
-            <a href="/blog"><button className=" p-2 rounded-full cursor-pointer">Explorar</button></a>
+         <div className="w-full text-end py-8">
+            <a href="/blog"><button className=" rounded-full cursor-pointer mr-10">Explorar</button></a>
          </div>
-            <div className="grid md:grid-cols-4 gap-8">
-            {blogsMock.map((blog) => (
+            <div className="grid md:grid-cols-4 gap-8 px-4"> 
+            {blogs?.map((blog) => (
             <BlogCard key={blog.id} blog={blog} />
             ))}   
             </div>

@@ -13,13 +13,13 @@ const BlogCard = ({ blog }) => {
 
   return (
     <div 
-      className="w-full max-w-[350px] bg-white rounded-2xl overflow-hidden shadow-lg transform transition-all 
+      className="w-full bg-white rounded-2xl overflow-hidden shadow-lg transform transition-all 
                  hover:shadow-2xl hover:-translate-y-2 flex flex-col h-full"
     >
       {/* Imagen con aspect ratio 16:9 */}
       <div className="cursor-pointer relative aspect-video overflow-hidden">
         <img 
-          src={"https://api.navinatubelleza.com/storage/policies/d888a4d2-8a4b-4d1c-a795-1e9e31166860.jpeg"}
+          src={blog.image.url ||""}
           alt={blog.title} 
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           onClick={handleReadMore}
