@@ -6,7 +6,7 @@ import { useState } from 'react'
 import ModalSubCategorie from './modalSubCategorie/ModalSubCategorie'
 import {getSubCategorie} from '../../services/subCategories'
 
-const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) => {
+const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie,categorieFilter}) => {
 
     const[isConfirmDelete,setConfirmDelete]=useState(false);
     const[isConfirmUpdate,setConfirmUpdate]=useState(false);
@@ -114,7 +114,7 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie}) 
             <TableCategoria
             className={styles.tablaCategoria}
             columns={column}
-            data={dataCategorie}
+            data={(categorieFilter ===null ) ? dataCategorie : categorieFilter}
             customStyles={customStyle}
             pagination
             pointerOnHover

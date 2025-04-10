@@ -10,7 +10,22 @@ const CategoriaPage = () => {
     const [categorieSelected,setCategorieSelected]=useState(null)
     const [isConfirmAdd , setConfirmAdd]=useState(false);
     const [isConfirmPut , setConfirmPut]=useState(false);
+    const [textSearchCat, setTextSearchCat]=useState('');
+    const [filterCategorie, setFilterCategoriew]=useState(null)
     
+    useEffect(()=>{
+        listCategories();
+    },[isConfirmAdd])
+
+
+    useEffect(()=>{
+        if(textSearchCat){
+            const filtroCategoria = dataCat.filter(categorie  => categorie.name.toLowerCase() === textSearchCat.toLowerCase());
+            console.log(filtroCategoria);
+            setFilterCategoriew(filtroCategoria);
+        } 
+    },[dataCat,textSearchCat])
+
     //LISTAR CATEGORIA
     const listCategories=async()=>{
         const response = await getCategories();
@@ -41,21 +56,22 @@ const CategoriaPage = () => {
         } 
     }
 
-    useEffect(()=>{
-        listCategories();
-    },[isConfirmAdd])
-
+    //OBTENIENDO EL TEXTO DE BUSCAR CATEGORIA 
+    const getTextSearch = (textSearch)=>{
+        console.log(textSearch);
+        setTextSearchCat(textSearch);
+    }
 
     return (
         <>
-                <CategorieSearch/>
+                <CategorieSearch getTextSerch={getTextSearch}/>
                 
                 <div className={styles.pageCategoria}>
                     {categorieSelected ? <CategorieContent className={styles.catContent} updateListCategorie={getConfirmAdd} categoriaSelect={categorieSelected}/> 
                     : <CategorieContent className={styles.catContent} updateListCategorie={getConfirmAdd}/>}
 
                     <section className={styles.sectionTable}>
-                        {dataCat && <CategorieTable dataCategorie={dataCat} updateListCategorie={getConfirmAdd} optionPutCategorie={getConfirmOptionPut}/> } 
+                        {dataCat && <CategorieTable dataCategorie={dataCat} updateListCategorie={getConfirmAdd} optionPutCategorie={getConfirmOptionPut} categorieFilter={filterCategorie}/> } 
                     </section>
                 </div>
         </>
