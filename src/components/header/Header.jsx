@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { getCategories } from '../../services/categoriesService'
 import logo from '../../assets/image/logo-navi.png';
 import styles from "../../styles/header.module.css";
 
@@ -25,11 +26,40 @@ const Header = () => {
     const [showProductos, setShowProductos] = useState(false);
     const [showCategorias, setShowCategorias] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    //const [dataCategorie, setDataCategorie]=useState(null);
+
+
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
     
     const productosRef = useRef(null);
     const categoriasRef = useRef(null);
+
+    /*Listar Categorias
+    const listarCategoria=async()=>{
+        const response = await getCategories();
+        response &&  setDataCategorie(response.data.map(cat => cat.name));
+    }*/
+
+    /*
+    useEffect(()=>{
+        updateCategoryMenu();
+    },[])
+
+    //FUNCION PARA CONVINAR EL JSON CON EL NOMBRE DE CATEGORIAS
+
+    const updateCategoryMenu=async ()=>{
+        const response = await getCategories();
+        response &&  setDataCategorie(response.data.map(cat => cat.name));
+        if(response){
+
+            return  categoryMenuItems.map((cat,index)=>({
+                ...cat,
+                title:dataCategorie[index]
+            }));
+            //console.log(rep);
+        }   
+    }*/
 
     useEffect(() => {
         const handleResize = () => {
@@ -119,6 +149,7 @@ const Header = () => {
                         </div>
                     </div>
                     <div
+
                         ref={categoriasRef}
                         className={styles.dropdownTrigger}
                         onMouseEnter={() => handleDropdownEnter(setShowCategorias)}
@@ -129,12 +160,17 @@ const Header = () => {
                         </NavLink>
                         <div className={`${styles.dropdown} ${styles.categoryDropdown} ${showCategorias ? styles.dropdownVisible : ''}`}>
                             {categoryMenuItems.map(item => (
-                                <Link key={item.id} to={item.to} className={styles.dropdownSection} onClick={() => setShowCategorias(false)}>
-                                    <h1>{item.title}</h1>
-                                    <p>{item.description}</p>
-                                </Link>
-                            ))}
-                        </div>
+                            <Link 
+                                key={item.id} 
+                                to={item.to} 
+                                className={styles.dropdownSection} 
+                                onClick={() => setShowCategorias(false)}
+                            >
+                                <h1>{item.title}</h1>
+                                <p>{item.description}</p>
+                            </Link>
+  ))}
+</div>
                     </div>
                     <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Nosotros</NavLink>
                     <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</NavLink>

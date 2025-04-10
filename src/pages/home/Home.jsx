@@ -55,15 +55,15 @@ const blogsMock = [
 ]
 
    return (
-     <>
+   <>
       <SectionPrincipal/>
-       <hr className=" text-gray-50"/>
-       <div className="max-full mx-auto">
-       <Sectionaboutushome/>
-       <Sectionaboutus/>
-       <SectionCategorias/>
-       <Sectionservices/>
-       <SectionRecomendacion/>   
+      <hr className=" text-gray-50"/>
+      <div className="max-full mx-auto">
+      <Sectionaboutushome/>
+      <Sectionaboutus/>
+      <SectionCategorias/>
+      <Sectionservices/>
+      <SectionRecomendacion/>   
       
 
          <div className="w-full text-end my-4">
