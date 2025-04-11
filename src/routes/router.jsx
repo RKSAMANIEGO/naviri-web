@@ -13,7 +13,8 @@ import {
   Products,
   ProductAdmin,
   CategoriaPage,
-  ComentAdminPage
+  ComentAdminPage,
+  PromotionAdminPage
 }  from '../pages/index';
 import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 
@@ -54,6 +55,7 @@ const Router = () => {
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
               <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
               <Route path="/admin/panel/page/mail" element={ <InfoEmails/>} />
+              <Route path="/admin/panel/promotions" element={ <PromotionAdminPage/>} />
             </Route>
           </Route>
 

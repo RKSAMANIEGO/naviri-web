@@ -13,7 +13,8 @@ import {
   MoonOutlined,
   LeftOutlined,
   RightOutlined,
-  MailOutlined
+  MailOutlined,
+  TagsOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -103,6 +104,11 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               key: '/admin/panel/page/mail',
               icon: <MailOutlined />,
               label: 'Correo',
+            },
+            {
+              key: '/admin/panel/promotions',
+              icon: <TagsOutlined />,
+              label: 'Promociones',
             },
             {
               key: 'page',
