@@ -23,7 +23,13 @@ import { useEffect } from 'react';
 
 import InfoContact from '../pages/contactoadmin/InfoContact';
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
+
 import InfoEmails from '../pages/formClient/InfoEmails';
+
+//import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
+//import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
+import ContentProducts from '../components/Products/ContentProducts';
+
 
 const Router = () => {
   useEffect(() => {
@@ -35,7 +41,16 @@ const Router = () => {
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
-            <Route path='/categories' element={<PageCategorie/>}/> 
+            <Route path='/categories' element={<PageCategorie/>}>
+              
+              <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/>
+              <Route path="aceites" element={ <ContentProducts categorie="aceites"/>}/>
+              <Route path="cosmeticos" element={ <ContentProducts categorie="Cosméticos"/>}/>
+              <Route path="cuidado capilar" element={ <ContentProducts categorie="cuidado capilar"/>}/>
+              <Route path="Exfoliante Corporal" element={ <ContentProducts categorie="Exfoliante Corporal"/>}/>
+              <Route path="sales minerales" element={ <ContentProducts categorie="sales minerales"/>}/>
+              
+            </Route> 
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 

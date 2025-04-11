@@ -50,24 +50,36 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
         onClose();
     };
 
+    
+
+
     return (
         <Modal
             isOpen={isOpen}
             onRequestClose={onClose}
             style={{
                 overlay: {
-                    background:"rgb(0,0,0,0.5)",
-                    zIndex: 100
+                    background: "rgba(0, 0, 0, 0.5)",
+                    zIndex: 100,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                 },
                 content:{
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width:"750px",
-                    height:"400px",
-                    padding:"0",
-                    border:"none"
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: "90vw",
+                    maxWidth: "750px",
+                    height: "85vh",
+                    maxHeight: "400px",
+                    padding: "0",
+                    border: "none",
+                    overflow: "auto",
+                    borderRadius: "10px",
+                    backgroundColor: "white"
                 }
+
             }}
         >
             {(product && isOpen) &&
@@ -75,8 +87,6 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                 <section className={styles.section} style={
                     {
                         backgroundImage: `url(${product.image.url})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
                     }
                 }>
                     
