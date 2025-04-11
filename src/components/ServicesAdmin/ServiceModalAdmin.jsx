@@ -28,8 +28,8 @@ const ServiceModalAdmin = ({
       if (currentServices) {
         form.setFieldsValue({
           title: currentServices.title,
-          category: currentServices.category,
           description: currentServices.description,
+          features: currentServices.features,
           imagen: currentServices.imagen || [],
         });
 
@@ -57,6 +57,7 @@ const ServiceModalAdmin = ({
   useEffect(() => {
     form.setFieldsValue({ imagen: fileList });
   }, [fileList, form]);
+
 
   const uploadProps = {
     beforeUpload: (file) => {
@@ -91,7 +92,7 @@ const ServiceModalAdmin = ({
 
   return (
     <Modal
-      title={currentServices ? "Editar Entrada" : "Nueva Entrada"}
+      title={currentServices ? "Editar Servicio" : "Nuevo Servicio"}
       open={isModalVisible}
       onCancel={() => setIsModalVisible(false)}
       footer={null}
@@ -118,21 +119,27 @@ const ServiceModalAdmin = ({
                 { required: true, message: "¡Por favor ingresa el título!" },
               ]}
             >
-              <Input placeholder="Título del blog" />
+              <Input placeholder="Título del servicio" />
             </Form.Item>
 
             <Form.Item
-              label="Categoría"
-              name="category"
-              rules={[
-                { required: true, message: "¡Selecciona una categoría!" },
-              ]}
+             label="Características"
+             name="features"
+            rules={[{ required: true, message: "¡Agrega al menos una característica!" }]}
             >
-              <Select placeholder="Selecciona una categoría">
-                <Option value={1}>Aceites</Option>
-                <Option value={2}>Aromas</Option>
-              </Select>
-            </Form.Item>
+           <Select
+             mode="tags"
+             style={{ width: "100%" }}
+             placeholder="Agrega o selecciona características"
+             tokenSeparators={[","]}
+        >
+            <Option value="Rápido">Rápido</Option>
+            <Option value="Efectivo">Efectivo</Option>
+            <Option value="Duradero">Duradero</Option>
+            <Option value="Natural">Natural</Option>
+          </Select>
+          
+        </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
