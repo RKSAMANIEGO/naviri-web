@@ -1,55 +1,57 @@
 import { useEffect, useState } from "react";
 import styles from "./TestimonioPrincipal.module.css";
-import img from '../../assets/image/logo-navi.png'
-import { getTestimonios } from '../../services/testimoniosServices.js'
+import img from '../../assets/image/logo-navi.png';
+import { getTestimonios } from '../../services/testimoniosServices.js';
 
 export default function Testi() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [testimonios, setTestimonios] = useState({})
+  const [currentPage, setCurrentPage] = useState(0);
+  const [testimonios, setTestimonios] = useState({ data: [] });
+  const testimonialsPerPage = 3;
 
   useEffect(() => {
     const fetchData = async () => {
-      const dataTestimonio = await getTestimonios();
-      console.log(dataTestimonio);
-      setTestimonios(dataTestimonio)
-    }
+      try {
+        const dataTestimonio = await getTestimonios();
+        setTestimonios(dataTestimonio);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      }
+    };
     fetchData();
-  }, [])
-
-  /* const testimonios = [
-    {
-      id: 1,
-      nombre: "Daniela García",
-      imagen: "/placeholder.svg",
-      texto:
-        "Los productos faciales son increíbles. Mi piel nunca había lucido tan radiante. La calidad es excepcional y los resultados son visibles desde la primera aplicación.",
-      estado: "en línea",
-    },
-    {
-      id: 2,
-      nombre: "Micaela Rojas",
-      imagen: "/placeholder.svg",
-      texto:
-        "El kit de maquillaje que compré es perfecto. Los colores son preciosos y la duración es notable. Todos me preguntan qué productos uso. ¡Totalmente recomendado!",
-      estado: "en línea",
-    },
-    {
-      id: 3,
-      nombre: "Nicoll Romero",
-      imagen: "/placeholder.svg",
-      texto:
-        "Los productos para el cabello son de excelente calidad. Mi cabello nunca había estado tan saludable y brillante como ahora. Además, el envío fue muy rápido.",
-      estado: "en línea",
-    },
-  ]; */
+  }, []);
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? testimonios.length - 1 : prevIndex - 1));
+    if (!testimonios.data || testimonios.data.length === 0) return;
+    
+    const totalPages = Math.ceil(testimonios.data.length / testimonialsPerPage);
+    setCurrentPage((prevPage) => (prevPage === 0 ? totalPages - 1 : prevPage - 1));
+  };
+
+  const nextSlide = () => {
+    if (!testimonios.data || testimonios.data.length === 0) return;
+    
+    const totalPages = Math.ceil(testimonios.data.length / testimonialsPerPage);
+    setCurrentPage((prevPage) => (prevPage === totalPages - 1 ? 0 : prevPage + 1));
   };
 
   const goToSlide = (index) => {
-    setCurrentIndex(index);
+    setCurrentPage(index);
   };
+
+  // Calculate which testimonials to show based on current page
+  const getCurrentTestimonials = () => {
+    if (!testimonios.data || testimonios.data.length === 0) return [];
+    
+    const startIndex = currentPage * testimonialsPerPage;
+    return testimonios.data.slice(startIndex, startIndex + testimonialsPerPage);
+  };
+
+  // Calculate total number of pages
+  const totalPages = testimonios.data && testimonios.data.length > 0 
+    ? Math.ceil(testimonios.data.length / testimonialsPerPage) 
+    : 0;
+
+  const currentTestimonials = getCurrentTestimonials();
 
   return (
     <section className={styles.testiSection}>
@@ -61,15 +63,26 @@ export default function Testi() {
 
         <div className={styles.content}>
           <div className={styles.testimoniosContainer}>
-            <button className={`${styles.navButton} ${styles.prevButton}`} onClick={prevSlide} aria-label="Testimonio anterior">
+            <button 
+              className={`${styles.navButton} ${styles.prevButton}`} 
+              onClick={prevSlide} 
+              aria-label="Testimonio anterior"
+            >
               &lt;
             </button>
+            
             <div className={styles.testimoniosWrapper}>
-              {testimonios.data && testimonios.data.map((testimonio) => (
+              {currentTestimonials.map((testimonio) => (
                 <div key={testimonio.id} className={styles.testimonioCard}>
                   <div className={styles.clienteInfo}>
                     <div className={styles.avatarContainer}>
-                      <img src='' alt={testimonio.name_customer} width={60} height={60} className={styles.avatar} />
+                      <img 
+                        src={testimonio.image_url || '/placeholder.svg'} 
+                        alt={testimonio.name_customer} 
+                        width={60} 
+                        height={60} 
+                        className={styles.avatar} 
+                      />
                     </div>
                     <div className={styles.clienteDetalles}>
                       <h3 className={styles.clienteNombre}>{testimonio.name_customer}</h3>
@@ -80,11 +93,19 @@ export default function Testi() {
                 </div>
               ))}
             </div>
+            
+            <button 
+              className={`${styles.navButton} ${styles.nextButton}`} 
+              onClick={nextSlide} 
+              aria-label="Testimonio siguiente"
+            >
+              &gt;
+            </button>
           </div>
 
           <div className={styles.brandPanel}>
             <div className={styles.brandLogo}>
-              <img src={img} alt="Navi Logo" width={120} height={120} className={styles.logo} />
+              <img src={img || "/placeholder.svg"} alt="Navi Logo" width={120} height={120} className={styles.logo} />
             </div>
             <p className={styles.brandMessage}>
               En BeautyGlow nos dedicamos a ofrecerte los mejores productos de belleza para que te sientas radiante todos los días.
@@ -103,10 +124,10 @@ export default function Testi() {
         </div>
 
         <div className={styles.indicadores}>
-          {Array.isArray(testimonios) && testimonios.map((_, index) => (
+          {Array.from({ length: totalPages }).map((_, index) => (
             <button
               key={index}
-              className={`${styles.indicador} ${currentIndex === index ? styles.indicadorActivo : ""}`}
+              className={`${styles.indicador} ${currentPage === index ? styles.indicadorActivo : ""}`}
               onClick={() => goToSlide(index)}
               aria-label={`Ir al testimonio ${index + 1}`}
             />
