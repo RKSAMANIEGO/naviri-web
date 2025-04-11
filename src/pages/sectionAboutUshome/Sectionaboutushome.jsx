@@ -31,7 +31,7 @@ const Sectionaboutushome = () => {
     }
 
     return (
-        <section className={style.aboutSection}>
+        <section id="aboutus" className={style.aboutSection}>
             <div className={style.aboutContainer}>
                 {aboutUs ? (
                     <div className={style.aboutContent}>

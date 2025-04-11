@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Modal, Table, Tag, FloatButton, message, Tooltip } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EmailSearch from '../../components/InfoEmailAdmin/EmailSearch';
+import { getEmails } from '../../services/emailService';
 
 const InfoEmails = () => {
   const [form] = Form.useForm();
@@ -16,11 +17,23 @@ const InfoEmails = () => {
   const [currentEmail, setCurrentEmail] = useState(null);
 
   useEffect(() => {
-    const results = emails.filter(item =>
-      item.email.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredEmails(results);
-  }, [searchQuery, emails]);
+
+    const fetchEmails = async () => {
+      try {
+        const response = await getEmails();
+        console.log(response);
+        
+        if (response && response.data.length > 0) {
+          setEmails(response.data);
+        } else {
+          console.error("No emails found");
+        }
+      } catch (error) {
+        console.error("Error fetching emails:", error);
+      }
+    }
+    fetchEmails();
+  }, []);
 
 
   const handleDelete = (id) => {
@@ -60,7 +73,7 @@ const InfoEmails = () => {
     },
     {
       title: "Estado",
-      dataIndex: "estado",
+      dataIndex: "active",
       key: "estado",
       render: (estado) => (
         <Tag color={estado === "Activo" ? "green" : "volcano"}>{estado}</Tag>
@@ -103,7 +116,7 @@ const InfoEmails = () => {
       {/* Tabla */}
       <Table
         columns={columns}
-        dataSource={filteredEmails}
+        dataSource={emails}
         rowKey="id"
         pagination={false}
         components={{
