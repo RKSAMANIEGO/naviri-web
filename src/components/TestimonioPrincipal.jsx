@@ -69,25 +69,6 @@ export default function Testi() {
               ))}
             </div>
           </div>
-
-          <div className={styles.brandPanel}>
-            <div className={styles.brandLogo}>
-              <img src={img} alt="Navi Logo" width={120} height={120} className={styles.logo} />
-            </div>
-            <p className={styles.brandMessage}>
-              En BeautyGlow nos dedicamos a ofrecerte los mejores productos de belleza para que te sientas radiante todos los días.
-            </p>
-            <div className={styles.statsContainer}>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>5K+</span>
-                <span className={styles.statLabel}>Clientas satisfechas</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statNumber}>200+</span>
-                <span className={styles.statLabel}>Productos exclusivos</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className={styles.indicadores}>
