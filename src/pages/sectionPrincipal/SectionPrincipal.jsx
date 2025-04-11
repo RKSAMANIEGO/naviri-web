@@ -12,7 +12,7 @@ const Carousel = () => {
     const navigationNextRef = useRef(null);
 
     return (
-        <div className="relative w-full h-[550px] bg-gradient-to-r from-[#FFECFA] to-[#FFAFEB]">
+        <div className="relative w-full h-auto lg:h-[550px] bg-gradient-to-r from-[#FFECFA] to-[#FFAFEB] overflow-hidden"> 
             <Swiper
                 navigation={{
                     prevEl: navigationPrevRef.current,
@@ -26,13 +26,14 @@ const Carousel = () => {
                 className="w-full h-full"
             >
                 <SwiperSlide>
-                    <div className="flex w-full h-full justify-center items-center">
-                        <div className="w-full md:w-[45%] flex flex-col items-start justify-center pl-16 md:pl-32 pr-16">
+                    <div className="flex flex-col lg:flex-row w-full h-full justify-center items-center py-10 lg:py-0"> 
+                        
+                        <div className="w-full lg:w-[45%] flex flex-col items-center lg:items-start justify-center text-center lg:text-left px-4 lg:pl-32 lg:pr-16 order-1 lg:order-1"> {/* Changed md to lg */}
                             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center p-2 mb-6">
                                 <img src={logo} alt="Navi Logo" className="w-14 h-14" />
                             </div>
-                            <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight mb-4">¡Renueva tu Belleza con Nosotras!✨</h1>
-                            <p className="text-lg text-gray-800 max-w-lg mb-6">
+                            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-black leading-tight mb-4">¡Renueva tu Belleza con Nosotras!✨</h1>
+                            <p className="text-base sm:text-lg text-gray-800 max-w-lg mb-6">
                                 Descubre nuestras promociones especiales en cuidado de la piel y maquillaje.
                                 ¡Solo por tiempo limitado!
                             </p>
@@ -45,24 +46,25 @@ const Carousel = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className="hidden md:block md:w-[55%] h-full relative">
+                        
+                        <div className="hidden lg:block lg:w-[55%] h-64 lg:h-full relative order-2 lg:order-2"> 
                             <img
                                 src={model1}
                                 alt="Modelo con producto de belleza"
-                                className="absolute bottom-0 right-0 h-full w-auto object-contain max-w-none"
+                                className="h-full w-auto object-contain lg:absolute lg:bottom-0 lg:right-0 lg:max-w-none"
                             />
                         </div>
                     </div>
                 </SwiperSlide>
 
                 <SwiperSlide>
-                    <div className="flex w-full h-full justify-center items-center">
-                        <div className="w-full md:w-[45%] flex flex-col items-start justify-center pl-16 md:pl-32 pr-16">
+                    <div className="flex flex-col lg:flex-row w-full h-full justify-center items-center py-10 lg:py-0"> 
+                        <div className="w-full lg:w-[45%] flex flex-col items-center lg:items-start justify-center text-center lg:text-left px-4 lg:pl-32 lg:pr-16 order-1 lg:order-1"> {/* Changed md to lg */}
                             <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center p-2 mb-6">
                                 <img src={logo} alt="Navi Logo" className="w-14 h-14" />
                             </div>
-                            <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight mb-4">¡Piel Perfecta al Instante!</h1>
-                            <p className="text-lg text-gray-800 max-w-lg mb-6">
+                            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-black leading-tight mb-4">¡Piel Perfecta al Instante!</h1>
+                            <p className="text-base sm:text-lg text-gray-800 max-w-lg mb-6">
                                 Consigue un acabado profesional con nuestro nuevo Serum Iluminador.
                                 ¡Oferta exclusiva por lanzamiento!
                             </p>
@@ -75,11 +77,12 @@ const Carousel = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className="hidden md:block md:w-[55%] h-full relative">
-                            <img
+                        
+                        <div className="hidden lg:block lg:w-[55%] h-64 lg:h-full relative order-2 lg:order-2">
+                             <img
                                 src={model2}
                                 alt="Modelo con producto de belleza"
-                                className="absolute bottom-0 right-0 h-full w-auto object-contain max-w-none"
+                                className="h-full w-auto object-contain lg:absolute lg:bottom-0 lg:right-0 lg:max-w-none"
                             />
                         </div>
                     </div>
@@ -88,17 +91,17 @@ const Carousel = () => {
 
             <div
                 ref={navigationPrevRef}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all shadow-md hover:shadow-lg"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 md:p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all shadow-md hover:shadow-lg"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
             </div>
             <div
                 ref={navigationNextRef}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all shadow-md hover:shadow-lg"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 md:p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all shadow-md hover:shadow-lg"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
             </div>

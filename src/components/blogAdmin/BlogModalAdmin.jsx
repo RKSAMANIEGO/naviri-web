@@ -4,7 +4,7 @@ import { UploadOutlined, DeleteOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
-const BlogModalAdmin = ({ isModalVisible, setIsModalVisible, form, handleSubmit, currentBlog }) => {
+const BlogModalAdmin = ({categoriesList = [], isModalVisible, setIsModalVisible, form, handleSubmit, currentBlog }) => {
   const [fileList, setFileList] = useState([]);
   
   useEffect(() => {
@@ -75,7 +75,7 @@ const BlogModalAdmin = ({ isModalVisible, setIsModalVisible, form, handleSubmit,
       <Form
         form={form}
         layout="vertical"
-        onFinish={handleSubmit}
+        onFinish={(values) => handleSubmit(values)}
         style={{ maxHeight: '70vh', overflowY: 'auto',overflowX: 'hidden', paddingRight: 10 }}
       >
         <Row gutter={24}>
@@ -94,8 +94,11 @@ const BlogModalAdmin = ({ isModalVisible, setIsModalVisible, form, handleSubmit,
               rules={[{ required: true, message: '¡Selecciona una categoría!' }]}
             >
               <Select placeholder="Selecciona una categoría">
-                <Option value={1}>Aceites</Option>
-                <Option value={2}>Aromas</Option>
+                {categoriesList.map((category) => (
+                  <Option key={category.id} value={category.id}>
+                    {category.name}
+                  </Option>
+                ))}
               </Select>
             </Form.Item>
           </Col>
