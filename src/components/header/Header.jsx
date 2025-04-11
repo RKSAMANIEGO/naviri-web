@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes, FaWhatsapp } from 'react-icons/fa';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/image/logo-navi.png';
 import styles from "../../styles/header.module.css";
+import { useCart } from '../../context/CartContext';
 
 const productMenuItems = [
     { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products/new' },
@@ -27,6 +28,8 @@ const Header = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const { toggleCart, getCartCount } = useCart();
     
     const productosRef = useRef(null);
     const categoriasRef = useRef(null);
@@ -78,6 +81,20 @@ const Header = () => {
 
     const handleDropdownLeave = (setter) => {
         setter(false);
+    };
+
+    const handleReserveClick = () => {
+        const message = "¡Hola! Me gustaría reservar una cita para conocer más sobre sus servicios y productos.";
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+    };
+
+    const handleCartClick = () => {
+        if (location.pathname === '/') {
+            navigate('/products');
+        } else {
+            toggleCart();
+        }
     };
 
     return (
@@ -156,11 +173,11 @@ const Header = () => {
                             <FaSearch className={styles.iconsearch} aria-hidden="true" />
                         </button>
                     </form>
-                    <Link to="/cart" className={styles.cart} aria-label="Ver carrito de compras">
+                    <button onClick={handleCartClick} className={styles.cart} aria-label="Ver carrito de compras">
                         <FaShoppingCart className={styles.carticon} aria-hidden="true"/>
-                        <span className={styles.cartcount}>0</span>
-                    </Link>
-                    <Link to="/reservar" className={styles.btnreserve}>Reservar</Link>
+                        <span className={styles.cartcount}>{getCartCount()}</span>
+                    </button>
+                    <button onClick={handleReserveClick} className={styles.btnreserve}>Reservar</button>
                 </div>
 
                 <button
@@ -204,13 +221,21 @@ const Header = () => {
                 <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</NavLink>
                 
                 <div className={styles.mobileExtras}>
-                    <Link to="/cart" className={styles.cart} onClick={closeMobileMenu} aria-label="Ver carrito de compras">
+                    <button onClick={() => { 
+                        if (location.pathname === '/') {
+                            navigate('/products');
+                            closeMobileMenu();
+                        } else {
+                            toggleCart();
+                            closeMobileMenu();
+                        }
+                    }} className={styles.cart} aria-label="Ver carrito de compras">
                         <span className={styles.mobileCartContent}>Carrito <FaShoppingCart className={styles.carticon} aria-hidden="true"/></span>
-                        <span className={styles.cartcount}>0</span>
-                    </Link>
-                    <Link to="/reservar" className={`${styles.btnreserve} ${styles.mobileReserveBtn}`} onClick={closeMobileMenu}>
-                        Reservar
-                    </Link>
+                        <span className={styles.cartcount}>{getCartCount()}</span>
+                    </button>
+                    <button onClick={handleReserveClick} className={`${styles.btnreserve} ${styles.mobileReserveBtn}`}>
+                        <FaWhatsapp className={styles.whatsappIcon} /> Reservar
+                    </button>
                 </div>
             </nav>
         </header>

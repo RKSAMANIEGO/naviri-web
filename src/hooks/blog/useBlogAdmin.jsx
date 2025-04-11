@@ -4,6 +4,7 @@ import { message, Button, Image, Modal } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import React from 'react';
 import { createBlog, deleteBlog, getBlogs, updateBlog } from '../../services/blogService';
+import { getCategories } from '../../services/categoriesService';
 
 export const useBlogAdmin = (form) => {
   const [blogs, setBlogs] = useState([
@@ -20,14 +21,19 @@ export const useBlogAdmin = (form) => {
       },
     },
   ]);
+  const [categories, setCategories] = useState([]);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentBlog, setCurrentBlog] = useState(null);
 
-  const loadBlogs = async (page = 1) => {
+  const loadBlogs = async (page = 1, category = '') => {
     try {
-      const response = await getBlogs(page);
-      if (response?.data) {
+      const response = await getBlogs(page, 5, category); 
+      const categoriesData = await getCategories();
+      
+      if (response?.data && categoriesData.data) {
         setBlogs(response.data.data);
+        setCategories(categoriesData.data);
         return response.data;
       }
     } catch (error) {
@@ -86,7 +92,7 @@ export const useBlogAdmin = (form) => {
   const handleSubmit = async (values) => {
     try {
       const imagenUrl = values.imagen?.[0]?.url || 
-                      await convertFileToUrl(values.imagen?.[0]?.originFileObj);
+                        await convertFileToUrl(values.imagen?.[0]?.originFileObj);
   
       const blogData = {
         title: values.title,
@@ -97,28 +103,35 @@ export const useBlogAdmin = (form) => {
   
       let response;
       if (currentBlog) {
-        console.log("Actualizando");
-        
         response = await updateBlog(currentBlog.id, blogData);
+        setBlogs(prev => prev.map(blog => 
+          blog.id === currentBlog.id ? { ...blog, ...blogData, image: { url: imagenUrl } } : blog
+        ));
       } else {
-        console.log("Creando");
         response = await createBlog(blogData);
+        const newBlog = {
+          ...blogData,
+          id: Date.now(),
+          category: categories.find(cat => cat.id === blogData.category_id),
+          image: { url: imagenUrl }
+        };
+        setBlogs(prev => [newBlog, ...prev]);
       }
   
-      console.log(response.data);
-
       if (response.data) {
-        // await loadBlogs(pagination.current); 
         message.success(`¡Entrada ${currentBlog ? 'actualizada' : 'creada'}!`);
         setIsModalVisible(false);
         form.resetFields();
+        
+        loadBlogs(pagination.current);
       }
     } catch (error) {
-      console.log("error");
       message.error(error.response?.data?.message || 'Error al guardar');
+      if (!currentBlog) {
+        setBlogs(prev => prev.filter(blog => blog.id !== Date.now()));
+      }
     }
   };
-
 
   const handleDelete = async (id) => {
     Modal.confirm({
@@ -129,16 +142,20 @@ export const useBlogAdmin = (form) => {
       cancelText: 'Cancelar',
       async onOk() {
         try {
-          await deleteBlog(id);
+          // Eliminación local inmediata
           setBlogs(prev => prev.filter(blog => blog.id !== id));
+          await deleteBlog(id);
           message.success('¡Entrada eliminada!');
         } catch (error) {
+          setBlogs(prev => [...prev, blogs.find(blog => blog.id === id)]);
           message.error(error.message);
         }
       }
     });
   };
+  
 
+  
   const columns = [
     {
       title: 'Título',
@@ -159,11 +176,11 @@ export const useBlogAdmin = (form) => {
     {
       title: 'Categoría',
       render: (_, record) => record.category?.name,
-      filters: [
-        { text: 'Aceites', value: 'Aceites' },
-        // Agrega más categorías según tu API
-      ],
-      onFilter: (value, record) => record.category.name === value,
+      filters: categories.map(category => ({
+        text: category.name,
+        value: category.id,
+      })),
+      onFilter: (value, record) => record.category.id === value,
       width: "10%"
     },
     {
@@ -192,6 +209,7 @@ export const useBlogAdmin = (form) => {
     blogs,
     isModalVisible,
     currentBlog,
+    categories,
     loadBlogs,
     showModal,
     handleEdit,
