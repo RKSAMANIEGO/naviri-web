@@ -13,16 +13,23 @@ import {
   Products,
   ProductAdmin,
   CategoriaPage,
-  ComentAdminPage
+  ComentAdminPage,
+  PromotionAdminPage
 }  from '../pages/index';
+import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
+
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
-import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
+//import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 import ContentProducts from '../components/Products/ContentProducts';
 
+
+import InfoContact from '../pages/contactoadmin/InfoContact';
+//import BlogAdminPage from '../pages/blog/BlogAdminPage';
+import InfoEmails from '../pages/formClient/InfoEmails';
 
 
 const Router = () => {
@@ -55,13 +62,15 @@ const Router = () => {
           <Route element={ <RequireAuth/> }>
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/products" element={<ProductAdmin/>} />
-              <Route path="/admin/panel/categories" element={<CategoriaPage/>}/>
-              <Route path="/admin/panel/customers" element={<h1>Clientes</h1>} />
+              <Route path="/admin/panel/categories" element={<CategoriaPage/>} />
+              <Route path="/admin/panel/customers" element={<InfoContact/>} />
               <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
               <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
+              <Route path="/admin/panel/mail" element={ <InfoEmails/>} />
+              <Route path="/admin/panel/promotions" element={ <PromotionAdminPage/>} />
             </Route>
           </Route>
 

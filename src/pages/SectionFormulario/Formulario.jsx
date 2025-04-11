@@ -2,34 +2,29 @@
 
 import React, { useState } from "react";
 import styles from "./Formulario.module.css";
+import { createEmail } from "../../services/emailService";
 
 export default function Formulario() {
-  const [email, setEmail] = useState("");
+  const [form, setEmail] = useState({
+    email: "",
+    active: true,
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validación básica de email
-    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-      setMessage("Por favor, introduce un correo electrónico válido.");
-      setMessageType("error");
-      return;
-    }
-
-    setIsSubmitting(true);
-    setMessage("");
-
+    
     try {
-      // Simulación de una petición con un timeout
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const resp = await createEmail(form);
+      setIsSubmitting(true);
+      setMessage("");
 
       setMessage("¡Gracias por suscribirte! Pronto recibirás nuestras novedades.");
       setMessageType("success");
       setEmail("");
-    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setMessage("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo.");
       setMessageType("error");
@@ -37,6 +32,16 @@ export default function Formulario() {
       setIsSubmitting(false);
     }
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEmail(
+      (prevForm) => ({
+        ...prevForm,
+        [name]: value,
+      })   
+    );
+  }
 
   return (
     <div className={styles.formContainer}>
@@ -51,8 +56,9 @@ export default function Formulario() {
           <div className={styles.inputGroup}>
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={form.email}
+              name="email"
+              onChange={handleChange}
               placeholder="Tu correo electrónico"
               className={styles.emailInput}
               disabled={isSubmitting}
@@ -67,7 +73,7 @@ export default function Formulario() {
 
           <p className={styles.privacyNote}>
             Al suscribirte, aceptas nuestra{" "}
-            <a href="/politica-privacidad" className={styles.privacyLink}>
+            <a href="/policy" className={styles.privacyLink}>
               política de privacidad
             </a>
             . Nunca compartiremos tu correo electrónico.

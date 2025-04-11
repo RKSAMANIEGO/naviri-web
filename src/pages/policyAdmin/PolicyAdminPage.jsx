@@ -62,22 +62,22 @@ const PolicyAdminPage = () => {
 
   const handleSubmit = async () => {
     try {
-      // Si hay una imagen nueva, la convertimos a base64
-      let imagenUrl = policy.image; // Usamos la URL si no se cambia la imagen
+      let imagenUrl = policy.image.url; 
 
       if (fileList.length > 0 && fileList[0].originFileObj) {
         imagenUrl = await convertFileToBase64(fileList[0].originFileObj);
       }
-
+      
       const policyData = {
         title: policy.title,
         description: policy.description,
-        image: imagenUrl,  // Enviamos la URL o el base64 de la imagen
+        image: imagenUrl,  
       };
-
+      
+      console.log(policyData);
       const response = await updatePolicy(policy.id, policyData);
 
-      if (response.data) {
+      if (response) {
         message.success('¡Política actualizada correctamente!');
       }
     } catch (error) {

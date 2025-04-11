@@ -12,7 +12,9 @@ import {
   SunOutlined,
   MoonOutlined,
   LeftOutlined,
-  RightOutlined
+  RightOutlined,
+  MailOutlined,
+  TagsOutlined
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -29,7 +31,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
   return (
     <div className="relative">
 
-      {/* Botón de colapso */}
       <button
         onClick={() => setCollapsed(!collapsed)}
         className="absolute -right-3 top-16 bg-white cursor-pointer dark:bg-gray-700 p-1.5 rounded-full shadow-lg border-2 border-gray-200 dark:border-gray-600 hover:scale-105 transition-transform z-10"
@@ -57,14 +58,12 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
           color: isDarkMode ? 'white' : '#1f2937',
         }}
       >
-        {/* Logo */}
         <div className="p-4 py-8">
           <div className="flex justify-center">
             <img src={logo} alt="logo" width="80px" />
           </div>
         </div>
         
-        {/* Menú */}
         <Menu
           theme={isDarkMode ? 'dark' : 'light'}
           mode="inline"
@@ -76,11 +75,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             backgroundColor: isDarkMode ? '#1f2937' : 'white',
           }}
           items={[
-            // {
-            //   key: '/admin/panel',
-            //   icon: <HomeOutlined />,
-            //   label: 'Inicio',
-            // },
             {
               key: '/admin/panel/products',
               icon: <ShoppingOutlined />,
@@ -88,13 +82,13 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             },
             {
               key: '/admin/panel/categories',
-              icon: <ShoppingOutlined /> ,
+              icon: <ShoppingOutlined />,
               label: 'Categorias',
             },
             {
               key: '/admin/panel/customers',
               icon: <UserOutlined />,
-              label: 'Clientes',
+              label: 'Información',
             },
             {
               key: '/admin/panel/coments',
@@ -105,6 +99,16 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               key: '/admin/panel/blogs',
               icon: <FileTextOutlined />,
               label: 'Blogs',
+            },
+            {
+              key: '/admin/panel/mail',
+              icon: <MailOutlined />,
+              label: 'Correo',
+            },
+            {
+              key: '/admin/panel/promotions',
+              icon: <TagsOutlined />,
+              label: 'Promociones',
             },
             {
               key: 'page',
@@ -124,7 +128,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
           ]}
         />
         
-        {/* Botón de cambio de tema al final del sidebar */}
         <div 
           className="absolute bottom-0 left-0 right-0 p-4 border-t flex justify-center"
           style={{ 
