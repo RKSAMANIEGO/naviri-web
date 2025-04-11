@@ -9,7 +9,8 @@ import { listProducts, productByName } from '../../services/productService'
 import { useCart } from '../../context/CartContext';
 import CartSidebar from '../cart/CartSidebar';
 
-const ContentProducts = () => {
+const ContentProducts = ({categorie}) => {
+
 
     const [isOpen, setIsOpen] = useState(false);
     const [productSelected,setProductSelected]=useState(null);
@@ -39,6 +40,8 @@ const ContentProducts = () => {
             setTextSearch(searchQuery);
         }
     }, [searchParams]);
+
+
     const recibirFiltroPrecio=(precio)=>{
         setFilterPrecio(precio);
     }
@@ -95,11 +98,26 @@ const ContentProducts = () => {
                 console.log(productsFilterCat);
                 setProductoFiltrado(productsFilterCat);
             }
-            else if(!textSearch || !filterPrecio){
+            else if(categorie){
+
+                localStorage.setItem("nameCategorie",categorie || '');
+                window.dispatchEvent(new Event("localStorageUpdated"));
+                
+                const productsFilterCateg=allProducts.filter(product => product.categories.some(subCat=>subCat.name.toLowerCase().includes( localStorage.getItem("nameCategorie").toLowerCase())));
+                
+                (categorie === "accesorios") && setProductoFiltrado(productsFilterCateg); 
+                (categorie === "aceites") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "Cosméticos") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "cuidado capilar") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "Exfoliante Corporal") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "sales minerales") && setProductoFiltrado(productsFilterCateg); 
+                console.log(productsFilterCateg);
+            }
+            else if(!textSearch || !filterPrecio ){
                 setProductoFiltrado(dataProducts);
             }     
         }
-    },[dataProducts,filterPrecio,textSearch,filterCategorie,allProducts])
+    },[dataProducts,filterPrecio,textSearch,filterCategorie,allProducts,categorie])
 
     const handleAddToCart = (product) => {
         addToCart(product);
@@ -120,16 +138,8 @@ const ContentProducts = () => {
             {/*FILTRO DE PRODUCTOS */}
             { productoFiltrado.map((product) => (
                 <section className={styles.sectionProducts} key={product.id}>
-                    <div style={{
-                        width:"100%",
-                        height:"190px",
-                        marginBottom:"10px",
-                        backgroundImage: `url(${product.image.url})`,  
-                        backgroundSize: "80%",
-                        backgroundPosition:"center 60%",
-                        borderTopLeftRadius:"10px",
-                        borderTopRightRadius:"10px",
-                        cursor:"pointer"
+                    <div className={styles.divImagen} style={{
+                        backgroundImage: `url(${product.image.url})`
                     }}
                     onClick={async ()=>{
                         setIsOpen(true)  
@@ -146,7 +156,6 @@ const ContentProducts = () => {
                     </div>
                     <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                     <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
-                    {/**<p className={styles.p}>{product.descripcion}</p>*/} 
                     <h5 className={styles.h5}>S/{product.price}</h5>
                     <section className={styles.productActions}>
                         <button 
@@ -159,7 +168,7 @@ const ContentProducts = () => {
                             className={`btn btn-primary ${styles.buyBtn}`}
                             onClick={() => handleWhatsappCheckout(product)}
                         >
-                            <FaWhatsapp /> Comprar
+                            <FaWhatsapp/> Comprar
                         </button>
                     </section>
                 </section>
