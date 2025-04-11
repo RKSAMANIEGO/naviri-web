@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes } from 'react-icons/fa';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { getCategories } from '../../services/categoriesService'
+import { useState, useEffect, useRef } from 'react';
+import { FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes, FaWhatsapp } from 'react-icons/fa';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/image/logo-navi.png';
 import styles from "../../styles/header.module.css";
+import { useCart } from '../../context/CartContext';
 
 const productMenuItems = [
     { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products/new' },
@@ -14,52 +14,25 @@ const productMenuItems = [
 ];
 
 const categoryMenuItems = [
-    { id: 'accessories', title: 'Accesorios', description: 'Encuentra productos esenciales para limpiar y proteger tu piel', to: '/categories/accessories' },
-    { id: 'oils', title: 'Aceite', description: 'Aceites naturales para nutrir, revitalizar tu piel y cabello', to: '/categories/oils' },
-    { id: 'cosmetics', title: 'Cosméticos', description: 'Brochas, esponjas, neceseres y más para tu rutina', to: '/categories/cosmetics' },
-    { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/hair-care' },
-    { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/body-care' },
-    { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/mineral-salts' },
+    { id: 'accessories', title: 'Accesorios', description: 'Encuentra productos esenciales para limpiar y proteger tu piel', to: '/categories/accesorios' },
+    { id: 'oils', title: 'Aceite', description: 'Aceites naturales para nutrir, revitalizar tu piel y cabello', to: '/categories/aceites' },
+    { id: 'cosmetics', title: 'Cosméticos', description: 'Brochas, esponjas, neceseres y más para tu rutina', to: '/categories/cosmeticos' },
+    { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
+    { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
+    { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/sales minerales' },
 ];
 
 const Header = () => {
     const [showProductos, setShowProductos] = useState(false);
     const [showCategorias, setShowCategorias] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    //const [dataCategorie, setDataCategorie]=useState(null);
-
-
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const { toggleCart, getCartCount } = useCart();
     
     const productosRef = useRef(null);
     const categoriasRef = useRef(null);
-
-    /*Listar Categorias
-    const listarCategoria=async()=>{
-        const response = await getCategories();
-        response &&  setDataCategorie(response.data.map(cat => cat.name));
-    }*/
-
-    /*
-    useEffect(()=>{
-        updateCategoryMenu();
-    },[])
-
-    //FUNCION PARA CONVINAR EL JSON CON EL NOMBRE DE CATEGORIAS
-
-    const updateCategoryMenu=async ()=>{
-        const response = await getCategories();
-        response &&  setDataCategorie(response.data.map(cat => cat.name));
-        if(response){
-
-            return  categoryMenuItems.map((cat,index)=>({
-                ...cat,
-                title:dataCategorie[index]
-            }));
-            //console.log(rep);
-        }   
-    }*/
 
     useEffect(() => {
         const handleResize = () => {
@@ -110,6 +83,21 @@ const Header = () => {
         setter(false);
     };
 
+    const handleReserveClick = () => {
+        const message = "¡Hola! Me gustaría reservar una cita para conocer más sobre sus servicios y productos.";
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+    };
+
+    const handleCartClick = () => {
+        if (location.pathname === '/') {
+            localStorage.removeItem("nameCategorie")
+            navigate('/products');
+        } else {
+            toggleCart();
+        }
+    };
+
     return (
         <header className={styles.header}>
             <div className={styles.navContainer}>
@@ -149,7 +137,6 @@ const Header = () => {
                         </div>
                     </div>
                     <div
-
                         ref={categoriasRef}
                         className={styles.dropdownTrigger}
                         onMouseEnter={() => handleDropdownEnter(setShowCategorias)}
@@ -160,17 +147,12 @@ const Header = () => {
                         </NavLink>
                         <div className={`${styles.dropdown} ${styles.categoryDropdown} ${showCategorias ? styles.dropdownVisible : ''}`}>
                             {categoryMenuItems.map(item => (
-                            <Link 
-                                key={item.id} 
-                                to={item.to} 
-                                className={styles.dropdownSection} 
-                                onClick={() => setShowCategorias(false)}
-                            >
-                                <h1>{item.title}</h1>
-                                <p>{item.description}</p>
-                            </Link>
-  ))}
-</div>
+                                <Link key={item.id} to={item.to} className={styles.dropdownSection} onClick={() => setShowCategorias(false)}>
+                                    <h1>{item.title}</h1>
+                                    <p>{item.description}</p>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                     <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Nosotros</NavLink>
                     <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</NavLink>
@@ -192,11 +174,11 @@ const Header = () => {
                             <FaSearch className={styles.iconsearch} aria-hidden="true" />
                         </button>
                     </form>
-                    <Link to="/cart" className={styles.cart} aria-label="Ver carrito de compras">
+                    <button onClick={handleCartClick} className={styles.cart} aria-label="Ver carrito de compras">
                         <FaShoppingCart className={styles.carticon} aria-hidden="true"/>
-                        <span className={styles.cartcount}>0</span>
-                    </Link>
-                    <Link to="/reservar" className={styles.btnreserve}>Reservar</Link>
+                        <span className={styles.cartcount}>{getCartCount()}</span>
+                    </button>
+                    <button onClick={handleReserveClick} className={styles.btnreserve}>Reservar</button>
                 </div>
 
                 <button
@@ -240,13 +222,21 @@ const Header = () => {
                 <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</NavLink>
                 
                 <div className={styles.mobileExtras}>
-                    <Link to="/cart" className={styles.cart} onClick={closeMobileMenu} aria-label="Ver carrito de compras">
+                    <button onClick={() => { 
+                        if (location.pathname === '/') {
+                            navigate('/products');
+                            closeMobileMenu();
+                        } else {
+                            toggleCart();
+                            closeMobileMenu();
+                        }
+                    }} className={styles.cart} aria-label="Ver carrito de compras">
                         <span className={styles.mobileCartContent}>Carrito <FaShoppingCart className={styles.carticon} aria-hidden="true"/></span>
-                        <span className={styles.cartcount}>0</span>
-                    </Link>
-                    <Link to="/reservar" className={`${styles.btnreserve} ${styles.mobileReserveBtn}`} onClick={closeMobileMenu}>
-                        Reservar
-                    </Link>
+                        <span className={styles.cartcount}>{getCartCount()}</span>
+                    </button>
+                    <button onClick={handleReserveClick} className={`${styles.btnreserve} ${styles.mobileReserveBtn}`}>
+                        <FaWhatsapp className={styles.whatsappIcon} /> Reservar
+                    </button>
                 </div>
             </nav>
         </header>

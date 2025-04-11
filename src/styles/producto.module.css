@@ -357,36 +357,45 @@
 
 .wrapperBtn {
 	display: flex;
-	justify-content: center;
-	gap: 10px;
+	justify-content: space-between;
+	gap: 20px;
 	padding: 20px 0;
 }
 
 .wrapperBtn button {
 	flex: 1;
-	padding: 6px 0;
-	font-size: 12px;
-	border-radius: 3px;
+	padding: 12px 0;
+	font-size: 14px;
+	border-radius: 8px;
 	color: white;
-	font-weight: 700;
+	font-weight: 600;
 	border: 1px solid transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .wrapperBtn button:first-child {
-	background-color: #000;
+	background-color: #5c1e68;
 }
 
 .wrapperBtn button:first-child:hover {
-	background-color: #d13648;
-	color: #ffffff;
+	background-color: #7b2284;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(92, 30, 104, 0.3);
 }
 
 .wrapperBtn button:last-child {
-	background-color: rgb(68, 201, 38);
+	background-color: #25D366;
 }
 
 .wrapperBtn button:last-child:hover {
-	background-color: rgb(44, 131, 24);
+	background-color: #128C7E;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(18, 140, 126, 0.3);
 }
 
 .stock {
@@ -435,7 +444,54 @@
 	font-size: 11px;
 }
 
+/*PRODUCT ACTIONS*/
+.productActions {
+	display: flex;
+	justify-content: space-between;
+	gap: 15px;
+	margin-top: 15px;
+	padding: 0 10px 10px;
+}
 
+.addToCartBtn, .buyBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	padding: 10px 15px;
+	border-radius: 8px;
+	border: none;
+	font-weight: 500;
+	font-size: 14px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	flex: 1;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.addToCartBtn {
+	background-color: #f8f8f8;
+	color: #333;
+	border: 1px solid #e0e0e0;
+}
+
+.addToCartBtn:hover {
+	background-color: #efefef;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buyBtn {
+	background-color: #25D366;
+	color: white;
+	font-weight: 600;
+}
+
+.buyBtn:hover {
+	background-color: #128C7E;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(18, 140, 126, 0.3);
+}
 
 @media(max-width:850px) {
 	.options {

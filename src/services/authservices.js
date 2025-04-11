@@ -15,3 +15,15 @@ export const login = async (form) => {
 		return [];
 	}
 };
+
+export const refreshToken = async () => {
+	try {
+		const response = await api.post("/refresh-token");
+		console.log("Respuesta API:", response);
+		
+		return response.data;
+	} catch (error) {
+		console.error("Error:", error);
+		return [];
+	}
+};

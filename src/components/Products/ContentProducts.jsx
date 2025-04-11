@@ -4,9 +4,13 @@ import styles from '../../styles/producto.module.css'
 import PaginationProducts from './PaginationProducts'
 import ModalProducts from './ModalProducts'
 import SearchProducts from './SearchProducts'
-import {listProducts,productByName} from '../../services/productService'
+import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
+import { listProducts, productByName } from '../../services/productService'
+import { useCart } from '../../context/CartContext';
+import CartSidebar from '../cart/CartSidebar';
 
-const ContentProducts = () => {
+const ContentProducts = ({categorie}) => {
+
 
     const [isOpen, setIsOpen] = useState(false);
     const [productSelected,setProductSelected]=useState(null);
@@ -18,7 +22,8 @@ const ContentProducts = () => {
     const [totalPages,setTotalPages]=useState(null);
     const [numPage,setNumPage]=useState(1);
     const [allProducts,setAllProducts]=useState([]);
-    const [totalProducts,setTotalProducts]=useState(null)
+    const [totalProducts,setTotalProducts]=useState(null);
+    const { addToCart } = useCart();
 
     // Obtener parámetros de búsqueda
     const [searchParams] = useSearchParams();
@@ -35,6 +40,8 @@ const ContentProducts = () => {
             setTextSearch(searchQuery);
         }
     }, [searchParams]);
+
+
     const recibirFiltroPrecio=(precio)=>{
         setFilterPrecio(precio);
     }
@@ -91,11 +98,36 @@ const ContentProducts = () => {
                 console.log(productsFilterCat);
                 setProductoFiltrado(productsFilterCat);
             }
-            else if(!textSearch || !filterPrecio){
+            else if(categorie){
+
+                localStorage.setItem("nameCategorie",categorie || '');
+                window.dispatchEvent(new Event("localStorageUpdated"));
+                
+                const productsFilterCateg=allProducts.filter(product => product.categories.some(subCat=>subCat.name.toLowerCase().includes( localStorage.getItem("nameCategorie").toLowerCase())));
+                
+                (categorie === "accesorios") && setProductoFiltrado(productsFilterCateg); 
+                (categorie === "aceites") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "Cosméticos") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "cuidado capilar") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "Exfoliante Corporal") && setProductoFiltrado(productsFilterCateg);
+                (categorie === "sales minerales") && setProductoFiltrado(productsFilterCateg); 
+                console.log(productsFilterCateg);
+            }
+            else if(!textSearch || !filterPrecio ){
                 setProductoFiltrado(dataProducts);
             }     
         }
-    },[dataProducts,filterPrecio,textSearch,filterCategorie,allProducts])
+    },[dataProducts,filterPrecio,textSearch,filterCategorie,allProducts,categorie])
+
+    const handleAddToCart = (product) => {
+        addToCart(product);
+    };
+
+    const handleWhatsappCheckout = (product) => {
+        const message = `¡Hola! Me gustaría comprar el producto ${product.name} de S/${product.price}`;
+        const encodedMessage = encodeURIComponent(message);
+        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+    };
 
     return (
     <>
@@ -132,18 +164,27 @@ const ContentProducts = () => {
                     </div>
                     <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                     <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
-                    {/**<p className={styles.p}>{product.descripcion}</p>*/} 
                     <h5 className={styles.h5}>S/{product.price}</h5>
-                    <section>
-                        <button className='btn btn-secondary'><i className="fa-solid fa-cart-shopping"></i> Añadir</button>
-                        <button className='btn btn-primary'>Comprar</button>
+                    <section className={styles.productActions}>
+                        <button 
+                            className={`btn btn-secondary ${styles.addToCartBtn}`}
+                            onClick={() => handleAddToCart(product)}
+                        >
+                            <FaShoppingCart /> Añadir
+                        </button>
+                        <button 
+                            className={`btn btn-primary ${styles.buyBtn}`}
+                            onClick={() => handleWhatsappCheckout(product)}
+                        >
+                            <FaWhatsapp /> Comprar
+                        </button>
                     </section>
                 </section>
             ))}
 
             {totalPages && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext}/>}
             {productSelected!=null && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected} title="productCustomer"/> } 
-
+            <CartSidebar />
         </section>
         </div>
     </>
