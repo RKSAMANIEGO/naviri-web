@@ -13,3 +13,4 @@ export { default as ProductAdmin } from "./PageProductAdmin/ProductAdmin";
 export { default as CategoriaPage } from "./PageCategoriaAdmin/CategoriaPage";
 export { default as ComentAdminPage } from "./ComentsAdmin/ComentAdminPage";
 export { default as PromotionAdminPage } from "./promotionAdmin/PromotionAdminPage";
+

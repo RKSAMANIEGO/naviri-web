@@ -101,7 +101,7 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               label: 'Blogs',
             },
             {
-              key: '/admin/panel/page/mail',
+              key: '/admin/panel/mail',
               icon: <MailOutlined />,
               label: 'Correo',
             },

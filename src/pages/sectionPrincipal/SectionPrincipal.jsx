@@ -5,7 +5,6 @@ import { Navigation } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/image/logo-navi.png";
 import model1 from "../../assets/models/model1.png";
-import model2 from "../../assets/models/model2.png";
 import { getPromotions } from "../../services/promotionService";
 
 const Carousel = () => {
@@ -25,9 +24,8 @@ const Carousel = () => {
         fetchData();
     }, [])
     
-
     return (
-        <div className="relative w-full h-auto lg:h-[550px] bg-gradient-to-r from-[#FFECFA] to-[#FFAFEB] overflow-hidden"> 
+        <div className="relative w-full h-[600px] lg:h-[600px] overflow-hidden">
             <Swiper
                 navigation={{
                     prevEl: navigationPrevRef.current,
@@ -40,53 +38,60 @@ const Carousel = () => {
                 modules={[Navigation]}
                 className="w-full h-full"
             >
-               
-                {promotions.map((promotion, index) => (
+                {promotions && promotions.map((promotion, index) => (
                     <SwiperSlide key={index}>
-                        <div className="flex flex-col lg:flex-row w-full h-full justify-center items-center py-10 lg:py-0"> 
-                            <div className="w-full lg:w-[45%] flex flex-col items-center lg:items-start justify-center text-center lg:text-left px-4 lg:pl-32 lg:pr-16 order-1 lg:order-1"> {/* Changed md to lg */}
-                                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center p-2 mb-6">
-                                    <img src={logo} alt="Navi Logo" className="w-14 h-14" />
-                                </div>
-                                <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-black leading-tight mb-4">{promotion.title}</h1>
-                                <p className="text-base sm:text-lg text-gray-800 max-w-lg mb-6">
-                                    {promotion.description}
-                                </p>
-                                <div className="flex gap-4">
-                                    <button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg">
-                                        Ver Promoción
-                                    </button>
-                                    <button className="bg-white hover:bg-gray-50 text-pink-500 px-6 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg border border-pink-300">
-                                        Conócenos
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div className="hidden lg:block lg:w-[55%] h-64 lg:h-full relative order-2 lg:order-2"> 
+                        <div className="relative w-full h-full">
+                            {/* Fondo con imagen y opacidad */}
+                            <div className="absolute inset-0 z-0">
                                 <img
                                     src={promotion.image.url || model1}
-                                    alt="Modelo con producto de belleza"
-                                    className="h-full w-auto object-contain lg:absolute lg:bottom-0 lg:right-0 lg:max-w-none"
+                                    alt="Background"
+                                    className="w-full h-full object-cover object-center lg:object-right opacity-70"
                                 />
+                                <div className="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
+                            </div>
+                            
+                            {/* Contenido superpuesto - Ajustado a la izquierda */}
+                            <div className="relative z-10 h-full flex items-center px-4 lg:px-8">
+                                <div className="w-full lg:w-[70%] flex flex-col items-start text-left pl-6 lg:pl-20 pr-4 max-w-3xl py-8">
+                                    <div className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center p-2 mb-6">
+                                        <img src={logo} alt="Navi Logo" className="w-14 h-14" />
+                                    </div>
+                                    <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-5xl font-bold text-gray-100 mb-4 [text-shadow:_1px_1px_4px_rgb(0_0_0_/_50%)] leading-tight">
+                                        {promotion.title}
+                                    </h1>
+                                    <p className="text-base sm:text-lg text-gray-200 max-w-xl mb-6 [text-shadow:_1px_1px_3px_rgb(0_0_0_/_40%)] leading-relaxed">
+                                        {promotion.description}
+                                    </p>
+                                    <div className="flex flex-col sm:flex-row gap-4">
+                                        <button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg">
+                                            Ver Promoción
+                                        </button>
+                                        <button className="bg-white/90 hover:bg-white text-pink-600 px-8 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg border border-pink-300">
+                                            Conócenos
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </SwiperSlide>
                 ))}
             </Swiper>
 
+            {/* Controles de navegación */}
             <div
                 ref={navigationPrevRef}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 md:p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all shadow-md hover:shadow-lg"
+                className="absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 z-20 bg-white/40 hover:bg-white p-3 md:p-4 rounded-full cursor-pointer transition-all shadow-lg hover:shadow-xl"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
             </div>
             <div
                 ref={navigationNextRef}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white bg-opacity-70 p-2 md:p-3 rounded-full cursor-pointer hover:bg-opacity-100 transition-all shadow-md hover:shadow-lg"
+                className="absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 z-20 bg-white/40 hover:bg-white p-3 md:p-4 rounded-full cursor-pointer transition-all shadow-lg hover:shadow-xl"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6 text-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
             </div>

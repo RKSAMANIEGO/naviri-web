@@ -85,6 +85,7 @@ const ServiceModalAdmin = ({
   return (
     <Modal
       title={currentServices ? "Editar Servicio" : "Nuevo Servicio"}
+      title={currentServices ? "Editar Servicio" : "Nuevo Servicio"}
       open={isModalVisible}
       onCancel={() => setIsModalVisible(false)}
       footer={null}
@@ -111,6 +112,7 @@ const ServiceModalAdmin = ({
                 { required: true, message: "¡Por favor ingresa el título!" },
               ]}
             >
+              <Input placeholder="Título del servicio" />
               <Input placeholder="Título del servicio" />
             </Form.Item>
 
