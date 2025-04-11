@@ -1,78 +1,78 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { ArrowLeft, Clock, Share2, Heart } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Clock, Share2, Heart } from 'lucide-react';
+import { getBlogById } from '../../services/blogService';
+
 
 const BlogDetailsPage = () => {
-  const { state } = useLocation();
-  const blog = state?.blog; 
 
-  if (!blog) {
-    return <p>No se encontró el blog.</p>;
+  const { blogId } = useParams();
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const blogData = await getBlogById(blogId);
+        setBlog(blogData.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+   fetchData();
+  }, [blogId]);
+
+  if (loading) {
+    return <div className="text-center p-8">Cargando...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
-        {/* Hero Image Section */}
-        <div className="relative h-[400px] overflow-hidden">
-          <img 
-            src={blog.image.url || " "}
-            alt={blog.title}
-            className="w-full h-full object-cover absolute inset-0 transform transition-transform duration-500 hover:scale-105"
-          />
-          {/* Overlay Buttons */}
-          <div className="absolute top-6 left-6 right-6 flex justify-between">
-            <button className="bg-white/70 backdrop-blur-sm p-3 rounded-full hover:bg-white/90 transition-all">
-              <ArrowLeft className="text-neutral-800" />
-            </button>
-            <div className="flex space-x-4">
-              <button className="bg-white/70 backdrop-blur-sm p-3 rounded-full hover:bg-white/90 transition-all">
-                <Share2 className="text-neutral-800" />
-              </button>
-              <button className="bg-white/70 backdrop-blur-sm p-3 rounded-full hover:bg-white/90 transition-all">
-                <Heart className="text-neutral-800" />
-              </button>
-            </div>
-          </div>
-        </div>
-        {/* Blog Content */}
-        <div className="p-8 space-y-6">
-          {/* Category and Date */}
-          <div className="flex justify-between items-center">
-            <span className="bg-[#E1CCF5] bg-opacity-30 px-3 py-1 rounded-full text-sm text-[#8A4FFF]">
-              {blog.category.name}
-            </span>
-            <div className="flex items-center space-x-2 text-neutral-500">
-              <Clock className="w-5 h-5 text-[#F2B5D4]" />
-              <span>{new Date().toLocaleDateString()}</span>
-            </div>
-          </div>
-          {/* Title */}
-          <h1 className="text-3xl font-bold text-neutral-800 leading-tight">
-            {blog.title}
-          </h1>
-          {/* Blog Content */}
-          <div className="prose prose-lg text-neutral-700 leading-relaxed">
-            {blog.description}
-          </div>
-          {/* Author Section */}
-          <div className="flex items-center space-x-4 pt-6 border-t border-neutral-200">
-            <div className="w-14 h-14 rounded-full overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] py-12 px-3 sm:px-4">
+      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
+        <div className="space-y-8">
+          {/* Sección horizontal */}
+          <div className="grid grid-cols-1 md:grid-cols-[1.2fr_2fr] gap-6 items-start">
+            {/* Imagen */}
+            <div className="relative rounded-xl overflow-hidden bg-gray-100 max-w-[600px]">
               <img 
-                src="/api/placeholder/56/56" 
-                alt="Author" 
+                src={blog.image.url}
+                alt={blog.title}
                 className="w-full h-full object-cover"
               />
+              <div className="absolute top-3 right-3 flex gap-2">
+                <button className="bg-white/80 backdrop-blur-sm p-1.5 rounded-md hover:bg-white transition-all">
+                  <Share2 className="text-neutral-700 w-4 h-4" />
+                </button>
+                <button className="bg-white/80 backdrop-blur-sm p-1.5 rounded-md hover:bg-white transition-all">
+                  <Heart className="text-neutral-700 w-4 h-4" />
+                </button>
+              </div>
             </div>
-            <div>
-              <h3 className="font-semibold text-neutral-800">
-                {blog.author || 'Nombre del Autor'}
-              </h3>
-              <p className="text-neutral-500 text-sm">
-                Escritor del Blog
-              </p>
+
+            {/* Contenido */}
+            <div className="space-y-5">
+              <h1 className="text-2xl md:text-3xl font-bold text-neutral-800 leading-tight">
+                {blog.title}
+              </h1>
+              
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="bg-[#E1CCF5] px-2.5 py-0.5 rounded-full text-xs md:text-sm text-[#8A4FFF]">
+                  {blog.category.name}
+                </span>
+                <div className="flex items-center gap-1 text-neutral-500 text-sm">
+                  <Clock className="w-3.5 h-3.5 text-[#F2B5D4]" />
+                  <span>{blog.date}</span>
+                </div>
+              </div>
+
+              <article className="prose prose-base md:prose-lg max-w-none text-neutral-700">
+                {blog.description}
+              </article>
             </div>
           </div>
+
         </div>
       </div>
     </div>

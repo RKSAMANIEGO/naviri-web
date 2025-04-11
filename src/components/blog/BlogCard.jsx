@@ -6,10 +6,9 @@ const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
 
   const handleReadMore = () => {
-    navigate(`/blog/${blog.id}`, { 
-      state: { blog }
-    });
+    navigate(`/blog/${blog.id}`); // Elimina el state
   }
+  
 
   return (
     <div 
