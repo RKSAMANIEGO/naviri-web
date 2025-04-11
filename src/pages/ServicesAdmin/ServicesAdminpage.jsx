@@ -6,12 +6,6 @@ import ServiceForm from './ServiceForm';
 
 const ServicesAdminPage = () => {
   const [form] = Form.useForm();
-  const servicesAdmin = useServicesAdmin(form);
-  
-  if (!servicesAdmin) {
-    return <div>Error al cargar los servicios</div>;
-  }
-
   const {
     services = [],
     loading = false,

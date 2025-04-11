@@ -32,12 +32,10 @@ const BlogAdminPage = () => {
     pageSize: 5,
   });
 
-  // Filtrado seguro con valor por defecto
   const filteredBlogs = (blogs || []).filter(blog =>
     (blog?.title || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Paginación segura
   const paginatedBlogs = filteredBlogs.slice(
     (pagination.current - 1) * pagination.pageSize,
     pagination.current * pagination.pageSize
@@ -74,7 +72,7 @@ const BlogAdminPage = () => {
       ) : (
         <Table
           columns={columns}
-          dataSource={filteredBlogs}  // Changed from paginatedBlogs to apply filters to all data
+          dataSource={filteredBlogs} 
           rowKey="id"
           loading={!blogs}
           pagination={{
@@ -99,7 +97,6 @@ const BlogAdminPage = () => {
         />
       )}
 
-      {/* Manual pagination, only needed for grid view */}
       {gridView && (
         <div className="flex justify-between items-center mt-4">
           <span>

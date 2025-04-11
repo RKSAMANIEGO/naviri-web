@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Upload, Modal, Table, Select, FloatButton } from 'antd';
 import { UploadOutlined, PlusOutlined, ProductOutlined } from "@ant-design/icons";
-import { useServicesadmin }  from "../../hooks/serviceshook/useServiceadmin";
+import { useServiceAdmin }  from "../../hooks/serviceshook/useServiceadmin";
 import Search from 'antd/es/input/Search';
 import ServiceModalAdmin from '../../components/ServicesAdmin/ServiceModalAdmin';
-import ServicesCardAdmin from '../../components/ServicesAdmin/ServicesCardAdmin';
+import ServicesCardAdmin from "../../components/ServicesAdmin/ServicesCardAdmin";
 
 
 const { Option } = Select;
@@ -23,61 +23,43 @@ const ServiceAdminPage = () => {
     handleDelete,
     columns,
     setIsModalVisible,
-  } = useServicesadmin(form);
+  } = useServiceAdmin(form);
 
-
-  const [searchQuery, setSearchQuery] = useState('');
-  const [gridView, setGridView] = useState(false)
-  const [pagination, setPagination] = useState({
-    current: 1,
-    pageSize: 5,
-    total: 0,
-  });
-
-  const handleSearch = (value) => {
-    setSearchQuery(value);
-    setPagination(prev => ({ ...prev, current: 1 })); 
-  };
-
-  const filteredServices = (services || []).filter(service =>
-    (service?.title || '').toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const paginatedBlogs = filteredServices.slice(
-    (pagination.current - 1) * pagination.pageSize,
-    pagination.current * pagination.pageSize
-  );
-
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await loadServices(pagination.current);
-      if (data) {
-        setPagination((prev) => ({
-          ...prev,
-          total: data.total,
-        }));
-      }
+    const [searchQuery, setSearchQuery] = useState('');
+    const [gridView, setGridView] = useState(false);
+    const [pagination, setPagination] = useState({
+      current: 1,
+      pageSize: 5,
+    });
+  
+    const filteredServices = (services || []).filter(service =>
+      (service?.title || '').toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  
+    const paginatedServices = filteredServices.slice(
+      (pagination.current - 1) * pagination.pageSize,
+      pagination.current * pagination.pageSize
+    );
+  
+    useEffect(() => {
+      loadServices();
+    }, []);
+  
+    const handlePagination = (page) => {
+      setPagination(prev => ({ ...prev, current: page }));
     };
-    fetchData();
-  }, [pagination.current]);
-
-  const handlePagination = (page) => {
-    setPagination((prev) => ({ ...prev, current: page }));
-  };
 
 
    return (
     <div className="p-6">
-      <h1 className='text-4xl'>Gestion de Servicios</h1>
+      <h1 className='text-5xl font-semibold' style={{ fontFamily: "'Great Vibes', cursive" }}>Gestion de Servicios</h1>
       
-      <div className="flex gap-2 my-5">
+      <div className="flex gap-2 my-5 w-full">
         <Search 
           placeholder="Buscar por título" 
-          onSearch={handleSearch}
-          onChange={(e) => handleSearch(e.target.value)} 
-          style={{ width: 300 }}
+          onSearch={setSearchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)} 
+          style={{ width: 1800 }}
         />
         <Button 
           icon={<ProductOutlined />} 
@@ -88,7 +70,7 @@ const ServiceAdminPage = () => {
       
       {gridView ? 
         <div className='grid md:grid-cols-4 gap-4'>
-          {paginatedBlogs.map((service) => (
+          {paginatedServices.map((service) => (
             <ServicesCardAdmin 
               key={service.id} 
               services={service} 
@@ -99,22 +81,38 @@ const ServiceAdminPage = () => {
         </div>
         :
 
+        <div className="overflow-x-auto">
         <Table
         columns={columns}
         dataSource={filteredServices}
         rowKey="id"
-        pagination={false}
-        scroll={{ x: true }}
-        components={{
-          header: {
-            cell: (props) => (
-              <th {...props} style={{ backgroundColor: 'rgba(255, 241, 249, 1)'
-                , fontWeight: 'bold' , color: 'rgba(255, 107, 188, 1)'}}/>
-            )
-          }
+        pagination={{
+          current: pagination.current,
+          pageSize: pagination.pageSize,
+          total: filteredServices.length,
+          onChange: handlePagination,
+          showSizeChanger: false
         }}
-      />
-      }     
+
+        scroll={{ x: 'max-content' }}
+         components={{
+          header: {
+          cell: (props) => (
+          <th
+            {...props}
+            style={{
+              backgroundColor: 'rgba(255, 241, 249, 1)',
+              fontWeight: 'bold',
+              color: 'rgba(255, 107, 188, 1)',
+             }}
+           />
+         ),
+       },
+     }}
+     />
+   </div>
+  }
+      {gridView && (     
 
       <div className="flex justify-between items-center mt-4">
         <span>
@@ -136,6 +134,7 @@ const ServiceAdminPage = () => {
           </Button>
         </div>
       </div>
+      )}
 
       <ServiceModalAdmin 
         isModalVisible={isModalVisible} 
