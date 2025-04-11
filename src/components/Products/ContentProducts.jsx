@@ -138,16 +138,8 @@ const ContentProducts = ({categorie}) => {
             {/*FILTRO DE PRODUCTOS */}
             { productoFiltrado.map((product) => (
                 <section className={styles.sectionProducts} key={product.id}>
-                    <div style={{
-                        width:"100%",
-                        height:"190px",
-                        marginBottom:"10px",
-                        backgroundImage: `url(${product.image.url})`,  
-                        backgroundSize: "80%",
-                        backgroundPosition:"center 60%",
-                        borderTopLeftRadius:"10px",
-                        borderTopRightRadius:"10px",
-                        cursor:"pointer"
+                    <div className={styles.divImagen} style={{
+                        backgroundImage: `url(${product.image.url})`
                     }}
                     onClick={async ()=>{
                         setIsOpen(true)  
@@ -176,7 +168,7 @@ const ContentProducts = ({categorie}) => {
                             className={`btn btn-primary ${styles.buyBtn}`}
                             onClick={() => handleWhatsappCheckout(product)}
                         >
-                            <FaWhatsapp /> Comprar
+                            <FaWhatsapp/> Comprar
                         </button>
                     </section>
                 </section>
