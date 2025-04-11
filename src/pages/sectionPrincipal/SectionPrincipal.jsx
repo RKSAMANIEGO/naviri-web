@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
 import logo from "../../assets/image/logo-navi.png";
 import model1 from "../../assets/models/model1.png";
@@ -27,6 +27,7 @@ const Carousel = () => {
     return (
         <div className="relative w-full h-[600px] lg:h-[600px] overflow-hidden">
             <Swiper
+                autoplay={{ delay: 5000 }}
                 navigation={{
                     prevEl: navigationPrevRef.current,
                     nextEl: navigationNextRef.current,
@@ -35,8 +36,9 @@ const Carousel = () => {
                     swiper.params.navigation.prevEl = navigationPrevRef.current;
                     swiper.params.navigation.nextEl = navigationNextRef.current;
                 }}
-                modules={[Navigation]}
+                modules={[Navigation, Autoplay]}
                 className="w-full h-full"
+                
             >
                 {promotions && promotions.map((promotion, index) => (
                     <SwiperSlide key={index}>
@@ -64,12 +66,12 @@ const Carousel = () => {
                                         {promotion.description}
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4">
-                                        <button className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg">
+                                        <a href="/products" className="bg-pink-500 hover:bg-pink-600 text-white px-8 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg">
                                             Ver Promoción
-                                        </button>
-                                        <button className="bg-white/90 hover:bg-white text-pink-600 px-8 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg border border-pink-300">
+                                        </a>
+                                        <a href="#aboutus" className="bg-white/90 hover:bg-white text-pink-600 px-8 py-3 rounded-[8px] text-lg font-medium transition-all shadow-md hover:shadow-lg border border-pink-300">
                                             Conócenos
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

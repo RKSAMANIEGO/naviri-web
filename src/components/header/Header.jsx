@@ -153,8 +153,8 @@ const Header = () => {
                             ))}
                         </div>
                     </div>
-                    <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Nosotros</NavLink>
-                    <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</NavLink>
+                    <a href="#aboutus" className={({ isActive }) => isActive ? styles.activeLink : ''}>Nosotros</a>
+                    <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                 </nav>
 
                 <div className={`${styles.sectionright} ${styles.desktopNav}`}>
@@ -217,8 +217,8 @@ const Header = () => {
                 <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
                 <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
                 <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
-                <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Nosotros</NavLink>
-                <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</NavLink>
+                <a href="#aboutus" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Nosotros</a>
+                <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
                 
                 <div className={styles.mobileExtras}>
                     <button onClick={() => { 

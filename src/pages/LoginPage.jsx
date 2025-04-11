@@ -4,10 +4,12 @@ import { useAuthStore } from "../context/authProvider";
 import "./../styles/loginpage.css";
 import logoNavi from "./../assets/image/logo.jpg";
 import { FaUser, FaLock } from "react-icons/fa";
+import { message } from "antd";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState({});
+  const [loginError, setLoginError] = useState(false); // Nuevo estado para el error de login
   const { login, isAuthenticate } = useAuthStore();
   const navigate = useNavigate();
 
@@ -15,28 +17,26 @@ const LoginPage = () => {
     if (isAuthenticate) navigate("/admin/panel/products");
   }, [isAuthenticate, navigate]);
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.username) newErrors.username = "Nombre de usuario es requerido";
-    if (!formData.password) newErrors.password = "Contraseña es requerida";
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(formData);
-      navigate("/admin/panel/products");
+      const resp = await login(formData);
+      if (resp){
+        message.success("Inicio de sesión exitoso");
+        navigate("/admin/panel/products");
+      } else {
+        setLoginError(true); // Mostrar error si las credenciales son incorrectas
+      }
     } catch (error) {
       console.log(error);
+      setLoginError(true);
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setLoginError(false); // Resetear el error al cambiar los inputs
   };
 
   return (
@@ -77,6 +77,7 @@ const LoginPage = () => {
               />
             </div>
             {errors.password && <span className="error-text">{errors.password}</span>}
+            {loginError && <span className="error-text">Credenciales incorrectas</span>} {/* Mensaje de error */}
           </div>
           <button type="submit" className="ingresar-button">Iniciar sesión</button>
         </form>

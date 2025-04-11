@@ -7,6 +7,13 @@
     box-sizing: border-box;
 }
 
+.error-text {
+    color: #ff4d4f;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+  }
+
 .styled-container {
     display: flex;
     flex-direction: row;
