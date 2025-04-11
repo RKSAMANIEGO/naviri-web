@@ -22,7 +22,6 @@ const ServicesCardAdmin = ({ services, onEdit, onDelete }) => {
           {services.description}
         </p>
 
-        {/* acciones */}
         <div className="border-t pt-3 mt-auto flex justify-end gap-2">
           <Tooltip title="Editar">
             <Button 
