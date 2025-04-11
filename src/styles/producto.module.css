@@ -777,9 +777,6 @@
 		padding: 8px;
 	}
 
-
-
-
 	/*SEARCH CONTENT PRODUCTS*/
 	.search {
 		width: 100%;
@@ -788,8 +785,6 @@
 		justify-content: center;
 
 	}
-
-
 
 	/*--------------------------*-/
 	/*CONTENT PRODUCTS*/
@@ -804,7 +799,7 @@
 		max-width: 1200px;
 		height: 100%;
 		display: flex;
-		justify-content: center;
+		justify-content: space-evenly;
 		flex-wrap: wrap;
 		gap: 10px;
 		padding-block: 40px;

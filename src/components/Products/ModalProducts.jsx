@@ -71,7 +71,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     transform: "translate(-50%, -50%)",
                     width: "90vw",
                     maxWidth: "750px",
-                    height: "85vh",
+                    height: "85vh", 
                     maxHeight: "400px",
                     padding: "0",
                     border: "none",
