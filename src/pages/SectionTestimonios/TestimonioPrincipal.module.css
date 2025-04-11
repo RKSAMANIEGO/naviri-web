@@ -10,7 +10,22 @@
   font-weight: 800;
   color: rgba(255, 107, 188, 1);
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* espaciado entre el texto y el animado */
+  flex-wrap: wrap; /* por si no entra en pantallas chicas */
+  justify-content: center; /* o flex-start si lo querés a la izquierda */
+  text-align: center;
 }
+.rotatingHighlight {
+  background-color: rgba(255, 107, 188, 1);
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
 
 
 .carousel {

@@ -3,6 +3,7 @@ import styles from "./TestimonioPrincipal.module.css";
 import fondoTestimonio from "../../assets/image/testimonio.jpg";
 import Stars from './stars.jsx'; 
 import { getTestimonios } from "../../services/testimoniosServices.js";
+import RotatingText from "./RotatingText.jsx";
 
 export default function Testi() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,8 +62,8 @@ export default function Testi() {
   return (
     <section className={styles.testiSection}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Lo que dicen nuestras clientas</h2>
-
+      <h2 className={styles.title}> Lo que dicen <RotatingText texts={["nuestros clientes", "nuestras clientas"]}
+      mainClassName={styles.rotatingHighlight} /></h2>
         <div className={styles.carousel}>
           <div className={styles.cardsContainer}>
             {currentTestimonios.map((testimonio) => (
