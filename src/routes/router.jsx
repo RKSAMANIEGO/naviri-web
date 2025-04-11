@@ -25,9 +25,6 @@ import InfoContact from '../pages/contactoadmin/InfoContact';
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
 
 import InfoEmails from '../pages/formClient/InfoEmails';
-
-//import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
-//import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 import ContentProducts from '../components/Products/ContentProducts';
 
 
