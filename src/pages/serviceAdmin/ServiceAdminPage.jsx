@@ -9,6 +9,7 @@ import ServicesCardAdmin from '../../components/ServicesAdmin/ServicesCardAdmin'
 
 const { Option } = Select;
 
+
 const ServiceAdminPage = () => {
   const [form] = Form.useForm();
   const {
@@ -24,14 +25,29 @@ const ServiceAdminPage = () => {
     setIsModalVisible,
   } = useServicesadmin(form);
 
-  const [gridView, setGridView] = useState(false)
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [gridView, setGridView] = useState(false)
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 5,
     total: 0,
   });
-  const onSearch = (value, _e, info) => console.log(value);
+
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+    setPagination(prev => ({ ...prev, current: 1 })); 
+  };
+
+  const filteredServices = (services || []).filter(service =>
+    (service?.title || '').toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const paginatedBlogs = filteredServices.slice(
+    (pagination.current - 1) * pagination.pageSize,
+    pagination.current * pagination.pageSize
+  );
+
 
 
   useEffect(() => {
@@ -55,25 +71,37 @@ const ServiceAdminPage = () => {
    return (
     <div className="p-6">
       <h1 className='text-4xl'>Gestion de Servicios</h1>
-      {/* buscar */}
+      
       <div className="flex gap-2 my-5">
-        <Search  placeholder="input search text" onSearch={onSearch} />
-        <Button icon={<ProductOutlined/>} onClick={() => setGridView(!gridView)} />
+        <Search 
+          placeholder="Buscar por título" 
+          onSearch={handleSearch}
+          onChange={(e) => handleSearch(e.target.value)} 
+          style={{ width: 300 }}
+        />
+        <Button 
+          icon={<ProductOutlined />} 
+          onClick={() => setGridView(!gridView)} 
+          tooltip={gridView ? "Vista de tabla" : "Vista de cuadrícula"}
+        />
       </div>
       
       {gridView ? 
-        // grid
-        <div className='grid md:grid-cols-4'>
-          {services.map((services) => (
-            <ServicesCardAdmin services={services} onEdit={handleEdit} onDelete={handleDelete}></ServicesCardAdmin>
+        <div className='grid md:grid-cols-4 gap-4'>
+          {paginatedBlogs.map((service) => (
+            <ServicesCardAdmin 
+              key={service.id} 
+              services={service} 
+              onEdit={handleEdit} 
+              onDelete={handleDelete} 
+            />
           ))}
         </div>
-        
         :
-        // tabla
+
         <Table
         columns={columns}
-        dataSource={services}
+        dataSource={filteredServices}
         rowKey="id"
         pagination={false}
         scroll={{ x: true }}
@@ -91,7 +119,7 @@ const ServiceAdminPage = () => {
       <div className="flex justify-between items-center mt-4">
         <span>
           Mostrando {(pagination.current - 1) * pagination.pageSize + 1} - 
-          {Math.min(pagination.current * pagination.pageSize, pagination.total)} de {pagination.total}
+          {Math.min(pagination.current * pagination.pageSize, filteredServices.length)} de {filteredServices.length}
         </span>
         <div className="flex gap-2">
           <Button 
@@ -101,7 +129,7 @@ const ServiceAdminPage = () => {
             Anterior
           </Button>
           <Button 
-            disabled={pagination.current * pagination.pageSize >= pagination.total}
+            disabled={pagination.current * pagination.pageSize >= filteredServices.length}
             onClick={() => handlePagination(pagination.current + 1)}
           >
             Siguiente

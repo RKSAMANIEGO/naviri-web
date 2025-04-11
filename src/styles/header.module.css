@@ -241,39 +241,33 @@
 }
   
 .searchbar {
+    position: relative;
     display: flex;
     align-items: center;
-    background: #fde6f0;
-    border-radius: 12px;
-    padding: 0 0.5rem;
 }
-  
+
 .searchbar input {
-    padding: 9px 35px 9px 15px;
+    border-radius: 20px;
+    padding: 8px 40px 8px 15px;
     border: 1px solid #ddd;
-    border-radius: var(--border-radius-medium);
-    background-color: var(--background-color);
-    color: var(--text-color-secondary);
-    width: 200px;
-    font-size: var(--font-size-base);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 250px;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 .searchbar input:focus {
-    border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 0 0 2px var(--primary-color-hover-bg);
+    box-shadow: 0 0 0 2px rgba(92, 30, 104, 0.2);
+    border-color: #5c1e68;
 }
 
 .searchbar .searchButton {
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
-    width: 40px;
+    right: 12px;
     background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,18 +278,19 @@
 }
 
 .searchbar .iconsearch {
-    color: var(--text-color-light);
-    transition: color 0.3s ease;
-    font-size: var(--font-size-base);
+    color: #5c1e68;
+    font-size: 16px;
 }
   
 .cart {
     position: relative;
+    background: none;
+    border: none;
     cursor: pointer;
-    color: var(--text-color);
+    margin: 0 20px;
+    padding: 5px;
     display: flex;
     align-items: center;
-    padding: 5px;
 }
 
 .cart:hover {
@@ -303,22 +298,24 @@
 }
   
 .carticon {
-    font-size: 24px;
-    transition: color 0.2s ease;
+    font-size: 22px;
+    color: #5c1e68;
 }
   
 .cartcount {
     position: absolute;
-    top: 0px;
-    right: -3px;
-    background: var(--primary-color);
-    color: var(--text-on-primary);
-    font-size: 10px;
-    font-weight: bold;
-    padding: 1px 5px;
+    top: -5px;
+    right: -5px;
+    background-color: #e74c3c;
+    color: white;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    line-height: 1;
-    border: 1px solid var(--background-color);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
 }
 
 .btnreserve {
@@ -409,18 +406,12 @@
 }
 
 .mobileSearch {
-    margin-bottom: 20px;
-    width: 90%;
-    max-width: 350px;
-    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .mobileSearch input {
     width: 100%;
-    padding: 14px 55px 14px 20px;
-    font-size: var(--font-size-medium);
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius-medium);
 }
 
 .mobileSearch .searchButton {
@@ -449,21 +440,27 @@
 
 .mobileExtras {
     display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.mobileCartContent {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 30px;
-    width: 90%;
-    max-width: 350px;
+    gap: 8px;
+}
+
+.whatsappIcon {
+    margin-right: 8px;
 }
 
 .mobileReserveBtn {
-    padding: 12px 25px;
-    font-size: var(--font-size-medium);
-    flex-grow: 1;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 
 body.noScroll {
     overflow: hidden;

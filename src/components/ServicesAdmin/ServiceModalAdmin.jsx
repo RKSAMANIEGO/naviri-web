@@ -22,42 +22,44 @@ const ServiceModalAdmin = ({
   form,
 }) => {
   const [fileList, setFileList] = useState([]);
+  const [hasExistingImage, setHasExistingImage] = useState(false);
 
   useEffect(() => {
-    if (isModalVisible) {
-      if (currentServices) {
-        form.setFieldsValue({
-          title: currentServices.title,
-          description: currentServices.description,
-          features: currentServices.features,
-          imagen: currentServices.imagen || [],
-        });
+    if (isModalVisible && currentServices) {
+      // Limpiamos primero el formulario
+      form.resetFields();
+      
+      // Preparamos la lista de archivos para la imagen existente
+      const initialFileList = currentServices.imagen
+        ? Array.isArray(currentServices.imagen)
+          ? currentServices.imagen
+          : [currentServices.imagen]
+        : [];
 
-        const initialFileList = currentServices.imagen
-          ? Array.isArray(currentServices.imagen)
-            ? currentServices.imagen
-            : [currentServices.imagen]
-          : [];
-        setFileList(
-          initialFileList.map((img, index) => ({
-            uid: img.uid || `-${index}`,
-            name: img.name || "imagen.jpg",
-            status: "done",
-            url: img.url,
-            preview: img.url,
-          }))
-        );
-      } else {
-        form.resetFields();
-        setFileList([]);
-      }
+      // Configuramos los valores del formulario
+      form.setFieldsValue({
+        title: currentServices.title,
+        description: currentServices.description,
+        features: currentServices.features,
+        imagen: initialFileList,
+      });
+
+      // Actualizamos el estado de la imagen
+      setFileList(initialFileList.map((img, index) => ({
+        uid: `existing-${index}-${Date.now()}`,
+        name: img.name || "imagen.jpg",
+        status: "done",
+        url: img.url,
+      })));
+
+      setHasExistingImage(initialFileList.length > 0);
+    } else if (isModalVisible) {
+      // Modo creación: limpiamos todo
+      form.resetFields();
+      setFileList([]);
+      setHasExistingImage(false);
     }
   }, [isModalVisible, currentServices, form]);
-
-  useEffect(() => {
-    form.setFieldsValue({ imagen: fileList });
-  }, [fileList, form]);
-
 
   const uploadProps = {
     beforeUpload: (file) => {
@@ -68,13 +70,16 @@ const ServiceModalAdmin = ({
       return isImage ? false : Upload.LIST_IGNORE;
     },
     onChange: ({ fileList: newFileList }) => {
-      newFileList = newFileList.map((file) => {
-        if (file.originFileObj && !file.preview) {
-          file.preview = URL.createObjectURL(file.originFileObj);
-        }
-        return file;
-      });
-      setFileList(newFileList);
+      const updatedFileList = newFileList.map(file => ({
+        ...file,
+        preview: file.originFileObj ? URL.createObjectURL(file.originFileObj) : file.url
+      }));
+      setFileList(updatedFileList);
+      setHasExistingImage(updatedFileList.length > 0);
+      form.setFieldsValue({ imagen: updatedFileList });
+    },
+    onRemove: () => {
+      setHasExistingImage(false);
     },
     fileList,
     listType: "picture",
@@ -82,6 +87,24 @@ const ServiceModalAdmin = ({
     accept: "image/jpeg,image/png,image/webp",
     multiple: false,
     showUploadList: false,
+  };
+
+  const handleRemoveImage = () => {
+    setFileList([]);
+    setHasExistingImage(false);
+    form.setFieldsValue({ imagen: [] });
+  };
+
+  const imageValidator = (_, value) => {
+    // Si estamos editando y hay una imagen existente, no es requerido
+    if (currentServices && hasExistingImage) {
+      return Promise.resolve();
+    }
+    // Si no hay imagen existente y no se ha subido ninguna nueva
+    if (!value || value.length === 0) {
+      return Promise.reject(new Error('¡Debes subir una imagen!'));
+    }
+    return Promise.resolve();
   };
 
   const imageContainerStyle = {
@@ -123,30 +146,35 @@ const ServiceModalAdmin = ({
             </Form.Item>
 
             <Form.Item
-             label="Características"
-             name="features"
-            rules={[{ required: true, message: "¡Agrega al menos una característica!" }]}
+              label="Características"
+              name="features"
+              rules={[{ required: true, message: "¡Agrega al menos una característica!" }]}
             >
-           <Select
-             mode="tags"
-             style={{ width: "100%" }}
-             placeholder="Agrega o selecciona características"
-             tokenSeparators={[","]}
-        >
-            <Option value="Rápido">Rápido</Option>
-            <Option value="Efectivo">Efectivo</Option>
-            <Option value="Duradero">Duradero</Option>
-            <Option value="Natural">Natural</Option>
-          </Select>
-          
-        </Form.Item>
+              <Select
+                mode="tags"
+                style={{ width: "100%" }}
+                placeholder="Agrega o selecciona características"
+                tokenSeparators={[","]}
+              >
+                <Option value="Rápido">Rápido</Option>
+                <Option value="Efectivo">Efectivo</Option>
+                <Option value="Duradero">Duradero</Option>
+                <Option value="Natural">Natural</Option>
+              </Select>
+            </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
               label="Imagen"
               name="imagen"
               valuePropName="fileList"
-              rules={[{ required: true, message: "¡Debes subir una imagen!" }]}
+              rules={[{ validator: imageValidator }]}
+              getValueFromEvent={(e) => {
+                if (Array.isArray(e)) {
+                  return e;
+                }
+                return e && e.fileList;
+              }}
             >
               <div style={imageContainerStyle}>
                 {fileList.length === 0 ? (
@@ -172,21 +200,22 @@ const ServiceModalAdmin = ({
                       }}
                     >
                       <img
-                        src={fileList[0].preview || fileList[0].url}
+                        src={fileList[0]?.url || fileList[0]?.preview}
                         alt="Vista previa"
                         style={{
                           width: "100%",
                           height: "100%",
                           objectFit: "cover",
                         }}
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/350x150?text=Imagen+no+disponible';
+                        }}
                       />
                     </div>
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
+                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
                       <Button
                         icon={<DeleteOutlined />}
-                        onClick={() => setFileList([])}
+                        onClick={handleRemoveImage}
                       ></Button>
                     </div>
                   </div>
@@ -203,11 +232,9 @@ const ServiceModalAdmin = ({
           />
         </Form.Item>
 
-        <div
-          style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}
-        >
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
           <Button type="primary" htmlType="submit">
-            {currentServices ? "Guardar Cambios" : "Crear Entrada"}
+            {currentServices ? "Guardar Cambios" : "Crear Servicios"}
           </Button>
         </div>
       </Form>

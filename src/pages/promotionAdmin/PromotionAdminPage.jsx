@@ -1,29 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Table, Select, FloatButton } from 'antd';
 import { UploadOutlined, PlusOutlined, ProductOutlined } from '@ant-design/icons';
-import { useBlogAdmin } from '../../hooks/blog/useBlogAdmin';
-import BlogModalAdmin from '../../components/blogAdmin/BlogModalAdmin';
-import BlogAdminCard from '../../components/blogAdmin/BlogCardAdmin';
+import { usePromotionAdmin } from '../../hooks/promotion/usePromotionAdmin';
+import PromotionModalAdmin from '../../components/promotionAdmin/PromotionModalAdmin';
+import PromotionCardAdmin from '../../components/promotionAdmin/PromotionCardAdmin';
 
-const { Option } = Select;
 const { Search } = Input;
 
-const BlogAdminPage = () => {
+const PromotionAdminPage = () => {
   const [form] = Form.useForm();
   const {
-    blogs,
-    loadBlogs,
+    promotions,
+    loadPromotions,
     isLoading,
-    categories,
     isModalVisible,
-    currentBlog,
+    currentPromotion,
     showModal,
     handleDelete,
     handleEdit,
     handleSubmit,
     columns,
     setIsModalVisible,
-  } = useBlogAdmin(form);
+  } = usePromotionAdmin(form);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [gridView, setGridView] = useState(false);
@@ -33,18 +31,18 @@ const BlogAdminPage = () => {
   });
 
   // Filtrado seguro con valor por defecto
-  const filteredBlogs = (blogs || []).filter(blog =>
-    (blog?.title || '').toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredPromotions = (promotions || []).filter(promotion =>
+    (promotion?.title || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Paginación segura
-  const paginatedBlogs = filteredBlogs.slice(
+  const paginatedPromotions = filteredPromotions.slice(
     (pagination.current - 1) * pagination.pageSize,
     pagination.current * pagination.pageSize
   );
 
   useEffect(() => {
-    loadBlogs();
+    loadPromotions();
   }, []);
 
   const handlePagination = (page) => {
@@ -53,7 +51,7 @@ const BlogAdminPage = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-4xl">Gestión de Blogs</h1>
+      <h1 className="text-4xl">Gestión de Promociones</h1>
       
       <div className="flex gap-2 my-5">
         <Search
@@ -67,20 +65,20 @@ const BlogAdminPage = () => {
 
       {gridView ? (
         <div className="grid md:grid-cols-4 gap-4">
-          {paginatedBlogs.map(blog => (
-            <BlogAdminCard key={blog?.id} blog={blog} onEdit={handleEdit} onDelete={handleDelete} />
+          {paginatedPromotions.map(promotion => (
+            <PromotionCardAdmin key={promotion?.id} promotion={promotion} onEdit={handleEdit} onDelete={handleDelete} />
           ))}
         </div>
       ) : (
         <Table
           columns={columns}
-          dataSource={filteredBlogs}  // Changed from paginatedBlogs to apply filters to all data
+          dataSource={filteredPromotions}  // Changed from paginatedBlogs to apply filters to all data
           rowKey="id"
-          loading={!blogs}
+          loading={!promotions}
           pagination={{
             current: pagination.current,
             pageSize: pagination.pageSize,
-            total: filteredBlogs.length,
+            total: filteredPromotions.length,
             onChange: handlePagination,
             showSizeChanger: false
           }}
@@ -104,7 +102,7 @@ const BlogAdminPage = () => {
         <div className="flex justify-between items-center mt-4">
           <span>
             Mostrando {(pagination.current - 1) * pagination.pageSize + 1} -{' '}
-            {Math.min(pagination.current * pagination.pageSize, filteredBlogs.length)} de {filteredBlogs.length}
+            {Math.min(pagination.current * pagination.pageSize, filteredPromotions.length)} de {filteredPromotions.length}
           </span>
           <div className="flex gap-2">
             <Button 
@@ -114,7 +112,7 @@ const BlogAdminPage = () => {
               Anterior
             </Button>
             <Button
-              disabled={pagination.current * pagination.pageSize >= filteredBlogs.length}
+              disabled={pagination.current * pagination.pageSize >= filteredPromotions.length}
               onClick={() => handlePagination(pagination.current + 1)}
             >
               Siguiente
@@ -123,13 +121,12 @@ const BlogAdminPage = () => {
         </div>
       )}
 
-      <BlogModalAdmin
+      <PromotionModalAdmin
         isModalVisible={isModalVisible}
         setIsModalVisible={setIsModalVisible}
-        categoriesList={categories}
         form={form}
         handleSubmit={handleSubmit}
-        currentBlog={currentBlog}
+        currentPromotion={currentPromotion}
       />
 
       <FloatButton
@@ -142,4 +139,4 @@ const BlogAdminPage = () => {
   );
 };
 
-export default BlogAdminPage;
+export default PromotionAdminPage;

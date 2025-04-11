@@ -1,30 +1,23 @@
 import { useState } from "react";
 import { Clock, ArrowRight } from 'lucide-react'
-import { useNavigate } from 'react-router-dom';
 
 const BlogCard = ({ blog }) => {
-  const navigate = useNavigate();
-
-  const handleReadMore = () => {
-    navigate(`/blog/${blog.id}`, { 
-      state: { blog }
-    });
-  }
 
   return (
     <div 
-      className="w-full max-w-[350px] bg-white rounded-2xl overflow-hidden shadow-lg transform transition-all 
+      className="w-full bg-white rounded-2xl overflow-hidden shadow-lg transform transition-all 
                  hover:shadow-2xl hover:-translate-y-2 flex flex-col h-full"
     >
       {/* Imagen con aspect ratio 16:9 */}
       <div className="cursor-pointer relative aspect-video overflow-hidden">
-        <img 
-          src={"https://api.navinatubelleza.com/storage/policies/d888a4d2-8a4b-4d1c-a795-1e9e31166860.jpeg"}
-          alt={blog.title} 
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-          onClick={handleReadMore}
-          loading="lazy"
-        />
+        <a href={`/blog/${blog.id}`}>
+          <img 
+            src={blog.image.url ||""}
+            alt={blog.title} 
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            loading="lazy"
+          />
+        </a>
       </div>
 
       {/* Contenido */}
@@ -47,14 +40,15 @@ const BlogCard = ({ blog }) => {
         </p>
 
         {/* Botón de Leer Más */}
-        <button 
-          className="mt-auto w-full flex items-center justify-center gap-2 bg-[#F2B5D4] text-white py-2.5 
-                     rounded-full hover:bg-fuchsia-500 transition-all focus:outline-none text-sm md:text-base"
-          onClick={handleReadMore}
-        >
-          <span>Leer Más</span>
-          <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-        </button>
+        <a href={`/blog/${blog.id}`}>
+          <button 
+            className="cursor-pointer mt-auto w-full flex items-center justify-center gap-2 bg-[#F2B5D4] text-white py-2.5 
+                      rounded-full hover:bg-fuchsia-500 transition-all focus:outline-none text-sm md:text-base"
+          >
+            <span>Leer Más</span>
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+        </a>
       </div>
     </div>
   )

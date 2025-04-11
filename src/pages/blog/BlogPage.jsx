@@ -41,10 +41,6 @@ const BlogPage = () => {
     setCurrentPage(1) // Resetear a primera página al cambiar categoría
   }
 
-  const handleReadMore = (blog) => {
-    navigate(`/blog/${blog.id}`, { state: { blog } })
-  }
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#faf5f7] flex items-center justify-center">
@@ -148,13 +144,13 @@ const BlogPage = () => {
                       {blog.description}
                     </p>
                     
-                    <button
+                    <a href={`/blog/${blog.id}`}><button
                       onClick={() => handleReadMore(blog)}
                       className="flex items-center text-[#F2B5D4] font-semibold hover:text-[#d895b3] transition-colors cursor-pointer"
                     >
                       Leer artículo completo
                       <TrendingUp className="w-5 h-5 ml-2" />
-                    </button>
+                    </button></a>
                   </div>
                 </div>
               </article>
