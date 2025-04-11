@@ -73,7 +73,7 @@ export default function Testi() {
               >
                 <div className={styles.headerCard}>
                   <img
-                    src={testimonio.image || "../../assets/image/testiuser.png"}
+                    src={testimonio.image.url || "../../assets/image/testiuser.png"}
                     alt={testimonio.name_customer}
                     className={styles.avatar}
                   />

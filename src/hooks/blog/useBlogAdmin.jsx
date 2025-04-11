@@ -82,6 +82,8 @@ export const useBlogAdmin = (form) => {
       const imagenUrl = values.imagen?.[0]?.url || 
                         (values.imagen?.[0]?.originFileObj && await convertFileToUrl(values.imagen?.[0]?.originFileObj));
 
+      console.log(values);
+                      
       const blogData = {
         title: values.title,
         description: values.description,
