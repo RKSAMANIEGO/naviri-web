@@ -6,11 +6,11 @@ import styles from "../../styles/header.module.css";
 import { useCart } from '../../context/CartContext';
 
 const productMenuItems = [
-    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products/new' },
+    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products' },
     { id: 'all', title: 'Ver todo', description: 'Explora nuestra colección completa de productos', to: '/products' },
-    { id: 'facial', title: 'Cuidado facial', description: 'Cremas, sérums, mascarillas y más para tu rutina facial.', to: '/products/facial-care' },
-    { id: 'makeup', title: 'Maquillaje', description: 'Bases, labiales, sombras y todo para tu look perfecto', to: '/products/makeup' },
-    { id: 'hair', title: 'Cuidado capilar', description: 'Champús, acondicionadores y tratamientos para tu cabello', to: '/products/hair-care' },
+    { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
+    { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
+    { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/sales minerales' },
 ];
 
 const categoryMenuItems = [
@@ -86,7 +86,7 @@ const Header = () => {
     const handleReserveClick = () => {
         const message = "¡Hola! Me gustaría reservar una cita para conocer más sobre sus servicios y productos.";
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
     };
 
     const handleCartClick = () => {
@@ -154,7 +154,7 @@ const Header = () => {
                             ))}
                         </div>
                     </div>
-                    <a href="#aboutus" className={({ isActive }) => isActive ? styles.activeLink : ''}>Nosotros</a>
+                    <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
                     <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                 </nav>
 
@@ -218,7 +218,7 @@ const Header = () => {
                 <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
                 <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
                 <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
-                <a href="#aboutus" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Nosotros</a>
+                <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
                 <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
                 
                 <div className={styles.mobileExtras}>

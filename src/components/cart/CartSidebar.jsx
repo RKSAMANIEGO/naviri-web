@@ -22,7 +22,7 @@ const CartSidebar = () => {
     
     const text = `¡Hola! Me gustaría hacer el siguiente pedido:\n\n${message}\n\n*Total: S/${total.toFixed(2)}*`;
     const encodedText = encodeURIComponent(text);
-    window.open(`https://wa.me/+51935427263?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/+51927987259?text=${encodedText}`, '_blank');
   };
 
   return (

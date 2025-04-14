@@ -9,10 +9,22 @@ Modal.setAppElement("#root")
 const ModalProducts = ({isOpen, onClose, product, title}) => {
     const [stock, setStock] = useState(1);
     const { addToCart } = useCart();
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
+    const [isAdding, setIsAdding] = useState(false);
 
     useEffect(() => {
         setStock(1); // Inicializar en 1 para que siempre pueda añadirse al carrito
     }, [product]);
+
+    useEffect(() => {
+        // Actualizar el estado cuando cambia el tamaño de la ventana
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth > 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const decrementStock = () => {
         if (stock > 1) {
@@ -26,11 +38,17 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
 
     const handleAddToCart = () => {
         if (product && stock > 0) {
+            setIsAdding(true);
             // Añadir la cantidad seleccionada del producto
             for (let i = 0; i < stock; i++) {
                 addToCart(product);
             }
-            onClose();
+            
+            // Pequeña demora para mostrar el efecto del botón
+            setTimeout(() => {
+                setIsAdding(false);
+                onClose();
+            }, 500);
         }
     };
 
@@ -38,7 +56,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
         if (product) {
             const message = `¡Hola! Me gustaría comprar ${stock} ${stock > 1 ? 'unidades' : 'unidad'} del producto ${product.name} de S/${product.price} cada uno. Total: S/${(stock * product.price).toFixed(2)}`;
             const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+            window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
             onClose();
         }
     };
@@ -46,12 +64,9 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
     const handleReserve = () => {
         const message = "¡Hola! Me gustaría reservar una cita para conocer más sobre sus servicios y productos.";
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
         onClose();
     };
-
-    
-
 
     return (
         <Modal
@@ -71,15 +86,14 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     transform: "translate(-50%, -50%)",
                     width: "90vw",
                     maxWidth: "750px",
-                    height: "85vh", 
-                    maxHeight: "400px",
+                    height: isDesktop ? "90vh" : "85vh",
+                    maxHeight: isDesktop ? "600px" : "400px",
                     padding: "0",
                     border: "none",
                     overflow: "auto",
                     borderRadius: "10px",
                     backgroundColor: "white"
                 }
-
             }}
         >
             {(product && isOpen) &&
@@ -136,10 +150,11 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     {title==="productCustomer" &&
                     <div className={styles.wrapperBtn}>
                         <button 
-                            className={styles.button} 
+                            className={`${styles.button} ${isAdding ? styles.adding : ''}`} 
                             onClick={handleAddToCart}
+                            disabled={isAdding}
                         >
-                            <FaShoppingCart /> Añadir al Carrito
+                            <FaShoppingCart /> {isAdding ? 'Añadiendo...' : 'Añadir al Carrito'}
                         </button>
                         <button 
                             className={styles.button}

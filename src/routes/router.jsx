@@ -23,14 +23,11 @@ import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
-//import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
-import ContentProducts from '../components/Products/ContentProducts';
 
 
-import InfoContact from '../pages/contactoadmin/InfoContact';
-//import BlogAdminPage from '../pages/blog/BlogAdminPage';
 import InfoEmails from '../pages/formClient/InfoEmails';
-
+import ContentProducts from '../components/Products/ContentProducts';
+import InfoContact from '../pages/contactoadmin/InfoContact';
 
 const Router = () => {
   useEffect(() => {

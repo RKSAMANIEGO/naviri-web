@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const CartContext = createContext();
 
@@ -36,6 +37,9 @@ export const CartProvider = ({ children }) => {
       
       if (existingItem) {
         // Si ya existe, incrementar la cantidad
+        toast.success(`${product.name} añadido al carrito`, {
+          icon: "🛒"
+        });
         return prevItems.map(item => 
           item.id === product.id 
             ? { ...item, quantity: item.quantity + 1 } 
@@ -43,6 +47,9 @@ export const CartProvider = ({ children }) => {
         );
       } else {
         // Si no existe, agregar nuevo producto con cantidad 1
+        toast.success(`${product.name} añadido al carrito`, {
+          icon: "🛒"
+        });
         return [...prevItems, { ...product, quantity: 1 }];
       }
     });
@@ -50,7 +57,15 @@ export const CartProvider = ({ children }) => {
 
   // Remover un producto del carrito
   const removeFromCart = (productId) => {
+    // Obtener el nombre del producto antes de eliminarlo
+    const productToRemove = cartItems.find(item => item.id === productId);
     setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    
+    if (productToRemove) {
+      toast.info(`${productToRemove.name} eliminado del carrito`, {
+        icon: "🗑️"
+      });
+    }
   };
 
   // Actualizar cantidad de un producto
@@ -72,6 +87,9 @@ export const CartProvider = ({ children }) => {
   // Vaciar carrito
   const clearCart = () => {
     setCartItems([]);
+    toast.info('Carrito vaciado', {
+      icon: "🧹"
+    });
   };
 
   // Calcular el total del carrito
