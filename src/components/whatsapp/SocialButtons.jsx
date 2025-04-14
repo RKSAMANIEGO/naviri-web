@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaWhatsapp, FaInstagram, FaTiktok, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 import './SocialButtons.css';
 
 const SocialButtons = () => {
@@ -7,6 +8,15 @@ const SocialButtons = () => {
   const [showWhatsappMessage, setShowWhatsappMessage] = useState(false);
   const phoneNumber = '+51927987259'; 
   const whatsappMessage = encodeURIComponent('¡Hola! Me gustaría conocer más sobre los productos de Naviri.');
+  const location = useLocation();
+  
+  // Verificar si la ruta actual es del panel administrativo
+  const isAdminPanel = location.pathname.includes('/admin/panel');
+  
+  // Si estamos en el panel administrativo, no renderizar el componente
+  if (isAdminPanel) {
+    return null;
+  }
   
   const handleWhatsappClick = () => {
     window.open(`https://wa.me/${phoneNumber}?text=${whatsappMessage}`, '_blank');

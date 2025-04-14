@@ -39,13 +39,7 @@ const handleSlideChange = (direction) => {
       content: aboutData.vision,
       icon: <ArrowRightCircle size={35} color="#ff6bbc" />
     },
-    {
-      id: 3,
-      title: "Canal de YouTube",
-      content: aboutData.name_yt,
-      url: aboutData.url_yt,
-      icon: <Youtube size={35} color="#ff6bbc" />
-    }
+    
   ] : [];
 
 
