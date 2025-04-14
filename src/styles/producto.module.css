@@ -509,6 +509,26 @@
 	box-shadow: 0 4px 8px rgba(18, 140, 126, 0.3);
 }
 
+/* Estilo para el botón en estado de añadiendo */
+.adding {
+  background-color: #41245e !important;
+  cursor: not-allowed;
+  opacity: 0.8;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @media(max-width:850px) {
 	.options {
 		gap: 80px;
@@ -677,7 +697,7 @@
 		gap: 40px;
 	}
 
-	/*--------------------------*-/
+	/*--------------------------*-/	
 	/*HEADER PRODUCTS*/
 	.section {
 		padding-inline: 10px;
@@ -791,7 +811,7 @@
 
 
 
-	/*--------------------------*-/
+	/*--------------------------*-/	
 	/*CONTENT PRODUCTS*/
 	.containerProducts {
 		display: flex;

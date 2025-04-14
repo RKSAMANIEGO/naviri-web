@@ -154,7 +154,7 @@ const Header = () => {
                             ))}
                         </div>
                     </div>
-                    <a href="#aboutus" className={({ isActive }) => isActive ? styles.activeLink : ''}>Nosotros</a>
+                    <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
                     <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                 </nav>
 
@@ -218,7 +218,7 @@ const Header = () => {
                 <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
                 <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
                 <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
-                <a href="#aboutus" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Nosotros</a>
+                <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
                 <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
                 
                 <div className={styles.mobileExtras}>
