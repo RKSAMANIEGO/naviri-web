@@ -96,7 +96,6 @@ const ContentProducts = ({categorie}) => {
             else if (filterCategorie){
                 const productsFilterCat=allProducts.filter(product => product.categories.some(subCat=>subCat.sub_categories.some(obj=> obj.name.toLowerCase()=== filterCategorie.toLowerCase())))
                 console.log(productsFilterCat);
-                setProductoFiltrado(productsFilterCat);
             }
             else if(categorie){
 
@@ -124,9 +123,9 @@ const ContentProducts = ({categorie}) => {
     };
 
     const handleWhatsappCheckout = (product) => {
-        const message = `¡Hola! Me gustaría comprar el producto ${product.name} de S/${product.price}`;
+        const message = `¡Hola! Me interesa comprar el producto ${product.name} por ${product.price}. ¿Podría darme más información?`;
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
     };
 
     return (

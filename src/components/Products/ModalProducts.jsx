@@ -38,7 +38,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
         if (product) {
             const message = `¡Hola! Me gustaría comprar ${stock} ${stock > 1 ? 'unidades' : 'unidad'} del producto ${product.name} de S/${product.price} cada uno. Total: S/${(stock * product.price).toFixed(2)}`;
             const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+            window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
             onClose();
         }
     };
@@ -46,7 +46,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
     const handleReserve = () => {
         const message = "¡Hola! Me gustaría reservar una cita para conocer más sobre sus servicios y productos.";
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
         onClose();
     };
 
