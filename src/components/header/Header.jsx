@@ -86,7 +86,7 @@ const Header = () => {
     const handleReserveClick = () => {
         const message = "¡Hola! Me gustaría reservar una cita para conocer más sobre sus servicios y productos.";
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
     };
 
     const handleCartClick = () => {
