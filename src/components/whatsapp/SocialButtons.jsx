@@ -7,7 +7,7 @@ const SocialButtons = () => {
   const [showButtons, setShowButtons] = useState(false);
   const [showWhatsappMessage, setShowWhatsappMessage] = useState(false);
   const phoneNumber = '+51927987259'; 
-  const whatsappMessage = encodeURIComponent('¡Hola! Me gustaría conocer más sobre los productos de Naviri.');
+  const whatsappMessage = encodeURIComponent('¡Hola! Me gustaría conocer más sobre los productos de Navi Natubelleza.');
   const location = useLocation();
   
   // Verificar si la ruta actual es del panel administrativo

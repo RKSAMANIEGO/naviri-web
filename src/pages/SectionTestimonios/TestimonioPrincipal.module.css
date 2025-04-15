@@ -1,15 +1,31 @@
+
 .testiSection {
   padding: 4rem 1rem;
-  background-color: #e7e7e7a4;
+  background-color: #f3f3f3;
   text-align: center;
 }
 
 .title {
-  font-size: 2.5rem; /* más grande */
-  font-weight: 800;   /* bien negrita */
+  font-size: 2.5rem;
+  font-weight: 800;
   color: rgba(255, 107, 188, 1);
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* espaciado entre el texto y el animado */
+  flex-wrap: wrap; /* por si no entra en pantallas chicas */
+  justify-content: center; /* o flex-start si lo querés a la izquierda */
+  text-align: center;
 }
+.rotatingHighlight {
+  background-color: rgba(255, 107, 188, 1);
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+}
+
 
 
 .carousel {
@@ -33,8 +49,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  width: 400px;
-  height: 200px;
+  width: 430px;
+  height: 240px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -44,7 +60,6 @@
   position: relative;
   padding: 0;
 }
-
 
 .headerCard {
   background-color: white;
@@ -88,10 +103,8 @@
   text-align: left;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 85%;
-  margin: 0.75rem 0 0 1rem; /* <-- espacio arriba, alineado izq */
+  margin: 0.75rem 0 1rem 1rem;
 }
-
-
 
 .navButton {
   background: none;
@@ -120,12 +133,31 @@
   background-color: #fc6ab5;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
+/* Tablets: 2 tarjetas visibles */
+@media (min-width: 768px) and (max-width: 991px) {
+  .card {
+    width: 45%;
+    height: 260px;
+  }
+
+  .cardsContainer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+/* Móviles: 1 tarjeta visible */
+@media (max-width: 767px) {
   .card {
     width: 90%;
     max-width: 320px;
-    height: auto;
+    height: 260px;
+    padding-bottom: 1rem;
+  }
+
+  .mensajeCard {
+    margin: 0.75rem 0 1rem 1rem;
   }
 
   .cardsContainer {
