@@ -130,19 +130,20 @@ const EditProfile = () => {
       {isModalOpen && (
         <div className="modal-overlay" onClick={handleCloseModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
+            {/* Ícono de cerrar dentro de un círculo negro */}
             <div
               className="close-icon-container"
               onClick={() => setIsModalOpen(false)}
               style={{
-                position: 'fixed',
-                left: '79%',
-                bottom: '20px',
-                transform: 'translateX(-50%)',
+                position: 'fixed', // Fija el icono en la parte inferior
+                left: '79%', // Centrado horizontalmente
+                bottom: '20px', // Separado del borde inferior
+                transform: 'translateX(-50%)', // Centrado exacto en el medio
                 backgroundColor: 'rgba(255, 107, 188, 1)',
                 color: 'white',
                 borderRadius: '50%',
-                padding: '10px',
-                fontSize: '1rem',
+                padding: '10px', // Tamaño del círculo
+                fontSize: '1rem', // Tamaño de la X
                 cursor: 'pointer',
                 zIndex: '10',
                 boxShadow: '0 2px 6px rgba(0, 0, 0, 0.4)',
@@ -159,8 +160,9 @@ const EditProfile = () => {
                 <input
                   type="email"
                   value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="input"
-                  readOnly
+                  required
                 />
               </div>
 

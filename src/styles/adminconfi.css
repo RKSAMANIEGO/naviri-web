@@ -10,10 +10,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1100;
 }
-.input[readonly] { /*contenedor para correo*/
-  background-color: #faaee069;
-  cursor: not-allowed;
-}
 
 .user-icon {
   font-size: 24px;

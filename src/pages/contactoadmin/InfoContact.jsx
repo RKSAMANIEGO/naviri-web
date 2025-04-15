@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Upload, Button, message, Row, Col, Input } from 'antd';
-import { getContact, updateContact } from "../../services/contactServices";
+import { getContact, updateContact } from "../../services/contactservices";
 
 
 const InfoContact= () => {

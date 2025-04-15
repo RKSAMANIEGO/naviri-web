@@ -2,26 +2,22 @@ import { useState, useEffect } from 'react';
 import { message, Button, Image, Modal } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { createBlog, deleteBlog, getAllBlogs, updateBlog } from '../../services/blogService';
-import { getCategories } from '../../services/categoriesService';
+import { createPromotion, deletePromotion, getPromotions, updatePromotion } from '../../services/promotionService';
 
-export const useBlogAdmin = (form) => {
-  const [blogs, setBlogs] = useState([]);
-  const [categories, setCategories] = useState([]);
+export const usePromotionAdmin = (form) => {
+  const [promotions, setPromotions] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [currentBlog, setCurrentBlog] = useState(null);
-  const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key
+  const [currentPromotion, setCurrentPromotion] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0);
   const [isLoading, setIsloading] = useState(false);
 
-  const loadBlogs = async () => {
+  const loadPromotions = async () => {
     try {
-      const [blogsResponse, categoriesData] = await Promise.all([
-        getAllBlogs(),
-        getCategories()
-      ]);
-
-      if (blogsResponse?.data && categoriesData?.data) {
-        setBlogs(Array.isArray(blogsResponse.data) ? blogsResponse.data : []);
-        setCategories(categoriesData.data);
+      const response = await getPromotions();
+      console.log(response);
+      
+      if (response?.data) {
+        setPromotions(Array.isArray(response.data) ? response.data : []);
       }
     } catch (error) {
       message.error('Error al cargar los blogs');
@@ -30,38 +26,36 @@ export const useBlogAdmin = (form) => {
 
   // Reload blogs when refreshKey changes
   useEffect(() => {
-    loadBlogs();
+    loadPromotions();
   }, [refreshKey]);
 
-  const handleEdit = (blog) => {
-    setCurrentBlog(blog);
+  const handleEdit = (promotion) => {
+    setCurrentPromotion(promotion);
     form.setFieldsValue({
-      title: blog?.title,
-      description: blog?.description,
-      category: blog?.category?.id,
-      imagen: blog?.image?.url ? [{
+      title: promotion?.title,
+      description: promotion?.description,
+      imagen: promotion?.image?.url ? [{
         uid: '-1',
         name: 'image',
         status: 'done',
-        url: blog.image.url,
+        url: promotion.image.url,
       }] : []
     });
     setIsModalVisible(true);
   };
 
-  const showModal = (blog = null) => {
-    setCurrentBlog(blog);
+  const showModal = (promotion = null) => {
+    setCurrentPromotion(promotion);
     setIsModalVisible(true);
-    if (blog) {
+    if (promotion) {
       form.setFieldsValue({
-        title: blog.title,
-        description: blog.description,
-        category: blog.category?.id,
-        imagen: blog.image?.url ? [{
+        title: promotion.title,
+        description: promotion.description,
+        imagen: promotion.image?.url ? [{
           uid: '-1',
           name: 'image',
           status: 'done',
-          url: blog.image.url,
+          url: promotion.image.url,
         }] : []
       });
     } else {
@@ -82,36 +76,36 @@ export const useBlogAdmin = (form) => {
       const imagenUrl = values.imagen?.[0]?.url || 
                         (values.imagen?.[0]?.originFileObj && await convertFileToUrl(values.imagen?.[0]?.originFileObj));
 
-      console.log(values);
-                      
-      const blogData = {
+      const promotionData = {
         title: values.title,
         description: values.description,
-        category_id: values.category,
         image: imagenUrl
       };
 
       let response;
 
-      if (currentBlog) {
-        response = await updateBlog(currentBlog.id, blogData);
+      if (currentPromotion) {
+        console.log(promotionData);
+        response = await updatePromotion(currentPromotion.id, promotionData);
         
         // Update locally for immediate UI update
         if (response && response.data) {
-          setBlogs(prev => prev.map(blog => 
-            blog.id === currentBlog.id ? { ...response.data } : blog
+          setPromotions(prev => prev.map(promotion => 
+            promotion.id === currentPromotion.id ? { ...response.data } : promotion
           ));
         }
       } else {
-        response = await createBlog(blogData);
+        console.log(promotionData);
+        
+        response = await createPromotion(promotionData);
         
         // Add to beginning of array for immediate UI update
         if (response && response.data) {
-          setBlogs(prev => [response.data, ...prev]);
+          setPromotions(prev => [response.data, ...prev]);
         }
       }
 
-      message.success(`¡Entrada ${currentBlog ? 'actualizada' : 'creada'}!`);
+      message.success(`¡Entrada ${currentPromotion ? 'actualizada' : 'creada'}!`);
       setIsModalVisible(false);
       form.resetFields();
       
@@ -124,16 +118,16 @@ export const useBlogAdmin = (form) => {
 
   const handleDelete = async (id) => {
     Modal.confirm({
-      title: '¿Eliminar Blog?',
+      title: '¿Eliminar Promoción?',
       content: 'Esta acción no se puede deshacer',
       okText: 'Eliminar',
       okType: 'danger',
       cancelText: 'Cancelar',
       async onOk() {
         try {
-          await deleteBlog(id);
-          setBlogs(prev => prev.filter(blog => blog.id !== id));
-          message.success('¡Entrada eliminada!');
+          await deletePromotion(id);
+          setPromotions(prev => prev.filter(promotion => promotion.id !== id));
+          message.success('¡Promocion eliminada!');
         } catch (error) {
           message.error(error.message);
         }
@@ -153,16 +147,6 @@ export const useBlogAdmin = (form) => {
       dataIndex: 'description',
       render: (_, record) => <p className='line-clamp-3'>{record.description}</p>,
       width: "35%"
-    },
-    {
-      title: 'Categoría',
-      render: (_, record) => record.category?.name,
-      filters: categories.map(category => ({
-        text: category.name,
-        value: category.id,
-      })),
-      onFilter: (value, record) => record.category?.id === value,
-      width: "10%"
     },
     {
       title: 'Imagen',
@@ -187,12 +171,11 @@ export const useBlogAdmin = (form) => {
   ];
 
   return {
-    blogs,
+    promotions,
     isModalVisible,
-    currentBlog,
-    categories,
+    currentPromotion,
     isLoading,
-    loadBlogs,
+    loadPromotions,
     showModal,
     handleEdit,
     handleSubmit,

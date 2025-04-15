@@ -22,76 +22,69 @@ const ServiceModalAdmin = ({
   form,
 }) => {
   const [fileList, setFileList] = useState([]);
-
-  useEffect(() => {
-    if (isModalVisible) {
-      if (currentServices) {
-        form.setFieldsValue({
-          title: currentServices.title,
-          category: currentServices.category,
-          description: currentServices.description,
-          imagen: currentServices.imagen || [],
-        });
-
-        const initialFileList = currentServices.imagen
-          ? Array.isArray(currentServices.imagen)
-            ? currentServices.imagen
-            : [currentServices.imagen]
-          : [];
-        setFileList(
-          initialFileList.map((img, index) => ({
-            uid: img.uid || `-${index}`,
-            name: img.name || "imagen.jpg",
-            status: "done",
-            url: img.url,
-            preview: img.url,
-          }))
-        );
-      } else {
-        form.resetFields();
+    
+    useEffect(() => {
+      if (!isModalVisible) {
         setFileList([]);
+        form.resetFields();
+      } else if (!currentServices) {
+        setFileList([]);
+        form.resetFields();
+      } else {
+        const imagen = form.getFieldValue("imagen") || [];
+        console.log(imagen[0].url);
+        
+        setFileList(imagen);
       }
-    }
-  }, [isModalVisible, currentServices, form]);
+    }, [isModalVisible, currentServices]);
+    
+    
 
-  useEffect(() => {
-    form.setFieldsValue({ imagen: fileList });
-  }, [fileList, form]);
-
-  const uploadProps = {
-    beforeUpload: (file) => {
-      const isImage = file.type.startsWith("image/");
-      if (!isImage) {
-        message.error("Solo se permiten imágenes (JPG, PNG, WEBP)!");
-      }
-      return isImage ? false : Upload.LIST_IGNORE;
-    },
-    onChange: ({ fileList: newFileList }) => {
-      newFileList = newFileList.map((file) => {
-        if (file.originFileObj && !file.preview) {
-          file.preview = URL.createObjectURL(file.originFileObj);
+    useEffect(() => {
+      form.setFieldsValue({ imagen: fileList });
+    }, [fileList, form]);
+  
+    const uploadProps = {
+      beforeUpload: (file) => {
+        const isImage = file.type.startsWith('image/');
+        if (!isImage) {
+          message.error('Solo se permiten imágenes (JPG, PNG, WEBP)!');
         }
-        return file;
-      });
-      setFileList(newFileList);
-    },
-    fileList,
-    listType: "picture",
-    maxCount: 1,
-    accept: "image/jpeg,image/png,image/webp",
-    multiple: false,
-    showUploadList: false,
-  };
+        // Evita la subida automática
+        return isImage ? false : Upload.LIST_IGNORE;
+      },
+      onChange: ({ fileList: newFileList }) => {
+        // Genera el preview para mostrar la imagen localmente
+        newFileList = newFileList.map(file => {
+          if (file.originFileObj && !file.preview) {
+            file.preview = URL.createObjectURL(file.originFileObj);
+          }
+          return file;
+        });
+        setFileList(newFileList);
+      },
+      fileList,
+      listType: "picture",
+      maxCount: 1,
+      accept: "image/jpeg,image/png,image/webp",
+      multiple: false,
+      showUploadList: false
+    };
+  
+    // Contenedor fijo para la imagen para evitar movimiento de inputs adyacentes
+    const imageContainerStyle = {
+      
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    };
 
-  const imageContainerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-  };
+
+
 
   return (
     <Modal
-      title={currentServices ? "Editar Entrada" : "Nueva Entrada"}
+      title={currentServices ? "Editar Servicio" : "Nuevo Servicio"}
       open={isModalVisible}
       onCancel={() => setIsModalVisible(false)}
       footer={null}
@@ -118,19 +111,29 @@ const ServiceModalAdmin = ({
                 { required: true, message: "¡Por favor ingresa el título!" },
               ]}
             >
-              <Input placeholder="Título del blog" />
+              <Input placeholder="Título del servicio" />
             </Form.Item>
 
             <Form.Item
-              label="Categoría"
-              name="category"
+              label="Características"
+              name="features"
               rules={[
-                { required: true, message: "¡Selecciona una categoría!" },
+                {
+                  required: true,
+                  message: "¡Agrega al menos una característica!",
+                },
               ]}
             >
-              <Select placeholder="Selecciona una categoría">
-                <Option value={1}>Aceites</Option>
-                <Option value={2}>Aromas</Option>
+              <Select
+                mode="tags"
+                style={{ width: "100%" }}
+                placeholder="Agrega o selecciona características"
+                tokenSeparators={[","]}
+              >
+                <Option value="Rápido">Rápido</Option>
+                <Option value="Efectivo">Efectivo</Option>
+                <Option value="Duradero">Duradero</Option>
+                <Option value="Natural">Natural</Option>
               </Select>
             </Form.Item>
           </Col>
@@ -138,54 +141,53 @@ const ServiceModalAdmin = ({
             <Form.Item
               label="Imagen"
               name="imagen"
-              valuePropName="fileList"
-              rules={[{ required: true, message: "¡Debes subir una imagen!" }]}
             >
-              <div style={imageContainerStyle}>
-                {fileList.length === 0 ? (
-                  <Upload.Dragger {...uploadProps}>
-                    <div style={{ textAlign: "center" }}>
-                      <UploadOutlined style={{ fontSize: "32px" }} />
-                      <p>Arrastra tu imagen aquí o haz clic para seleccionar</p>
-                      <p style={{ fontSize: "12px", color: "#999" }}>
-                        Formatos soportados: JPG, PNG, WEBP
-                      </p>
-                    </div>
-                  </Upload.Dragger>
-                ) : (
-                  <div style={{ textAlign: "center" }}>
-                    <div
-                      style={{
-                        width: "100%",
-                        maxWidth: "350px",
-                        height: "150px",
-                        margin: "0 auto 8px",
-                        overflow: "hidden",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      <img
-                        src={fileList[0].preview || fileList[0].url}
-                        alt="Vista previa"
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      />
-                    </div>
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        icon={<DeleteOutlined />}
-                        onClick={() => setFileList([])}
-                      ></Button>
-                    </div>
-                  </div>
-                )}
-              </div>
+              <Upload.Dragger {...uploadProps}>
+                <div style={{ textAlign: "center" }}>
+                  <UploadOutlined style={{ fontSize: "32px" }} />
+                  <p>Arrastra tu imagen aquí o haz clic para seleccionar</p>
+                  <p style={{ fontSize: "12px", color: "#999" }}>
+                    Formatos soportados: JPG, PNG, WEBP
+                  </p>
+                </div>
+              </Upload.Dragger>
             </Form.Item>
+            {fileList.length > 0 && (
+              <div style={imageContainerStyle}>
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "350px",
+                    height: "150px",
+                    margin: "0 auto 8px",
+                    overflow: "hidden",
+                    borderRadius: "4px",
+                  }}
+                >
+                  <img
+                    src={fileList[0]?.url || fileList[0]?.preview}
+                    alt="Vista previa"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    onError={(e) => {
+                      e.target.src =
+                        "https://via.placeholder.com/350x150?text=Imagen+no+disponible";
+                    }}
+                  />
+                </div>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Button
+                    icon={<DeleteOutlined />}
+                    onClick={() => {
+                      setFileList([]);
+                    }}
+                  ></Button>
+                </div>
+              </div>
+            )}
           </Col>
         </Row>
 
@@ -197,10 +199,14 @@ const ServiceModalAdmin = ({
         </Form.Item>
 
         <div
-          style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: "8px",
+          }}
         >
           <Button type="primary" htmlType="submit">
-            {currentServices ? "Guardar Cambios" : "Crear Entrada"}
+            {currentServices ? "Guardar Cambios" : "Crear Servicios"}
           </Button>
         </div>
       </Form>

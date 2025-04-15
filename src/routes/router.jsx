@@ -13,7 +13,8 @@ import {
   Products,
   ProductAdmin,
   CategoriaPage,
-  ComentAdminPage
+  ComentAdminPage,
+  PromotionAdminPage
 }  from '../pages/index';
 import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 
@@ -21,9 +22,12 @@ import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 
-import InfoContact from '../pages/contactoadmin/InfoContact';
 //import BlogAdminPage from '../pages/blog/BlogAdminPage';
+
+
 import InfoEmails from '../pages/formClient/InfoEmails';
+import ContentProducts from '../components/Products/ContentProducts';
+import InfoContact from '../pages/contactoadmin/InfoContact';
 
 const Router = () => {
   useEffect(() => {
@@ -35,7 +39,16 @@ const Router = () => {
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<Products />} />
-            <Route path='/categories' element={<PageCategorie/>}/> 
+            <Route path='/categories' element={<PageCategorie/>}>
+              
+              <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/>
+              <Route path="aceites" element={ <ContentProducts categorie="aceites"/>}/>
+              <Route path="cosmeticos" element={ <ContentProducts categorie="Cosméticos"/>}/>
+              <Route path="cuidado capilar" element={ <ContentProducts categorie="cuidado capilar"/>}/>
+              <Route path="Exfoliante Corporal" element={ <ContentProducts categorie="Exfoliante Corporal"/>}/>
+              <Route path="sales minerales" element={ <ContentProducts categorie="sales minerales"/>}/>
+              
+            </Route> 
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
@@ -53,7 +66,8 @@ const Router = () => {
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
               <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
-              <Route path="/admin/panel/page/mail" element={ <InfoEmails/>} />
+              <Route path="/admin/panel/mail" element={ <InfoEmails/>} />
+              <Route path="/admin/panel/promotions" element={ <PromotionAdminPage/>} />
             </Route>
           </Route>
 

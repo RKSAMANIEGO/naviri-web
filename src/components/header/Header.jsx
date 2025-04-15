@@ -6,20 +6,20 @@ import styles from "../../styles/header.module.css";
 import { useCart } from '../../context/CartContext';
 
 const productMenuItems = [
-    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products/new' },
+    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products' },
     { id: 'all', title: 'Ver todo', description: 'Explora nuestra colección completa de productos', to: '/products' },
-    { id: 'facial', title: 'Cuidado facial', description: 'Cremas, sérums, mascarillas y más para tu rutina facial.', to: '/products/facial-care' },
-    { id: 'makeup', title: 'Maquillaje', description: 'Bases, labiales, sombras y todo para tu look perfecto', to: '/products/makeup' },
-    { id: 'hair', title: 'Cuidado capilar', description: 'Champús, acondicionadores y tratamientos para tu cabello', to: '/products/hair-care' },
+    { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
+    { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
+    { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/sales minerales' },
 ];
 
 const categoryMenuItems = [
-    { id: 'accessories', title: 'Accesorios', description: 'Encuentra productos esenciales para limpiar y proteger tu piel', to: '/categories/accessories' },
-    { id: 'oils', title: 'Aceite', description: 'Aceites naturales para nutrir, revitalizar tu piel y cabello', to: '/categories/oils' },
-    { id: 'cosmetics', title: 'Cosméticos', description: 'Brochas, esponjas, neceseres y más para tu rutina', to: '/categories/cosmetics' },
-    { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/hair-care' },
-    { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/body-care' },
-    { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/mineral-salts' },
+    { id: 'accessories', title: 'Accesorios', description: 'Encuentra productos esenciales para limpiar y proteger tu piel', to: '/categories/accesorios' },
+    { id: 'oils', title: 'Aceite', description: 'Aceites naturales para nutrir, revitalizar tu piel y cabello', to: '/categories/aceites' },
+    { id: 'cosmetics', title: 'Cosméticos', description: 'Brochas, esponjas, neceseres y más para tu rutina', to: '/categories/cosmeticos' },
+    { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
+    { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
+    { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/sales minerales' },
 ];
 
 const Header = () => {
@@ -86,11 +86,12 @@ const Header = () => {
     const handleReserveClick = () => {
         const message = "¡Hola! Me gustaría reservar una cita para conocer más sobre sus servicios y productos.";
         const encodedMessage = encodeURIComponent(message);
-        window.open(`https://wa.me/+51935427263?text=${encodedMessage}`, '_blank');
+        window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
     };
 
     const handleCartClick = () => {
         if (location.pathname === '/') {
+            localStorage.removeItem("nameCategorie")
             navigate('/products');
         } else {
             toggleCart();
@@ -153,8 +154,8 @@ const Header = () => {
                             ))}
                         </div>
                     </div>
-                    <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Nosotros</NavLink>
-                    <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</NavLink>
+                    <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
+                    <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                 </nav>
 
                 <div className={`${styles.sectionright} ${styles.desktopNav}`}>
@@ -217,8 +218,8 @@ const Header = () => {
                 <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
                 <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
                 <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
-                <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Nosotros</NavLink>
-                <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</NavLink>
+                <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
+                <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
                 
                 <div className={styles.mobileExtras}>
                     <button onClick={() => { 

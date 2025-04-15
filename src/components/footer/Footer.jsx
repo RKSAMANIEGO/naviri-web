@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import styles from "../../styles/footer.module.css";
 import logo from '../../assets/image/logo-navi.png';
-import { getContact } from "../../services/contactServices";
+import { getContact } from "../../services/contactservices";
 
 const Footer = () => {
   const [contact, setContact] = useState({});
@@ -21,7 +21,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className={styles.footer}>
+    <footer id="contact" className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.sectionfooter}>
           <div className={styles.logoContainer}>
