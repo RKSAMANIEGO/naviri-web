@@ -95,6 +95,7 @@ const ContentProducts = ({categorie}) => {
             }
             else if (filterCategorie){
                 const productsFilterCat=allProducts.filter(product => product.categories.some(subCat=>subCat.sub_categories.some(obj=> obj.name.toLowerCase()=== filterCategorie.toLowerCase())))
+                setProductoFiltrado(productsFilterCat); // <-- Soluciona el filtro por categoría
                 console.log(productsFilterCat);
             }
             else if(categorie){
