@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import {
-  PolicyPage, 
-  HomePage, 
-  BlogPage, 
-  BlogDetailsPage, 
+  PolicyPage,
+  HomePage,
+  // BlogPage, // Moved to features
+  // BlogDetailsPage, // Moved to features
   BlogAdminPage,
   PolicyAdminPage,
   ServiceAdminPage,
@@ -14,6 +14,8 @@ import {
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
+import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; // Added new import
+import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; // Added new import
 import MainLayout from '../../shared/layouts/MainLayout';
 import AdminLayout from '../../shared/layouts/AdminLayout';
 import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';

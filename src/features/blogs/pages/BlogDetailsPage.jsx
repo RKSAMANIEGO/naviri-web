@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Clock, Share2, Heart } from 'lucide-react';
-import { getBlogById } from '../../services/blogService';
+import { getBlogById } from '../services/blogsApi.js'; // Updated path
 
 
 const BlogDetailsPage = () => {
