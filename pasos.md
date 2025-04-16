@@ -35,7 +35,7 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
     -   [x] Asegurar importación correcta en `src/main.jsx`.
 -   [x] **Contexto Global:**
     -   [x] Mover `src/context/authProvider.js` a `src/core/context/AuthContext.js` (o `src/features/auth/context/` si es muy específico).
-    -   [ ] Mover `src/context/CartContext.jsx` a `src/features/cart/context/CartContext.jsx` (más específico de la feature).
+    -   [x] Mover `src/context/CartContext.jsx` a `src/features/cart/context/CartContext.jsx` (más específico de la feature).
     -   [x] Actualizar `src/main.jsx` o `src/App.jsx` para envolver con los providers desde sus nuevas ubicaciones.
 
 *(Testea la carga inicial de la aplicación y la funcionalidad básica del router/contexto. Haz commit.)*
@@ -78,8 +78,8 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
 
 **Lista de Características a Refactorizar:**
 
--   [ ] `homepage`
--   [ ] `products` (público)
+-   [x] `homepage`
+-   [x] `products` (público)
 -   [ ] `categories` (público, si aplica)
 -   [ ] `blogs` (público)
 -   [ ] `services-public` (público)

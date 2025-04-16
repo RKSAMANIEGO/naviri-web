@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   PolicyPage, 
-  HomePage, 
   AdminLayout, 
   MainLayout, 
   BlogPage, 
@@ -16,14 +15,12 @@ import {
   ComentAdminPage,
   PromotionAdminPage
 }  from '../pages/index';
+import { HomePage } from '../features/homepage'; // Importando desde la nueva estructura
 import PageCategorie from '../pages/PageCategoriaLanding/PageCategorie';
 
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
-
-//import BlogAdminPage from '../pages/blog/BlogAdminPage';
-
 
 import InfoEmails from '../pages/formClient/InfoEmails';
 import ContentProducts from '../components/Products/ContentProducts';
