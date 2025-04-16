@@ -12,6 +12,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
     const [isAdding, setIsAdding] = useState(false);
 
+    console.log(product)
     useEffect(() => {
         setStock(1); // Inicializar en 1 para que siempre pueda añadirse al carrito
     }, [product]);
@@ -107,7 +108,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                 </section>
                 <section className={styles.sectionLast}>
                     <h2 className={styles.h2}>{product.name.toUpperCase()}</h2>
-                    <p className={styles.p}>{product.subcategories[0].name}</p>
+                    {/*<p className={styles.p}>{product.subcategories[0].name}</p>*/}
                     <p className={styles.precio}>S/{product.price}</p>
                     <p className={styles.descripcion}>{product.compatibility}</p>
                     
