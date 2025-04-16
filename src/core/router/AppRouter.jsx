@@ -2,8 +2,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   PolicyPage, 
   HomePage, 
-  AdminLayout, 
-  MainLayout, 
   BlogPage, 
   BlogDetailsPage, 
   BlogAdminPage,
@@ -16,6 +14,8 @@ import {
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
+import MainLayout from '../../shared/layouts/MainLayout';
+import AdminLayout from '../../shared/layouts/AdminLayout';
 import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';
 
 import RequireAuth from './RequireAuth';
