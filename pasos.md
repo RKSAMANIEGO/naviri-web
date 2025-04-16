@@ -81,7 +81,7 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
 -   [x] `homepage`
 -   [x] `products` (público)
 -   [ ] `categories` (público, si aplica)
--   [ ] `blogs` (público)
+-   [x] `blogs` (público)
 -   [ ] `services-public` (público)
 -   [ ] `about` (público)
 -   [ ] `testimonials` (público)
