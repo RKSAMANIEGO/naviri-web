@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './core/styles/global.css'
 import App from './App.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { CartProvider } from './context/CartContext'
+import { CartProvider } from './features/cart/context/CartContext' // Try absolute path from src
 
 const queryClient = new QueryClient({
   defaultOptions: {

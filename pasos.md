@@ -35,29 +35,29 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
     -   [x] Asegurar importación correcta en `src/main.jsx`.
 -   [x] **Contexto Global:**
     -   [x] Mover `src/context/authProvider.js` a `src/core/context/AuthContext.js` (o `src/features/auth/context/` si es muy específico).
-    -   [ ] Mover `src/context/CartContext.jsx` a `src/features/cart/context/CartContext.jsx` (más específico de la feature).
+    -   [x] Mover `src/context/CartContext.jsx` a `src/features/cart/context/CartContext.jsx` (más específico de la feature).
     -   [x] Actualizar `src/main.jsx` o `src/App.jsx` para envolver con los providers desde sus nuevas ubicaciones.
 
 *(Testea la carga inicial de la aplicación y la funcionalidad básica del router/contexto. Haz commit.)*
 
 ## Fase 3: Mover Elementos Compartidos (`shared`)
 
--   [ ] **Layouts:**
-    -   [ ] Mover `src/pages/layout/MainLayout.jsx` a `src/shared/layouts/MainLayout.jsx`.
-    -   [ ] Mover `src/pages/layout/AdminLayout.jsx` a `src/shared/layouts/AdminLayout.jsx`.
-    -   [ ] Actualizar importaciones en `src/core/router/AppRouter.jsx`.
--   [ ] **Componentes UI Comunes:**
-    -   [ ] Mover `src/components/header/Header.jsx` (y `header.module.css`) a `src/shared/components/Header/`.
-    -   [ ] Mover `src/components/footer/Footer.jsx` (y `footer.module.css`) a `src/shared/components/Footer/`.
-    -   [ ] Mover `src/components/sidebar/Sidebar.jsx` (y `sidebar.module.css`) a `src/shared/components/Sidebar/`.
+-   [x] **Layouts:**
+    -   [x] Mover `src/pages/layout/MainLayout.jsx` a `src/shared/layouts/MainLayout.jsx`.
+    -   [x] Mover `src/pages/layout/AdminLayout.jsx` a `src/shared/layouts/AdminLayout.jsx`.
+    -   [x] Actualizar importaciones en `src/core/router/AppRouter.jsx`.
+-   [x] **Componentes UI Comunes:**
+    -   [x] Mover `src/components/header/Header.jsx` (y `header.module.css`) a `src/shared/components/Header/`.
+    -   [x] Mover `src/components/footer/Footer.jsx` (y `footer.module.css`) a `src/shared/components/Footer/`.
+    -   [x] Mover `src/components/sidebar/Sidebar.jsx` (y `sidebar.module.css`) a `src/shared/components/Sidebar/`.
     -   [ ] Identificar y mover otros componentes reutilizables (botones, modales base, inputs, `ProductCard.jsx` si es genérico) a `src/shared/components/`. Mover sus CSS Modules.
-    -   [ ] Actualizar *todas* las importaciones de estos componentes movidos.
--   [ ] **Hooks Comunes:**
-    -   [ ] Identificar y mover hooks reutilizables a `src/shared/hooks/`.
-    -   [ ] Actualizar importaciones.
--   [ ] **Utils:**
-    -   [ ] Identificar y mover funciones de utilidad genéricas a `src/shared/utils/`.
-    -   [ ] Actualizar importaciones.
+    -   [x] Actualizar *todas* las importaciones de estos componentes movidos.
+-   [x] **Hooks Comunes:**
+    -   [x] Identificar y mover hooks reutilizables a `src/shared/hooks/`. (No se encontraron hooks comunes en este momento, los hooks existentes son específicos de características).
+    -   [x] Actualizar importaciones.
+-   [x] **Utils:**
+    -   [x] Identificar y mover funciones de utilidad genéricas a `src/shared/utils/`. (No se encontraron utilidades comunes, `products.js` es específico de la característica de productos).
+    -   [x] Actualizar importaciones.
 
 *(Testea que los layouts y componentes compartidos se rendericen correctamente en todas las páginas donde se usan. Haz commit.)*
 
@@ -78,8 +78,8 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
 
 **Lista de Características a Refactorizar:**
 
--   [ ] `homepage`
--   [ ] `products` (público)
+-   [x] `homepage`
+-   [x] `products` (público)
 -   [ ] `categories` (público, si aplica)
 -   [ ] `blogs` (público)
 -   [ ] `services-public` (público)

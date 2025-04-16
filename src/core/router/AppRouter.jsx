@@ -2,20 +2,20 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   PolicyPage, 
   HomePage, 
-  AdminLayout, 
-  MainLayout, 
   BlogPage, 
   BlogDetailsPage, 
   BlogAdminPage,
   PolicyAdminPage,
   ServiceAdminPage,
   LoginPage,
-  Products,
+  // Products, // Removed, moved to features
   ProductAdmin,
   CategoriaPage,
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
+import MainLayout from '../../shared/layouts/MainLayout';
+import AdminLayout from '../../shared/layouts/AdminLayout';
 import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';
 
 import RequireAuth from './RequireAuth';
@@ -23,8 +23,10 @@ import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 
 import InfoEmails from '../../pages/formClient/InfoEmails';
-import ContentProducts from '../../components/Products/ContentProducts';
+// import ContentProducts from '../../components/Products/ContentProducts'; // Removed, moved to features
 import InfoContact from '../../pages/contactoadmin/InfoContact';
+import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
+import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
 
 const Router = () => {
   useEffect(() => {
@@ -35,17 +37,17 @@ const Router = () => {
       <Routes>
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/products" element={<ProductsPage />} /> {/* Updated route element */}
             <Route path='/categories' element={<PageCategorie/>}>
-              
-              <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/>
-              <Route path="aceites" element={ <ContentProducts categorie="aceites"/>}/>
-              <Route path="cosmeticos" element={ <ContentProducts categorie="Cosméticos"/>}/>
-              <Route path="cuidado capilar" element={ <ContentProducts categorie="cuidado capilar"/>}/>
-              <Route path="Exfoliante Corporal" element={ <ContentProducts categorie="Exfoliante Corporal"/>}/>
-              <Route path="sales minerales" element={ <ContentProducts categorie="sales minerales"/>}/>
-              
-            </Route> 
+
+              <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/> {/* Uses new import */}
+              <Route path="aceites" element={ <ContentProducts categorie="aceites"/>}/> {/* Uses new import */}
+              <Route path="cosmeticos" element={ <ContentProducts categorie="Cosméticos"/>}/> {/* Uses new import */}
+              <Route path="cuidado capilar" element={ <ContentProducts categorie="cuidado capilar"/>}/> {/* Uses new import */}
+              <Route path="Exfoliante Corporal" element={ <ContentProducts categorie="Exfoliante Corporal"/>}/> {/* Uses new import */}
+              <Route path="sales minerales" element={ <ContentProducts categorie="sales minerales"/>}/> {/* Uses new import */}
+
+            </Route>
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
