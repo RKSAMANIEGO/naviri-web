@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom'
-import { Header, Footer } from '../../components/index.js'
-import Formulario from '../../pages/SectionFormulario/Formulario'
-import Testimonios from '../../pages/SectionTestimonios/TestimonioPrincipal'
+import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer'
+import Formulario from '../components/Formulario/Formulario'
+import Testimonios from '../components/Testimonials/TestimonioPrincipal'
 
 const MainLayout = () => {
   return (

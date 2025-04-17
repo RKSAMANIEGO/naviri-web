@@ -35,7 +35,7 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
     -   [x] Asegurar importación correcta en `src/main.jsx`.
 -   [x] **Contexto Global:**
     -   [x] Mover `src/context/authProvider.js` a `src/core/context/AuthContext.js` (o `src/features/auth/context/` si es muy específico).
-    -   [ ] Mover `src/context/CartContext.jsx` a `src/features/cart/context/CartContext.jsx` (más específico de la feature).
+    -   [x] Mover `src/context/CartContext.jsx` a `src/features/cart/context/CartContext.jsx` (más específico de la feature).
     -   [x] Actualizar `src/main.jsx` o `src/App.jsx` para envolver con los providers desde sus nuevas ubicaciones.
 
 *(Testea la carga inicial de la aplicación y la funcionalidad básica del router/contexto. Haz commit.)*
@@ -50,7 +50,7 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
     -   [x] Mover `src/components/header/Header.jsx` (y `header.module.css`) a `src/shared/components/Header/`.
     -   [x] Mover `src/components/footer/Footer.jsx` (y `footer.module.css`) a `src/shared/components/Footer/`.
     -   [x] Mover `src/components/sidebar/Sidebar.jsx` (y `sidebar.module.css`) a `src/shared/components/Sidebar/`.
-    -   [ ] Identificar y mover otros componentes reutilizables (botones, modales base, inputs, `ProductCard.jsx` si es genérico) a `src/shared/components/`. Mover sus CSS Modules.
+    -   [ ] Identificar y mover otros componentes reutilizables (botones, modales base, inputs, `ProductCard.jsx` si es genérico) a `src/shared/components/`. Mover sus CSS Modules. (Moved Formulario, Testimonios)
     -   [x] Actualizar *todas* las importaciones de estos componentes movidos.
 -   [x] **Hooks Comunes:**
     -   [x] Identificar y mover hooks reutilizables a `src/shared/hooks/`. (No se encontraron hooks comunes en este momento, los hooks existentes son específicos de características).
@@ -78,10 +78,10 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
 
 **Lista de Características a Refactorizar:**
 
--   [ ] `homepage`
--   [ ] `products` (público)
+-   [x] `homepage`
+-   [x] `products` (público)
 -   [ ] `categories` (público, si aplica)
--   [ ] `blogs` (público)
+-   [x] `blogs` (público)
 -   [ ] `services-public` (público)
 -   [ ] `about` (público)
 -   [ ] `testimonials` (público)

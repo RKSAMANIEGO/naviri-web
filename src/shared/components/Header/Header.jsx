@@ -3,7 +3,7 @@ import { FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes, FaWhatsapp } 
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../../assets/image/logo-navi.png';
 import styles from "./Header.module.css";
-import { useCart } from '../../../context/CartContext';
+import { useCart } from '../../../features/cart/context/CartContext'; // Updated path
 
 const productMenuItems = [
     { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products' },
