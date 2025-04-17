@@ -8,7 +8,7 @@ Modal.setAppElement("#root")
     
 const ModalProducts = ({isOpen, onClose, product, title}) => {
     const [stock, setStock] = useState(1);
-    const { addToCart } = useCart();
+    const { addToCart } = useCart(0);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
     const [isAdding, setIsAdding] = useState(false);
 

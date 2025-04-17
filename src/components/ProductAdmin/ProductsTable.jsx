@@ -3,8 +3,9 @@ import styles from '../../styles/productAdmin.module.css'
 import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
 import ModalCrudProduct from './Modal/ModalCrudProduct';
-import ModalProducts from '../Products/ModalProducts';
+//import ModalProducts from '../Products/ModalProducts';
 import {productByName,deleteProduct} from '../../services/productService'
+import ModalProductsAdmin from './ModalProductsAdmin';
 
 const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -192,7 +193,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
                         :
                         <ModalCrudProduct isOpen={isOpenModalProducts} onClose={()=> setOpenModalProducts(false)} titleModal="updateProduct"/>
         }
-        <ModalProducts isOpen={openModalDetailsProduct}  onClose={()=> setOpenModalDetailsProduct(false)} product={productSelect} title="productAdmin"/>
+        <ModalProductsAdmin isOpen={openModalDetailsProduct}  onClose={()=> setOpenModalDetailsProduct(false)} product={productSelect} title="productAdmin"/>
     </div>
     </>
     )
