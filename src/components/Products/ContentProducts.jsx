@@ -9,6 +9,9 @@ import { listProducts, productByName } from '../../services/productService'
 import { useCart } from '../../context/CartContext';
 import CartSidebar from '../cart/CartSidebar';
 
+
+
+
 const ContentProducts = ({categorie}) => {
 
 

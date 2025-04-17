@@ -8,6 +8,8 @@ import {productByName,deleteProduct} from '../../services/productService'
 import ModalProductsAdmin from './ModalProductsAdmin';
 
 const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) => {
+
+    console.log(products);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
