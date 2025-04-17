@@ -3,7 +3,7 @@ import HeaderProducts from "../components/HeaderProducts"
 import OptionsProducts from "../components/OptionsProducts"
 import TitleProducst from "../components/TitleProducst"
 
-const ProductsPage = () => { // Renamed component to ProductsPage
+const ProductsPage = () => {
 
     return (
         <>
@@ -15,4 +15,4 @@ const ProductsPage = () => { // Renamed component to ProductsPage
     )
 }
 
-export default ProductsPage // Updated export name
+export default ProductsPage 

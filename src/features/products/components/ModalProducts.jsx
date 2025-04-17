@@ -100,14 +100,14 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
             <div className={styles.modalProducts}>
                 <section className={styles.section} style={
                     {
-                        backgroundImage: `url(${product.image.url})`,
+                        backgroundImage: `url(${product.image?.url || ''})`,
                     }
                 }>
 
                 </section>
                 <section className={styles.sectionLast}>
-                    <h2 className={styles.h2}>{product.name.toUpperCase()}</h2>
-                    <p className={styles.p}>{product.subcategories[0].name}</p>
+                    <h2 className={styles.h2}>{product.name?.toUpperCase()}</h2>
+                    <p className={styles.p}>{product.subcategories && product.subcategories.length > 0 ? product.subcategories[0].name : ''}</p>
                     <p className={styles.precio}>S/{product.price}</p>
                     <p className={styles.descripcion}>{product.compatibility}</p>
 

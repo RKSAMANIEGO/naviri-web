@@ -1,6 +1,6 @@
 /*HEADER PRODUCTS*/
 .section {
-	background: url("../../shared/assets/image/headerProduct.png"); /* Updated path */
+	background: url("../../../assets/image/headerProduct.png");
 	background-size: cover;
 	background-position: top;
 	display: flex;

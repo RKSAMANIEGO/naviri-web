@@ -1,21 +1,18 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   PolicyPage,
-  HomePage,
-  // BlogPage, // Moved to features
-  // BlogDetailsPage, // Moved to features
   BlogAdminPage,
   PolicyAdminPage,
   ServiceAdminPage,
   LoginPage,
-  // Products, // Removed, moved to features
   ProductAdmin,
   CategoriaPage,
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
-import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; // Added new import
-import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; // Added new import
+import HomePage from '../../features/homepage/pages/HomePage.jsx'; // Changed to default import
+import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
+import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
 import MainLayout from '../../shared/layouts/MainLayout';
 import AdminLayout from '../../shared/layouts/AdminLayout';
 import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';
