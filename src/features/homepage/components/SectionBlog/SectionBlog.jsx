@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getBlogs } from '../../../../services/blogService'
-import BlogCard from '../../../../components/blog/BlogCard'
+import { getBlogs } from '../../../blogs/services/blogsApi.js' // Updated path
+import BlogCard from '../../../blogs/components/BlogCard'
 import { ArrowRight } from 'lucide-react'
 
 const SectionBlog = () => {

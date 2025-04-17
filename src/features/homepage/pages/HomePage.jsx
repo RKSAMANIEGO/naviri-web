@@ -5,7 +5,7 @@ import SectionAboutUs from "../components/SectionAboutUs/SectionAboutUs";
 import SectionServices from "../components/SectionServices/SectionServices";
 import SectionBlog from "../components/SectionBlog/SectionBlog";
 
-export const HomePage = () => {
+const HomePage = () => { 
    return (
       <>
          <SectionPrincipal/>
@@ -14,11 +14,11 @@ export const HomePage = () => {
             <SectionAboutUsHome/>
             <SectionAboutUs/>
             <SectionCategorias/>
-            <SectionServices/> 
-            <SectionBlog/>    
+            <SectionServices/>
+            <SectionBlog/>
          </div>
       </>
    )
 }
 
-export default HomePage;
+export default HomePage; // Keep default export

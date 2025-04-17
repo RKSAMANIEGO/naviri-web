@@ -1,4 +1,4 @@
-import styles from './producto.module.css' // Updated path
+import styles from './producto.module.css' 
 
 const HeaderProducts = () => {
     return (

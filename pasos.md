@@ -50,7 +50,7 @@ Esta es una guía paso a paso para migrar la estructura actual del proyecto a la
     -   [x] Mover `src/components/header/Header.jsx` (y `header.module.css`) a `src/shared/components/Header/`.
     -   [x] Mover `src/components/footer/Footer.jsx` (y `footer.module.css`) a `src/shared/components/Footer/`.
     -   [x] Mover `src/components/sidebar/Sidebar.jsx` (y `sidebar.module.css`) a `src/shared/components/Sidebar/`.
-    -   [ ] Identificar y mover otros componentes reutilizables (botones, modales base, inputs, `ProductCard.jsx` si es genérico) a `src/shared/components/`. Mover sus CSS Modules.
+    -   [ ] Identificar y mover otros componentes reutilizables (botones, modales base, inputs, `ProductCard.jsx` si es genérico) a `src/shared/components/`. Mover sus CSS Modules. (Moved Formulario, Testimonios)
     -   [x] Actualizar *todas* las importaciones de estos componentes movidos.
 -   [x] **Hooks Comunes:**
     -   [x] Identificar y mover hooks reutilizables a `src/shared/hooks/`. (No se encontraron hooks comunes en este momento, los hooks existentes son específicos de características).
