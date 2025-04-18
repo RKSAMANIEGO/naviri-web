@@ -56,9 +56,9 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie,ca
                                     // VALIDACION SI LA CATEGORIA TIENE PRODUCTOS ASOCIADOS
                                     ( confirmCategorieIncludeProducts.length > 0 ) ?
                                     Swal.fire({
-                                        title: `${row.name} tiene productos asociados`,
+                                        title: `${row.name} tiene ${confirmCategorieIncludeProducts.length} productos asociados`,
                                         text: 'Primero Elimine los Productos Asociados',
-                                        icon: 'error',
+                                        icon: 'warning',
                                         timer: 4000
                                     })
                                     :                   
