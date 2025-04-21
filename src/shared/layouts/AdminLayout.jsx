@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../../shared/components/Sidebar/Sidebar';
+import Sidebar from '../components/Sidebar/Sidebar';
 import UserSettings from "../../components/AdminPanel/AdminConfi";
 
 const AdminLayout = () => { 
