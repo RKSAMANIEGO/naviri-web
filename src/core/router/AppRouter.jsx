@@ -4,7 +4,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   PolicyPage,
   BlogAdminPage,
-  //ServiceAdminPage,
   LoginPage,
   //ProductAdmin, // Moved to features
   CategoriaPage,
