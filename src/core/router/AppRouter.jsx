@@ -1,8 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+
+/*FALTAN REESTRUCTURAR */
 import {
   PolicyPage,
   BlogAdminPage,
-  PolicyAdminPage,
   ServiceAdminPage,
   LoginPage,
   //ProductAdmin, // Moved to features
@@ -10,6 +11,9 @@ import {
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
+
+
+import PolicyAdminPage from '../../features/admin-policy/pages/PolicyAdminPage.jsx'; // Import the new policy admin page
 import HomePage from '../../features/homepage/pages/HomePage.jsx';
 import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 

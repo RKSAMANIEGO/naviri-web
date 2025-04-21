@@ -89,7 +89,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     width: "90vw",
                     maxWidth: "850px",
                     height: isDesktop ? "90vh" : "85vh",
-                    maxHeight: isDesktop ? "600px" : "650px",
+                    maxHeight: isDesktop ? "600px" : "600px",
                     padding: "0",
                     border: "none",
                     overflow: "auto",
