@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { message, Button, Image, Modal } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { createBlog, deleteBlog, getAllBlogs, updateBlog } from '../../services/blogService';
+// Removed unused blog service import
 import { createPromotion, deletePromotion, getPromotions, updatePromotion } from '../../services/promotionService';
 
 export const usePromotionAdmin = (form) => {

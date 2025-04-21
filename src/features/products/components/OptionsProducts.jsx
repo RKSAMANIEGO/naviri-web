@@ -1,0 +1,16 @@
+import React from 'react'
+import styles from './producto.module.css' // Updated path
+
+
+const OptionsProducts = () => {
+    return (
+        <section className={styles.options}>
+            <a href=""><i className="fa-solid fa-plus"></i></a>
+            <a href=""><i className="fa-solid fa-cart-shopping"></i></a>
+            <a href=""><i className="fa-solid fa-shield"></i></a>
+            <a href=""><i className="fa-solid fa-location-dot"></i></a>
+        </section>
+    )
+}
+
+export default OptionsProducts

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { getBlogs } from '../../services/blogService'
+import { getBlogs } from '../services/blogsApi.js' // Updated path
 import { 
   Calendar,
   TrendingUp,

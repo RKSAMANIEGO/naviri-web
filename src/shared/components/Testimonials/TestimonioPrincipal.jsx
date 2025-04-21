@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./TestimonioPrincipal.module.css";
-import fondoTestimonio from "../../assets/image/testimonio.jpg";
+import fondoTestimonio from "../../../assets/image/testimonio.jpg"; // Updated path
 import Stars from './stars.jsx'; 
-import { getTestimonios } from "../../services/testimoniosServices.js";
+import { getTestimonios } from "../../../services/testimoniosServices.js"; // Updated path
 import RotatingText from "./RotatingText.jsx";
 
 export default function Testi() {
@@ -74,7 +74,7 @@ export default function Testi() {
               >
                 <div className={styles.headerCard}>
                   <img
-                    src={testimonio.image.url || "../../assets/image/testiuser.png"}
+                    src={testimonio.image.url || "../../../assets/image/testiuser.png"} // Updated path
                     alt={testimonio.name_customer}
                     className={styles.avatar}
                   />

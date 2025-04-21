@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { message, Button, Image, Modal } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { createBlog, deleteBlog, getAllBlogs, updateBlog } from '../../services/blogService';
+import { createBlog, deleteBlog, updateBlog } from '../../services/blogService'; // Removed getAllBlogs
+import { getAllBlogs } from '../../features/blogs/services/blogsApi'; // Added import for getAllBlogs
 import { getCategories } from '../../services/categoriesService';
 
 export const useBlogAdmin = (form) => {

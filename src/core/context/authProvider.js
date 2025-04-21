@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { login, refreshToken } from '../services/authservices';
+import { login, refreshToken } from '../../services/authservices';
 import { jwtDecode } from 'jwt-decode';
 
 export const useAuthStore = create((set, get) => ({

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../context/authProvider"; 
+import { useAuthStore } from "../core/context/authProvider"; 
 import "./../styles/loginpage.css";
 import logoNavi from "./../assets/image/logo.jpg";
 import { FaUser, FaLock } from "react-icons/fa";

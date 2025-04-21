@@ -4,6 +4,7 @@ import styles from '../../styles/productAdmin.module.css'
 import ModalCrudProduct from './Modal/ModalCrudProduct'
 import ModalProducts from '../../components/Products/ModalProducts'
 import { productByName , deleteProduct } from '../../services/productService'
+import ModalProductsAdmin from './ModalProductsAdmin'
 const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) => {
 
     const [isOpenModal,setOpenModal] = useState(false)
@@ -106,8 +107,7 @@ const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) =
             
             </section>
             {(isOpenModal) && <ModalCrudProduct isOpen={isOpenModal} onClose={()=>setOpenModal(false)} titleModal="updateProduct" confirmActualizacionProducto={(confirm)=> isUpdateProduct(confirm) }  productPutTable={productSelected}/>} 
-            <ModalProducts isOpen={isOpenModalDetailsProduct} onClose={()=>setOpenModalDetailsProduct(false)} product={productSelected} title="productAdmin"/>
-        
+            <ModalProductsAdmin isOpen={isOpenModalDetailsProduct}  onClose={()=> setOpenModalDetailsProduct(false)} product={productSelected} title="productAdmin"/>
             </>
     )
 }
