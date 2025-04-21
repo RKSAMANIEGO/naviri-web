@@ -45,16 +45,17 @@ Esta es una guía paso a paso para migrar los módulos del panel administrativo 
 
 ---
 
--   [ ] **Módulo: `admin-categories`**
-    -   [ ] Crear carpeta `src/features/admin/admin-categories/`.
-    -   [ ] Crear subcarpetas necesarias.
-    -   [ ] **Mover Página:** Mover `src/pages/CategoriaPage.jsx` a `src/features/admin/admin-categories/pages/CategoryAdminPage.jsx`.
-    -   [ ] **Mover Componentes Específicos:** Mover componentes de gestión de categorías.
-    -   [ ] **Mover Hooks Específicos:** Mover hooks relacionados.
-    -   [ ] **Mover Servicios API:** Mover funciones CRUD de categorías.
-    -   [ ] **Actualizar Importaciones:** Corregir rutas en `AppRouter.jsx` y archivos movidos.
-    -   [ ] **Testear:** Verificar CRUD de categorías.
-    -   [ ] **Commit:** `feat(admin-categories): :sparkles: structure admin-categories feature`
+-   [x] **Módulo: `admin-categories`**
+    -   [x] Crear carpeta `src/features/admin-categories/`.
+    -   [x] Crear subcarpetas necesarias (`pages`, `components`, `components/Modal`, `services`, `styles`).
+    -   [x] **Mover Página:** Mover `src/pages/PageCategoriaAdmin/CategoriaPage.jsx` to `src/features/admin-categories/pages/CategoryAdminPage.jsx`.
+    -   [x] **Mover Componentes Específicos:** Movidos `CategorieContent`, `CategorieSearch`, `CategorieTable`, and `ModalSubCategorie` to `src/features/admin-categories/components/` (and `components/Modal/`).
+    -   [ ] **Mover Hooks Específicos:** (Identify and move if any exist).
+    -   [x] **Mover Servicios API:** Movidos category and subcategory functions from `src/services/categoriesService.js` and `src/services/subCategories.js` to `src/features/admin-categories/services/adminCategoriesApi.js`.
+    -   [x] **Mover Estilos Específicos:** Movido `src/styles/categorie.module.css` to `src/features/admin-categories/styles/categorie.module.css`.
+    -   [x] **Actualizar Importaciones:** Corregidas rutas in `AppRouter.jsx`, `CategoryAdminPage.jsx`, `CategorieContent.jsx`, `CategorieTable.jsx`, and `ModalSubCategorie.jsx`.
+    -   [x] **Testear:** Verificar CRUD de categorías.
+    -   [x] **Commit:** `feat(admin-categories): :sparkles: structure admin-categories feature`
 
 ---
 
