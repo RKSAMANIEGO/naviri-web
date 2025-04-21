@@ -1,0 +1,76 @@
+/*HEADER*/
+.headerQuestions {
+    background: linear-gradient(to right, #a855f7, #d946ef, #ec4899, #f43f5e, #f97316);
+    padding: 40px;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.headerQuestions h1 {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+.headerQuestions p {
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 60%;
+    text-align: center;
+    color: rgba(238, 238, 238, 0.922);
+}
+
+.search {
+    width: 50%;
+    position: relative;
+}
+
+.headerQuestions input {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background: white;
+    width: 100%;
+    border-radius: 20px;
+    color: black;
+    position: relative;
+}
+
+.headerQuestions input::placeholder {
+    color: rgb(152, 150, 150);
+}
+
+.icSearch {
+    color: black;
+    font-size: 1.3rem;
+    font-weight: 900;
+    position: absolute;
+    bottom: 26%;
+    right: 1%;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.icSearch :hover {
+    color: #dc8f8f;
+}
+
+/*CONTENT QUESTIONS*/
+.contentQuestions {
+    height: 40vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px;
+}
+
+.card {
+    width: 20%;
+    height: 60%;
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #b7b2b2;
+}

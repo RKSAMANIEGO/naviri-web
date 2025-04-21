@@ -7,11 +7,14 @@ import { useCart } from '../../context/CartContext';
 Modal.setAppElement("#root")
     
 const ModalProducts = ({isOpen, onClose, product, title}) => {
+
+    console.log(product);
     const [stock, setStock] = useState(1);
     const { addToCart } = useCart(0);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
     const [isAdding, setIsAdding] = useState(false);
 
+    console.log(product)
     useEffect(() => {
         setStock(1); // Inicializar en 1 para que siempre pueda añadirse al carrito
     }, [product]);
@@ -107,10 +110,10 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                 </section>
                 <section className={styles.sectionLast}>
                     <h2 className={styles.h2}>{product.name.toUpperCase()}</h2>
-                    <p className={styles.p}>{product.subcategories[0].name}</p>
+                    {/*<p className={styles.p}>{product.subcategories[0].name}</p>*/}
                     <p className={styles.precio}>S/{product.price}</p>
                     <p className={styles.descripcion}>{product.compatibility}</p>
-                    
+                    <p>{product.benefits}</p>
                     {title==="productCustomer" ?
                     <h3 className={styles.h3}>Cantidad</h3> :
                     <h3 className={styles.h3}>Beneficios</h3> }

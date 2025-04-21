@@ -26,8 +26,11 @@ import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdm
 
 import InfoEmails from '../../pages/formClient/InfoEmails';
 import InfoContact from '../../pages/contactoadmin/InfoContact';
-import ProductsPage from '../../features/products/pages/ProductsPage.jsx';
-import ContentProducts from '../../features/products/components/ContentProducts.jsx';
+
+import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
+import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
+import PageQuestionsAndAnswers from '../../pages/PageQuestionAndAnswers/PageQuestionsAndAnswers.jsx';
+
 
 const Router = () => {
   useEffect(() => {
@@ -52,6 +55,7 @@ const Router = () => {
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
+            <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} /> {/* Added new route frequently asked questions */}
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
 
