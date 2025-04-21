@@ -5,12 +5,12 @@ import {
   PolicyAdminPage,
   ServiceAdminPage,
   LoginPage,
-  ProductAdmin,
+  //ProductAdmin, // Moved to features
   CategoriaPage,
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
-import HomePage from '../../features/homepage/pages/HomePage.jsx'; // Changed to default import
+import HomePage from '../../features/homepage/pages/HomePage.jsx';
 import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
 import MainLayout from '../../shared/layouts/MainLayout';
@@ -20,12 +20,14 @@ import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
+import AdminDashboardPage from '../../features/admin-dashboard/pages/AdminDashboardPage'; // Import the new dashboard page
+import ProductAdminPage from '../../features/admin-products/pages/ProductAdminPage'; // Import the new product admin page
+import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdminPage'; // Import the new category admin page
 
 import InfoEmails from '../../pages/formClient/InfoEmails';
-// import ContentProducts from '../../components/Products/ContentProducts'; // Removed, moved to features
 import InfoContact from '../../pages/contactoadmin/InfoContact';
-import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
-import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
+import ProductsPage from '../../features/products/pages/ProductsPage.jsx';
+import ContentProducts from '../../features/products/components/ContentProducts.jsx';
 
 const Router = () => {
   useEffect(() => {
@@ -56,8 +58,9 @@ const Router = () => {
           <Route path="/login" element={<LoginPage />} />  
           <Route element={ <RequireAuth/> }>
             <Route element={<AdminLayout />}>
-              <Route path="/admin/panel/products" element={<ProductAdmin/>} />
-              <Route path="/admin/panel/categories" element={<CategoriaPage/>} />
+              <Route path="/admin/panel/dashboard" element={<AdminDashboardPage />} /> {/* Add dashboard route */}
+              <Route path="/admin/panel/products" element={<ProductAdminPage/>} /> {/* Updated route element */}
+              <Route path="/admin/panel/categories" element={<CategoryAdminPage/>} /> {/* Updated route element */}
               <Route path="/admin/panel/customers" element={<InfoContact/>} />
               <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
