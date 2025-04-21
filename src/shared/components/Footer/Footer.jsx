@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import styles from "./Footer.module.css";
 import logo from '../../../assets/image/logo-navi.png';
 import { getContact } from "../../../services/contactservices";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [contact, setContact] = useState({});
@@ -43,6 +44,7 @@ const Footer = () => {
             <li><a href="#">Cuidado Capilar</a></li>
             <li><a href="#">Fragancias</a></li>
             <li><a href="#">Accesorios</a></li>
+            <Link to="PreguntasFrecuentes"><li>Preguntas Frecuentes</li> </Link>
           </ul>
         </div>
 

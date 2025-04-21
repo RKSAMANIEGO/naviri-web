@@ -1,15 +1,19 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+
+/*FALTAN REESTRUCTURAR */
 import {
   PolicyPage,
   BlogAdminPage,
-  PolicyAdminPage,
-  ServiceAdminPage,
+  //ServiceAdminPage,
   LoginPage,
   //ProductAdmin, // Moved to features
   CategoriaPage,
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
+
+import ServiceAdminPage from '../../features/admin-services/page/ServiceAdminPage.jsx'; // Import the new service admin page
+import PolicyAdminPage from '../../features/admin-policy/pages/PolicyAdminPage.jsx'; // Import the new policy admin page
 import HomePage from '../../features/homepage/pages/HomePage.jsx';
 import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
@@ -26,8 +30,11 @@ import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdm
 
 import InfoEmails from '../../pages/formClient/InfoEmails';
 import InfoContact from '../../pages/contactoadmin/InfoContact';
-import ProductsPage from '../../features/products/pages/ProductsPage.jsx';
-import ContentProducts from '../../features/products/components/ContentProducts.jsx';
+
+import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
+import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
+import PageQuestionsAndAnswers from '../../pages/PageQuestionAndAnswers/PageQuestionsAndAnswers.jsx';
+
 
 const Router = () => {
   useEffect(() => {
@@ -52,6 +59,7 @@ const Router = () => {
             <Route path="/policy" element={<PolicyPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
+            <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} /> {/* Added new route frequently asked questions */}
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
 

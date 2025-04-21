@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import styles from "../../styles/footer.module.css";
+import styles from "../../styles//footer.module.css";
 import logo from '../../assets/image/logo-navi.png';
 import { getContact } from "../../services/contactservices";
 
@@ -29,7 +29,7 @@ const Footer = () => {
           </div>
           <h1 className={styles.footerdescrip}>
             <p>
-              Tu destino de belleza integral, donde la calidad y los mejores productos
+              Tu destino de belleza integral, donde la calidad y los mejores productos471- 
               se unen para realzar tu belleza natural.
             </p>
           </h1>
@@ -40,9 +40,9 @@ const Footer = () => {
           <ul>
             <li><a href="#">Cuidado Facial</a></li>
             <li><a href="#">Maquillaje</a></li>
-            <li><a href="#">Cuidado Capilar</a></li>
             <li><a href="#">Fragancias</a></li>
             <li><a href="#">Accesorios</a></li>
+            <li><a href="#">Preguntas frecuentes</a></li>
           </ul>
         </div>
 
@@ -52,7 +52,7 @@ const Footer = () => {
             <li><a href="#">Novedades</a></li>
             <li><a href="#">Más vendidos</a></li>
             <li><a href="#">Ofertas</a></li>
-            <li><a href="#">Productos Naturales</a></li>
+            <li><a href="#">Productos Naturales</a></li>34           
             <li><a href="/policy">Políticas</a></li>
             <li><a href="/blog">Blogs</a></li>
           </ul>
