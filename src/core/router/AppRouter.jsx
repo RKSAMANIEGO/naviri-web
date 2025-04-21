@@ -32,7 +32,8 @@ import InfoContact from '../../pages/contactoadmin/InfoContact';
 
 import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
-import PageQuestionsAndAnswers from '../../pages/PageQuestionAndAnswers/PageQuestionsAndAnswers.jsx';
+import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/page/PageQuestionsAndAnswers.jsx';
+
 
 
 const Router = () => {
