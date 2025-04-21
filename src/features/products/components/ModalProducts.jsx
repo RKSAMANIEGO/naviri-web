@@ -117,9 +117,10 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     <p style={{color:"black"}} className={styles.titleBenefits}><strong>Beneficios</strong></p> {/**ADD BENEFITS */}
 
                     <div className={styles.contentBeneficios}>
-
                         {product.benefits.map((obj,index) => (
-                            <p key={index} className={styles.descripcionBeneficios}>{obj}</p>
+                            <ul>
+                                <li key={index} className={styles.itemBenefits}>{obj}</li>
+                            </ul>
                         ))}
 
                     </div>
