@@ -7,6 +7,8 @@ import { useCart } from '../../cart/context/CartContext'; // Updated path to new
 Modal.setAppElement("#root")
 
 const ModalProducts = ({isOpen, onClose, product, title}) => {
+
+    console.log(product);
     const [stock, setStock] = useState(1);
     const { addToCart } = useCart();
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
@@ -85,9 +87,9 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     width: "90vw",
-                    maxWidth: "750px",
+                    maxWidth: "850px",
                     height: isDesktop ? "90vh" : "85vh",
-                    maxHeight: isDesktop ? "600px" : "400px",
+                    maxHeight: isDesktop ? "600px" : "650px",
                     padding: "0",
                     border: "none",
                     overflow: "auto",
@@ -110,6 +112,18 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     <p className={styles.p}>{product.subcategories && product.subcategories.length > 0 ? product.subcategories[0].name : ''}</p>
                     <p className={styles.precio}>S/{product.price}</p>
                     <p className={styles.descripcion}>{product.compatibility}</p>
+
+
+                    <p style={{color:"black"}} className={styles.titleBenefits}><strong>Beneficios</strong></p> {/**ADD BENEFITS */}
+
+                    <div className={styles.contentBeneficios}>
+
+                        {product.benefits.map((obj,index) => (
+                            <p key={index} className={styles.descripcionBeneficios}>{obj}</p>
+                        ))}
+
+                    </div>
+                
 
                     {title==="productCustomer" ?
                     <h3 className={styles.h3}>Cantidad</h3> :

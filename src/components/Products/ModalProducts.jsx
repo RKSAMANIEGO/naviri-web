@@ -7,6 +7,8 @@ import { useCart } from '../../context/CartContext';
 Modal.setAppElement("#root")
     
 const ModalProducts = ({isOpen, onClose, product, title}) => {
+
+    console.log(product);
     const [stock, setStock] = useState(1);
     const { addToCart } = useCart(0);
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
@@ -111,7 +113,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     {/*<p className={styles.p}>{product.subcategories[0].name}</p>*/}
                     <p className={styles.precio}>S/{product.price}</p>
                     <p className={styles.descripcion}>{product.compatibility}</p>
-                    
+                    <p>{product.benefits}</p>
                     {title==="productCustomer" ?
                     <h3 className={styles.h3}>Cantidad</h3> :
                     <h3 className={styles.h3}>Beneficios</h3> }
