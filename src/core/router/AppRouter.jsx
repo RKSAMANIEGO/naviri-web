@@ -22,6 +22,7 @@ import { useAuthStore } from '../context/authProvider';
 import { useEffect } from 'react';
 import AdminDashboardPage from '../../features/admin-dashboard/pages/AdminDashboardPage'; // Import the new dashboard page
 import ProductAdminPage from '../../features/admin-products/pages/ProductAdminPage'; // Import the new product admin page
+import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdminPage'; // Import the new category admin page
 
 import InfoEmails from '../../pages/formClient/InfoEmails';
 import InfoContact from '../../pages/contactoadmin/InfoContact';
@@ -59,7 +60,7 @@ const Router = () => {
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/dashboard" element={<AdminDashboardPage />} /> {/* Add dashboard route */}
               <Route path="/admin/panel/products" element={<ProductAdminPage/>} /> {/* Updated route element */}
-              <Route path="/admin/panel/categories" element={<CategoriaPage/>} />
+              <Route path="/admin/panel/categories" element={<CategoryAdminPage/>} /> {/* Updated route element */}
               <Route path="/admin/panel/customers" element={<InfoContact/>} />
               <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />

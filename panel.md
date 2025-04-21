@@ -40,8 +40,8 @@ Esta es una guía paso a paso para migrar los módulos del panel administrativo 
     -   [x] **Mover Servicios API:** Movidos admin product functions from `src/services/productService.js` to `src/features/admin-products/services/adminProductsApi.js`.
     -   [x] **Mover Estilos Específicos:** Movido `src/styles/productAdmin.module.css` to `src/features/admin-products/styles/productAdmin.module.css`.
     -   [x] **Actualizar Importaciones:** Corregidas rutas in `AppRouter.jsx`, `ProductAdminPage.jsx`, `ProductSearch.jsx`, `ProductsTable.jsx`, `ProductsCards.jsx`, `ModalCrudProduct.jsx`, `ModalProducts.jsx`, and `productService.js`.
-    -   [ ] **Testear:** Verificar CRUD de productos en el panel.
-    -   [ ] **Commit:** `feat(admin-products): :sparkles: structure admin-products feature`
+    -   [x] **Testear:** Verificar CRUD de productos en el panel.
+    -   [x] **Commit:** `feat(admin-products): :sparkles: structure admin-products feature`
 
 ---
 
