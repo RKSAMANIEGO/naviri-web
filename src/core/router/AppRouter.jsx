@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import {
   PolicyPage,
   BlogAdminPage,
-  ServiceAdminPage,
+  //ServiceAdminPage,
   LoginPage,
   //ProductAdmin, // Moved to features
   CategoriaPage,
@@ -12,7 +12,7 @@ import {
   PromotionAdminPage
 }  from '../../pages/index';
 
-
+import ServiceAdminPage from '../../features/admin-services/page/ServiceAdminPage.jsx'; // Import the new service admin page
 import PolicyAdminPage from '../../features/admin-policy/pages/PolicyAdminPage.jsx'; // Import the new policy admin page
 import HomePage from '../../features/homepage/pages/HomePage.jsx';
 import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
