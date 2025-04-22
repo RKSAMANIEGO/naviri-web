@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from '../../styles/productAdmin.module.css';
 
 const ComentAdmin = ({ onSearch }) => {
+  console.log(onSearch);
   const [value, setValue] = useState('');
 
   const handleSearch = () => {
