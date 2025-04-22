@@ -2,8 +2,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 /*FALTAN REESTRUCTURAR */
 import {
-  PolicyPage,
-  BlogAdminPage,
+
+  //PolicyAdminPage,
+  //ServiceAdminPage,
+
   LoginPage,
   //ProductAdmin, // Moved to features
   CategoriaPage,
@@ -19,6 +21,7 @@ import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx';
 import MainLayout from '../../shared/layouts/MainLayout';
 import AdminLayout from '../../shared/layouts/AdminLayout';
 import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';
+import PolicyPage from '../../features/policy/pages/PolicyPage.jsx'; 
 
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
@@ -26,6 +29,8 @@ import { useEffect } from 'react';
 import AdminDashboardPage from '../../features/admin-dashboard/pages/AdminDashboardPage'; // Import the new dashboard page
 import ProductAdminPage from '../../features/admin-products/pages/ProductAdminPage'; // Import the new product admin page
 import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdminPage'; // Import the new category admin page
+import BlogAdminPage from '../../features/admin-blog/pages/BlogAdminPage.jsx'; // Import the new blog admin page
+
 
 import InfoEmails from '../../pages/formClient/InfoEmails';
 import InfoContact from '../../pages/contactoadmin/InfoContact';
