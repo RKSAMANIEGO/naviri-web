@@ -1,16 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-/*FALTAN REESTRUCTURAR */
-import {
-  //PolicyAdminPage,
-  //ServiceAdminPage,
-  //LoginPage,
-  //ProductAdmin, // Moved to features
-  //CategoriaPage,
-  ComentAdminPage,
-  PromotionAdminPage
-}  from '../../pages/index';
-
 import { useEffect } from 'react'; 
 import PageCategorie from '../../features/categories/pages/PageCategorie.jsx';
 import LoginPage from '../../features/login/Pages/LoginPage.jsx';
@@ -31,10 +20,9 @@ import ProductAdminPage from '../../features/admin-products/pages/ProductAdminPa
 import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdminPage'; // Import the new category admin page
 import BlogAdminPage from '../../features/admin-blog/pages/BlogAdminPage.jsx'; // Import the new blog admin page
 import ComentAdminPage from '../../features/admin-coments/pages/ComentAdminPage.jsx';
-
-import InfoEmails from '../../features/admin-email/pages/InfoEmails.jsx'
-import InfoContact from '../../pages/contactoadmin/InfoContact';
-
+import PromotionAdminPage from '../../features/admin-promotion/pages/PromotionAdminPage'; // Import the new promotion admin page
+import InfoEmails from '../../features/admin-email/pages/InfoEmails.jsx';
+import ContactAdminPage from '../../features/admin-contacts/pages/ContactAdminPage.jsx';
 
 import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
@@ -75,7 +63,7 @@ const Router = () => {
               <Route path="/admin/panel/dashboard" element={<AdminDashboardPage />} /> {/* Add dashboard route */}
               <Route path="/admin/panel/products" element={<ProductAdminPage/>} /> {/* Updated route element */}
               <Route path="/admin/panel/categories" element={<CategoryAdminPage/>} /> {/* Updated route element */}
-              <Route path="/admin/panel/customers" element={<InfoContact/>} />
+              <Route path="/admin/panel/customers" element={<ContactAdminPage/>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
