@@ -6,12 +6,8 @@ import {
   //PolicyAdminPage,
   //ServiceAdminPage,
 
-  LoginPage,
+  LoginPage, 
   //ProductAdmin, // Moved to features
-  CategoriaPage,
-  ComentAdminPage,
-
- 
 }  from '../../pages/index';
 
 import ServiceAdminPage from '../../features/admin-services/page/ServiceAdminPage.jsx'; // Import the new service admin page
@@ -34,10 +30,10 @@ import AdminDashboardPage from '../../features/admin-dashboard/pages/AdminDashbo
 import ProductAdminPage from '../../features/admin-products/pages/ProductAdminPage'; // Import the new product admin page
 import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdminPage'; // Import the new category admin page
 import BlogAdminPage from '../../features/admin-blog/pages/BlogAdminPage.jsx'; // Import the new blog admin page
+import ComentAdminPage from '../../features/admin-coments/pages/ComentAdminPage.jsx';
 
-
-import InfoEmails from '../../pages/formClient/InfoEmails';
-import InfoContact from '../../pages/contactoadmin/InfoContact';
+import InfoEmails from '../../pages/formClient/InfoEmails'; // Falta restructurar
+import InfoContact from '../../pages/contactoadmin/InfoContact'; // Falta restructurar
 
 import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
@@ -79,7 +75,6 @@ const Router = () => {
               <Route path="/admin/panel/products" element={<ProductAdminPage/>} /> {/* Updated route element */}
               <Route path="/admin/panel/categories" element={<CategoryAdminPage/>} /> {/* Updated route element */}
               <Route path="/admin/panel/customers" element={<InfoContact/>} />
-              <Route path="/admin/panel/comentary" element={<h1>Comentarios</h1>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
