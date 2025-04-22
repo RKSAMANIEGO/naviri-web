@@ -12,6 +12,7 @@ import {
   SunOutlined,
   MoonOutlined,
   LeftOutlined,
+  QuestionOutlined,
   RightOutlined,
   MailOutlined,
   TagsOutlined
@@ -109,6 +110,11 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               key: '/admin/panel/promotions',
               icon: <TagsOutlined />,
               label: 'Promociones',
+            },
+            {
+              key: '/admin/panel/questions',
+              icon: <QuestionOutlined />,
+              label: 'Preguntas y Respuestas',
             },
             {
               key: 'page',

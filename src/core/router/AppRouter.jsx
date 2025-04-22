@@ -33,7 +33,7 @@ import InfoContact from '../../pages/contactoadmin/InfoContact';
 import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
 import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/page/PageQuestionsAndAnswers.jsx';
-
+import Questions from '../../features/admin-questions/page/Questions.jsx' // Added new import admin questions
 
 
 const Router = () => {
@@ -77,6 +77,7 @@ const Router = () => {
               <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
               <Route path="/admin/panel/mail" element={ <InfoEmails/>} />
               <Route path="/admin/panel/promotions" element={ <PromotionAdminPage/>} />
+              <Route path="/admin/panel/questions" element={<Questions/>} />
             </Route>
           </Route>
 
