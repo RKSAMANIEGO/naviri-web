@@ -520,8 +520,8 @@
 	flex-direction: column;
 }
 
-.descripcionBeneficios {
-	font-size: 12px;
+.itemBenefits {
+	font-size: 14px;
 }
 
 /* Estilo para el botón en estado de añadiendo */
@@ -612,8 +612,9 @@
 		order: 6;
 	}
 
-	.descripcionBeneficios {
-		font-size: 10px;
+
+	.itemBenefits {
+		font-size: 12px;
 	}
 
 
@@ -739,7 +740,9 @@
 		line-height: 15px;
 	}
 
-
+	.itemBenefits {
+		font-size: 11px;
+	}
 
 	/*OPTIONS PRODUCTS*/
 
@@ -863,6 +866,7 @@
 		font-size: 9px;
 	}
 
+
 	.sectionProducts {
 		width: 150px;
 		height: 250px;
@@ -967,8 +971,8 @@
 		width: 100%;
 	}
 
-	.descripcionBeneficios {
-		font-size: 8px;
+	.itemBenefits {
+		font-size: 10px;
 	}
 
 	.sectionProducts {

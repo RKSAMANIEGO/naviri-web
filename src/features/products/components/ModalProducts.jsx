@@ -89,7 +89,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     width: "90vw",
                     maxWidth: "850px",
                     height: isDesktop ? "90vh" : "85vh",
-                    maxHeight: isDesktop ? "600px" : "650px",
+                    maxHeight: isDesktop ? "600px" : "600px",
                     padding: "0",
                     border: "none",
                     overflow: "auto",
@@ -117,9 +117,10 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     <p style={{color:"black"}} className={styles.titleBenefits}><strong>Beneficios</strong></p> {/**ADD BENEFITS */}
 
                     <div className={styles.contentBeneficios}>
-
                         {product.benefits.map((obj,index) => (
-                            <p key={index} className={styles.descripcionBeneficios}>{obj}</p>
+                            <ul>
+                                <li key={index} className={styles.itemBenefits}>{obj}</li>
+                            </ul>
                         ))}
 
                     </div>

@@ -1,13 +1,20 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+
+/*FALTAN REESTRUCTURAR */
 import {
-  PolicyAdminPage,
-  ServiceAdminPage,
+
+  //PolicyAdminPage,
+  //ServiceAdminPage,
+
   LoginPage,
   //ProductAdmin, // Moved to features
   CategoriaPage,
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
+
+import ServiceAdminPage from '../../features/admin-services/page/ServiceAdminPage.jsx'; // Import the new service admin page
+import PolicyAdminPage from '../../features/admin-policy/pages/PolicyAdminPage.jsx'; // Import the new policy admin page
 import HomePage from '../../features/homepage/pages/HomePage.jsx';
 import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
@@ -30,7 +37,8 @@ import InfoContact from '../../pages/contactoadmin/InfoContact';
 
 import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
-import PageQuestionsAndAnswers from '../../pages/PageQuestionAndAnswers/PageQuestionsAndAnswers.jsx';
+import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/page/PageQuestionsAndAnswers.jsx';
+
 
 
 const Router = () => {

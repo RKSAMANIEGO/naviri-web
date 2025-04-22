@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import { useEffect, useState } from 'react'
 import ModalSubCategorie from './Modal/ModalSubCategorie' // Adjusted path (assuming modal moves)
 import {getSubCategorie} from '../services/adminCategoriesApi' // Updated path
+import {listProducts} from '../../admin-products/services/adminProductsApi'
 
 const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie,categorieFilter}) => {
 
@@ -32,45 +33,64 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie,ca
             name: 'Opciones',
             cell:row=>(
                 <div className={styles.optionCategorieTable}>
+                    
                     <i className="fa-solid fa-pencil" onClick={async()=>{
                         localStorage.setItem("idCat",row.id);
                         setConfirmUpdate(!isConfirmUpdate);
                         optionPutCategorie(!isConfirmUpdate);
                     }}/>
+
                     <i className="fa-solid fa-trash-can" onClick={async()=>{
-                        Swal.fire({
-                                    title: '¿Estás seguro de eliminar este producto?',
-                                    text: 'No podrás revertir esto',
-                                    icon:"warning",
-                                    showCancelButton: true,
-                                    cancelButtonColor:"rgb(38, 86, 218)",
-                                    confirmButtonColor:"rgb(228, 34, 170)",
-                                    confirmButtonText: 'Sí, eliminar',
-                                    cancelButtonText:"Cancelar"
-                                }).then(async(result)=>{
-                                    if(result.value){
-                                        const response = await deleteCategorie(row.id);
-                                        if(response){
-                                            Swal.fire({
-                                                title: 'Categoria eliminada',
-                                                text: 'La categoria ha sido eliminada con exito',
-                                                icon: 'success',
-                                                timer: 2000
-                                            });
-                                            setConfirmDelete(!isConfirmDelete);
-                                            updateListCategorie(!isConfirmDelete);
-
-
-                                        }else{
-                                            Swal.fire({
-                                                title: 'Error',
-                                                text: 'La categoria no se pudo eliminar',
-                                                icon: 'error',
-                                                timer: 2000
-                                            })
+                    
+                        //LISTAR LOS PRODUCTOS PARA VALIDAR LA ELIMINACION DE UNA CATEGORIA
+                        const allProducts = await listProducts(1, 1000);
+                        //FILTRAR LA CATEGORIA SI TIENE PRODUCTOS ASOCIADOS
+                        if(allProducts){
+                                const confirmCategorieIncludeProducts = allProducts?.data.data.filter((product) => {
+                                return product.categories.some((category) => category.name === row.name) });
+                    
+                                    // VALIDACION SI LA CATEGORIA TIENE PRODUCTOS ASOCIADOS
+                                    ( confirmCategorieIncludeProducts.length > 0 ) ?
+                                    Swal.fire({
+                                        title: `${row.name} tiene ${confirmCategorieIncludeProducts.length} productos asociados`,
+                                        text: 'Primero Elimine los Productos Asociados',
+                                        icon: 'warning',
+                                        timer: 4000
+                                    })
+                                    :                   
+                                    Swal.fire({
+                                        title: '¿Estás seguro de eliminar este producto?',
+                                        text: 'No podrás revertir esto',
+                                        icon:"warning",
+                                        showCancelButton: true,
+                                        cancelButtonColor:"rgb(38, 86, 218)",
+                                        confirmButtonColor:"rgb(228, 34, 170)",
+                                        confirmButtonText: 'Sí, eliminar',
+                                        cancelButtonText:"Cancelar"
+                                    }).then(async(result)=>{
+                                        if(result.value){
+                                            const response = await deleteCategorie(row.id);
+                                            if(response){
+                                                Swal.fire({
+                                                    title: 'Categoria eliminada',
+                                                    text: 'La categoria ha sido eliminada con exito',
+                                                    icon: 'success',
+                                                    timer: 2000
+                                                });
+                                                setConfirmDelete(!isConfirmDelete);
+                                                updateListCategorie(!isConfirmDelete);
+                                            }
+                                            else{
+                                                Swal.fire({
+                                                    title: 'Error',
+                                                    text: 'La categoria no se pudo eliminar',
+                                                    icon: 'error',
+                                                    timer: 2000 })
+                                            }
                                         }
                                     }
-                                })}}
+                                )}}                    
+                    }  
                     />
                     <i className="fa-solid fa-eye" onClick={async()=> {
                         setModalSubCategorie(true);
