@@ -67,11 +67,9 @@ const ModalQuestions = ({isOpen,onClosed,titleModal}) => {
         <Form.Item 
           className={styles.pregunta} 
           name="question"
-          //label={<span className={styles.labelQuestions}>Ingrese la Pregunta</span>}
-          label="Ingrese la Pregunta"
+          label="Ingrese la Pregunta" 
           >
           <Input placeholder='Escribiendo...✍🏻' className={styles.inputPregunta} style={{width:"100%", border:"1px solid gray"}}/>
-          {/*<span className={styles.labelQuestions}>Ingrese la Pregunta</span>*/}
         </Form.Item>
       
         <Form.List name="respuestas">
@@ -85,7 +83,7 @@ const ModalQuestions = ({isOpen,onClosed,titleModal}) => {
                   name={name}
                   rules={[{ required: true, message: 'Ingrese una respuesta' }]}
                 >
-                  <Input placeholder="Respuesta..." className={styles.inputRespuestas}  style={{width:"530px", border:"1px solid gray"}}/>
+                  <Input placeholder="Respuesta..." className={styles.inputRespuestas}  style={{width:"590px", border:"1px solid gray"}}/>
                 </Form.Item>
                 <MinusCircleOutlined onClick={() => remove(name)} />
               </Space>

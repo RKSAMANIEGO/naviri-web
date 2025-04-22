@@ -1,4 +1,4 @@
-.wrapperQuestions{
+.wrapperQuestions {
     padding: 20px 40px;
     display: flex;
     flex-direction: column;
@@ -6,29 +6,34 @@
     position: relative;
     height: 85vh;
 }
-.wrapperQuestions h1{
+
+.wrapperQuestions h1 {
     font-size: 3rem;
     font-family: "Great Vibes", cursive;
     font-weight: 600;
     font-style: normal;
 }
-.search :global(.ant-input){
-    padding: 8px;
-    font-size: 16px;
+
+.search :global(.ant-input) {
+    padding: 5px 20px;
+    font-size: 14px;
     border: 1px solid rgb(233, 140, 213);
 }
-.search :global(.ant-input)::placeholder{
+
+.search :global(.ant-input)::placeholder {
     color: rgb(139, 136, 136);
+    font-size: 12px;
 }
 
-.search :global(.ant-btn){
+.search :global(.ant-btn) {
     background-color: rgb(241, 88, 208);
-    padding: 20.6px;
+    padding: 16px;
     font-weight: 900;
     color: white;
 }
+
 /*BOTON ADD*/
-.addOptions{
+.addOptions {
     position: absolute;
     bottom: 0;
     right: 20px;
@@ -37,18 +42,21 @@
     color: white;
     padding: 10px;
     border-radius: 50%;
-    cursor:pointer;
+    cursor: pointer;
     transition: all 0.2s ease-in-out;
-    animation : move 1s ease-in-out infinite alternate
+    animation: move 1s ease-in-out infinite alternate
 }
-@keyframes move{
-    0%{
+
+@keyframes move {
+    0% {
         transform: translateY(0);
     }
-    100%{
+
+    100% {
         transform: translateY(5px)
     }
 }
-.addOptions:hover{
+
+.addOptions:hover {
     box-shadow: 0 0 15px rgb(170, 9, 130);
 }

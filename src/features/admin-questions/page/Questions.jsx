@@ -16,7 +16,7 @@
           <h1>Preguntas y Respuestas</h1>
           <Search  placeholder='Ingrese la Pregunta...' enterButton className={styles.search}/>
           <TableQuestions/>
-          <Tooltip title="Agregar Una Pregunta">
+          <Tooltip title="Agregar Una Pregunta"  placement="left" overlayInnerStyle={{background:"white",color:"gray",boxShadow:"0 0 15px gray"}}>
             <PlusOutlined className={styles.addOptions} onClick={()=>setIsOpen(true)}/>
           </Tooltip>
           

@@ -13,13 +13,24 @@ const TableQuestions = () => {
             style:{
                 display:"flex",
                 justifyContent:"start",
-                fontSize:"1rem",
+                fontSize:"0.8rem",
                 fontWeight:"bold",
-                color:"white",
-                backgroundColor:"rgb(209, 30, 200)",
+                color: 'rgba(255, 107, 188, 1)',
+                backgroundColor:"rgba(255, 241, 249, 1)",
                 padding:"10px 15px",
+            
+            } 
+        },
+        cells:{
+            style:{
+                display:"flex",
+                justifyContent:"start",
+                fontSize:"0.7rem",
+                fontWeight:"700",
+                padding:"5px 15px",
+                textTransform:"capitalize"
             }
-        }
+        },
     }
 
     const colums =[
@@ -49,8 +60,8 @@ const TableQuestions = () => {
                             text: "No podras revertir este cambio",
                             icon: 'warning',
                             showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
+                            confirmButtonColor: 'rgb(228, 34, 170)',
+                            cancelButtonColor: 'rgb(38, 86, 218)',
                             confirmButtonText: 'Si, eliminar!'
                         }).then((result) => {
                             if (result.isConfirmed) {
@@ -73,21 +84,23 @@ const TableQuestions = () => {
 
     ]
 
-  return (
+    return (
     <>
-    <Table
-     columns={colums}
-     data={questions}
-     customStyles={styleTableQuestions}
-     highlightOnHover
-     pointerOnHover
-     paginationPerPage={5}
-     paginationRowsPerPageOptions={[5]}
-     pagination
-    />
-    <ModalQuestions isOpen={isOpenModal} onClosed={()=> setIsOpenModal(false)} titleModal="updateQuestion"/>
+        <Table
+        columns={colums}
+        data={questions}
+        customStyles={styleTableQuestions}
+        highlightOnHover
+        pointerOnHover
+        paginationPerPage={5}
+        paginationRowsPerPageOptions={[5]}
+        pagination
+        />
+        
+        <ModalQuestions isOpen={isOpenModal} onClosed={()=> setIsOpenModal(false)} titleModal="updateQuestion"/>
     </>
-  )
+    
+    )
 }
 
 export default TableQuestions

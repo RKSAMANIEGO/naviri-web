@@ -1,24 +1,28 @@
-.wrapperOptions{
+.wrapperOptions {
     display: flex;
     gap: 10px;
 }
-.EditOption{
+
+.EditOption {
     padding: 5px 7px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgb(216, 168, 36);
+    background-color: #d8a713;
     color: white;
 }
-.EditOption:hover{
+
+.EditOption:hover {
     transform: scale(1.1);
 }
-.DeleteOption{
+
+.DeleteOption {
     padding: 5px 7px;
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgb(212, 21, 21);
+    background-color: rgb(231, 72, 72);
     color: white;
 }
-.DeleteOption:hover{
+
+.DeleteOption:hover {
     transform: scale(1.1);
 }
