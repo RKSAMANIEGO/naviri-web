@@ -2,17 +2,18 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 /*FALTAN REESTRUCTURAR */
 import {
-
   //PolicyAdminPage,
   //ServiceAdminPage,
-
-  LoginPage,
+  //LoginPage,
   //ProductAdmin, // Moved to features
-  CategoriaPage,
+  //CategoriaPage,
   ComentAdminPage,
   PromotionAdminPage
 }  from '../../pages/index';
 
+import { useEffect } from 'react'; 
+import PageCategorie from '../../features/categories/pages/PageCategorie.jsx';
+import LoginPage from '../../features/login/Pages/LoginPage.jsx';
 import ServiceAdminPage from '../../features/admin-services/page/ServiceAdminPage.jsx'; // Import the new service admin page
 import PolicyAdminPage from '../../features/admin-policy/pages/PolicyAdminPage.jsx'; // Import the new policy admin page
 import HomePage from '../../features/homepage/pages/HomePage.jsx';
@@ -20,20 +21,20 @@ import BlogPage from '../../features/blogs/pages/BlogPage.jsx';
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
 import MainLayout from '../../shared/layouts/MainLayout';
 import AdminLayout from '../../shared/layouts/AdminLayout';
-import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';
 import PolicyPage from '../../features/policy/pages/PolicyPage.jsx'; 
 
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
-import { useEffect } from 'react';
+
 import AdminDashboardPage from '../../features/admin-dashboard/pages/AdminDashboardPage'; // Import the new dashboard page
 import ProductAdminPage from '../../features/admin-products/pages/ProductAdminPage'; // Import the new product admin page
 import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdminPage'; // Import the new category admin page
 import BlogAdminPage from '../../features/admin-blog/pages/BlogAdminPage.jsx'; // Import the new blog admin page
 
 
-import InfoEmails from '../../pages/formClient/InfoEmails';
-import InfoContact from '../../pages/contactoadmin/InfoContact';
+//import InfoEmails from '../../pages/formClient/InfoEmails'; //
+import InfoEmails from '../../features/admin-email/pages/InfoEmails.jsx'
+import InfoContact from '../../pages/contactoadmin/InfoContact'; //
 
 import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import

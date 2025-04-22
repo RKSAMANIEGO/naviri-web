@@ -1,6 +1,6 @@
 export { default as HomePage } from "./home/Home";
 export { default as PolicyPage } from "./policity/PolicyPage";
-export { default as LoginPage } from "./LoginPage";
+//export { default as LoginPage } from "./LoginPage";
 // export { default as MainLayout } from "./layout/MainLayout"; // Movido a shared
 // export { default as AdminLayout } from "./layout/AdminLayout"; // Movido a shared
 // export { default as BlogPage } from "./blog/BlogPage"; // Moved to features/blogs

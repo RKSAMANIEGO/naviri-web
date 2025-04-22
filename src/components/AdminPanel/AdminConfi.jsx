@@ -50,7 +50,7 @@ const EditProfile = () => {
         setError(data.message || 'Error al enviar el código.');
       }
     } catch (err) {
-      setError('Error de red al enviar el código.');
+      setError('Error de red al enviar el código.'+err);
     }
   };
 
@@ -73,7 +73,7 @@ const EditProfile = () => {
           setError(data.message || 'Código incorrecto.');
         }
       } catch (err) {
-        setError('Error al verificar el código.');
+        setError('Error al verificar el código.'+err);
       }
     } else {
       setError('Código inválido.');
@@ -109,7 +109,7 @@ const EditProfile = () => {
         setError(data.message || 'Error al cambiar la contraseña.');
       }
     } catch (err) {
-      setError('Error de red al cambiar la contraseña.');
+      setError('Error de red al cambiar la contraseña.'+err);
     }
   };
 
