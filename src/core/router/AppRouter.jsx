@@ -31,10 +31,9 @@ import ProductAdminPage from '../../features/admin-products/pages/ProductAdminPa
 import CategoryAdminPage from '../../features/admin-categories/pages/CategoryAdminPage'; // Import the new category admin page
 import BlogAdminPage from '../../features/admin-blog/pages/BlogAdminPage.jsx'; // Import the new blog admin page
 
-
-//import InfoEmails from '../../pages/formClient/InfoEmails'; //
 import InfoEmails from '../../features/admin-email/pages/InfoEmails.jsx'
-import InfoContact from '../../pages/contactoadmin/InfoContact'; //
+import InfoContact from '../../pages/contactoadmin/InfoContact';
+
 
 import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Added new import
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
