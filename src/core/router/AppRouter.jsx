@@ -8,9 +8,6 @@ import {
 
   LoginPage, 
   //ProductAdmin, // Moved to features
-  //CategoriaPage,
-  //ComentAdminPage,
-  PromotionAdminPage
 }  from '../../pages/index';
 
 import ServiceAdminPage from '../../features/admin-services/page/ServiceAdminPage.jsx'; // Import the new service admin page
@@ -21,7 +18,10 @@ import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx';
 import MainLayout from '../../shared/layouts/MainLayout';
 import AdminLayout from '../../shared/layouts/AdminLayout';
 import PageCategorie from '../../pages/PageCategoriaLanding/PageCategorie';
-import PolicyPage from '../../features/policy/pages/PolicyPage.jsx'; 
+import PolicyPage from '../../features/policy/pages/PolicyPage.jsx';
+
+import PromotionAdminPage from '../../features/admin-promotion/pages/PromotionAdminPage.jsx';
+
 
 import RequireAuth from './RequireAuth';
 import { useAuthStore } from '../context/authProvider';
