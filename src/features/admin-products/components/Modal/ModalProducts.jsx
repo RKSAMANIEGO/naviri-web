@@ -92,7 +92,9 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
                     border: "none",
                     overflow: "auto",
                     borderRadius: "10px",
-                    backgroundColor: "white"
+                    backgroundColor: "white",
+                
+
                 }
             }}
         >

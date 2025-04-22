@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import styles from '../../styles/productAdmin.module.css';
+import styles from '../styles/productAdmin.module.css';
 
-const ComentAdmin = ({ onSearch }) => {
-  console.log(onSearch);
+const EmailSearch = ({ onSearch }) => {
   const [value, setValue] = useState('');
 
   const handleSearch = () => {
@@ -11,8 +10,8 @@ const ComentAdmin = ({ onSearch }) => {
 
   return (
     <div className={styles.productSearch}>
-      <h2>Gestión de Comentarios</h2>
-      <p>Administra los comentarios de los clientes. Puedes buscar, editar o eliminar entradas.</p>
+      <h2>Gestión de Correos Electrónicos</h2>
+      <p>Administra los correos electrónicos registrados. Puedes buscar, editar y cambiar el estado de los correos.</p>
       <div>
         <label>
           <input
@@ -21,7 +20,7 @@ const ComentAdmin = ({ onSearch }) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-            placeholder="Buscar por Cliente..."
+            placeholder="Buscar por correo..."
           />
           <i 
             className="fa-solid fa-magnifying-glass iconSearch"
@@ -33,4 +32,4 @@ const ComentAdmin = ({ onSearch }) => {
   );
 };
 
-export default ComentAdmin;
+export default EmailSearch;
