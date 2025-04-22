@@ -126,6 +126,7 @@ export const useCommentAdmin = (form) => {
       
       // Refresh data from API to ensure consistency
       setRefreshKey(prev => prev + 1);
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       message.error('Error al guardar el comentario');
     }
