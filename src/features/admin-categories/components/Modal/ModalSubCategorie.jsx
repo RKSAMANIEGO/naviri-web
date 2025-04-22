@@ -3,7 +3,8 @@ import ModalSubCat from 'react-modal'
 import styles from '../../styles/subCategorie.module.css' // Adjusted path
 import TableSubCategorie from 'react-data-table-component'
 import {message} from 'antd'
-import {getSubCategorie, postSubCategories,deleteSubCategorie} from '../../services/adminCategoriesApi' 
+import {getSubCategorie, postSubCategories,deleteSubCategorie} from '../../services/adminCategoriesApi'
+import {listProducts} from '../../../admin-products/services/adminProductsApi'
 import Swal from 'sweetalert2'
 ModalSubCat.setAppElement("#root");
 const ModalSubCategorie = ({isOpen,onClose,dataSubCategorie,nameCategorie}) => {
@@ -66,38 +67,63 @@ const ModalSubCategorie = ({isOpen,onClose,dataSubCategorie,nameCategorie}) => {
             name:"Opciones",
             cell:row=>(
                 <div className={styles.subCategorieOptions}>
-                    <i className="fa-solid fa-trash-can" onClick={()=>{
+                    
+                    <i className="fa-solid fa-trash-can" onClick={async()=>{
 
-                        Swal.fire({
-                            title:"Estas seguro de eliminar la Sub Categoria "+row.name.toUpperCase(),
-                            text: "Esta acción no se puede deshacer",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Si, eliminar',
-                            cancelButtonText: 'No, cancelar',
-                            }).then(async(result) =>{
-                                if(result.value){
-                                    const response = await deleteSubCategorie(row.name);
-                                    if(response){
-                                        Swal.fire({
-                                            title: 'Subcategoría eliminada',
-                                            text: 'La subcategoría se eliminó correctamente',
-                                            icon: 'success',
-                                            timer:2000
-                                        });
-                                        setUpdateDataSubCategorie(!updateDataSubCategorie);
-                                    }else{
-                                        Swal.fire({
-                                            title: 'Error',
-                                            text: 'No se pudo eliminar la subcategoría',
-                                            icon: 'error',
-                                            timer:2000})
-                                    }
-                                }
-                            })
-                        }} />
+                        //LISTAR LOS PRODUCTOS PARA VALIDAR LA ELIMINACION DE UNA SUB_CATEGORIA
+                        const allProducts = await listProducts(1, 1000);
+                        
+                        if(allProducts){
+                            const confirmSubCategorieIncludeProducts = allProducts?.data.data.filter(product => {
+                            return product.categories.some(categorie => categorie.sub_categories.some(subcategorie => subcategorie.name === row.name))});
+
+                            if(confirmSubCategorieIncludeProducts.length > 0){
+                            
+                                Swal.fire({
+                                    title: `${row.name} tiene ${confirmSubCategorieIncludeProducts.length} productos asociados`,
+                                    text: 'Primero Elimine los Productos Asociados',
+                                    icon: 'warning',
+                                    timer: 4000
+                                })
+                            
+                            }else{
+        
+                                Swal.fire({
+                                    title:"Estas seguro de eliminar la Sub Categoria "+row.name.toUpperCase(),
+                                    text: "Esta acción no se puede deshacer",
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Si, eliminar',
+                                    cancelButtonText: 'No, cancelar',
+                                    }).then(async(result) =>{
+                                        if(result.value){
+                                            const response = await deleteSubCategorie(row.name);
+                                            if(response){  
+
+                                                Swal.fire({
+                                                    title: 'Subcategoría eliminada',
+                                                    text: 'La subcategoría se eliminó correctamente',
+                                                    icon: 'success',
+                                                    timer:2000
+                                                });
+                                                setUpdateDataSubCategorie(!updateDataSubCategorie);
+                                            }
+                                            else{
+                                                Swal.fire({
+                                                    title: 'Error',
+                                                    text: 'No se pudo eliminar la subcategoría',
+                                                    icon: 'error',
+                                                    timer:2000}) 
+                                            }
+                                        }
+                                    });
+
+                            }
+                        }   
+                    }} />
+
                 </div>
             )
         }

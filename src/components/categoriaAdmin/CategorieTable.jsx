@@ -15,8 +15,8 @@ const CategorieTable = ({dataCategorie,updateListCategorie,optionPutCategorie,ca
     const[dataSubCategoria,setDataSubCategoria]=useState([]);
     const[nameCategorie,setNameCategorie]=useState('');
     const[dataCategorieFilter,setDataCategorieFilter]=useState(null);
-    const[confirmDeleteCategorie,setConfirmDeleteCategorie]=useState(false);
-    const [confirmDeleteCat,setConfirmDeleteCat]=useState(false);
+    //const[confirmDeleteCategorie,setConfirmDeleteCategorie]=useState(false);
+    //const [confirmDeleteCat,setConfirmDeleteCat]=useState(false);
 
     useEffect(()=>{
             setDataCategorieFilter(categorieFilter)
