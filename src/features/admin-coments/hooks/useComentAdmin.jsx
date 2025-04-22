@@ -3,23 +3,15 @@ import { message, Button, Modal, Image } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import React from 'react';
 import dayjs from 'dayjs';
-import { createTestimonios, deleteTestimonio, getTestimoniosPage, updateTestimonio } from '../../services/testimoniosServices';
+import { createTestimonios, deleteTestimonio, getTestimoniosPage, updateTestimonio } from '../services/testimoniosService';
 
 export const useCommentAdmin = (form) => {
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      name_customer: 'Juan Pérez',
-      description: 'Este es un excelente artículo sobre React.',
-      qualification: 5,
-      date: '2025-04-03',
-    },
-  ]);
+  const [comments, setComments] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentComment, setCurrentComment] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0); // Add a refresh key
 
-  // O usa 'dayjs' si es necesario
+  // Load comments from API
   const loadComent = async (page = 1) => {
       try {
         const response = await getTestimoniosPage(page);
@@ -29,7 +21,7 @@ export const useCommentAdmin = (form) => {
         }
       // eslint-disable-next-line no-unused-vars
       } catch (error) {
-        message.error('Error al cargar los blogs');
+        message.error('Error al cargar los comentarios');
       }
     };
 
@@ -38,13 +30,12 @@ export const useCommentAdmin = (form) => {
     }, [refreshKey]);
   
     const handleEdit = (comment) => {
-      console.log("Date original:", comment.date); // 👈 Verifica el formato
       setCurrentComment(comment);
       form.setFieldsValue({
         name_customer: comment.name_customer,
         description: comment.description,
         qualification: comment.qualification,
-        date: comment.date ? dayjs(comment.date, 'YYYY-MM-DD') : null,
+        date: comment.date ? dayjs(comment.date) : null,
         imagen: comment?.image?.url ? [{
           uid: '-1',
           name: 'image',
@@ -55,8 +46,6 @@ export const useCommentAdmin = (form) => {
       setIsModalVisible(true);
     };
     
-
-
   const showModal = (comment = null) => {
     setCurrentComment(comment);
     setIsModalVisible(true);
@@ -65,7 +54,7 @@ export const useCommentAdmin = (form) => {
         name_customer: comment.name_customer,
         description: comment.description,
         qualification: comment.qualification,
-        fecha: comment.fecha ? dayjs(comment.fecha) : null, // Convertir a dayjs
+        date: comment.date ? dayjs(comment.date) : null,
         imagen: comment.image?.url ? [{
           uid: '-1',
           name: 'image',
@@ -90,49 +79,43 @@ export const useCommentAdmin = (form) => {
     try {
       const imagenUrl = values.imagen?.[0]?.url || 
                         (values.imagen?.[0]?.originFileObj && await convertFileToUrl(values.imagen?.[0]?.originFileObj));
-
-      console.log("Envio:", values); // 👈 Verifica el formato
-      
-                        
+                      
       const commentData = {
         name_customer: values.name_customer,
         description: values.description,
         qualification: parseFloat(values.qualification),
-        date: values.date ? values.date.format('YYYY-MM-DD') : null, // Asegurar formato
+        date: values.date ? values.date.format('YYYY-MM-DD') : null,
         image: imagenUrl
       };
-    
   
+      let response;
       if (currentComment) {
-        console.log("Comentario a actualizar:", commentData); // 👈 Verifica el format 
-        console.log("Datos del formulario:", currentComment.id); // 👈 Verifica el formato
-        const response = await updateTestimonio(currentComment.id, commentData); // Asegúrate de que esta función esté definida y funcione correctamente   
+        response = await updateTestimonio(currentComment.id, commentData);
         if (response && response.data) {
           setComments(prev => prev.map(comment => 
             comment.id === currentComment.id ? { ...response.data } : comment
           ));
         }
       } else {
-        console.log("Comentario a guardar:", commentData); // 👈 Verifica el format 
-        const response = await createTestimonios(commentData); // Asegúrate de que esta función esté definida y funcione correctamente
+        response = await createTestimonios(commentData);
         if (response && response.data) {
           setComments(prev => [response.data, ...prev]);
         }
       }
   
-      message.success(`¡Comentario ${currentComment ? 'actualizada' : 'creada'}!`);
+      message.success(`¡Comentario ${currentComment ? 'actualizado' : 'creado'}!`);
       setIsModalVisible(false);
       form.resetFields();
       
       // Refresh data from API to ensure consistency
       setRefreshKey(prev => prev + 1);
-    // eslint-disable-next-line no-unused-vars
     } catch (error) {
+      console.error('Error al guardar:', error);
       message.error('Error al guardar el comentario');
     }
   };
   
-  const handleDelete =async (id) => {
+  const handleDelete = async (id) => {
     Modal.confirm({
       title: '¿Eliminar Comentario?',
       content: 'Esta acción no se puede deshacer',
@@ -157,13 +140,12 @@ export const useCommentAdmin = (form) => {
       dataIndex: 'name_customer',
       sorter: (a, b) => a.name_customer.localeCompare(b.name_customer),
     },
-    
     {
       title: 'Comentario',
       dataIndex: 'description',
     },
     {
-      title: 'Calificacion',
+      title: 'Calificación',
       dataIndex: 'qualification',
     },
     {
@@ -204,3 +186,5 @@ export const useCommentAdmin = (form) => {
     setIsModalVisible,
   };
 };
+
+export default useCommentAdmin;
