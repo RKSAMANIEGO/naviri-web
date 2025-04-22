@@ -15,8 +15,10 @@ import {
   QuestionOutlined,
   RightOutlined,
   MailOutlined,
-  TagsOutlined
+  TagsOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
+import { useAuthStore } from '../../../core/context/authProvider';
 
 const { Sider } = Layout;
 
@@ -24,6 +26,7 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const logout = useAuthStore(state => state.logout);
   
   const handleMenuClick = (e) => {
     navigate(e.key);
@@ -75,6 +78,7 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             borderRight: 0,
             backgroundColor: isDarkMode ? '#1f2937' : 'white',
           }}
+          className="custom-sidebar-menu"
           items={[
             {
               key: '/admin/panel/products',
@@ -134,35 +138,80 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
           ]}
         />
         
+        <style jsx="true">{`
+          .custom-sidebar-menu .ant-menu-item:hover {
+            background-color: rgba(255, 241, 249, 1) !important;
+          }
+          
+          .custom-sidebar-menu .ant-menu-submenu-title:hover {
+            background-color: rgba(255, 241, 249, 1) !important;
+          }
+          
+          .custom-sidebar-menu .ant-menu-item-selected {
+            background-color: rgba(255, 241, 249, 1) !important;
+            color: rgba(0, 0, 0, 0.88) !important;
+          }
+          
+          .custom-sidebar-menu .ant-menu-item-selected .ant-menu-item-icon {
+            color: rgba(255, 107, 188, 1) !important;
+          }
+          
+          .ant-menu-light .ant-menu-item-selected {
+            color: rgba(255, 107, 188, 1) !important;
+          }
+
+          .ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline .ant-menu-item-selected {
+            background-color: rgba(255, 241, 249, 1) !important;
+          }
+        `}</style>
+        
         <div 
-          className="absolute bottom-0 left-0 right-0 p-4 border-t flex justify-center"
+          className="absolute bottom-0 left-0 right-0 p-4 border-t flex flex-col items-center space-y-4"
           style={{ 
             borderColor: isDarkMode ? '#374151' : '#e5e7eb',
             paddingBottom: '16px', 
             paddingTop: '16px'
           }}
         >
-          <Button
-            type="text"
-            onClick={toggleTheme}
-            icon={isDarkMode ? (
-              <SunOutlined style={{ fontSize: '20px', color: '#fbbf24' }} />
-            ) : (
-              <MoonOutlined style={{ fontSize: '20px', color: '#4b5563' }} />
+          <div className="flex flex-col items-center">
+            <Button
+              type="text"
+              onClick={toggleTheme}
+              icon={isDarkMode ? (
+                <SunOutlined style={{ fontSize: '20px', color: '#fbbf24' }} />
+              ) : (
+                <MoonOutlined style={{ fontSize: '20px', color: '#4b5563' }} />
+              )}
+              size="large"
+            />
+            {!collapsed && (
+              <span
+                style={{ 
+                  color: isDarkMode ? '#9ca3af' : '#4b5563'
+                }}
+              >
+                {isDarkMode ? 'Claro' : 'Oscuro'}
+              </span>
             )}
-            size="large"
-          />
-          {!collapsed && (
-            <span
-              style={{ 
-                marginLeft: '8px',
-                color: isDarkMode ? '#9ca3af' : '#4b5563',
-                alignSelf: 'center'
-              }}
-            >
-              {isDarkMode ? 'Claro' : 'Oscuro'}
-            </span>
-          )}
+          </div>
+
+          <div className="flex flex-col items-center">
+            <Button
+              type="text"
+              onClick={() => { logout(); navigate('/login'); }}
+              icon={<LogoutOutlined style={{ fontSize: '20px', color: isDarkMode ? '#f87171' : '#4b5563' }} />}
+              size="large"
+            />
+            {!collapsed && (
+              <span
+                style={{ 
+                  color: isDarkMode ? '#f87171' : '#4b5563'
+                }}
+              >
+                Cerrar sesión
+              </span>
+            )}
+          </div>
         </div>
       </Sider>
     </div>
