@@ -1,68 +1,85 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Modal, Table, Tag, FloatButton, message, Tooltip } from 'antd';
+import { Form, Input, Button, Modal, Table, Tag, FloatButton, message, Tooltip, Select } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EmailSearch from '../../components/InfoEmailAdmin/EmailSearch';
-import { getEmails } from '../../services/emailService';
+import { getEmails, createEmail, updateEmail, deleteEmail } from '../../services/emailService';
 
 const InfoEmails = () => {
   const [form] = Form.useForm();
-  const [emails, setEmails] = useState([
-    { id: 1, email: 'usuario1@empresa.com', estado: 'Activo' },
-    { id: 2, email: 'usuario2@empresa.com', estado: 'Inactivo' },
-    { id: 3, email: 'usuario3@empresa.com', estado: 'Activo' }
-  ]);
+  const [emails, setEmails] = useState([]);
   const [filteredEmails, setFilteredEmails] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentEmail, setCurrentEmail] = useState(null);
+  const [emailToDelete, setEmailToDelete] = useState(null);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   useEffect(() => {
-
     const fetchEmails = async () => {
       try {
         const response = await getEmails();
-        console.log(response);
-        
         if (response && response.data.length > 0) {
           setEmails(response.data);
-        } else {
-          console.error("No emails found");
         }
       } catch (error) {
         console.error("Error fetching emails:", error);
+        message.error('Error al cargar los correos');
       }
     }
     fetchEmails();
   }, []);
 
-
-  const handleDelete = (id) => {
-    const updated = emails.filter((item) => item.id !== id);
-    setEmails(updated);
-    message.success('Correo eliminado');
+  const showDeleteConfirm = (email) => {
+    setEmailToDelete(email);
+    setIsDeleteModalVisible(true);
   };
 
-  const handleSubmit = (values) => {
-    if (currentEmail) {
-      // Editar
-      const updated = emails.map((item) =>
-        item.id === currentEmail.id ? { ...item, ...values } : item
-      );
-      setEmails(updated);
-      message.success('Correo actualizado');
-    } else {
-      // Nuevo
-      const nuevo = {
-        id: emails.length + 1,
-        ...values,
-        estado: 'Activo'
-      };
-      setEmails([...emails, nuevo]);
-      message.success('Correo agregado');
+  const handleDelete = async () => {
+    try {
+      const response = await deleteEmail(emailToDelete.id);
+      if (response && response.status === 200) {
+        setEmails(prev => prev.filter(item => item.id !== emailToDelete.id));
+        message.success('Correo eliminado exitosamente');
+      }
+      setIsDeleteModalVisible(false);
+      setEmailToDelete(null);
+    } catch (error) {
+      console.error("Error al eliminar:", error);
+      message.error('Error al eliminar el correo');
     }
-    form.resetFields();
-    setIsModalVisible(false);
-    setCurrentEmail(null);
+  };
+
+  const handleSubmit = async (values) => {
+    try {
+      const emailData = {
+        email: values.email,
+        active: values.active
+      };
+
+      if (currentEmail) {
+        const response = await updateEmail(currentEmail.id, emailData);
+        if (response && response.status === 200) {
+          setEmails(prev => 
+            prev.map(item => 
+              item.id === currentEmail.id ? { ...item, ...emailData } : item
+            )
+          );
+          message.success('Correo actualizado exitosamente');
+        }
+      } else {
+        const response = await createEmail(emailData);
+        if (response && response.status === 201) {
+          setEmails(prev => [...prev, response.data]);
+          message.success('Correo agregado exitosamente');
+        }
+      }
+      setIsModalVisible(false);
+      form.resetFields();
+      setCurrentEmail(null);
+    } catch (error) {
+      console.error("Error en la operación:", error);
+      message.error(error.response?.data?.message || 'Error al procesar la operación');
+    }
   };
 
   const columns = [
@@ -75,8 +92,10 @@ const InfoEmails = () => {
       title: "Estado",
       dataIndex: "active",
       key: "estado",
-      render: (estado) => (
-        <Tag color={estado === "Activo" ? "green" : "volcano"}>{estado}</Tag>
+      render: (active) => (
+        <Tag color={active ? "green" : "volcano"}>
+          {active ? "Activo" : "Inactivo"}
+        </Tag>
       ),
     },
     {
@@ -84,23 +103,23 @@ const InfoEmails = () => {
       key: "acciones",
       render: (_, record) => (
         <div className="flex gap-2">
-          {/* Editar botón primero */}
           <Tooltip title="Editar">
             <Button
               icon={<EditOutlined />}
               onClick={() => {
                 setCurrentEmail(record);
-                form.setFieldsValue(record);
+                form.setFieldsValue({
+                  email: record.email,
+                  active: record.active
+                });
                 setIsModalVisible(true);
               }}
             />
           </Tooltip>
-
-          {/* Eliminar botón después */}
           <Tooltip title="Eliminar">
             <Button
               icon={<DeleteOutlined />}
-              onClick={() => handleDelete(record.id)}
+              onClick={() => showDeleteConfirm(record)}
             />
           </Tooltip>
         </div>
@@ -110,10 +129,8 @@ const InfoEmails = () => {
 
   return (
     <div className="p-6">
-      {/* Buscador */}
       <EmailSearch onSearch={setSearchQuery} />
 
-      {/* Tabla */}
       <Table
         columns={columns}
         dataSource={emails}
@@ -132,7 +149,7 @@ const InfoEmails = () => {
         }}
       />
 
-      {/* Modal */}
+      {/* Modal de edición/creación */}
       <Modal
         title={currentEmail ? 'Editar correo' : 'Nuevo correo'}
         open={isModalVisible}
@@ -155,6 +172,17 @@ const InfoEmails = () => {
             <Input />
           </Form.Item>
 
+          <Form.Item
+            label="Estado"
+            name="active"
+            initialValue={true}
+          >
+            <Select>
+              <Select.Option value={true}>Activo</Select.Option>
+              <Select.Option value={false}>Inactivo</Select.Option>
+            </Select>
+          </Form.Item>
+
           <div className="flex justify-end gap-2">
             <Button onClick={() => setIsModalVisible(false)}>Cancelar</Button>
             <Button type="primary" htmlType="submit">
@@ -164,7 +192,38 @@ const InfoEmails = () => {
         </Form>
       </Modal>
 
-      {/* Botón flotante */}
+      {/* Modal de confirmación para eliminar */}
+      <Modal
+        title="Confirmar eliminación"
+        open={isDeleteModalVisible}
+        onCancel={() => {
+          setIsDeleteModalVisible(false);
+          setEmailToDelete(null);
+        }}
+        footer={[
+          <Button 
+            key="cancel" 
+            onClick={() => {
+              setIsDeleteModalVisible(false);
+              setEmailToDelete(null);
+            }}
+          >
+            Cancelar
+          </Button>,
+          <Button 
+            key="delete" 
+            type="primary" 
+            danger
+            onClick={handleDelete}
+          >
+            Eliminar
+          </Button>
+        ]}
+      >
+        <p>¿Estás seguro que deseas eliminar el correo {emailToDelete?.email}?</p>
+        <p>Esta acción no se puede deshacer.</p>
+      </Modal>
+
       <FloatButton
         icon={<PlusOutlined />}
         tooltip={<div>Agregar correo</div>}

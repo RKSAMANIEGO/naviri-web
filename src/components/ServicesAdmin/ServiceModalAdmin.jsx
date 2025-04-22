@@ -24,39 +24,32 @@ const ServiceModalAdmin = ({
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    if (isModalVisible) {
-      if (currentServices) {
-        form.setFieldsValue({
-          title: currentServices.title,
-          category: currentServices.category,
-          description: currentServices.description,
-          imagen: currentServices.imagen || [],
-        });
+    if (isModalVisible && currentServices) {
+      // Configurar los campos del formulario
+      form.setFieldsValue({
+        title: currentServices.title,
+        category: currentServices.category,
+        description: currentServices.description,
+      });
 
-        const initialFileList = currentServices.imagen
-          ? Array.isArray(currentServices.imagen)
-            ? currentServices.imagen
-            : [currentServices.imagen]
-          : [];
-        setFileList(
-          initialFileList.map((img, index) => ({
-            uid: img.uid || `-${index}`,
-            name: img.name || "imagen.jpg",
-            status: "done",
-            url: img.url,
-            preview: img.url,
-          }))
-        );
+      // Configurar la imagen si existe
+      if (currentServices.imagen) {
+        const imageFile = {
+          uid: '-1',
+          name: 'imagen.jpg',
+          status: 'done',
+          url: currentServices.imagen,
+        };
+        setFileList([imageFile]);
       } else {
-        form.resetFields();
         setFileList([]);
       }
+    } else {
+      // Limpiar el formulario si es una nueva entrada
+      form.resetFields();
+      setFileList([]);
     }
   }, [isModalVisible, currentServices, form]);
-
-  useEffect(() => {
-    form.setFieldsValue({ imagen: fileList });
-  }, [fileList, form]);
 
   const uploadProps = {
     beforeUpload: (file) => {
@@ -67,13 +60,13 @@ const ServiceModalAdmin = ({
       return isImage ? false : Upload.LIST_IGNORE;
     },
     onChange: ({ fileList: newFileList }) => {
-      newFileList = newFileList.map((file) => {
+      const updatedFileList = newFileList.map(file => {
         if (file.originFileObj && !file.preview) {
           file.preview = URL.createObjectURL(file.originFileObj);
         }
         return file;
       });
-      setFileList(newFileList);
+      setFileList(updatedFileList);
     },
     fileList,
     listType: "picture",
@@ -118,7 +111,7 @@ const ServiceModalAdmin = ({
                 { required: true, message: "¡Por favor ingresa el título!" },
               ]}
             >
-              <Input placeholder="Título del blog" />
+              <Input placeholder="Título del servicio" />
             </Form.Item>
 
             <Form.Item
@@ -165,7 +158,7 @@ const ServiceModalAdmin = ({
                       }}
                     >
                       <img
-                        src={fileList[0].preview || fileList[0].url}
+                        src={fileList[0].url || fileList[0].preview}
                         alt="Vista previa"
                         style={{
                           width: "100%",
@@ -174,13 +167,11 @@ const ServiceModalAdmin = ({
                         }}
                       />
                     </div>
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
+                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
                       <Button
                         icon={<DeleteOutlined />}
                         onClick={() => setFileList([])}
-                      ></Button>
+                      />
                     </div>
                   </div>
                 )}
@@ -196,9 +187,10 @@ const ServiceModalAdmin = ({
           />
         </Form.Item>
 
-        <div
-          style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}
-        >
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
+          <Button onClick={() => setIsModalVisible(false)}>
+            Cancelar
+          </Button>
           <Button type="primary" htmlType="submit">
             {currentServices ? "Guardar Cambios" : "Crear Entrada"}
           </Button>
