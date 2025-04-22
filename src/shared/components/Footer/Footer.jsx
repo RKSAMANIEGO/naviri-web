@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import styles from "./Footer.module.css";
 import logo from '../../../assets/image/logo-navi.png';
-import { getContact } from "../../../services/contactservices";
+import { getContact } from "../../../core/services/contactService";
 import { Link } from "react-router-dom";
 
 const Footer = () => {

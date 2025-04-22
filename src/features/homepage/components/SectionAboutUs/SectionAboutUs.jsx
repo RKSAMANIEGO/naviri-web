@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Heart, ArrowRightCircle, Youtube } from "lucide-react";
 import styles from "./SectionAboutUs.module.css";
-import { getAboutUs } from "../../../../services/aboutUseService";
+import { getAboutUs } from "../../../../core/services/aboutUsService";
 
 const SectionAboutUs = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
