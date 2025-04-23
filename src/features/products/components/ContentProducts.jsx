@@ -25,6 +25,9 @@ const ContentProducts = ({categorie}) => {
     const [totalProducts,setTotalProducts]=useState(null);
     const { addToCart } = useCart();
 
+    // stado para tachar el precio actual si hay dscto en el producto
+    const [crossPrice,setCrossPrice]=useState(true);
+
     // Obtener parámetros de búsqueda
     const [searchParams] = useSearchParams();
 
@@ -114,6 +117,7 @@ const ContentProducts = ({categorie}) => {
                 console.log(productsFilterCateg);
             }
             else if(!textSearch || !filterPrecio ){
+                
                 setProductoFiltrado(dataProducts);
             }
         }
@@ -156,7 +160,14 @@ const ContentProducts = ({categorie}) => {
                     </div>
                     <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                     <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
-                    <h5 className={styles.h5}>S/{product.price}</h5>
+
+                    <div className={styles.wrapperDscto}>
+                        {crossPrice ? <s>S/{product.price}</s> : <h5 className={styles.h5}>S/{product.price}</h5>}
+                        {/*<h5 className={styles.h5}>S/{product.price}</h5>*/}
+                        {product.price > 0 ?  <h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*0.10)).toFixed(2)}</h6> : setCrossPrice(false)}
+                        {/*<h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*0.10)).toFixed(2)}</h6>*/}
+                    </div>
+
                     <section className={styles.productActions}>
                         <button
                             className={`btn btn-secondary ${styles.addToCartBtn}`}

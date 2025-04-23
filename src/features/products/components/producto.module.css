@@ -186,7 +186,7 @@
 
 .contentProducts {
 	min-width: 340px;
-	max-width: 1200px;
+	max-width: 1500px;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -197,7 +197,7 @@
 
 
 .sectionProducts {
-	width: 263px;
+	width: 300px;
 	height: 350px;
 	border-radius: 12px;
 	border: 1px solid rgb(241, 239, 239);
@@ -232,12 +232,29 @@
 	font-size: 16px;
 	font-weight: 600;
 	padding-inline: 10px;
+	margin-block: 2px;
 }
 
-.sectionProducts h5 {
+/*dscto*/
+.wrapperDscto {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-block: 2px;
+}
+
+.dscto {
+	font-weight: 750;
+	padding-right: 10px;
+	color: #ef6ab7;
+	font-size: 17px;
+
+}
+
+.sectionProducts s {
 	font-size: 16px;
 	font-weight: 600;
-	color: rgba(255, 68, 171, 1);
+	color: rgb(122, 121, 122);
 	padding-inline: 10px;
 }
 
@@ -463,7 +480,7 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 10px;
-	margin-top: 15px;
+	margin-top: 10px;
 	padding: 0 10px 10px;
 }
 

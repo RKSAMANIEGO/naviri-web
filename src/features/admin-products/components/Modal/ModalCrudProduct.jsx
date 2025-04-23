@@ -17,6 +17,9 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     const [dataCategories,setDataCategories]=useState(null)
     const [confirmAddProd,setConfirmAddProd]=useState(false)
     const [confirmPutProd,setConfirmPutProd]=useState(false)
+    
+    //add prop Dscto
+    const [dscto,setDscto]=useState(0);
 
     //LISTAR CATEGORIAS
     const listCategories= async()=>{
@@ -272,6 +275,19 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                                 onChange={getDataInput}
                             />
                         </label>
+
+                        {/**** add prop Dscto ****/}
+
+                        <label>Dscto
+                            <input
+                                type='number'
+                                name='descuento'
+                                value={dscto}
+                                onChange={(e)=> setDscto(e.target.value)}
+                            />
+                        </label>
+
+                        {/** ------------------*/}
 
                         <label>Stock
                             <input

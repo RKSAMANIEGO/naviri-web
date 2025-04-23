@@ -7,6 +7,9 @@ import { useCart } from '../../../../features/cart/context/CartContext';
 Modal.setAppElement("#root")
 
 const ModalProducts = ({isOpen, onClose, product, title}) => {
+
+    console.log(product);
+
     const [stock, setStock] = useState(1);
     const { addToCart } = useCart();
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
