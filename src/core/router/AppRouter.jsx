@@ -30,6 +30,7 @@ import InfoEmails from '../../features/admin-email/pages/InfoEmails.jsx';
 import ContactAdminPage from '../../features/admin-contacts/pages/ContactAdminPage.jsx';
 import PromotionAdminPage from '../../features/admin-promotion/pages/PromotionAdminPage';
 import Questions from '../../features/admin-questions/page/Questions.jsx';
+import NewProductsPage from '../../features/admin-new-products/pages/NewProductsPage.jsx';
 
 const Router = () => {
   useEffect(() => {
@@ -66,10 +67,11 @@ const Router = () => {
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />
-              <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} />
+              <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} /> 
               <Route path="/admin/panel/mail" element={ <InfoEmails/>} />
               <Route path="/admin/panel/promotions" element={ <PromotionAdminPage/>} />
               <Route path="/admin/panel/questions" element={<Questions/>} />
+              <Route path="/admin/panel/productos-nuevos" element={ <NewProductsPage/>} />
             </Route>
           </Route>
         </Routes>

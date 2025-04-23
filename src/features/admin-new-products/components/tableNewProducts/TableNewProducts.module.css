@@ -1,0 +1,28 @@
+.wrapperOptions {
+    display: flex;
+    gap: 10px;
+}
+
+.EditOption {
+    padding: 5px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #d8a713;
+    color: white;
+}
+
+.EditOption:hover {
+    transform: scale(1.1);
+}
+
+.DeleteOption {
+    padding: 5px 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(231, 72, 72);
+    color: white;
+}
+
+.DeleteOption:hover {
+    transform: scale(1.1);
+}
