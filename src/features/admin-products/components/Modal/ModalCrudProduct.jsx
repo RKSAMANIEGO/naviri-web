@@ -129,15 +129,24 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 const nameProd= localStorage.getItem("nameProduct");
                 const response = await updateProduct(nameProd, updatedDataForm);
                 console.log(updatedDataForm);
-                if (response.status!==200) {
+
+                if(response.status===422){
+                    Swal.fire({
+                        title: '¡El Producto Ya Existe!',
+                        text: 'Intente con otro nombre',
+                        icon: 'warning',
+                        timer: 2000,
+                    });
+                }
+                else if (response.status!==200) {
                     Swal.fire({
                         title:  response.message,
                         text: 'Error al Actualizar el producto',
                         icon: 'error',
                         timer: 2000,
                     });
-                    }
-                    else if(response.status===200){
+                }
+                else if(response.status===200){
                     Swal.fire({
                         title: '¡Producto Actualizado con éxito!',
                         icon: 'success',
@@ -146,7 +155,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                     confirmActualizacionProducto(!confirmPutProd);
                     setConfirmPutProd(!confirmPutProd);
                     clearForm();
-                    }
+                }
+
             }else{
                 const response = await addProduct(updatedDataForm);
 
