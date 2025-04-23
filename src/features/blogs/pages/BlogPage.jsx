@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import aceite from '../../../assets/image/aceiteARBOLDETE.jpeg'
 import { useQuery } from '@tanstack/react-query'
 import { getBlogs } from '../services/blogsApi.js' // Updated path
 import { 
@@ -7,10 +8,10 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+//import { useNavigate } from 'react-router-dom'
 
 const BlogPage = () => {
-  const navigate = useNavigate()
+ // const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState('')
 
@@ -21,6 +22,7 @@ const BlogPage = () => {
 
   // Manejo de la respuesta de la API
   const blogs = apiResponse?.data?.data || []
+  console.log(blogs);
   const pagination = {
     currentPage: apiResponse?.data?.current_page || 1,
     lastPage: apiResponse?.data?.last_page || 1,
@@ -116,12 +118,22 @@ const BlogPage = () => {
               >
                 <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                   {/* Imagen del artículo */}
+                  
                   <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden shadow-sm">
+                    {blog.image=== null ?
                     <img
-                      src={blog.image.url}
+                    src={aceite} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    alt={blog.title}
+                    /> 
+                    :                   
+                    <img
+                      src={blog?.image.url} 
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       alt={blog.title}
-                    />
+                    />  
+                    }
+
                   </div>
 
                   {/* Contenido del artículo */}

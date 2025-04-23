@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import Router from "./core/router/AppRouter";
-import SocialButtons from "./components/whatsapp/SocialButtons";
+import SocialButtons from "./shared/components/SocialButtons/SocialButtons";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

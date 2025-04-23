@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAboutUsHome } from "../../../../services/aboutuseHomeService";
+import { getAboutUsHome } from "../../../../core/services/aboutUsHomeService";
 import style from "./SectionAboutUsHome.module.css";
 
 const SectionAboutUsHome = () => {
