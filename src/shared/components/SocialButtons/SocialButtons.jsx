@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { FaWhatsapp, FaInstagram, FaTiktok, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaTiktok} from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
+import { useCart } from '../../../features/cart/context/CartContext';
 import './SocialButtons.css';
 
 const SocialButtons = () => {
-  const [showButtons, setShowButtons] = useState(false);
   const [showWhatsappMessage, setShowWhatsappMessage] = useState(false);
   const phoneNumber = '+51927987259'; 
   const whatsappMessage = encodeURIComponent('¡Hola! Me gustaría conocer más sobre los productos de Navi Natubelleza.');
   const location = useLocation();
+  const { isCartOpen } = useCart(); 
   
-  // Verificar si la ruta actual es del panel administrativo
-  const isAdminPanel = location.pathname.includes('/admin/panel');
-  
-  // Si estamos en el panel administrativo, no renderizar el componente
-  if (isAdminPanel) {
+
+  const hiddenRoutes = ['/admin/panel', '/checkout', 'login'];
+  const shouldHideButtons = hiddenRoutes.some(path => location.pathname.includes(path)) || isCartOpen;;
+  if (shouldHideButtons) {
     return null;
   }
   
@@ -30,60 +30,49 @@ const SocialButtons = () => {
     window.open('https://www.tiktok.com/@natubellezanavi26', '_blank');
   };
 
-  const toggleButtons = () => {
-    setShowButtons(!showButtons);
-  };
+
 
   return (
-    <div className="social-buttons-container">
-      {showButtons && (
-        <>
+   <>
+     <div className="left-social-buttons">
+         <button 
+            className="social-button instagram-button"
+            onClick={handleInstagramClick}
+            aria-label="Visitar Instagram"
+           >
+           <FaInstagram/>
+          </button>
+        
           <button 
             className="social-button tiktok-button"
             onClick={handleTiktokClick}
             aria-label="Visitar TikTok"
           >
-            <FaTiktok />
-            <span className="tooltip">TikTok</span>
+          <FaTiktok />
           </button>
-          
-          <button 
-            className="social-button instagram-button"
-            onClick={handleInstagramClick}
-            aria-label="Visitar Instagram"
-          >
-            <FaInstagram />
-            <span className="tooltip">Instagram</span>
-          </button>
-        </>
-      )}
-      
-      <button 
-        className="social-button toggle-button"
-        onClick={toggleButtons}
-        aria-label="Mostrar redes sociales"
-      >
-        {showButtons ? <FaChevronDown /> : <FaChevronUp />}
-      </button>
-      
-      <div className="whatsapp-container" 
-           onMouseEnter={() => setShowWhatsappMessage(true)}
-           onMouseLeave={() => setShowWhatsappMessage(false)}>
-        {showWhatsappMessage && (
-          <div className="whatsapp-message">
-            <p>¿Buscas productos naturales de calidad? ¡Chatea con nosotros ahora!</p>
-          </div>
-        )}
-        <button 
-          className="social-button whatsapp-button"
-          onClick={handleWhatsappClick}
-          aria-label="Contactar por WhatsApp"
-        >
-          <FaWhatsapp />
-        </button>
       </div>
-    </div>
+
+      <div className="right-social-buttons">
+         <div className="whatsapp-container" 
+             onMouseEnter={() => setShowWhatsappMessage(true)}
+             onMouseLeave={() => setShowWhatsappMessage(false)}>
+          {showWhatsappMessage && (
+            <div className="whatsapp-message">
+              <p>¿Buscas productos naturales de calidad? ¡Chatea con nosotros ahora!</p>
+            </div>
+          )}
+          <button 
+            className="social-button whatsapp-button"
+            onClick={handleWhatsappClick}
+            aria-label="Contactar por WhatsApp"
+          >
+            <FaWhatsapp />
+          </button>
+         </div>
+      </div>
+   </>
   );
-};
+}
+
 
 export default SocialButtons;
