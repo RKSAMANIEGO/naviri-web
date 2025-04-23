@@ -25,8 +25,8 @@ const TableQuestions = () => {
             style:{
                 display:"flex",
                 justifyContent:"start",
-                fontSize:"0.7rem",
-                fontWeight:"700",
+                fontSize:"0.73rem",
+                fontWeight:"500",
                 padding:"5px 15px",
                 textTransform:"capitalize"
             }

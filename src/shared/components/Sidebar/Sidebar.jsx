@@ -14,6 +14,9 @@ import {
   LeftOutlined,
   QuestionOutlined,
   RightOutlined,
+
+  TagOutlined,
+  
   MailOutlined,
   TagsOutlined,
   LogoutOutlined
@@ -89,6 +92,11 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               key: '/admin/panel/categories',
               icon: <ShoppingOutlined />,
               label: 'Categorias',
+            },
+            {
+              key: '/admin/panel/productos-nuevos',
+              icon:<TagOutlined />,
+              label: 'Producto Nuevo',
             },
             {
               key: '/admin/panel/customers',
