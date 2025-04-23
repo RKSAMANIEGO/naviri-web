@@ -31,7 +31,7 @@ import ContactAdminPage from '../../features/admin-contacts/pages/ContactAdminPa
 import PromotionAdminPage from '../../features/admin-promotion/pages/PromotionAdminPage';
 import Questions from '../../features/admin-questions/page/Questions.jsx';
 import NewProductsPage from '../../features/admin-new-products/pages/NewProductsPage.jsx';
-
+import NewProductsPageAdmin from '../../features/new-products/pages/NewProductsPage.jsx';
 const Router = () => {
   useEffect(() => {
     useAuthStore.getState().initialize();
@@ -42,6 +42,7 @@ const Router = () => {
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/new-products" element={<NewProductsPageAdmin/>}/>
             <Route path='/categories' element={<PageCategorie/>}>
               <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/>
               <Route path="aceites" element={ <ContentProducts categorie="aceites"/>}/>
