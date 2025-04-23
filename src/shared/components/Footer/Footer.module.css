@@ -27,13 +27,13 @@
 .logo {
     width: 110px;
     height: auto;
-    margin-left: 70px;
+    margin: 0 auto; 
+    display: block;
 }
 
 .footerdescrip {
     max-width: 250px;
     color: #929292;
-    margin-right: 50px;
 }
 
 .footerdescrip p{
@@ -113,8 +113,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: #f0f0f0;
     color: #333;
@@ -124,7 +124,6 @@
 .socialIcon:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
 }
 
 .socialIcon:nth-child(1):hover {
@@ -157,17 +156,18 @@
 .container {
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .sectionfooter {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
+    align-items: center; 
 }
 
 .logo {
     width: 80px;
-    text-align: center;
+    margin-left: 0; 
+    margin-right: 0;
+    margin: 0 auto 15px;
 }
 
 .footerdescrip {
