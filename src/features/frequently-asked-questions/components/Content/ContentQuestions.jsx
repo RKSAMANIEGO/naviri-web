@@ -38,7 +38,7 @@ const ContentQuestions = () => {
                         <p>{cat.description}</p>
                     </div>
 
-                    <img src={cat.image} alt='iconCategorie' width='50'/>
+                    <img src={cat.image} alt='iconCategorie'/>
                 </div>
             ))}
         </section>

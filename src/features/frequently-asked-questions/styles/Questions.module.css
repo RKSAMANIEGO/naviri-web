@@ -12,6 +12,8 @@
     animation: square-in-top-left 2s ease-in-out;
 }
 
+
+
 @keyframes square-in-top-left {
     from {
         clip-path: inset(100% 0 0 100%);
@@ -50,8 +52,6 @@
     position: relative;
 }
 
-
-
 .headerQuestions input {
     margin: 20px 0;
     padding: 15px 20px;
@@ -83,22 +83,31 @@
 
 /*CONTENT QUESTIONS*/
 .contentQuestions {
-    height: 40vh;
+    height: auto;
     display: flex;
+    flex-wrap: wrap;
+    padding: 40px;
     justify-content: space-evenly;
     align-items: center;
-    padding: 20px;
+    gap: 20px;
 }
 
 .card {
-    width: 20%;
+    min-width: 100px;
+    width: auto;
     height: 80%;
     background-color: aliceblue;
     border-radius: 10px;
     padding: 20px;
+    gap: 20px;
     box-shadow: 0 0 10px rgb(119, 119, 119);
     cursor: pointer;
     display: flex;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.1);
 }
 
 .infoCategorie {
@@ -106,15 +115,91 @@
 }
 
 .infoCategorie h2 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 800;
     color: #a855f7;
 }
 
 .infoCategorie p {
-    line-height: 1rem;
+    line-height: 1.2rem;
 }
 
 .card img {
     flex: 1;
+    width: 50px;
+}
+
+@media (max-width:690px) {
+    .contentQuestions {
+        padding: 10px;
+    }
+}
+
+@media (max-width:500px) {
+    .headerQuestions {
+        height: 35vh;
+    }
+
+    .headerQuestions h1 {
+        font-size: 2.5rem;
+        line-height: 1;
+    }
+
+    /*SEARCH*/
+
+    .search {
+        width: 80%;
+    }
+
+    .headerQuestions input {
+        padding: 12px 15px;
+    }
+
+    .headerQuestions input::placeholder {
+        font-size: 12px;
+    }
+
+    .icSearch {
+        font-size: 1rem;
+        bottom: 28%;
+    }
+
+    /*CONTENT QUESTIONS*/
+    .contentQuestions {
+        padding: 20px;
+    }
+
+    .card {
+        padding: 10px;
+        box-shadow: 0 0 10px rgb(119, 119, 119);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+    }
+
+    .infoCategorie h2 {
+        font-size: 12px;
+    }
+
+    .infoCategorie p {
+        line-height: 1rem;
+        font-size: 0.7rem;
+    }
+
+    .card img {
+        width: 40px;
+    }
+}
+
+@media (max-width:370px) {
+    .card {
+        width: 130px;
+    }
+
+    .infoCategorie p {
+        font-size: 9px;
+    }
+
 }
