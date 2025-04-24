@@ -10,7 +10,11 @@ import Swal from 'sweetalert2';
 
 const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
 
-    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",pdf:"",subcategory_id:[""],image:''})
+    console.log(productPutTable);
+
+    //const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",pdf:"",subcategory_id:[""],image:''})
+    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],image:''})
+
     const [benefits, setBenefits] = useState([]);
     const [imageUrl, setImageUrl] = useState(null);
     const [inputValue, setInputValue] = useState('');
@@ -19,7 +23,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     const [confirmPutProd,setConfirmPutProd]=useState(false)
     
     //add prop Dscto
-    const [dscto,setDscto]=useState(0);
+    //const [dscto,setDscto]=useState(0);
 
     //LISTAR CATEGORIAS
     const listCategories= async()=>{
@@ -41,6 +45,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 compatibility:productPutTable?.compatibility || '',
                 price:productPutTable?.price || '',
                 stock:productPutTable?.stock || '',
+                discount:productPutTable?.discount || '',  // add field discount
                 //pdf:productPutTable?.pdf || '',
                 subcategory_id:[productPutTable?.subcategories[0]?.id],
                 image:productPutTable?.image.url || ''
@@ -114,6 +119,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         if (!dataForm.name) { message.error("Ingrese el Nombre del Producto"); return; }
         if (!dataForm.price) { message.error("Ingrese el Precio del Producto"); return; }
         if (!dataForm.stock) {message.error("Ingrese el Stock del Producto"); return;}
+        if (!dataForm.discount) {message.error("Ingrese el % de  Descuento del Producto"); return;}
         if (!dataForm.compatibility) {message.error("Ingrese la Descripcion del Producto"); return;}
         if (!imageUrl) { message.error('Debes cargar una imagen');return;}
         if (benefits.length === 0) { message.error('Debes agregar al menos un beneficio'); return;}
@@ -178,6 +184,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                     icon: 'success',
                     timer: 2000,
                 });
+
                 clearForm();
                 setConfirmAddProd(!confirmAddProd);
                 confirmAddProduct(!confirmAddProd);
@@ -196,7 +203,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
             name:'',
             compatibility:'',
             price:0,
-            stock:0
+            stock:0,
+            discount:0, // add field discount
         })
     }
 
@@ -283,9 +291,9 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                         <label>Dscto
                             <input
                                 type='number'
-                                name='descuento'
-                                value={dscto}
-                                onChange={(e)=> setDscto(e.target.value)}
+                                name='discount'
+                                value={dataForm.discount}
+                                onChange={getDataInput}
                             />
                         </label>
 
