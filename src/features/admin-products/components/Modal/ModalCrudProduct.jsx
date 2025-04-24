@@ -158,6 +158,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                     confirmActualizacionProducto(!confirmPutProd);
                     setConfirmPutProd(!confirmPutProd);
                     clearForm();
+                    onClose();
                 }
 
             }else{
@@ -180,6 +181,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 clearForm();
                 setConfirmAddProd(!confirmAddProd);
                 confirmAddProduct(!confirmAddProd);
+                onClose();
                 }
             }
         } else {
