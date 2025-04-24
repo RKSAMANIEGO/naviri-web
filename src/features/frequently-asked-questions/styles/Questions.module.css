@@ -1,3 +1,21 @@
+.wrapperPageQuestions {
+    animation: circle-in-center 1s ease-in;
+}
+
+@keyframes circle-in-center {
+    from {
+        clip-path: circle(0%);
+    }
+
+    to {
+        clip-path: circle(125%);
+    }
+}
+
+[transition-style="in:circle:center"] {
+    animation: 2.5s cubic-bezier(.25, 1, .30, 1) circle-in-center both;
+}
+
 /*HEADER*/
 .headerQuestions {
     height: 45vh;
@@ -9,7 +27,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    animation: square-in-top-left 2s ease-in-out;
+    /*animation: square-in-top-left 2s ease-in-out;*/
     color: #f3d3e7;
 }
 
