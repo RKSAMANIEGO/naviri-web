@@ -43,6 +43,7 @@ import ProductsPage from '../../features/products/pages/ProductsPage.jsx'; // Ad
 import ContentProducts from '../../features/products/components/ContentProducts.jsx'; // Added new import
 import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/page/PageQuestionsAndAnswers.jsx';
 
+import ContactPage from '../../pages/sectionContact/ContactPage.jsx'
 
 
 const Router = () => {
@@ -66,9 +67,12 @@ const Router = () => {
 
             </Route>
             <Route path="/policy" element={<PolicyPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
-            <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} /> {/* Added new route frequently asked questions */}
+  <Route path="/blog" element={<BlogPage />} />
+  <Route path="/blog/:blogId" element={<BlogDetailsPage/>} />
+  <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} />
+  // Añade esta nueva ruta aquí
+  <Route path="/contact" element={<ContactPage />} />
+  <Route path="*" element={<Navigate to="/" />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
 
