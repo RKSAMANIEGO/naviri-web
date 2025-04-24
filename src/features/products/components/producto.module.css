@@ -267,7 +267,6 @@
 	padding-right: 10px;
 	color: #ef6ab7;
 	font-size: 17px;
-
 }
 
 .sectionProducts s {
@@ -887,18 +886,23 @@
 
 	/*--------------------------*-/
 	/*CONTENT PRODUCTS*/
+
+
+
 	.containerProducts {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
+
+
 	.contentProducts {
 		min-width: 100px;
 		max-width: 1200px;
 		height: 100%;
 		display: flex;
-		justify-content: center;
+		justify-content: space-evenly;
 		flex-wrap: wrap;
 		gap: 10px;
 		padding-block: 40px;
@@ -907,6 +911,18 @@
 
 	.descripcionBeneficios {
 		font-size: 9px;
+	}
+
+
+	/*dscto*/
+
+
+	.dscto {
+		font-size: 11px;
+	}
+
+	.sectionProducts s {
+		font-size: 10px;
 	}
 
 
