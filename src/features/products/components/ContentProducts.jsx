@@ -12,6 +12,8 @@ import CartSidebar from '../../cart/components/CartSidebar'; // Updated path to 
 const ContentProducts = ({categorie}) => {
 
 
+
+    
     const [isOpen, setIsOpen] = useState(false);
     const [productSelected,setProductSelected]=useState(null);
     const [textSearch,setTextSearch]=useState("");
