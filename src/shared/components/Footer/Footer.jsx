@@ -52,7 +52,7 @@ const Footer = () => {
             <li><a href="#">Cuidado Capilar</a></li>
             <li><a href="#">Fragancias</a></li>
             <li><a href="#">Accesorios</a></li>
-            <Link to="PreguntasFrecuentes"><li>Preguntas Frecuentes</li> </Link>
+            <Link to="PreguntasFrecuentes"><li> <li><a href="/PreguntasFrecuentes">Preguntas Frecuentes</a></li></li> </Link>
           </ul>
         </div>
 

@@ -34,13 +34,18 @@ import Questions from '../../features/admin-questions/page/Questions.jsx';
 import NewProductsPage from '../../features/admin-new-products/pages/NewProductsPage.jsx';
 import NewProductsPageAdmin from '../../features/new-products/pages/NewProductsPage.jsx';
 import AboutAdminPage from '../../features/admin-about/pages/AboutAdmin.jsx'
+
+// scroll to top page
+import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 const Router = () => {
   useEffect(() => {
     useAuthStore.getState().initialize();
   }, []);
   
     return (
-      <Routes>
+      <>
+        <ScrollToTop/>
+        <Routes>
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductsPage />} />
@@ -82,6 +87,7 @@ const Router = () => {
             </Route>
           </Route>
         </Routes>
+      </>
     );
 };
 
