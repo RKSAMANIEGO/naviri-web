@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../../styles/producto.module.css';
 const PaginationNewProducts = ({numPage,handlerPagina,nextPage}) => {
 
+    const [activePage,setActivePage]=useState(1);
     const newPages=[]
     for (let i=1 ; i<=numPage ; i++){
         newPages.push(i)
@@ -10,7 +11,10 @@ const PaginationNewProducts = ({numPage,handlerPagina,nextPage}) => {
     return (
         <div className={styles.pagination}>
             {newPages.map((pagina,index)=> (
-                <button key={index} className={styles.button} onClick={()=>handlerPagina(pagina)}>{pagina}</button>
+                <button key={index} className={`${styles.button} ${activePage===pagina ? styles.activePage :''} ` } onClick={()=>{
+                    handlerPagina(pagina);
+                    setActivePage(pagina);
+                }}>{pagina}</button>
             ))}
             <button onClick={nextPage}>Siguiente</button>
         </div>
