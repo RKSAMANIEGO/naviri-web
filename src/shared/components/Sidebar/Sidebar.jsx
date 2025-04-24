@@ -14,9 +14,6 @@ import {
   LeftOutlined,
   QuestionOutlined,
   RightOutlined,
-
-  TagOutlined,
-  
   MailOutlined,
   TagsOutlined,
   LogoutOutlined
@@ -89,14 +86,14 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               label: 'Productos',
             },
             {
+              key: '/admin/panel/productos%nuevos',
+              icon: <ShoppingOutlined />,
+              label: 'Productos Nuevos',
+            },
+            {
               key: '/admin/panel/categories',
               icon: <ShoppingOutlined />,
               label: 'Categorias',
-            },
-            {
-              key: '/admin/panel/productos-nuevos',
-              icon:<TagOutlined />,
-              label: 'Producto Nuevo',
             },
             {
               key: '/admin/panel/customers',
@@ -140,6 +137,10 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
                 {
                   key: '/admin/panel/page/service',
                   label: 'Servicios',
+                },
+                {
+                  key: '/admin/panel/page/about',
+                  label: 'About Us',
                 },
               ],
             },
