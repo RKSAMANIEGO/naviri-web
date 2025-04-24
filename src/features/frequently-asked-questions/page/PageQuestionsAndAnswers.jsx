@@ -4,7 +4,7 @@ import ContentQuestions from '../components/Content/ContentQuestions'
 
 const PageQuestionsAndAnswers = () => {
   return (
-    <div>
+    <div id='headerFrequentlyAskedQuestions'>
       <HeaderFrequentlyAskedQuestions/>
       <ContentQuestions/>
     </div>
