@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 import { useCart } from '../../../features/cart/context/CartContext'; // Updated path
 
 const productMenuItems = [
-    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/new-products' },
+    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products' },
     { id: 'all', title: 'Ver todo', description: 'Explora nuestra colección completa de productos', to: '/products' },
     { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
     { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
@@ -155,6 +155,7 @@ const Header = () => {
                         </div>
                     </div>
                     <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
+                    <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Sobre Nosotros</NavLink>
                     <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                 </nav>
 
@@ -219,6 +220,7 @@ const Header = () => {
                 <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
                 <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
                 <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
+                <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Sobre Nosotros</NavLink>
                 <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
                 
                 <div className={styles.mobileExtras}>

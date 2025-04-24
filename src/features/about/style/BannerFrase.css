@@ -1,0 +1,84 @@
+.banner-frase {
+    width: 100%;
+    background-color: #FF7BC3;
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+  
+  .banner-frase h2 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .contacto-btn-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  .contacto-btn {
+    background-color: #00D772;
+    color: white;
+    padding: 0.9rem 4rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contacto-btn:hover {
+    background-color: #46cf4d;
+  }
+  
+  /* Tablet */
+  @media (max-width: 768px) {
+    .banner-frase {
+      padding: 3rem 1rem;
+    }
+  
+    .banner-frase h2 {
+      font-size: 2.5rem;
+    }
+  
+    .contacto-btn {
+      padding: 0.8rem 3rem;
+      font-size: 0.95rem;
+    }
+  }
+  
+  /* Smartphone grande */
+  @media (max-width: 576px) {
+    .banner-frase {
+      padding: 2.5rem 1rem;
+    }
+  
+    .banner-frase h2 {
+      font-size: 2rem;
+    }
+  
+    .contacto-btn {
+      padding: 0.7rem 2.5rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Smartphone pequeño */
+  @media (max-width: 400px) {
+    .banner-frase {
+      padding: 2rem 0.5rem;
+    }
+  
+    .banner-frase h2 {
+      font-size: 1.6rem;
+    }
+  
+    .contacto-btn {
+      padding: 0.6rem 2rem;
+      font-size: 0.85rem;
+    }
+  }

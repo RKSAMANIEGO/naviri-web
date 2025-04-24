@@ -17,6 +17,7 @@ import BlogPage from '../../features/blogs/pages/BlogPage.jsx';
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
 import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/page/PageQuestionsAndAnswers.jsx';
 import LoginPage from '../../features/login/Pages/LoginPage.jsx';
+import AboutPage from '../../features/about/pages/about.jsx';
 
 // Admin pages
 import AdminDashboardPage from '../../features/admin-dashboard/pages/AdminDashboardPage';
@@ -32,6 +33,7 @@ import PromotionAdminPage from '../../features/admin-promotion/pages/PromotionAd
 import Questions from '../../features/admin-questions/page/Questions.jsx';
 import NewProductsPage from '../../features/admin-new-products/pages/NewProductsPage.jsx';
 import NewProductsPageAdmin from '../../features/new-products/pages/NewProductsPage.jsx';
+import AboutAdminPage from '../../features/admin-about/pages/AboutAdmin.jsx'
 const Router = () => {
   useEffect(() => {
     useAuthStore.getState().initialize();
@@ -52,6 +54,7 @@ const Router = () => {
               <Route path="sales minerales" element={ <ContentProducts categorie="sales minerales"/>}/>
             </Route>
             <Route path="/policy" element={<PolicyPage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
             <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} />
@@ -72,6 +75,7 @@ const Router = () => {
               <Route path="/admin/panel/page/service" element={ <ServiceAdminPage/>} /> 
               <Route path="/admin/panel/mail" element={ <InfoEmails/>} />
               <Route path="/admin/panel/promotions" element={ <PromotionAdminPage/>} />
+              <Route path="/admin/panel/page/about" element={ <AboutAdminPage/>} />
               <Route path="/admin/panel/questions" element={<Questions/>} />
               <Route path="/admin/panel/productos-nuevos" element={ <NewProductsPage/>} />
             </Route>
