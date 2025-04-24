@@ -12,8 +12,6 @@ import CartSidebar from '../../cart/components/CartSidebar'; // Updated path to 
 const ContentProducts = ({categorie}) => {
 
 
-
-    
     const [isOpen, setIsOpen] = useState(false);
     const [productSelected,setProductSelected]=useState(null);
     const [textSearch,setTextSearch]=useState("");
@@ -27,8 +25,6 @@ const ContentProducts = ({categorie}) => {
     const [totalProducts,setTotalProducts]=useState(null);
     const { addToCart } = useCart();
 
-    // stado para tachar el precio actual si hay dscto en el producto
-    const [crossPrice,setCrossPrice]=useState(true);
 
     // Obtener parámetros de búsqueda
     const [searchParams] = useSearchParams();
@@ -119,7 +115,6 @@ const ContentProducts = ({categorie}) => {
                 console.log(productsFilterCateg);
             }
             else if(!textSearch || !filterPrecio ){
-                
                 setProductoFiltrado(dataProducts);
             }
         }
@@ -163,12 +158,23 @@ const ContentProducts = ({categorie}) => {
                     <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                     <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
 
-                    <div className={styles.wrapperDscto}>
-                        {crossPrice ? <s>S/{product.price}</s> : <h5 className={styles.h5}>S/{product.price}</h5>}
-                        {/*<h5 className={styles.h5}>S/{product.price}</h5>*/}
-                        {product.price > 0 ?  <h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*0.10)).toFixed(2)}</h6> : setCrossPrice(false)}
-                        {/*<h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*0.10)).toFixed(2)}</h6>*/}
-                    </div>
+
+
+                    {product.discount > 0 && product.discount !==null ? (
+
+                        <div className={styles.wrapperDscto}>
+                            <s>S/{product.price}</s>
+                            <h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*product.discount/100)).toFixed(2)}</h6>
+                        </div>
+
+                        )  
+                        :
+                        (
+                        <div className={styles.wrapperDscto}>
+                            <h5 className={styles.sinDscto}>S/{product.price}</h5>
+                        </div>
+                        )
+                    }
 
                     <section className={styles.productActions}>
                         <button

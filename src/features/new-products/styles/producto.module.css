@@ -92,11 +92,17 @@
 /*SEARCH TITLE*/
 .title {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: start;
 	font-size: 32px;
 	font-weight: 700;
 	color: rgba(182, 42, 105, 1);
-	padding-block: 40px;
+	padding: 20px 40px;
+}
+
+.title p {
+	font-size: 16px;
+	color: rgb(83, 80, 80);
 }
 
 /*SEARCH PRODUCTS*/
@@ -266,6 +272,14 @@
 .dscto {
 	font-weight: 750;
 	padding-right: 10px;
+	color: #ef6ab7;
+	font-size: 17px;
+
+}
+
+.sinDscto {
+	font-weight: 750;
+	padding-left: 10px;
 	color: #ef6ab7;
 	font-size: 17px;
 
