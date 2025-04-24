@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 import { useCart } from '../../../features/cart/context/CartContext'; // Updated path
 
 const productMenuItems = [
-    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products' },
+    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/new-products' },
     { id: 'all', title: 'Ver todo', description: 'Explora nuestra colección completa de productos', to: '/products' },
     { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
     { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },

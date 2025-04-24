@@ -86,6 +86,11 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               label: 'Productos',
             },
             {
+              key: '/admin/panel/productos%nuevos',
+              icon: <ShoppingOutlined />,
+              label: 'Productos Nuevos',
+            },
+            {
               key: '/admin/panel/categories',
               icon: <ShoppingOutlined />,
               label: 'Categorias',

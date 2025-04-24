@@ -77,7 +77,7 @@ const Router = () => {
               <Route path="/admin/panel/promotions" element={ <PromotionAdminPage/>} />
               <Route path="/admin/panel/page/about" element={ <AboutAdminPage/>} />
               <Route path="/admin/panel/questions" element={<Questions/>} />
-              <Route path="/admin/panel/productos-nuevos" element={ <NewProductsPage/>} />
+              <Route path="/admin/panel/productos%nuevos" element={ <NewProductsPage/>} />
             </Route>
           </Route>
         </Routes>
