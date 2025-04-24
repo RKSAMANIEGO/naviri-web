@@ -46,6 +46,7 @@ const Router = () => {
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/new-products" element={<NewProductsPageAdmin/>}/>
             <Route path='/categories' element={<PageCategorie/>}>
+              <Route index element={<ContentProducts categorie="aceites"/>}/>
               <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/>
               <Route path="aceites" element={ <ContentProducts categorie="aceites"/>}/>
               <Route path="cosmeticos" element={ <ContentProducts categorie="Cosméticos"/>}/>
