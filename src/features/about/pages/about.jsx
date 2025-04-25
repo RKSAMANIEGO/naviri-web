@@ -30,11 +30,11 @@ const SobreNosotros = () => {
           <div className="botones-contacto">
       <div className="boton pink icono-animado">
         <FaPhoneAlt className="icono" />
-        974 584 654
+        927 987 259
       </div>
       <div className="boton pink icono-animado">
         <FaEnvelope className="icono" />
-        about@correo.com
+        navinatubelleza@gmail.com
       </div>
     </div>
         </div>
