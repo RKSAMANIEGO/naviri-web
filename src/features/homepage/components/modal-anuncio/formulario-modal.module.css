@@ -1,0 +1,271 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  
+  .modalContainer {
+    width: 100%;
+    max-width: 900px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .modalContent {
+    display: flex;
+    height: 600px;
+  }
+  
+  .imageSection {
+    flex: 1;
+    background: linear-gradient(135deg, #FF6BBC 0%, #ff4bac 100%);
+    overflow: hidden;
+    position: relative;
+    display: flex; /* Añadido para centrar la imagen */
+    align-items: center;
+    justify-content: center;
+    min-width: 300px; /* Asegura un ancho mínimo */
+  }
+  
+  .promoImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cambiado de contain a cover */
+    padding: 0; /* Eliminado el padding */
+    position: absolute; /* Posicionamiento absoluto */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .formSection {
+    flex: 1;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+  }
+  
+  .closeButton:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  .formHeader {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    color: #FF6BBC;
+  }
+  
+  .subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #FF6BBC;
+  }
+  
+  .description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .fieldContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+  }
+  
+  .label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .required {
+    color: #FF6BBC;
+    margin-left: 4px;
+  }
+  
+  .input,
+  .select {
+    padding: 12px 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+  
+  .input:focus,
+  .select:focus {
+    outline: none;
+    border-color: #FF6BBC;
+    box-shadow: 0 0 0 2px rgba(255, 107, 188, 0.2);
+  }
+  
+  .inputError {
+    border-color: #FF6BBC;
+  }
+  
+  .errorMessage {
+    color: #FF6BBC;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .phoneContainer {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .countryCode {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    height: 44px;
+  }
+  
+  .flag {
+    font-size: 16px;
+  }
+  
+  .phoneInput {
+    flex: 1;
+  }
+  
+  .submitButton {
+    background: #FF6BBC;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+  }
+  
+  .submitButton:hover {
+    background: #ff4bac;
+  }
+  
+  .privacyNote {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 15px;
+    line-height: 1.5;
+  }
+  
+  .privacyLink {
+    color: #FF6BBC;
+    text-decoration: underline;
+  }
+  
+  .privacyLink:hover {
+    opacity: 0.8;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .modalContent {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .imageSection {
+      display: none;
+    }
+  
+    .formSection {
+      padding: 20px;
+    }
+  
+    .title {
+      font-size: 24px;
+    }
+  
+    .subtitle {
+      font-size: 20px;
+    }
+  }
+  
+  .dontShowAgain {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .dontShowButton {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .dontShowButton:hover {
+    color: #FF6BBC;
+  }

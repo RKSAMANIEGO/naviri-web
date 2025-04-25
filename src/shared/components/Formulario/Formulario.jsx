@@ -26,7 +26,7 @@ export default function Formulario() {
       setMessageType("success");
       setEmail("");
     } catch (error) {
-      setMessage("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo.");
+      setMessage("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo."+error);
       setMessageType("error");
     } finally {
       setIsSubmitting(false);
