@@ -174,7 +174,7 @@ const Header = () => {
                     <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Sobre Nosotros</NavLink>
                     
                     <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
-                    </Link>
+                   
                 </nav>
 
                 <div className={`${styles.sectionright} ${styles.desktopNav}`}>
