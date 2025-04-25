@@ -158,6 +158,10 @@ const Header = () => {
                     <Link to="/contact">
                     <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                     </Link>
+
+                    <Link to="/promotion">
+                    <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Promoción</a>
+                    </Link>
                 </nav>
 
                 <div className={`${styles.sectionright} ${styles.desktopNav}`}>

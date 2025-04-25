@@ -41,6 +41,8 @@ import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/p
 
 import ContactPage from '../../pages/sectionContact/ContactPage.jsx'
 
+import PromocionesProductos from '../../features/Promotion/pages/PromocionesProductos.jsx';
+
 
 const Router = () => {
   useEffect(() => {
@@ -68,6 +70,7 @@ const Router = () => {
   <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} />
   // Añade esta nueva ruta aquí
   <Route path="/contact" element={<ContactPage />} />
+  <Route path="/promotion" element={<PromocionesProductos></PromocionesProductos> } />
   <Route path="*" element={<Navigate to="/" />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
