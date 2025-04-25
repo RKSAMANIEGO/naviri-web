@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+.info-wrapper {
+  position: relative;
+  margin-top: 3rem;
+}
+
+.stats-container {
+  font-family: Arial, sans-serif;
+  padding: 2rem 0 7rem 0;
+  background-color: #ffffff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 10rem;
+  position: relative;
+  z-index: 1;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.stat-box {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🎯 Nuevo estilo para el GIF a la izquierda y texto a la derecha */
+.stat-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  height: 120px; /* Altura total de la tarjeta */
+  gap: 1.5rem;
+}
+
+.inline-gif-full {
+  width: 80px;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+
+.stat-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  text-align: left;
+}
+
+.stat-text h2 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 0;
+  color: #222;
+  line-height: 1;
+}
+
+.stat-text p {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0.5rem 0 0 0;
+  color: #444;
+  letter-spacing: 1px;
+}
+
+/* 🎯 Contenedor del GIF en el fondo (anterior) */
+.gif-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gif-overlay {
+  max-width: 80px;
+  max-height: 80px;
+  opacity: 0.6;
+  object-fit: contain;
+}
+
+/* 🎯 Estilos de la misión y visión */
+.missions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  position: relative;
+  top: -80px;
+  z-index: 2;
+}
+
+.mission-box {
+  background-color: #FF73BF;
+  color: white;
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.116);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.box-content {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  height: 100%;
+}
+
+.initial-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 1;
+  pointer-events: auto;
+  height: 100%;
+}
+
+.initial-content h3 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.text-content {
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 0;
+}
+
+.text-content p {
+  margin: 0;
+  padding: 0 2rem;
+  font-size: 25px;
+  line-height: 1.5;
+  font-family: "Roboto", sans-serif;
+}
+
+.mission-box.active .text-content {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mission-box.active .initial-content {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mission-box.active {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.mission-box.active h3 {
+  color: rgb(255, 255, 255);
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .stats-container {
+    gap: 10rem;
+  }
+
+  .mission-box {
+    max-width: 350px;
+    height: 250px;
+  }
+
+  .initial-content h3 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-container {
+    gap: 5rem;
+    flex-direction: row;
+    padding: 1rem 0 4rem 0;
+  }
+
+  .mission-box {
+    max-width: 300px;
+    height: 220px;
+  }
+
+  .initial-content h3 {
+    font-size: 2.5rem;
+  }
+
+  .missions {
+    gap: 1rem;
+    top: -60px;
+    margin-top: 3rem;
+  }
+  .text-content p {
+    margin: 0;
+    padding: 0 2rem;
+    font-size: 18px;
+    line-height: 1.5;
+    font-family: "Delius", cursive;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-container {
+    gap: 3rem;
+    padding: 1rem 0 3rem 0;
+  }
+
+  .mission-box {
+    max-width: 100%;
+    height: 200px;
+  }
+
+  .initial-content h3 {
+    font-size: 2rem;
+  }
+
+  .missions {
+    flex-direction: row;
+    top: -40px;
+    margin-top: 3rem;
+  }
+.text-content p {
+  margin: 0;
+  padding: 0 2rem;
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: "Delius", cursive;
+}
+}

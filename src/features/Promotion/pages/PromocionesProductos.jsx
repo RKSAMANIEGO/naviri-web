@@ -2,8 +2,21 @@ import styles from "./PromocionesProductos.module.css"
 import aceiteOregano from "../../../assets/image/aceideOREGANO.jpeg"
 import aceiteArbolTe from "../../../assets/image/aceiteARBOLDETE.jpeg"
 import aceitegirasol from '../../../assets/image/aceitegirasol.jpeg'
-import aceitejazmin from '../../../assets/image/aceiteJAZMIN.jpeg' 
+import aceitejazmin from '../../../assets/image/aceiteJAZMIN.jpeg'
+/* import  {getPromotions} from '../services/promotionService.js' */
+import { useEffect } from "react"
+import { getPromotions } from "../../../core/services/promotionService.js"
+
 const PromocionesProductos = () => {
+  
+  const listPromotion =async() =>{
+      const responsive = await getPromotions();
+      console.log(responsive.data);
+  }
+  useEffect(() => {
+    listPromotion()}, [])
+  // Simulación de datos de productos (esto debería venir de una API o base de datos)
+
   const productos = [
     {
       id: 1,

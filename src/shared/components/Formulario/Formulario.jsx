@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./Formulario.module.css";
-import { createEmail } from "../../../services/emailService"; // Updated path
+import { createEmail } from "../../../core/services/emailService"; // Updated path
 
 export default function Formulario() {
   const [form, setEmail] = useState({
@@ -26,7 +26,7 @@ export default function Formulario() {
       setMessageType("success");
       setEmail("");
     } catch (error) {
-      setMessage("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo.");
+      setMessage("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo."+error);
       setMessageType("error");
     } finally {
       setIsSubmitting(false);

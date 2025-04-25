@@ -4,9 +4,13 @@ import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../../assets/image/logo-navi.png';
 import styles from "./Header.module.css";
 import { useCart } from '../../../features/cart/context/CartContext'; // Updated path
+import imageProduct1 from "../../../assets/image/cosmetologia.png"
+import imageProduct2 from "../../../assets/image/cosmetologia2.jpg";
+import imageCategory1 from "../../../assets/image/categoria1.jpg";
+import imageCategory2 from "../../../assets/image/categoria2.jpg";
 
 const productMenuItems = [
-    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products' },
+    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/new-products' },
     { id: 'all', title: 'Ver todo', description: 'Explora nuestra colección completa de productos', to: '/products' },
     { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
     { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
@@ -100,116 +104,90 @@ const Header = () => {
 
     return (
         <header className={styles.header}>
-            <div className={styles.navContainer}>
-                <div className={styles.logo}>
-                    <Link to="/" onClick={closeMobileMenu}>
-                        <img src={logo} alt="Navi Cosméticos Logo" />
-                    </Link>
-                </div>
+        <div className={styles.navContainer}>
+            <div className={styles.logo}>
+                <Link to="/" onClick={closeMobileMenu}>
+                    <img src={logo} alt="Navi Cosméticos Logo" />
+                </Link>
+            </div>
 
-                <nav className={`${styles.nav} ${styles.desktopNav}`}>
-                    <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} end>Inicio</NavLink>
-                    <div
-                        ref={productosRef}
-                        className={styles.dropdownTrigger}
-                        onMouseEnter={() => handleDropdownEnter(setShowProductos)}
-                        onMouseLeave={() => handleDropdownLeave(setShowProductos)}
-                    >
-                        <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} aria-haspopup="true" aria-expanded={showProductos}>
-                            Productos <FaChevronDown className={`${styles.iconDropdown} ${showProductos ? styles.iconDropdownOpen : ''}`} />
-                        </NavLink>
-                        <div className={`${styles.dropdown} ${showProductos ? styles.dropdownVisible : ''}`}>
-                            {productMenuItems.map(item => (
-                                item.type === 'banner' ? (
-                                    <Link key={item.id} to={item.to} className={styles.productosnew} onClick={() => setShowProductos(false)}>
-                                        <div className={styles.titleproductos}>
-                                            <h1>{item.title}</h1>
-                                            <p>{item.description}</p>
-                                        </div>
-                                    </Link>
-                                ) : (
-                                    <Link key={item.id} to={item.to} className={styles.dropdownSection} onClick={() => setShowProductos(false)}>
+            <nav className={`${styles.nav} ${styles.desktopNav}`}>
+                <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} end>Inicio</NavLink>
+                <div
+                    ref={productosRef}
+                    className={styles.dropdownTrigger}
+                    onMouseEnter={() => handleDropdownEnter(setShowProductos)}
+                    onMouseLeave={() => handleDropdownLeave(setShowProductos)}
+                >
+                    <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} aria-haspopup="true" aria-expanded={showProductos}>
+                        Productos <FaChevronDown className={`${styles.iconDropdown} ${showProductos ? styles.iconDropdownOpen : ''}`} />
+                    </NavLink>
+                    <div className={`${styles.dropdown} ${showProductos ? styles.dropdownVisible : ''}`}>
+                        {productMenuItems.map(item => (
+                            
+                            item.type === 'banner' ? (
+                                <Link key={item.id} to={item.to} className={styles.productosnew} onClick={() => setShowProductos(false)}>
+                                    
+                                    <div className={styles.titleproductos}>
                                         <h1>{item.title}</h1>
                                         <p>{item.description}</p>
-                                    </Link>
-                                )
-                            ))}
-                        </div>
-                    </div>
-                    <div
-                        ref={categoriasRef}
-                        className={styles.dropdownTrigger}
-                        onMouseEnter={() => handleDropdownEnter(setShowCategorias)}
-                        onMouseLeave={() => handleDropdownLeave(setShowCategorias)}
-                    >
-                        <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} aria-haspopup="true" aria-expanded={showCategorias}>
-                            Categorías <FaChevronDown className={`${styles.iconDropdown} ${showCategorias ? styles.iconDropdownOpen : ''}`} />
-                        </NavLink>
-                        <div className={`${styles.dropdown} ${styles.categoryDropdown} ${showCategorias ? styles.dropdownVisible : ''}`}>
-                            {categoryMenuItems.map(item => (
-                                <Link key={item.id} to={item.to} className={styles.dropdownSection} onClick={() => setShowCategorias(false)}>
+                                    </div>
+                                </Link>
+                            ) : (
+                                <Link key={item.id} to={item.to} className={styles.dropdownSection} onClick={() => setShowProductos(false)}>
                                     <h1>{item.title}</h1>
                                     <p>{item.description}</p>
                                 </Link>
-                            ))}
+                            )
+                            
+                        ))}
+                        <div className={styles.dropdownImages}>
+                           <img src={imageProduct1} alt="Producto 1" className={styles.dropdownImg} />
+                           <img src={imageProduct2} alt="Producto 2" className={styles.dropdownImg} />
                         </div>
                     </div>
-                    <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
-                    <Link to="/contact">
-                    <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
-                    </Link>
-
-                    <Link to="/promotion">
-                    <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Promoción</a>
-                    </Link>
-                </nav>
-
-                <div className={`${styles.sectionright} ${styles.desktopNav}`}>
-                    <form className={styles.searchbar} onSubmit={(e) => {
-                        e.preventDefault();
-                        navigate(`/products?search=${searchTerm}`);
-                    }}>
-                        <input
-                            type="text"
-                            placeholder="Buscar productos"
-                            aria-label="Buscar productos"
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <button type="submit" className={styles.searchButton} aria-label="Buscar">
-                            <FaSearch className={styles.iconsearch} aria-hidden="true" />
-                        </button>
-                    </form>
-                    <button onClick={handleCartClick} className={styles.cart} aria-label="Ver carrito de compras">
-                        <FaShoppingCart className={styles.carticon} aria-hidden="true"/>
-                        <span className={styles.cartcount}>{getCartCount()}</span>
-                    </button>
-                    <button onClick={handleReserveClick} className={styles.btnreserve}>Reservar</button>
                 </div>
-
-                <button
-                    className={styles.menuIcon}
-                    onClick={toggleMobileMenu}
-                    aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-                    aria-expanded={isMobileMenuOpen}
-                    aria-controls="mobileNavMenu"
+                <div
+                    ref={categoriasRef}
+                    className={styles.dropdownTrigger}
+                    onMouseEnter={() => handleDropdownEnter(setShowCategorias)}
+                    onMouseLeave={() => handleDropdownLeave(setShowCategorias)}
                 >
-                    {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
-                </button>
-            </div>
+                    <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} aria-haspopup="true" aria-expanded={showCategorias}>
+                        Categorías <FaChevronDown className={`${styles.iconDropdown} ${showCategorias ? styles.iconDropdownOpen : ''}`} />
+                    </NavLink>
+                    <div className={`${styles.dropdown} ${styles.categoryDropdown} ${showCategorias ? styles.dropdownVisible : ''}`}>
+                        {categoryMenuItems.map(item => (
+                            <Link key={item.id} to={item.to} className={styles.dropdownSection} onClick={() => setShowCategorias(false)}>
+                                <h1>{item.title}</h1>
+                                <p>{item.description}</p>
+                            </Link>
+                        ))}
+                        <div className={styles.dropdownImages}>
+                        <img src={imageCategory1} alt="Category 1" className={styles.dropdownImage} />
+                        <img src={imageCategory2} alt="Category2" className={styles.dropdownImage} />
+                        </div>
+                    </div>
+                </div>
+                <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
 
-            <nav
-                id="mobileNavMenu"
-                className={`${styles.mobileNav} ${isMobileMenuOpen ? styles.mobileNavOpen : ''}`}
-            >
-                <form
-                    className={`${styles.searchbar} ${styles.mobileSearch}`}
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        navigate(`/products?search=${searchTerm}`);
-                        closeMobileMenu();
-                    }}
-                >
+                <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Sobre Nosotros</NavLink>
+                
+               {/* <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>*/}
+                        <Link to ="/contacts"> 
+                        <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
+                        </Link>
+                        
+                        <Link to ="/promotions"> 
+                        <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Promoción</a>
+                        </Link>
+            </nav>
+
+            <div className={`${styles.sectionright} ${styles.desktopNav}`}>
+                <form className={styles.searchbar} onSubmit={(e) => {
+                    e.preventDefault();
+                    navigate(`/products?search=${searchTerm}`);
+                }}>
                     <input
                         type="text"
                         placeholder="Buscar productos"
@@ -218,34 +196,76 @@ const Header = () => {
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <button type="submit" className={styles.searchButton} aria-label="Buscar">
-                        <FaSearch className={styles.iconsearch} aria-hidden="true"/>
+                        <FaSearch className={styles.iconsearch} aria-hidden="true" />
                     </button>
                 </form>
-                <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
-                <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
-                <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
-                <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
-                <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
-                
-                <div className={styles.mobileExtras}>
-                    <button onClick={() => { 
-                        if (location.pathname === '/') {
-                            navigate('/products');
-                            closeMobileMenu();
-                        } else {
-                            toggleCart();
-                            closeMobileMenu();
-                        }
-                    }} className={styles.cart} aria-label="Ver carrito de compras">
-                        <span className={styles.mobileCartContent}>Carrito <FaShoppingCart className={styles.carticon} aria-hidden="true"/></span>
-                        <span className={styles.cartcount}>{getCartCount()}</span>
-                    </button>
-                    <button onClick={handleReserveClick} className={`${styles.btnreserve} ${styles.mobileReserveBtn}`}>
-                        <FaWhatsapp className={styles.whatsappIcon} /> Reservar
-                    </button>
-                </div>
-            </nav>
-        </header>
+                <button onClick={handleCartClick} className={styles.cart} aria-label="Ver carrito de compras">
+                    <FaShoppingCart className={styles.carticon} aria-hidden="true"/>
+                    <span className={styles.cartcount}>{getCartCount()}</span>
+                </button>
+                <button onClick={handleReserveClick} className={styles.btnreserve}>Reservar</button>
+            </div>
+
+            <button
+                className={styles.menuIcon}
+                onClick={toggleMobileMenu}
+                aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobileNavMenu"
+            >
+                {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
+            </button>
+        </div>
+
+        <nav
+            id="mobileNavMenu"
+            className={`${styles.mobileNav} ${isMobileMenuOpen ? styles.mobileNavOpen : ''}`}
+        >
+            <form
+                className={`${styles.searchbar} ${styles.mobileSearch}`}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    navigate(`/products?search=${searchTerm}`);
+                    closeMobileMenu();
+                }}
+            >
+                <input
+                    type="text"
+                    placeholder="Buscar productos"
+                    aria-label="Buscar productos"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button type="submit" className={styles.searchButton} aria-label="Buscar">
+                    <FaSearch className={styles.iconsearch} aria-hidden="true"/>
+                </button>
+            </form>
+            <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
+            <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
+            <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
+            <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
+            <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Sobre Nosotros</NavLink>
+            <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
+            
+            <div className={styles.mobileExtras}>
+                <button onClick={() => { 
+                    if (location.pathname === '/') {
+                        navigate('/products');
+                        closeMobileMenu();
+                    } else {
+                        toggleCart();
+                        closeMobileMenu();
+                    }
+                }} className={styles.cart} aria-label="Ver carrito de compras">
+                    <span className={styles.mobileCartContent}>Carrito <FaShoppingCart className={styles.carticon} aria-hidden="true"/></span>
+                    <span className={styles.cartcount}>{getCartCount()}</span>
+                </button>
+                <button onClick={handleReserveClick} className={`${styles.btnreserve} ${styles.mobileReserveBtn}`}>
+                    <FaWhatsapp className={styles.whatsappIcon} /> Reservar
+                </button>
+            </div>
+        </nav>
+    </header>
     );
 };
 
