@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./TestimonioPrincipal.module.css";
 import fondoTestimonio from "../../../assets/image/testimonio.jpg"; // Updated path
 import Stars from './stars.jsx'; 
-import { getTestimonios } from "../../../services/testimoniosServices.js"; // Updated path
+import { getTestimonios } from "../../../core/services/testimoniosService.js"; // Updated path
 import RotatingText from "./RotatingText.jsx";
 
 export default function Testi() {

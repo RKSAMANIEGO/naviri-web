@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/Sidebar/Sidebar';
-import UserSettings from "../../components/AdminPanel/AdminConfi";
+import UserSettings from "../components/AdminPanel/AdminConfig";
 
 const AdminLayout = () => { 
   const [isDarkMode, setIsDarkMode] = useState(false);

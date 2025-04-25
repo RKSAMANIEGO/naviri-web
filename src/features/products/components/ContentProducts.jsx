@@ -25,6 +25,7 @@ const ContentProducts = ({categorie}) => {
     const [totalProducts,setTotalProducts]=useState(null);
     const { addToCart } = useCart();
 
+
     // Obtener parámetros de búsqueda
     const [searchParams] = useSearchParams();
 
@@ -156,7 +157,25 @@ const ContentProducts = ({categorie}) => {
                     </div>
                     <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                     <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
-                    <h5 className={styles.h5}>S/{product.price}</h5>
+
+
+
+                    {product.discount > 0 && product.discount !==null ? (
+
+                        <div className={styles.wrapperDscto}>
+                            <s>S/{product.price}</s>
+                            <h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*product.discount/100)).toFixed(2)}</h6>
+                        </div>
+
+                        )  
+                        :
+                        (
+                        <div className={styles.wrapperDscto}>
+                            <h5 className={styles.sinDscto}>S/{product.price}</h5>
+                        </div>
+                        )
+                    }
+
                     <section className={styles.productActions}>
                         <button
                             className={`btn btn-secondary ${styles.addToCartBtn}`}

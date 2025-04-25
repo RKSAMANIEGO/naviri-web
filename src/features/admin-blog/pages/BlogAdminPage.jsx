@@ -52,7 +52,7 @@ const BlogAdminPage = () => {
   return (
     <div className="p-6">
       <h1 className="text-4xl">Gestión de Blogs</h1>
-      
+
       <div className="flex gap-2 my-5">
         <Search
           placeholder="Buscar en blogs..."
@@ -72,7 +72,7 @@ const BlogAdminPage = () => {
       ) : (
         <Table
           columns={columns}
-          dataSource={filteredBlogs} 
+          dataSource={filteredBlogs}
           rowKey="id"
           loading={!blogs}
           pagination={{
@@ -90,7 +90,7 @@ const BlogAdminPage = () => {
                   backgroundColor: 'rgba(255, 241, 249, 1)',
                   fontWeight: 'bold',
                   color: 'rgba(255, 107, 188, 1)',
-                }}/>
+                }} />
               ),
             },
           }}
@@ -104,8 +104,8 @@ const BlogAdminPage = () => {
             {Math.min(pagination.current * pagination.pageSize, filteredBlogs.length)} de {filteredBlogs.length}
           </span>
           <div className="flex gap-2">
-            <Button 
-              disabled={pagination.current === 1} 
+            <Button
+              disabled={pagination.current === 1}
               onClick={() => handlePagination(pagination.current - 1)}
             >
               Anterior

@@ -4,9 +4,13 @@ import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../../assets/image/logo-navi.png';
 import styles from "./Header.module.css";
 import { useCart } from '../../../features/cart/context/CartContext'; // Updated path
+import imageProduct1 from "../../../assets/image/cosmetologia.png"
+import imageProduct2 from "../../../assets/image/cosmetologia2.jpg";
+import imageCategory1 from "../../../assets/image/categoria1.jpg";
+import imageCategory2 from "../../../assets/image/categoria2.jpg";
 
 const productMenuItems = [
-    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/products' },
+    { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras ultimas novedades en productos de belleza', to: '/new-products' },
     { id: 'all', title: 'Ver todo', description: 'Explora nuestra colección completa de productos', to: '/products' },
     { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
     { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
@@ -120,8 +124,10 @@ const Header = () => {
                         </NavLink>
                         <div className={`${styles.dropdown} ${showProductos ? styles.dropdownVisible : ''}`}>
                             {productMenuItems.map(item => (
+                                
                                 item.type === 'banner' ? (
                                     <Link key={item.id} to={item.to} className={styles.productosnew} onClick={() => setShowProductos(false)}>
+                                        
                                         <div className={styles.titleproductos}>
                                             <h1>{item.title}</h1>
                                             <p>{item.description}</p>
@@ -133,7 +139,12 @@ const Header = () => {
                                         <p>{item.description}</p>
                                     </Link>
                                 )
+                                
                             ))}
+                            <div className={styles.dropdownImages}>
+                               <img src={imageProduct1} alt="Producto 1" className={styles.dropdownImg} />
+                               <img src={imageProduct2} alt="Producto 2" className={styles.dropdownImg} />
+                            </div>
                         </div>
                     </div>
                     <div
@@ -152,10 +163,16 @@ const Header = () => {
                                     <p>{item.description}</p>
                                 </Link>
                             ))}
+                            <div className={styles.dropdownImages}>
+                             <img src={imageCategory1} alt="Category 1" className={styles.dropdownImage} />
+                             <img src={imageCategory2} alt="Category2" className={styles.dropdownImage} />
+                            </div>
                         </div>
                     </div>
                     <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
-                    <Link to="/contact">
+
+                    <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Sobre Nosotros</NavLink>
+                    
                     <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                     </Link>
                 </nav>
@@ -221,6 +238,7 @@ const Header = () => {
                 <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
                 <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
                 <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
+                <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Sobre Nosotros</NavLink>
                 <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
                 
                 <div className={styles.mobileExtras}>

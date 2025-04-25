@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { getServices } from "../../../../services/secServices";
+import { getServices } from "../../../../core/services/secServices";
 import styles from "./SectionServices.module.css";
 
 // Importa los estilos de Swiper

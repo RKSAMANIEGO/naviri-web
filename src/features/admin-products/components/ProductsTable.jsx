@@ -56,17 +56,23 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
         name:"Categoria",
         selector:row=>row.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name).join()),
         sortable:true,
-        width:"20%"
+        width:"15%"
     },
     {
         name:"Precio",
         selector:row=>"S/."+ Number(row.price).toFixed(2),
         sortable:true,
-        width:"15%"
+        width:"10%"
     },
     {
         name:"Stock",
         selector:row=>row.stock,
+        sortable:true,
+        width:"10%"
+    },
+    {
+        name:"Dscto",
+        selector:row=>row.discount +"%" ,
         sortable:true,
         width:"10%"
     },

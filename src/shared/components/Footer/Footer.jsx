@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram } from "lucide-react";
+import { FaTiktok, FaWhatsapp } from "react-icons/fa";
 import styles from "./Footer.module.css";
 import logo from '../../../assets/image/logo-navi.png';
-import { getContact } from "../../../services/contactservices";
+import { getContact } from "../../../core/services/contactService";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   const [contact, setContact] = useState({});
+  const socialLinks = {
+    instagram: "https://www.instagram.com/navi_natubelleza",
+    tiktok: "https://www.tiktok.com/@natubellezanavi26",
+    whatsapp: "https://wa.me/+51927987259",
+    whatsappMessage: "¡Hola! Me gustaría conocer más sobre los productos de Navi Natubelleza."
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,6 +27,7 @@ const Footer = () => {
 
     fetchData();
   }, []);
+
 
   return (
     <footer id="contact" className={styles.footer}>
@@ -44,7 +52,7 @@ const Footer = () => {
             <li><a href="#">Cuidado Capilar</a></li>
             <li><a href="#">Fragancias</a></li>
             <li><a href="#">Accesorios</a></li>
-            <Link to="PreguntasFrecuentes"><li>Preguntas Frecuentes</li> </Link>
+            <Link to="PreguntasFrecuentes"><li> <li><a href="/PreguntasFrecuentes">Preguntas Frecuentes</a></li></li> </Link>
           </ul>
         </div>
 
@@ -76,6 +84,46 @@ const Footer = () => {
               <Clock className={styles.icon} size={18} /> {contact.attention_hours || 'Lun-Sáb: 9:00 - 20:00'}
             </li>
           </ul>
+        </div>
+
+
+        <div className={styles.sectionfooter}>
+          <h3>Nuestras redes sociales</h3>
+          <div className={styles.socialIcons}>
+            <a
+              href={socialLinks.instagram}
+              className={styles.socialIcon}
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-tooltip="Síguenos en Instagram"
+            >
+              <Instagram size={20} />
+            </a>
+            
+            <a
+              href={socialLinks.tiktok}
+              className={styles.socialIcon}
+              aria-label="TikTok"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-tooltip="Síguenos en TikTok"
+            >
+              <FaTiktok size={20} />
+            </a>
+            
+            <a
+              href={`${socialLinks.whatsapp}?text=${encodeURIComponent(socialLinks.whatsappMessage)}`}
+              className={styles.socialIcon}
+              aria-label="WhatsApp"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-tooltip="Contáctanos por WhatsApp"
+            >
+              <FaWhatsapp size={20} />
+            </a>
+            
+          </div>
         </div>
       </div>
     </footer>

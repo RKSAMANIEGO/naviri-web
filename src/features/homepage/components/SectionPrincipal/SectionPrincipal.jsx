@@ -6,7 +6,7 @@ import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { useEffect, useRef, useState } from "react";
 import logo from "../../../../assets/image/logo-navi.png";
 import model1 from "../../../../assets/models/model1.png";
-import { getPromotions } from "../../../../services/promotionService";
+import { getPromotions } from "../../../../core/services/promotionService";
 
 const SectionPrincipal = () => {
     const [promotions, setPromotions] = useState([])

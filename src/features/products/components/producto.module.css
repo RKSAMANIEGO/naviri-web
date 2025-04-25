@@ -10,7 +10,21 @@
 	font-weight: bold;
 	height: 208px;
 	text-align: center;
+	animation: circle-in-center 1.5s ease-in-out;
+}
 
+@keyframes circle-in-center {
+	from {
+		clip-path: circle(0%);
+	}
+
+	to {
+		clip-path: circle(125%);
+	}
+}
+
+[transition-style="in:circle:center"] {
+	animation: 2.5s cubic-bezier(.25, 1, .30, 1) circle-in-center both;
 }
 
 .section h2 {
@@ -18,6 +32,11 @@
 	color: white;
 	padding-bottom: 20px;
 	line-height: 40px;
+	text-shadow:
+		-1px -1px 0 rgb(229, 161, 207),
+		1px -1px 0 rgb(229, 161, 207),
+		-1px 1px 0 rgb(229, 161, 207),
+		1px 1px 0 rgb(229, 161, 207);
 }
 
 .section p {
@@ -186,7 +205,7 @@
 
 .contentProducts {
 	min-width: 340px;
-	max-width: 1200px;
+	max-width: 1500px;
 	height: 100%;
 	display: flex;
 	justify-content: center;
@@ -197,8 +216,8 @@
 
 
 .sectionProducts {
-	width: 263px;
-	height: 350px;
+	width: 310px;
+	height: 380px;
 	border-radius: 12px;
 	border: 1px solid rgb(241, 239, 239);
 	transition: all 0.3s ease-in-out;
@@ -221,6 +240,8 @@
 }
 
 .sectionProducts p {
+	display: flex;
+	flex-wrap: wrap;
 	font-size: 13px;
 	color: rgb(137, 135, 135);
 	font-weight: 600;
@@ -232,12 +253,35 @@
 	font-size: 16px;
 	font-weight: 600;
 	padding-inline: 10px;
+	margin-block: 2px;
 }
 
-.sectionProducts h5 {
+/*dscto*/
+.wrapperDscto {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-block: 2px;
+}
+
+.dscto {
+	font-weight: 750;
+	padding-right: 10px;
+	color: #ef6ab7;
+	font-size: 17px;
+}
+
+.sinDscto {
+	font-weight: 750;
+	padding-left: 10px;
+	color: #ef6ab7;
+	font-size: 17px;
+}
+
+.sectionProducts s {
 	font-size: 16px;
 	font-weight: 600;
-	color: rgba(255, 68, 171, 1);
+	color: rgb(122, 121, 122);
 	padding-inline: 10px;
 }
 
@@ -289,6 +333,12 @@
 	margin-block: 20px;
 }
 
+.activePage {
+	background-color: rgba(255, 68, 171, 1);
+	color: white;
+	border: none;
+}
+
 .pagination button {
 	padding: 5px 12px;
 	border: 1px solid rgb(205, 205, 205);
@@ -297,6 +347,7 @@
 	font-size: 15px;
 	cursor: pointer;
 }
+
 
 .pagination button:hover {
 	background-color: rgba(255, 68, 171, 1);
@@ -463,7 +514,7 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 10px;
-	margin-top: 15px;
+	margin-top: 10px;
 	padding: 0 10px 10px;
 }
 
@@ -844,18 +895,23 @@
 
 	/*--------------------------*-/
 	/*CONTENT PRODUCTS*/
+
+
+
 	.containerProducts {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
+
+
 	.contentProducts {
 		min-width: 100px;
 		max-width: 1200px;
 		height: 100%;
 		display: flex;
-		justify-content: center;
+		justify-content: space-evenly;
 		flex-wrap: wrap;
 		gap: 10px;
 		padding-block: 40px;
@@ -867,9 +923,20 @@
 	}
 
 
+	/*dscto*/
+
+
+	.dscto {
+		font-size: 11px;
+	}
+
+	.sectionProducts s {
+		font-size: 10px;
+	}
+
 	.sectionProducts {
-		width: 150px;
-		height: 250px;
+		width: 200px;
+		height: 270px;
 		border-radius: 12px;
 		border: 1px solid rgb(241, 239, 239);
 		transition: all 0.3s ease-in-out;
@@ -976,8 +1043,8 @@
 	}
 
 	.sectionProducts {
-		width: 150px;
-		height: 250px;
+		width: 155px;
+		height: 270px;
 		border-radius: 12px;
 		border: 1px solid rgb(241, 239, 239);
 		transition: all 0.3s ease-in-out;
