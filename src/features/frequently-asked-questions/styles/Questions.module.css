@@ -18,7 +18,7 @@
 
 /*HEADER*/
 .headerQuestions {
-    height: 45vh;
+    height: 40vh;
     background: linear-gradient(to right, #ec4899, #ec4899, #ec4899, #f43f5e);
     color: white;
     text-align: center;
@@ -181,7 +181,31 @@
     background-color: #e8e3f3;
 }
 
+/*Animacion del Icono de categorie*/
+.wrapperIcon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #db279f;
+}
 
+.iconCategorie {
+    font-size: 3rem;
+    rotate: 270deg;
+
+    animation: move-icon 0.5s infinite alternate;
+}
+
+@keyframes move-icon {
+    0% {
+        transform: translateX(0px);
+    }
+
+    100% {
+        transform: translateX(20px);
+    }
+}
 
 
 @media (max-width:690px) {
@@ -245,6 +269,15 @@
 
     .card img {
         width: 40px;
+    }
+
+    /*Animacion del Icono de categorie*/
+    .wrapperIcon {
+        font-size: 10px;
+    }
+
+    .iconCategorie {
+        font-size: 2rem;
     }
 }
 

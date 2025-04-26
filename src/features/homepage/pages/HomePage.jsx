@@ -10,36 +10,29 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Verifica si el usuario seleccionó "No mostrar de nuevo" (persiste entre sesiones)
+    // Verifica si el usuario ya seleccionó "No mostrar de nuevo"
     const dontShow = localStorage.getItem("dontShowModal");
-    
-    // Verifica si el usuario ya cerró el modal en esta sesión
-    const closedModalThisSession = sessionStorage.getItem("modalClosedThisSession");
-    
-    // Muestra el modal si no seleccionó "No mostrar de nuevo" y no lo ha cerrado en esta sesión
-    if (!dontShow && !closedModalThisSession) {
+    if (!dontShow) {
       setIsModalOpen(true);
     }
   }, []);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    // Marca que el usuario cerró el modal en esta sesión
-    sessionStorage.setItem("modalClosedThisSession", "true");
   };
 
-   return (
+    return (
       <>
-         {isModalOpen && <FormularioModal isOpen={isModalOpen} onClose={handleCloseModal} />}
-         <SectionPrincipal/>
-         <hr className="text-gray-50"/>
-         <div className="max-full mx-auto">
+          {isModalOpen && <FormularioModal isOpen={isModalOpen} onClose={handleCloseModal} />}
+          <SectionPrincipal/>
+          <hr className="text-gray-50"/>
+          <div className="max-full mx-auto">
             <SectionCategorias/>
             <SectionServices/>
             <SectionBlog/>
-         </div>
+          </div>
       </>
-   )
+  )
 }
 
 export default HomePage;
