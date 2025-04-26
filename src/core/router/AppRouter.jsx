@@ -16,7 +16,7 @@ import PolicyPage from '../../features/policy/pages/PolicyPage.jsx';
 import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
 import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/page/PageQuestionsAndAnswers.jsx';
-import ContactPage from '../../pages/sectionContact/ContactPage.jsx'
+//import ContactPage from '../../pages/sectionContact/ContactPage.jsx'
 
 import LoginPage from '../../features/login/Pages/LoginPage.jsx';
 import AboutPage from '../../features/about/pages/about.jsx';
@@ -67,7 +67,7 @@ const Router = () => {
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 
             <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} />
-            <Route path="/contact" element={<ContactPage />} />
+          {/*  <Route path="/contact" element={<ContactPage />} />* */}
             <Route path="*" element={<Navigate to="/" />} />
         
           </Route>
