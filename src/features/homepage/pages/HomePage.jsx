@@ -21,18 +21,18 @@ const HomePage = () => {
     setIsModalOpen(false);
   };
 
-   return (
+    return (
       <>
-         {isModalOpen && <FormularioModal isOpen={isModalOpen} onClose={handleCloseModal} />}
-         <SectionPrincipal/>
-         <hr className="text-gray-50"/>
-         <div className="max-full mx-auto">
+          {isModalOpen && <FormularioModal isOpen={isModalOpen} onClose={handleCloseModal} />}
+          <SectionPrincipal/>
+          <hr className="text-gray-50"/>
+          <div className="max-full mx-auto">
             <SectionCategorias/>
             <SectionServices/>
             <SectionBlog/>
-         </div>
+          </div>
       </>
-   )
+  )
 }
 
 export default HomePage;

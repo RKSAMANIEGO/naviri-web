@@ -1,9 +1,10 @@
 import React from 'react';
-import styles from './ContactPage.module.css';
+import styles from '../styles/ContactPage.module.css';
 import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 const ContactPage = () => {
-  return (
+
+    return (
     <div className={styles.contactPage}>
       <div className={styles.contactHeader}>
         <h1>Contáctanos</h1>

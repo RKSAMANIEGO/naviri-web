@@ -16,10 +16,6 @@ import PolicyPage from '../../features/policy/pages/PolicyPage.jsx';
 import BlogPage from '../../features/blogs/pages/BlogPage.jsx'; 
 import BlogDetailsPage from '../../features/blogs/pages/BlogDetailsPage.jsx'; 
 import PageQuestionsAndAnswers from '../../features/frequently-asked-questions/page/PageQuestionsAndAnswers.jsx';
-import ContactPage from '../../pages/sectionContact/ContactPage.jsx'
-
-
-
 
 import LoginPage from '../../features/login/Pages/LoginPage.jsx';
 import AboutPage from '../../features/about/pages/about.jsx';
@@ -43,6 +39,7 @@ import AboutAdminPage from '../../features/admin-about/pages/AboutAdmin.jsx'
 import PromocionesProductos from '../../features/Promotion/pages/PromocionesProductos.jsx'
 // scroll to top page
 import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
+import ContactPage from '../../features/contacts/pages/ContactPage.jsx';
 
 
 const Router = () => {
@@ -58,6 +55,7 @@ const Router = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/new-products" element={<NewProductsPageAdmin/>}/>
+
             <Route path='/categories' element={<PageCategorie/>}>
               <Route index element={<ContentProducts categorie="aceites"/>}/>
               <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/>
@@ -67,16 +65,8 @@ const Router = () => {
               <Route path="Exfoliante Corporal" element={ <ContentProducts categorie="Exfoliante Corporal"/>}/>
               <Route path="sales minerales" element={ <ContentProducts categorie="sales minerales"/>}/>
             </Route>
+            
             <Route path="/policy" element={<PolicyPage />} />
-{/*}
-  <Route path="/blog" element={<BlogPage />} />
-  <Route path="/blog/:blogId" element={<BlogDetailsPage/>} />
-  <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} />
-  // Añade esta nueva ruta aquí
-  <Route path="/contact" element={<ContactPage />} />
-  <Route path="/promotion" element={<PromocionesProductos></PromocionesProductos> } />
-  <Route path="*" element={<Navigate to="/" />} />
-*/}
             <Route path="/about" element={<AboutPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:blogId" element={<BlogDetailsPage/>} /> 

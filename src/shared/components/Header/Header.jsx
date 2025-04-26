@@ -142,8 +142,8 @@ const Header = () => {
                             
                         ))}
                         <div className={styles.dropdownImages}>
-                           <img src={imageProduct1} alt="Producto 1" className={styles.dropdownImg} />
-                           <img src={imageProduct2} alt="Producto 2" className={styles.dropdownImg} />
+                            <img src={imageProduct1} alt="Producto 1" className={styles.dropdownImg} />
+                            <img src={imageProduct2} alt="Producto 2" className={styles.dropdownImg} />
                         </div>
                     </div>
                 </div>
@@ -173,9 +173,9 @@ const Header = () => {
 
                 <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Sobre Nosotros</NavLink>
                 
-               {/* <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>*/}
+                {/* <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>*/}
                         <Link to ="/contacts"> 
-                        <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
+                            <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
                         </Link>
                         
                         <Link to ="/promotions"> 
