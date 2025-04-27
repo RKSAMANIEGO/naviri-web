@@ -85,12 +85,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               icon: <ShoppingOutlined />,
               label: 'Productos',
             },
-            /*
-            {
-              key: '/admin/panel/productos%nuevos',
-              icon: <ShoppingOutlined />,
-              label: 'Productos Nuevos',
-            },*/
             {
               key: '/admin/panel/categories',
               icon: <ShoppingOutlined />,
@@ -121,11 +115,12 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               icon: <TagsOutlined />,
               label: 'Promociones',
             },
+            /*
             {
               key: '/admin/panel/questions',
               icon: <QuestionOutlined />,
               label: 'Preguntas y Respuestas',
-            },
+            },*/
             {
               key: 'page',
               icon: <SettingOutlined />,
