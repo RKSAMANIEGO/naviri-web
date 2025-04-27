@@ -173,23 +173,7 @@ const ContentProducts = ({categorie}) => {
                         <div className={styles.wrapperDscto}>
                             <h5 className={styles.sinDscto}>S/{product.price}</h5>
                         </div>
-                        )
-                    }
-
-                    <section className={styles.productActions}>
-                        <button
-                            className={`btn btn-secondary ${styles.addToCartBtn}`}
-                            onClick={() => handleAddToCart(product)}
-                        >
-                            <FaShoppingCart /> Añadir
-                        </button>
-                        <button
-                            className={`btn btn-primary ${styles.buyBtn}`}
-                            onClick={() => handleWhatsappCheckout(product)}
-                        >
-                            <FaWhatsapp/> Comprar
-                        </button>
-                    </section>
+                        )}
                 </section>
             ))}
 
