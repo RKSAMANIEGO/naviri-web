@@ -85,12 +85,12 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               icon: <ShoppingOutlined />,
               label: 'Productos',
             },
-            /*
+            
             {
-              key: '/admin/panel/productos%nuevos',
+              key: '/admin/panel/userdiscount',
               icon: <ShoppingOutlined />,
-              label: 'Productos Nuevos',
-            },*/
+              label: 'Usuarios con Descuento',
+            },
             {
               key: '/admin/panel/categories',
               icon: <ShoppingOutlined />,
