@@ -76,20 +76,15 @@ const ContentProductNew = () => {
                             <p className="text-sm text-center">{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
                             <h4 className="text-md text-center">{product.name.toUpperCase()}</h4>
         
-                        {product.discount > 0 && product.discount !==null ? (
-
-                            <div className='flex justify-center gap-5'>
+                        {product.discount > 0 && product.discount !==null ? 
+                        ( <div className='flex justify-center gap-5'>
                                 <s >S/{product.price}</s>
                                 <h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*product.discount/100)).toFixed(2)}</h6>
-                            </div>
-
-                            )  
-                            :
-                            (
-                            <div className="flex justify-center">
+                            </div>  )  
+                        :
+                        ( <div className="flex justify-center">
                                 <h5 className={styles.sinDscto}>S/{product.price}</h5>
-                            </div>
-                            )
+                            </div> )
                         }
         
                             <section className={styles.productActions}>

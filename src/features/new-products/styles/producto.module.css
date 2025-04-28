@@ -97,12 +97,16 @@
 	font-size: 32px;
 	font-weight: 700;
 	color: rgba(182, 42, 105, 1);
-	padding: 20px 40px;
+	padding: 20px 30px;
+	line-height: 0.8;
 }
 
 .title p {
 	font-size: 16px;
 	color: rgb(83, 80, 80);
+	display: flex;
+	justify-content: start;
+	padding: 0;
 }
 
 /*SEARCH PRODUCTS*/
