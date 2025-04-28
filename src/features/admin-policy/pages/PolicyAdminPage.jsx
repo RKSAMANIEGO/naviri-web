@@ -97,13 +97,13 @@ const PolicyAdminPage = () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Políticas de la Empresa</h2>
+      <h2 className="text-5xl font-bold mb-6" style={{ fontFamily: "'Great Vibes', Recursive" }}>Políticas de la Empresa</h2>
       <Row gutter={32}>
         {/* Formulario */}
         <Col xs={24} md={12}>
           <div className="space-y-4">
             <div>
-              <label className="block mb-1 font-medium">Título</label>
+              <label className="text-3xl block mb-1 font-medium" style={{ fontFamily: "'Great Vibes', Recursive" }}>Título</label>
               <textarea
                 name="title"
                 rows={2}
@@ -114,7 +114,7 @@ const PolicyAdminPage = () => {
             </div>
 
             <div>
-              <label className="block mb-1 font-medium">Descripción</label>
+              <label className="text-3xl block mb-1 font-medium" style={{ fontFamily: "'Great Vibes', Recursive" }}>Descripción</label>
               <textarea
                 name="description"
                 value={policy.description}
@@ -124,7 +124,7 @@ const PolicyAdminPage = () => {
             </div>
 
             <div>
-              <label className="block mb-2 font-medium">Imagen</label>
+              <label className="text-3xl block mb-2 font-medium" style={{ fontFamily: "'Great Vibes', Recursive" }}>Imagen</label>
               <Upload.Dragger {...uploadProps}>
                 <div className="text-center">
                   <UploadOutlined className="text-3xl mb-2" />
@@ -147,8 +147,8 @@ const PolicyAdminPage = () => {
         {/* Vista previa */}
         <Col xs={24} md={12}>
           <div className="border border-gray-300 rounded-lg p-4 bg-gray-100 min-h-[300px] flex flex-col items-center justify-center text-center">
-            <h3 className="text-xl font-bold">{policy.title || 'Título de política'}</h3>
-            <p className="my-4">{policy.description || 'Descripción de la política...'}</p>
+            <h3 className="text-4xl font-bold" style={{ fontFamily: "'Great Vibes', Recursive" }}>{policy.title || 'Título de política'}</h3>
+            <p className="my-4" style={{ whiteSpace: 'pre-line', textAlign: 'left' }}>{policy.description || 'Descripción de la política...'}</p>
             {fileList.length > 0 && (
               <div className="w-full max-w-[350px] h-[200px] overflow-hidden rounded">
                 <img

@@ -51,7 +51,7 @@ const BlogAdminPage = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-4xl">Gestión de Blogs</h1>
+      <h1 className="text-5xl font-bold" style={{ fontFamily: "'Great Vibes', Recursive" }}>Gestión de Blogs</h1>
 
       <div className="flex gap-2 my-5">
         <Search

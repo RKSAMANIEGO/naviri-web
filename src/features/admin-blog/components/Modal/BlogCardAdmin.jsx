@@ -4,7 +4,7 @@ import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
 const BlogAdminCard = ({ blog, onEdit, onDelete }) => {
   return (
-    <div className="m-2 rounded-lg overflow-hidden shadow-sm hover:shadow-md hover:shadow-gray-600 transition-shadow bg-white">
+    <div className="m-2 rounded-lg overflow-hidden shadow-sm hover:shadow-sm hover:shadow-pink-400 transition-shadow bg-white">
       {/* Imagen */}
       <div className="h-48 bg-gray-100 overflow-hidden">
         <Image 

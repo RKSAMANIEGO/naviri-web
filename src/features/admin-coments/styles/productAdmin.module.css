@@ -1,12 +1,10 @@
 /*COMPONENTE PRODUCT SEARCH*/
 .productSearch {
     width: 100%;
-    padding: 0px 40px;
 }
 
 
 .productSearch h2 {
-    padding-top: 20px;
     font-size: 3rem;
     font-family: "Great Vibes", cursive;
     font-weight: 600;
