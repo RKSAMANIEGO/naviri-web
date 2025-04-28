@@ -5,6 +5,7 @@ import ProductsCards from '../components/ProductsCards';
 import styles from '../styles/productAdmin.module.css'
 import { listProducts } from '../services/adminProductsApi';
 import ModalCrudProduct from '../components/Modal/ModalCrudProduct';
+import { Tooltip } from 'antd';
 
 const ProductAdminPage = () => { // Renamed component
     const[onChangeStyleProducts,setOnChangeStyleProducts]=useState(false);
@@ -73,9 +74,13 @@ const ProductAdminPage = () => { // Renamed component
 
                     />
             )}
+            
+            <Tooltip title="Agregar Un Producto"  placement="left" overlayInnerStyle={{background:"#c52e84",color:"white",boxShadow:"0 0 15px gray"}}>
+                <div className={styles.addProduct} onClick={()=> setOpenModal(true)}>  <i className="fa-solid fa-plus"></i>  </div>
+            </Tooltip>
 
-            <div className={styles.addProduct} onClick={()=> setOpenModal(true)}>  <i className="fa-solid fa-plus"></i>  </div>
             <ModalCrudProduct isOpen={isOpenModal} onClose={()=> setOpenModal(false)} titleModal="productoAdmin" confirmAddProduct={updateListProducts} />
+        
         </>
     )
 }
