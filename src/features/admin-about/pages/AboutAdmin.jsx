@@ -54,13 +54,13 @@ const MissionVisionAdminPage = () => {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Misión y Visión</h2>
+      <h2 className="text-5xl font-bold mb-6" style={{ fontFamily: "'Great Vibes', Recursive" }}>Misión y Visión</h2>
       <Row gutter={32}>
         <Col xs={24} md={12}>
           <div className="space-y-6">
             {/* Misión */}
             <div>
-              <label className="block mb-1 font-medium">Misión</label>
+              <label className="block mb-1 font-medium text-3xl" style={{ fontFamily: "'Great Vibes', Recursive" }}>Misión</label>
               <textarea
                 name="mission"
                 value={info.mission}
@@ -78,7 +78,7 @@ const MissionVisionAdminPage = () => {
 
             {/* Visión */}
             <div>
-              <label className="block mb-1 font-medium">Visión</label>
+              <label className="block mb-1 font-medium text-3xl" style={{ fontFamily: "'Great Vibes', Recursive" }}>Visión</label>
               <textarea
                 name="vision"
                 value={info.vision}
@@ -99,14 +99,14 @@ const MissionVisionAdminPage = () => {
         {/* Vista previa */}
         <Col xs={24} md={12}>
           <div className="border border-gray-300 rounded-xl p-6 bg-gray-100 shadow-md min-h-[300px]">
-            <h3 className="text-lg font-semibold text-center mb-4">Vista Previa</h3>
+            <h3 className="text-4xl font-semibold text-center mb-4" style={{ fontFamily: "'Great Vibes', Recursive" }}>Vista Previa</h3>
             <div className="grid gap-4">
               <div className="bg-white p-4 rounded-lg shadow">
-                <h4 className="text-md font-bold mb-2">Misión</h4>
+                <h4 className="text-3xl font-bold mb-2" style={{ fontFamily: "'Great Vibes', Recursive" }} >Misión</h4>
                 <p>{info.mission || "Tu misión aparecerá aquí..."}</p>
               </div>
               <div className="bg-white p-4 rounded-lg shadow">
-                <h4 className="text-md font-bold mb-2">Visión</h4>
+                <h4 className="text-3xl font-bold mb-2" style={{ fontFamily: "'Great Vibes', Recursive" }}>Visión</h4>
                 <p>{info.vision || "Tu visión aparecerá aquí..."}</p>
               </div>
             </div>
