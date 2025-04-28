@@ -4,7 +4,6 @@
     padding: 0px 40px;
 }
 
-
 .productSearch h2 {
     padding-top: 20px;
     font-size: 3rem;
@@ -15,9 +14,11 @@
 }
 
 .productSearch p {
+    display: flex;
+    justify-content: start;
     color: rgba(167, 167, 167, 1);
     font-size: 12px;
-
+    margin: 0;
 }
 
 .productSearch div {
@@ -26,11 +27,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .productSearch div label {
     position: relative;
     width: 100%;
+
 }
 
 
@@ -39,13 +42,6 @@
     border: 1px solid rgb(220, 220, 220, 1);
     padding: 10px 50px;
     border-radius: 8px;
-
-    /*
-    background-image: url('../assets/image/search.png');
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-position: calc(3% - 15px) center;
-    */
 }
 
 .productSearch div label i {
@@ -58,6 +54,8 @@
 
 }
 
+
+
 .productSearch div label i:hover {
     color: rgb(66, 63, 63);
     background-color: white;
@@ -67,7 +65,7 @@
 
 .productSearch div i {
     padding-inline: 15px;
-    padding-block: 8px;
+    padding-block: 12px;
     border-radius: 10px;
     border: 1px solid rgb(220, 220, 220, 1);
     cursor: pointer;
@@ -168,7 +166,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
     padding: 0 20px;
     padding-bottom: 10px;
@@ -176,10 +174,13 @@
 
 .sectionProducts {
     width: 245px;
-    height: 380px;
+    height: 360px;
     border-radius: 12px;
     border: 1px solid rgb(241, 239, 239);
     transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+
 
 }
 
@@ -189,6 +190,7 @@
 }
 
 .sectionProducts p {
+    margin: 0;
     font-size: 11px;
     color: rgb(137, 135, 135);
     font-weight: 600;
@@ -197,7 +199,10 @@
 }
 
 .sectionProducts h4 {
-    font-size: 13px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 14px;
     font-weight: 600;
     padding-inline: 10px;
 }
@@ -208,7 +213,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px;
-    gap: 10px;
+
 }
 
 .contentProductAdmin section button:first-child {
@@ -241,8 +246,12 @@
     color: white;
 }
 
+
 .productsData div p {
-    padding: 5px;
+    font-size: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
 }
 
 .productsData div p span {
@@ -250,6 +259,8 @@
     background-color: rgb(191, 13, 13);
     color: white;
     border-radius: 6px;
+    font-size: 10px;
+
 }
 
 .productsData div p .stockValid {
@@ -258,7 +269,7 @@
 
 
 .productsData h5 {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 600;
     color: rgba(255, 68, 171, 1);
     padding-inline: 10px;
