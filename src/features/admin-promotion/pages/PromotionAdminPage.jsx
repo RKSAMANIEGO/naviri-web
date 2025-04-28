@@ -50,7 +50,7 @@ const PromotionAdminPage = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-4xl">Gestión de Promociones</h1>
+      <h1 className="text-5xl font-bold" style={{ fontFamily: "'Great Vibes', Recursive" }}>Gestión de Promociones</h1>
       
       <div className="flex gap-2 my-5">
         <Search

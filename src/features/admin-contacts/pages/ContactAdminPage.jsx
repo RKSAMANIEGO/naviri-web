@@ -41,7 +41,7 @@ const ContactAdminPage= () => { // Renamed component
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Información de la Empresa</h2>
+      <h2 className="text-5xl font-bold mb-6" style={{ fontFamily: "'Great Vibes', Recursive" }}>Información de la Empresa</h2>
       <Row gutter={32}>
         {/* Formulario */}
 
@@ -51,7 +51,7 @@ const ContactAdminPage= () => { // Renamed component
 
 
             <div>
-              <label className="block mb-1 font-medium">Locación</label>
+              <label className="text-3xl block mb-1 font-medium" style={{ fontFamily: "'Great Vibes', Recursive"}}>Locación</label>
               <Input
                 name="location"
                 rows={2}
@@ -61,7 +61,7 @@ const ContactAdminPage= () => { // Renamed component
               />
             </div>
             <div>
-              <label className="block mb-1 font-medium">Celular</label>
+              <label className="text-3xl block mb-1 font-medium" style={{ fontFamily: "'Great Vibes', Recursive"}}>Celular</label>
               <Input
                 name="cellphone"
                 rows={2}
@@ -72,19 +72,18 @@ const ContactAdminPage= () => { // Renamed component
             </div>
 
             <div>
-              <label className="block mb-1 font-medium">Correo</label>
+              <label className="text-3xl block mb-1 font-medium" style={{ fontFamily: "'Great Vibes', Recursive"}}>Correo</label>
               <Input
                 name="email"
                 rows={2}
                 value={contact.email}
                 onChange={handleChange}
-
               />
             </div>
 
 
             <div>
-              <label className="block mb-1 font-medium">Horario de Atención</label>
+              <label className="text-3xl block mb-1 font-medium" style={{ fontFamily: "'Great Vibes', Recursive"}}>Horario de Atención</label>
               <Input
                 name="attention_hours"
                 rows={2}
@@ -107,11 +106,11 @@ const ContactAdminPage= () => { // Renamed component
 
         {/* Vista previa */}
         <Col xs={24} md={12}>
-          <div className="border border-gray-300 rounded-lg p-4 bg-gray-100 min-h-[300px] flex flex-col items-center justify-center text-center">
-            <h3 className="text-xl font-bold">{contact.location || 'Título de política'}</h3>
-            <p className="my-4">{contact.cellphone || 'Descripción de la política...'}</p>
-            <p className="my-4">{contact.email || 'Descripción de la política...'}</p>
-            <p className="my-4">{contact.attention_hours || 'Descripción de la política...'}</p>
+          <div className="border border-gray-300 rounded-lg p-4 bg-gray-50 min-h-[400px] flex flex-col items-center justify-center text-center">
+            <h3 className="text-4xl font-bold"  style={{ fontFamily: "'Great Vibes', Recursive"}}>{contact.location || 'Título de política'}</h3>
+            <p className="my-2" >{contact.cellphone || 'Descripción de la política...'}</p>
+            <p className="my-2">{contact.email || 'Descripción de la política...'}</p>
+            <p className="my-2">{contact.attention_hours || 'Descripción de la política...'}</p>
 
           </div>
         </Col>
