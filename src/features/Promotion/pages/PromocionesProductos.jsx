@@ -2,7 +2,7 @@ import styles from "./PromocionesProductos.module.css"
 /* import  {getPromotions} from '../services/promotionService.js' */
 import { useEffect, useState } from "react"
 import { listProducts } from "../services/adminProductsApi.js"
-import { use } from "react";
+
 
 const PromocionesProductos = () => {
 
