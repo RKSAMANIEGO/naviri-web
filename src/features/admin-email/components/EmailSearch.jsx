@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/productAdmin.module.css';
 
 const EmailSearch = ({ onSearch }) => {
   const [value, setValue] = useState('');
 
-  const handleSearch = () => {
+  useEffect(() => {
     onSearch(value.trim().toLowerCase());
-  };
+  }, [value, onSearch]);
 
   return (
     <div className={styles.productSearch}>
-      <h2>Gestión de Correos Electrónicos</h2>
-      <p>Administra los correos electrónicos registrados. Puedes buscar, editar y cambiar el estado de los correos.</p>
+      <h2>Gestión de Usuarios</h2>
+      <p>Administra la información de los usuarios registrados. Puedes buscar, editar y cambiar la información.</p>
       <div>
         <label>
           <input
@@ -19,12 +19,10 @@ const EmailSearch = ({ onSearch }) => {
             type="text"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-            placeholder="Buscar por correo..."
+            placeholder="Buscar por nombre, apellido, distrito o correo"
           />
           <i 
             className="fa-solid fa-magnifying-glass iconSearch"
-            onClick={handleSearch}
           ></i>
         </label>
       </div>
