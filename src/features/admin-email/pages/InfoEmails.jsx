@@ -145,12 +145,9 @@ const handleDelete = async (id) => {
       key: "email",
     },
     {
-      title: "Estado",
-      dataIndex: "active",
-      key: "estado",
-      render: (estado) => (
-        <Tag color={estado === "Activo" ? "green" : "volcano"}>{estado}</Tag>
-      ),
+      title: "Mensaje",
+      dataIndex: "message",
+      key: "message",
     },
 
     {
@@ -253,6 +250,14 @@ const handleDelete = async (id) => {
               { required: true, message: 'Ingrese un correo válido' },
               { type: 'email', message: 'Formato de correo no válido' }
             ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Mensaje"
+            name="message"
+            rules={[{ required: true, message: 'Ingrese el mensaje' }]}
           >
             <Input />
           </Form.Item>
