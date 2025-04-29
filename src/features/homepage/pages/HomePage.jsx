@@ -10,10 +10,14 @@ const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Verifica si el usuario ya seleccionó "No mostrar de nuevo"
-    const dontShow = localStorage.getItem("dontShowModal");
-    if (!dontShow) {
+    // Aquí se verifica si ya se mostro el modal
+    const modalShownThisSession = sessionStorage.getItem("modalShownThisSession");
+    const dontShowEver = localStorage.getItem("dontShowModal");
+    
+    if (!modalShownThisSession && !dontShowEver) {
       setIsModalOpen(true);
+      // Marcar que el modal ya se mostró en esta sesión
+      sessionStorage.setItem("modalShownThisSession", "true");
     }
   }, []);
 
