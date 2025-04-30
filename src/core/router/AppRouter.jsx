@@ -42,7 +42,6 @@ import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 
 import ContactPage from '../../features/contacts/pages/ContactPage.jsx';
 
-import ClientAdminPage from '../../features/admin-user-desc/page/ClientAdminPage.jsx';
 import ProductDetails from '../../features/products/components/ProductDetails.jsx/ProductDetails.jsx';
 
 
@@ -91,7 +90,6 @@ const Router = () => {
               <Route path="/admin/panel/products" element={<ProductAdminPage/>} />
               <Route path="/admin/panel/categories" element={<CategoryAdminPage/>} />
               <Route path="/admin/panel/customers" element={<ContactAdminPage/>} />
-              <Route path="/admin/panel/userdiscount" element={ <ClientAdminPage/>} />
               <Route path="/admin/panel/blogs" element={ <BlogAdminPage/> } />
               <Route path="/admin/panel/coments" element={ <ComentAdminPage/> } />
               <Route path="/admin/panel/page/policy" element={ <PolicyAdminPage/> } />

@@ -525,6 +525,8 @@ h4 {
 
 }
 
+
+
 .addToCartBtn,
 .buyBtn {
 	display: flex;
@@ -543,7 +545,7 @@ h4 {
 }
 
 .addToCartBtn {
-	background-color: #f8f8f8;
+	background-color: #e037d5;
 	color: #333333;
 	border: 1px solid #767575;
 }
