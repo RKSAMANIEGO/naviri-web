@@ -86,12 +86,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               label: 'Productos',
             },
 
-            
-            {
-              key: '/admin/panel/userdiscount',
-              icon: <ShoppingOutlined />,
-              label: 'Usuarios con Descuento',
-            },
 
             {
               key: '/admin/panel/categories',
@@ -116,7 +110,7 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             {
               key: '/admin/panel/mail',
               icon: <MailOutlined />,
-              label: 'Correo',
+              label: 'Usuarios',
             },
             {
               key: '/admin/panel/promotions',
