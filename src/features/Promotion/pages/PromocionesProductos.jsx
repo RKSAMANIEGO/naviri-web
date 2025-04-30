@@ -25,8 +25,10 @@ const PromocionesProductos = () => {
         console.error("Error al obtener productos:", error);
       }
     };
+    fetchProductsWithDiscount();
+  }, []);
 
- /*   
+/*
 import styles from "./PromocionesProductos.module.css"
 import aceiteOregano from "../../../assets/image/aceideOREGANO.jpeg"
 import aceiteArbolTe from "../../../assets/image/aceiteARBOLDETE.jpeg"
@@ -42,16 +44,15 @@ const PromocionesProductos = () => {
       console.log(responsive.data);
   }
 
-    // Simulación de datos de productos (esto debería venir de una API o base de datos)
+    
   useEffect(() => {
     listPromotion()
   }, [])
 
-
-
     fetchProductsWithDiscount();
   }, []);
-/*
+*/
+
   return (
     <div className={styles.contenedor}>
       <h2 className={styles.titulo}>Nuestras Promociones</h2>
