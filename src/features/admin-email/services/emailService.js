@@ -20,3 +20,13 @@ export const createEmail = async (data) => {
 		throw error;
 	}
 };
+
+export const deleteEmail = async (id) => {
+	try {
+	  const response = await api.delete(`/customers/${id}`);
+	  return response.data;
+	} catch (error) {
+	  console.error("Error deleting email:", error);
+	  throw error;
+	}
+  };

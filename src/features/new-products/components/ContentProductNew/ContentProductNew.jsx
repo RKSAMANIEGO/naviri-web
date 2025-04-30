@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { listProducts } from '../../services/productsApi'
 import styles from '../../styles/producto.module.css'
-import { useCart } from '../../../cart/context/CartContext';
+//import { useCart } from '../../../cart/context/CartContext';
 import CartSidebar from '../../../cart/components/CartSidebar';
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
 const ContentProductNew = () => {
@@ -9,7 +9,7 @@ const ContentProductNew = () => {
     const [dataProducts,setDataProducts]=useState(null);
     const [totalProducts,setTotalProducts]=useState(0);
     const [dataFilterProducts,setDataFilterProducts]=useState(null);
-    const { addToCart } = useCart();
+    //const { addToCart } = useCart();
 
     //Consumir la lista de Productos
     const listarProductos =async(nPage) => {
@@ -50,7 +50,7 @@ const ContentProductNew = () => {
         dataProducts && filterDateProducts();
     },[dataProducts])
 
-
+    /*
     //CART PRODUCT
     const handleAddToCart = (product) => {
         addToCart(product);
@@ -61,14 +61,14 @@ const ContentProductNew = () => {
         const message = `¡Hola! Me interesa comprar el producto ${product.name} por ${product.price}. ¿Podría darme más información?`;
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
-    };
+    };*/
     return (
     <div className={styles.containerProducts}>
         <section className={styles.contentProducts} >
                     {/*FILTRO DE PRODUCTOS */}
                     { dataFilterProducts?.map((product) => (
                         <section class="group overflow-hidden w-[310px] h-[380px] rounded-lg border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-md" key={product.id}>
-                            <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/4 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-xl transition-all duration-500 ease-in-out"
+                            <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-[260px] cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-xl transition-all duration-500 ease-in-out"
                                 style={{backgroundImage: `url(${product.image.url})`
                             }}>
                                 <label className='hidden w-full bg-gray-200/70  group-hover:flex justify-evenly py-2 text-orange-500 text-md'>&#9733; &#9733; &#9733; &#9733; &#9733; <a href="#" className='text-pink-500 hover:underline hover:text-gray-800'>LO QUIERO &#10084;</a></label>
@@ -86,7 +86,7 @@ const ContentProductNew = () => {
                                 <h5 className={styles.sinDscto}>S/{product.price}</h5>
                             </div> )
                         }
-        
+                            {/**
                             <section className={styles.productActions}>
                                 <button
                                     className={`btn btn-secondary ${styles.addToCartBtn}`}
@@ -101,6 +101,7 @@ const ContentProductNew = () => {
                                     <FaWhatsapp/> Comprar
                                 </button>
                             </section>
+                            */}
                         </section>
                     ))}
                     <CartSidebar />

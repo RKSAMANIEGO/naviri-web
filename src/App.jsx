@@ -21,7 +21,7 @@ function App() {
           pauseOnHover
           theme="light"
         />
-     </BrowserRouter>
+    </BrowserRouter>
   )
 }
 export default App

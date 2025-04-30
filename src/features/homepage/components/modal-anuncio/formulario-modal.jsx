@@ -103,6 +103,8 @@ export default function FormularioModal({ isOpen, onClose }) {
     }
   }
 
+  // Edwin, aquí agregué la función para manejar el botón "No mostrar de nuevo"
+  // y guardé el estado en localStorage.
   const handleDontShowAgain = () => {
     localStorage.setItem("dontShowModal", "true")
     onClose()
@@ -190,17 +192,12 @@ export default function FormularioModal({ isOpen, onClose }) {
                 <a href="#" className={styles.privacyLink}>
                   política de privacidad
                 </a>{" "}
-                y{" "}
+                 y {" "}
                 <a href="#" className={styles.privacyLink}>
                   términos de servicio
                 </a>{" "}
                 para obtener más información.
               </p>
-              <div className={styles.dontShowAgain}>
-                <button type="button" onClick={handleDontShowAgain} className={styles.dontShowButton}>
-                  No mostrar de nuevo
-                </button>
-              </div>
             </form>
           </div>
         </div>
