@@ -27,14 +27,13 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const logout = useAuthStore(state => state.logout);
-  
+
   const handleMenuClick = (e) => {
     navigate(e.key);
   };
 
   return (
     <div className="relative">
-
       <button
         onClick={() => setCollapsed(!collapsed)}
         className="absolute -right-3 top-16 bg-white cursor-pointer dark:bg-gray-700 p-1.5 rounded-full shadow-lg border-2 border-gray-200 dark:border-gray-600 hover:scale-105 transition-transform z-10"
@@ -51,18 +50,18 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
       </button>
       
       <Sider 
-        collapsed={collapsed}
-        trigger={null}
-        theme={isDarkMode ? 'dark' : 'light'}
-        width={240}
-        collapsedWidth={80}
-        className="min-h-screen shadow-lg"
-        style={{ 
-          backgroundColor: isDarkMode ? '#1f2937' : 'white',
-          color: isDarkMode ? 'white' : '#1f2937',
-        }}
-      >
-        <div className="p-4 py-8">
+  collapsed={collapsed}
+  trigger={null}
+  theme={isDarkMode ? 'dark' : 'light'}
+  width={240}
+  collapsedWidth={80}
+  className="h-screen shadow-lg flex flex-col sticky top-0"
+  style={{ 
+    backgroundColor: isDarkMode ? '#1f2937' : 'white',
+    color: isDarkMode ? 'white' : '#1f2937',
+  }}
+>
+        <div className="p-4 py-8 flex-shrink-0"> 
           <div className="flex justify-center">
             <img src={logo} alt="logo" width="80px" />
           </div>
@@ -146,6 +145,15 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
         />
         
         <style jsx="true">{`
+          .hide-scrollbar {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+          }
+
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+          }
+          
           .custom-sidebar-menu .ant-menu-item:hover {
             background-color: rgba(255, 241, 249, 1) !important;
           }
@@ -171,55 +179,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             background-color: rgba(255, 241, 249, 1) !important;
           }
         `}</style>
-        
-        <div 
-          className="absolute bottom-0 left-0 right-0 p-4 border-t flex flex-col items-center space-y-4"
-          style={{ 
-            borderColor: isDarkMode ? '#374151' : '#e5e7eb',
-            paddingBottom: '16px', 
-            paddingTop: '16px'
-          }}
-        >
-          <div className="flex flex-col items-center">
-            <Button
-              type="text"
-              onClick={toggleTheme}
-              icon={isDarkMode ? (
-                <SunOutlined style={{ fontSize: '20px', color: '#fbbf24' }} />
-              ) : (
-                <MoonOutlined style={{ fontSize: '20px', color: '#4b5563' }} />
-              )}
-              size="large"
-            />
-            {!collapsed && (
-              <span
-                style={{ 
-                  color: isDarkMode ? '#9ca3af' : '#4b5563'
-                }}
-              >
-                {isDarkMode ? 'Claro' : 'Oscuro'}
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-col items-center">
-            <Button
-              type="text"
-              onClick={() => { logout(); navigate('/login'); }}
-              icon={<LogoutOutlined style={{ fontSize: '20px', color: isDarkMode ? '#f87171' : '#4b5563' }} />}
-              size="large"
-            />
-            {!collapsed && (
-              <span
-                style={{ 
-                  color: isDarkMode ? '#f87171' : '#4b5563'
-                }}
-              >
-                Cerrar sesión
-              </span>
-            )}
-          </div>
-        </div>
       </Sider>
     </div>
   );
