@@ -1,6 +1,6 @@
-
 import styles from "./PromocionesProductos.module.css";
 import { useEffect, useState } from "react";
+import { StarRating } from "../components/StarRating/StarRating.jsx";
 import { listProducts } from "../services/adminProductsApi.js";
 
 const PromocionesProductos = () => {
@@ -28,30 +28,6 @@ const PromocionesProductos = () => {
     fetchProductsWithDiscount();
   }, []);
 
-/*
-import styles from "./PromocionesProductos.module.css"
-import aceiteOregano from "../../../assets/image/aceideOREGANO.jpeg"
-import aceiteArbolTe from "../../../assets/image/aceiteARBOLDETE.jpeg"
-import aceitegirasol from '../../../assets/image/aceitegirasol.jpeg'
-import aceitejazmin from '../../../assets/image/aceiteJAZMIN.jpeg'
-import { useEffect } from "react"
-import { getPromotions } from "../../../core/services/promotionService.js"
-
-const PromocionesProductos = () => {
-  
-  const listPromotion =async() =>{
-      const responsive = await getPromotions();
-      console.log(responsive.data);
-  }
-
-    
-  useEffect(() => {
-    listPromotion()
-  }, [])
-
-    fetchProductsWithDiscount();
-  }, []);
-*/
 
   return (
     <div className={styles.contenedor}>
@@ -69,18 +45,18 @@ const PromocionesProductos = () => {
             </div>
             <div className={styles.infoProducto}>
               <h3 className={styles.nombreProducto}>{producto.name}</h3>
+              {/*<StarRating rating={producto.rating || 0} />*/}
               <div className={styles.price}>
                 <span className={styles.precioOriginal}>
-                  ${Number(producto.price).toFixed(2)}
+                  S/{Number(producto.price).toFixed(2)}
                 </span>
                 <span className={styles.precioOferta}>
-                  ${Number(producto.price - (producto.price * (producto.discount / 100))).toFixed(2)}
+                 Ahorra S/{Number(producto.price - (producto.price * (producto.discount / 100))).toFixed(2)}
                 </span>
               </div>
               <p className={styles.descuento}>
                 Dscto S/{Number(producto.price * (producto.discount / 100)).toFixed(2)}
               </p>
-              <button className={styles.botonComprar}>Comprar ahora</button>
             </div>
           </div>
         ))}
