@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Modal, Table, Tag, FloatButton, message, Tooltip } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EmailSearch from '../components/EmailSearch';
-import { getEmails } from '../services/emailService';
+import { getEmails, deleteEmail, createEmail } from '../services/emailService';
 
 const InfoEmails = () => {
   const [form] = Form.useForm();
@@ -16,8 +16,8 @@ const InfoEmails = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentEmail, setCurrentEmail] = useState(null);
 
-  useEffect(() => {
 
+  useEffect(() => {
     const fetchEmails = async () => {
       try {
         const response = await getEmails();
@@ -25,6 +25,7 @@ const InfoEmails = () => {
         
         if (response && response.data.length > 0) {
           setEmails(response.data);
+          setFilteredEmails(response.data);
         } else {
           console.error("No emails found");
         }
@@ -35,37 +36,109 @@ const InfoEmails = () => {
     fetchEmails();
   }, []);
 
+  //filtrado
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+       setFilteredEmails(emails);
+    } else {
+       const query = searchQuery.toLowerCase();
+       const filtered = emails.filter(item => 
+      (item.email && item.email.toLowerCase().includes(query)) ||
+      (item.name && item.name.toLowerCase().includes(query)) ||
+      (item.lastname && item.lastname.toLowerCase().includes(query)) ||
+      (item.disctric && item.disctric.toLowerCase().includes(query))
+    );
+    setFilteredEmails(filtered);
+  }
+}, [searchQuery, emails]);
 
-  const handleDelete = (id) => {
-    const updated = emails.filter((item) => item.id !== id);
-    setEmails(updated);
-    message.success('Correo eliminado');
-  };
 
-  const handleSubmit = (values) => {
+// agregar y editar
+const handleSubmit = async (values) => {
+  try {
     if (currentEmail) {
-      // Editar
+      //editar
       const updated = emails.map((item) =>
         item.id === currentEmail.id ? { ...item, ...values } : item
       );
       setEmails(updated);
-      message.success('Correo actualizado');
+      setFilteredEmails(updated);
+      message.success('Registro actualizado');
     } else {
-      // Nuevo
-      const nuevo = {
-        id: emails.length + 1,
+      //nuevo registro
+      const response = await createEmail({
         ...values,
-        estado: 'Activo'
+        active: 1,
+      });
+      
+      const nuevo = {
+        ...response.data,
+        id: response.data.id || Math.max(...emails.map(e => e.id), 0) + 1
       };
-      setEmails([...emails, nuevo]);
-      message.success('Correo agregado');
+      
+      setEmails(prev => [...prev, nuevo]);
+      setFilteredEmails(prev => [...prev, nuevo]);
+      message.success('Registro agregado exitosamente');
     }
+    
     form.resetFields();
     setIsModalVisible(false);
     setCurrentEmail(null);
-  };
+    } catch (error) {
+      console.error("Error al guardar:", error);
+      message.error(error.response?.data?.message || 'Error al guardar el registro');
+    }
+};
+
+// eliminar
+const handleDelete = async (id) => {
+  try {
+    Modal.confirm({
+      title: '¿Estás seguro de eliminar este registro?',
+      content: 'Esta acción no se puede deshacer',
+      okText: 'Eliminar',
+      okType: 'danger',
+      cancelText: 'Cancelar',
+      onOk: async () => {
+        try {
+          await deleteEmail(id);
+          const updated = emails.filter((item) => item.id !== id);
+          setEmails(updated);
+          setFilteredEmails(updated);
+          message.success('Registro eliminado correctamente');
+        } catch (error) {
+          console.error("Error al eliminar:", error);
+          message.error('Error al eliminar el registro');
+        }
+      }
+    });
+  } catch (error) {
+    console.error("Error en confirmación:", error);
+  }
+};
+
 
   const columns = [
+    {
+      title: "Nombre",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Apellido",
+      dataIndex: "lastname",
+      key: "lastname",
+    },
+    {
+      title: "Teléfono",
+      dataIndex: "cellphone",
+      key: "cellphone",
+    },
+    {
+      title: "Distrito",
+      dataIndex: "disctric",
+      key: "disctric",
+    },
     {
       title: "Correo electrónico",
       dataIndex: "email",
@@ -79,12 +152,13 @@ const InfoEmails = () => {
         <Tag color={estado === "Activo" ? "green" : "volcano"}>{estado}</Tag>
       ),
     },
+
     {
       title: "Acciones",
       key: "acciones",
       render: (_, record) => (
         <div className="flex gap-2">
-          {/* Editar botón primero */}
+
           <Tooltip title="Editar">
             <Button
               icon={<EditOutlined />}
@@ -96,7 +170,6 @@ const InfoEmails = () => {
             />
           </Tooltip>
 
-          {/* Eliminar botón después */}
           <Tooltip title="Eliminar">
             <Button
               icon={<DeleteOutlined />}
@@ -110,13 +183,11 @@ const InfoEmails = () => {
 
   return (
     <div className="p-6">
-      {/* Buscador */}
       <EmailSearch onSearch={setSearchQuery} />
-
       {/* Tabla */}
       <Table
         columns={columns}
-        dataSource={emails}
+        dataSource={filteredEmails}
         rowKey="id"
         pagination={false}
         components={{
@@ -132,9 +203,8 @@ const InfoEmails = () => {
         }}
       />
 
-      {/* Modal */}
       <Modal
-        title={currentEmail ? 'Editar correo' : 'Nuevo correo'}
+        title={currentEmail ? 'Editar registro' : 'Nuevo registro'}
         open={isModalVisible}
         onCancel={() => {
           setIsModalVisible(false);
@@ -144,6 +214,38 @@ const InfoEmails = () => {
         footer={null}
       >
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
+          <Form.Item
+            label="Nombre"
+            name="name"
+            rules={[{ required: true, message: 'Ingrese el nombre' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Apellido"
+            name="lastname"
+            rules={[{ required: true, message: 'Ingrese el apellido' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Teléfono"
+            name="cellphone"
+            rules={[{ required: true, message: 'Ingrese el teléfono' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Distrito"
+            name="disctric"
+            rules={[{ required: true, message: 'Ingrese el distrito' }]}
+          >
+            <Input />
+          </Form.Item>
+
           <Form.Item
             label="Correo electrónico"
             name="email"
@@ -167,7 +269,7 @@ const InfoEmails = () => {
       {/* Botón flotante */}
       <FloatButton
         icon={<PlusOutlined />}
-        tooltip={<div>Agregar correo</div>}
+        tooltip={<div>Agregar registro</div>}
         onClick={() => {
           setCurrentEmail(null);
           form.resetFields();
