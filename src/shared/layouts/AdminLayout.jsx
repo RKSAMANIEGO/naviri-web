@@ -20,10 +20,10 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      <Sidebar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+<div className="flex h-screen overflow-hidden">
+  <Sidebar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
 
-      <main className="flex-1 flex flex-col overflow-hidden">
+  <main className="flex-1 flex flex-col overflow-hidden">
 
         <header className={`sticky top-0 h-14 z-10 duration-300
               ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
