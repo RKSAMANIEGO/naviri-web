@@ -13,8 +13,9 @@
   }
   
   .modalContainer {
-    width: 100%;
-    max-width: 900px;
+    height: auto;
+    width: 1300px;
+    max-width: 100%;
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
@@ -32,30 +33,28 @@
     background: linear-gradient(135deg, #FF6BBC 0%, #ff4bac 100%);
     overflow: hidden;
     position: relative;
-    display: flex; /* Añadido para centrar la imagen */
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 300px; /* Asegura un ancho mínimo */
+    min-width: 300px;
   }
   
   .promoImage {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Cambiado de contain a cover */
-    padding: 0; /* Eliminado el padding */
-    position: absolute; /* Posicionamiento absoluto */
+    object-fit: cover;
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
   }
   
   .formSection {
     flex: 1;
-    padding: 30px;
+    padding: clamp(20px, 3vw, 40px);
     position: relative;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
   }
   
   .closeButton {
@@ -82,20 +81,13 @@
   
   .formHeader {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: clamp(15px, 2vw, 25px);
   }
   
   .title {
-    font-size: 28px;
+    font-size: 40px;
     font-weight: 700;
     margin: 0;
-    color: #FF6BBC;
-  }
-  
-  .subtitle {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0 0 10px 0;
     color: #FF6BBC;
   }
   
@@ -227,6 +219,18 @@
       transform: translateY(0);
     }
   }
+
+  @media (max-width: 1024px) {
+    .modalContent {
+      height: auto;
+      max-height: 90vh;
+    }
+    
+    .imageSection {
+      min-width: 250px;
+    }
+  }
+  
   
   @media (max-width: 768px) {
     .modalContent {
@@ -235,19 +239,81 @@
     }
   
     .imageSection {
-      display: none;
+      height: 100px;
+      min-width: 100%;
     }
-  
     .formSection {
-      padding: 20px;
+      padding: 50px;
     }
-  
+  }
+
+  @media (max-width: 600px) {
+    .modalContainer {
+      width: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+    }
+    
+    .modalOverlay {
+      padding: 0;
+    }
+    
+    .phoneContainer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .countryCode {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .formSection {
+      padding: 20px 15px;
+    }
+    
     .title {
-      font-size: 24px;
+      font-size: 22px;
     }
-  
+    
     .subtitle {
+      font-size: 18px;
+    }
+    
+    .closeButton {
+      top: 10px;
+      right: 10px;
       font-size: 20px;
+    }
+    
+    .submitButton {
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .formSection {
+      padding: 15px 10px;
+    }
+    
+    .title {
+      font-size: 18px;
+      text-align: justify;
+    }
+    
+    .subtitle {
+      font-size: 16px;
+    }
+    
+    .description {
+      font-size: 12px;
+    }
+    
+    .input,
+    .select {
+      padding: 10px 12px;
     }
   }
   
