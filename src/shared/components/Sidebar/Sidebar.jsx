@@ -67,83 +67,136 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
           </div>
         </div>
         
-        <Menu
-          theme={isDarkMode ? 'dark' : 'light'}
-          mode="inline"
-          selectedKeys={[location.pathname]}
-          onClick={handleMenuClick}
+        <div className="flex-1 overflow-y-auto h-[calc(100vh-250px)] hide-scrollbar">
+          <Menu
+            theme={isDarkMode ? 'dark' : 'light'}
+            mode="inline"
+            selectedKeys={[location.pathname]}
+            onClick={handleMenuClick}
+            style={{ 
+              borderRight: 0,
+              backgroundColor: isDarkMode ? '#1f2937' : 'white',
+            }}
+            className="custom-sidebar-menu h-full"
+            items={[
+              {
+                key: '/admin/panel/products',
+                icon: <ShoppingOutlined />,
+                label: 'Productos',
+              },
+              
+              
+              {
+                key: '/admin/panel/userdiscount',
+                icon: <ShoppingOutlined />,
+                label: 'Usuarios con Descuento',
+              },
+              
+              {
+                key: '/admin/panel/categories',
+                icon: <ShoppingOutlined />,
+                label: 'Categorias',
+              },
+              {
+                key: '/admin/panel/customers',
+                icon: <UserOutlined />,
+                label: 'Información',
+              },
+              {
+                key: '/admin/panel/coments',
+                icon: <CommentOutlined />,
+                label: 'Comentarios',
+              },
+              {
+                key: '/admin/panel/blogs',
+                icon: <FileTextOutlined />,
+                label: 'Blogs',
+              },
+              {
+                key: '/admin/panel/mail',
+                icon: <MailOutlined />,
+                label: 'Correo',
+              },
+              {
+                key: '/admin/panel/promotions',
+                icon: <TagsOutlined />,
+                label: 'Promociones',
+              },
+              /*
+              {
+                key: '/admin/panel/questions',
+                icon: <QuestionOutlined />,
+                label: 'Preguntas y Respuestas',
+              },*/
+              {
+                key: 'page',
+                icon: <SettingOutlined />,
+                label: 'Página',
+                children: [
+                  {
+                    key: '/admin/panel/page/policy',
+                    label: 'Política',
+                  },
+                  {
+                    key: '/admin/panel/page/service',
+                    label: 'Servicios',
+                  },
+                  {
+                    key: '/admin/panel/page/about',
+                    label: 'About Us',
+                  },
+                ],
+              },
+            ]}
+          />
+        </div>
+
+        {/* Botones en fila */}
+        <div 
+          className="border-t p-4 flex-shrink-0"
           style={{ 
-            marginTop: 20,
-            borderRight: 0,
-            backgroundColor: isDarkMode ? '#1f2937' : 'white',
+            borderColor: isDarkMode ? '#374151' : '#e5e7eb'
           }}
-          className="custom-sidebar-menu"
-          items={[
-            {
-              key: '/admin/panel/products',
-              icon: <ShoppingOutlined />,
-              label: 'Productos',
-            },
+        >
+          <div className={`flex ${collapsed ? 'flex-col items-center gap-4' : 'flex-row justify-around'}`}>
+            <div className="flex flex-col items-center">
+              <Button
+                type="text"
+                onClick={toggleTheme}
+                icon={isDarkMode ? (
+                  <SunOutlined style={{ fontSize: '20px', color: '#fbbf24' }} />
+                ) : (
+                  <MoonOutlined style={{ fontSize: '20px', color: '#4b5563' }} />
+                )}
+                size="large"
+              />
+              {!collapsed && (
+                <span style={{ color: isDarkMode ? '#9ca3af' : '#4b5563' }}>
+                  {isDarkMode ? 'Claro' : 'Oscuro'}
+                </span>
+              )}
+            </div>
 
+            <div className="flex flex-col items-center">
+              <Button
+                type="text"
+                onClick={() => { logout(); navigate('/login'); }}
+                icon={<LogoutOutlined style={{ 
+                  fontSize: '20px', 
+                  color: isDarkMode ? '#f87171' : '#4b5563' 
+                }} />}
+                size="large"
+              />
+              {!collapsed && (
+                <span style={{ color: isDarkMode ? '#f87171' : '#4b5563' }}>
+                  Cerrar sesión
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
 
-            {
-              key: '/admin/panel/categories',
-              icon: <ShoppingOutlined />,
-              label: 'Categorias',
-            },
-            {
-              key: '/admin/panel/customers',
-              icon: <UserOutlined />,
-              label: 'Información',
-            },
-            {
-              key: '/admin/panel/coments',
-              icon: <CommentOutlined />,
-              label: 'Comentarios',
-            },
-            {
-              key: '/admin/panel/blogs',
-              icon: <FileTextOutlined />,
-              label: 'Blogs',
-            },
-            {
-              key: '/admin/panel/mail',
-              icon: <MailOutlined />,
-              label: 'Usuarios',
-            },
-            {
-              key: '/admin/panel/promotions',
-              icon: <TagsOutlined />,
-              label: 'Promociones',
-            },
-            /*
-            {
-              key: '/admin/panel/questions',
-              icon: <QuestionOutlined />,
-              label: 'Preguntas y Respuestas',
-            },*/
-            {
-              key: 'page',
-              icon: <SettingOutlined />,
-              label: 'Página',
-              children: [
-                {
-                  key: '/admin/panel/page/policy',
-                  label: 'Política',
-                },
-                {
-                  key: '/admin/panel/page/service',
-                  label: 'Servicios',
-                },
-                {
-                  key: '/admin/panel/page/about',
-                  label: 'About Us',
-                },
-              ],
-            },
-          ]}
-        />
-        
+        {/* Estilos se mantienen igual */}
         <style jsx="true">{`
           .hide-scrollbar {
             scrollbar-width: none; /* Firefox */

@@ -87,6 +87,6 @@ const PromocionesProductos = () => {
       </div>
     </div>
   );
-};*/
+};
 
 export default PromocionesProductos;
