@@ -124,7 +124,9 @@ const Header = () => {
                     ${isActive ?  'text-pink-400 border-b-2 border-pink-400': 'hover:text-black  hover:scale-80'}  `} aria-haspopup="true" aria-expanded={showProductos}>
                         Productos <FaChevronDown className={`${styles.iconDropdown} ${showProductos ? styles.iconDropdownOpen : ''}`} />
                     </NavLink>
+
                     <div className={`${styles.dropdown} ${showProductos ? styles.dropdownVisible : ''}`}>
+                        
                         {productMenuItems.map(item => (
                             
                             item.type === 'banner' ? (
@@ -141,8 +143,8 @@ const Header = () => {
                                     <p>{item.description}</p>
                                 </Link>
                             )
-                            
-                        ))}
+                    
+                        ))} 
                         <div className={styles.dropdownImages}>
                             <img src={imageProduct1} alt="Producto 1" className={styles.dropdownImg} />
                             <img src={imageProduct2} alt="Producto 2" className={styles.dropdownImg} />
