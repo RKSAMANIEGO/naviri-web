@@ -7,11 +7,13 @@
     --primary-gradient-start: #d485c0;
     --primary-gradient-end: #8f497c;
 
+
     --text-color: #333;
     --text-color-secondary: #555;
     --text-color-light: #888;
     --text-color-lighter: #B2B2B2;
     --text-on-primary: #ffffff;
+
 
     --background-color: #ffffff;
     --background-light-gray: #f0f0f0;
@@ -45,6 +47,7 @@
     left: 0;
     width: 100%;
     z-index: var(--z-index-header);
+
 }
 
 .navContainer {
@@ -52,10 +55,10 @@
     align-items: center;
     justify-content: space-between;
     align-items: center;
-    max-width: var(--container-max-width);
+    max-width: 100%;
     height: var(--header-height);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 40px;
     width: 100%;
 }
 
@@ -72,20 +75,21 @@
     width: auto;
     display: block;
 }
-  
+
 .nav {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 30px;
     flex-grow: 1;
     margin: 0 20px;
+    font-size: 0.5rem;
 }
 
 .nav a,
 .dropdownTrigger>a {
     text-decoration: none;
-    color: var(--text-color-secondary);
+    /*color: var(--text-color-secondary);*/
     font-weight: 500;
     transition: color 0.3s ease;
     font-size: var(--font-size-medium);
@@ -95,18 +99,44 @@
     white-space: nowrap;
 }
 
+/*
 .nav a:hover,
 .dropdownTrigger>a:hover {
-    color: var(--text-color);
-}
+    /*color: var(--text-color);
+*/
 
+/*
 .nav a.activeLink,
 .dropdownTrigger>a.activeLink {
     color: var(--primary-color);
     font-weight: bold;
 }
 
+.nav a.activeLink,
+.dropdownTrigger>a.activeLink:hover {
+    transform: scale(1.1);
+}*/
 
+/*
+.link {
+    padding: 10px 16px;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    color: #e91e63;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+}
+
+
+.active {
+    color: rgb(231, 87, 228);
+    font-weight: bold;
+}
+*/
 .dropdownTrigger {
     position: relative;
 }
@@ -144,7 +174,7 @@
     opacity: 0;
     visibility: hidden;
     transform: translateX(-50%) translateY(-10px);
-    transition: 
+    transition:
         opacity 0.25s ease-out,
         transform 0.25s ease-out,
         visibility 0s linear 0.25s;
@@ -167,13 +197,15 @@
     color: var(--text-color-lighter);
     border-radius: var(--border-radius-medium);
     padding: 12px 15px;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; /* Added transitions */
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    /* Added transitions */
     display: flex;
     flex-direction: column;
     text-decoration: none;
     border: 1px solid transparent;
     word-wrap: break-word;
-    cursor: pointer; /* Added pointer cursor */
+    cursor: pointer;
+    /* Added pointer cursor */
 }
 
 .dropdownSection {
@@ -204,17 +236,21 @@
 
 .dropdownSection:hover {
     background-color: var(--primary-color-hover-bg);
-    color: var(--text-color-secondary); /* Ensure base text color changes on hover if needed */
-    border-color: #eee; /* Keep or adjust border as needed */
+    color: var(--text-color-secondary);
+    /* Ensure base text color changes on hover if needed */
+    border-color: #eee;
+    /* Keep or adjust border as needed */
 }
 
 .dropdownSection:hover h1 {
-    color: var(--primary-color); /* Title color changes to pink */
+    color: var(--primary-color);
+    /* Title color changes to pink */
 }
 
 /* Ensure paragraph color is explicitly set on hover if needed, otherwise it inherits */
 .dropdownSection:hover p {
-     color: var(--text-color-secondary); /* Explicitly set description color on hover */
+    color: var(--text-color-secondary);
+    /* Explicitly set description color on hover */
 }
 
 .productosnew {
@@ -252,10 +288,11 @@
 .sectionright {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
     flex-shrink: 0;
+
 }
-  
+
 .searchbar {
     position: relative;
     display: flex;
@@ -297,7 +334,7 @@
     color: #5c1e68;
     font-size: 16px;
 }
-  
+
 .cart {
     position: relative;
     background: none;
@@ -312,12 +349,12 @@
 .cart:hover {
     color: var(--primary-color);
 }
-  
+
 .carticon {
     font-size: 22px;
     color: #5c1e68;
 }
-  
+
 .cartcount {
     position: absolute;
     top: -5px;
@@ -487,9 +524,9 @@ body.noScroll {
     justify-content: center;
     gap: 10px;
     margin-top: 15px;
-    grid-column: span 2;       
+    grid-column: span 2;
 }
-  
+
 .dropdownImg {
     height: 200px;
     width: 400px;
@@ -497,7 +534,7 @@ body.noScroll {
     border-radius: 8px;
     transition: transform 0.3s ease;
 }
-  
+
 .dropdownImg:hover {
     transform: scale(1.05);
 }
@@ -510,7 +547,7 @@ body.noScroll {
     border-radius: 8px;
     transition: transform 0.3s ease;
 }
-  
+
 .dropdownImage:hover {
     transform: scale(1.05);
 }
@@ -711,7 +748,7 @@ body.noScroll {
     .mobileCartContent {
         display: flex;
         align-items: center;
-        gap: 5px; 
+        gap: 5px;
     }
 
     @media (max-width: 1024px) {

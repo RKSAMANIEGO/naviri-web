@@ -1,3 +1,32 @@
+
+import styles from "./PromocionesProductos.module.css";
+import { useEffect, useState } from "react";
+import { listProducts } from "../services/adminProductsApi.js";
+
+const PromocionesProductos = () => {
+  const [productFilter, setProductFilter] = useState([]);
+
+  useEffect(() => {
+    const fetchProductsWithDiscount = async () => {
+      try {
+        const responseTotal = await listProducts();
+        const total = responseTotal?.data?.total || 0;
+
+        if (total > 0) {
+          
+          const responseProducts = await listProducts(1, total);
+          const products = responseProducts?.data?.data || [];
+
+          
+          const productosConDescuento = products.filter(producto => producto.discount > 0);
+          setProductFilter(productosConDescuento);
+        }
+      } catch (error) {
+        console.error("Error al obtener productos:", error);
+      }
+    };
+
+ /*   
 import styles from "./PromocionesProductos.module.css"
 import aceiteOregano from "../../../assets/image/aceideOREGANO.jpeg"
 import aceiteArbolTe from "../../../assets/image/aceiteARBOLDETE.jpeg"
@@ -19,69 +48,44 @@ const PromocionesProductos = () => {
   }, [])
 
 
-  const productos = [
-    {
-      id: 1,
-      nombre: "BOX INIGUALABLE",
-      imagenUrl: aceiteOregano,
-      precioOriginal: 200.0,
-      precioOferta: 185.0,
-      descuento: 15.0,
-    },
-    {
-      id: 2,
-      nombre: "CAJA MAGIA FE",
-      imagenUrl: aceiteArbolTe,
-      precioOriginal: 130.0,
-      precioOferta: 120.0,
-      descuento: 10.0,
-    },
-    {
-      id: 3,
-      nombre: "DESAYUNO MAGIA FE",
-      imagenUrl: aceitegirasol,
-      precioOriginal: 190.0,
-      precioOferta: 180.0,
-      descuento: 10.0,
-    },
-    {
-      id: 4,
-      nombre: "PACK SEÑORITA",
-      imagenUrl: aceitejazmin,
-      precioOriginal: 98.0,
-      precioOferta: 86.0,
-      descuento: 12.0,
-    },
-  ]
 
+    fetchProductsWithDiscount();
+  }, []);
+/*
   return (
     <div className={styles.contenedor}>
       <h2 className={styles.titulo}>Nuestras Promociones</h2>
       <div className={styles.productosGrid}>
-        {productos.map((producto) => (
+        {productFilter.map((producto) => (
           <div key={producto.id} className={styles.tarjetaProducto}>
             <div className={styles.imagenContenedor}>
               <img
-                src={producto.imagenUrl || "/placeholder.svg"}
-                alt={producto.nombre}
+                src={producto.image?.url || "/placeholder.svg"}
+                alt={producto.name}
                 className={styles.imagenProducto}
               />
               <span className={styles.etiquetaPromocion}>Promoción</span>
             </div>
             <div className={styles.infoProducto}>
-              <h3 className={styles.nombreProducto}>{producto.nombre}</h3>
-              <div className={styles.precios}>
-                <span className={styles.precioOriginal}>${producto.precioOriginal.toFixed(2)}</span>
-                <span className={styles.precioOferta}>${producto.precioOferta.toFixed(2)}</span>
+              <h3 className={styles.nombreProducto}>{producto.name}</h3>
+              <div className={styles.price}>
+                <span className={styles.precioOriginal}>
+                  ${Number(producto.price).toFixed(2)}
+                </span>
+                <span className={styles.precioOferta}>
+                  ${Number(producto.price - (producto.price * (producto.discount / 100))).toFixed(2)}
+                </span>
               </div>
-              <p className={styles.descuento}>Desde de ${producto.descuento.toFixed(2)}</p>
+              <p className={styles.descuento}>
+                Dscto S/{Number(producto.price * (producto.discount / 100)).toFixed(2)}
+              </p>
               <button className={styles.botonComprar}>Comprar ahora</button>
             </div>
           </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PromocionesProductos
+export default PromocionesProductos;

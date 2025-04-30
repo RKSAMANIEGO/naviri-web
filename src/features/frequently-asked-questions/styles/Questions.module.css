@@ -29,6 +29,7 @@
     gap: 20px;
     /*animation: square-in-top-left 2s ease-in-out;*/
     color: #f3d3e7;
+
 }
 
 
@@ -173,27 +174,32 @@
 
 .collapse {
     margin-block: 20px;
-    width: 80%;
+    width: 70%;
     font-size: 16px;
+    text-align: start;
+
 }
 
-.collapse panel {
-    background-color: #e8e3f3;
+.answers {
+    display: flex;
+    justify-content: start;
 }
 
 /*Animacion del Icono de categorie*/
 .wrapperIcon {
     display: flex;
     flex-direction: column;
+    gap: 20px;
     align-items: center;
     justify-content: center;
-    color: #db279f;
+    color: #e642af;
+    padding-block: 20px;
+    font-weight: bold;
 }
 
 .iconCategorie {
     font-size: 3rem;
     rotate: 270deg;
-
     animation: move-icon 0.5s infinite alternate;
 }
 
@@ -203,7 +209,7 @@
     }
 
     100% {
-        transform: translateX(20px);
+        transform: translateX(-20px);
     }
 }
 

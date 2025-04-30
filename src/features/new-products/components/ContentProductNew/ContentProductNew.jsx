@@ -67,29 +67,24 @@ const ContentProductNew = () => {
         <section className={styles.contentProducts} >
                     {/*FILTRO DE PRODUCTOS */}
                     { dataFilterProducts?.map((product) => (
-                        <section className={styles.sectionProducts} key={product.id}>
-                            <div className={styles.divImagen} style={{
-                                backgroundImage: `url(${product.image.url})`
+                        <section class="group overflow-hidden w-[310px] h-[380px] rounded-lg border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-md" key={product.id}>
+                            <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/4 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-xl transition-all duration-500 ease-in-out"
+                                style={{backgroundImage: `url(${product.image.url})`
                             }}>
-
+                                <label className='hidden w-full bg-gray-200/70  group-hover:flex justify-evenly py-2 text-orange-500 text-md'>&#9733; &#9733; &#9733; &#9733; &#9733; <a href="#" className='text-pink-500 hover:underline hover:text-gray-800'>LO QUIERO &#10084;</a></label>
                             </div>
-                            <p className={styles.p}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
-                            <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
+                            <p className="text-sm text-center">{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
+                            <h4 className="text-md text-center">{product.name.toUpperCase()}</h4>
         
-                        {product.discount > 0 && product.discount !==null ? (
-
-                            <div className={styles.wrapperDscto}>
-                                <s>S/{product.price}</s>
+                        {product.discount > 0 && product.discount !==null ? 
+                        ( <div className='flex justify-center gap-5'>
+                                <s >S/{product.price}</s>
                                 <h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*product.discount/100)).toFixed(2)}</h6>
-                            </div>
-
-                            )  
-                            :
-                            (
-                            <div className={styles.wrapperDscto}>
+                            </div>  )  
+                        :
+                        ( <div className="flex justify-center">
                                 <h5 className={styles.sinDscto}>S/{product.price}</h5>
-                            </div>
-                            )
+                            </div> )
                         }
         
                             <section className={styles.productActions}>
