@@ -112,14 +112,16 @@ const Header = () => {
             </div>
 
             <nav className={`${styles.nav} ${styles.desktopNav}`}>
-                <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} end>Inicio</NavLink>
+                <NavLink to="/" className={({ isActive }) => `px-4 py-2 transition-transform duration-600 ease-in-out
+                ${isActive ? 'text-pink-400 border-b-2 border-pink-400 ' : 'hover:text-black hover:scale-80'}` }>Inicio</NavLink>
                 <div
                     ref={productosRef}
                     className={styles.dropdownTrigger}
                     onMouseEnter={() => handleDropdownEnter(setShowProductos)}
                     onMouseLeave={() => handleDropdownLeave(setShowProductos)}
                 >
-                    <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} aria-haspopup="true" aria-expanded={showProductos}>
+                    <NavLink to="/products" className={({ isActive }) => `py-4 px-2 transition-all duration-500 ease-in-out
+                    ${isActive ?  'text-pink-400 border-b-2 border-pink-400': 'hover:text-black  hover:scale-80'}  `} aria-haspopup="true" aria-expanded={showProductos}>
                         Productos <FaChevronDown className={`${styles.iconDropdown} ${showProductos ? styles.iconDropdownOpen : ''}`} />
                     </NavLink>
                     <div className={`${styles.dropdown} ${showProductos ? styles.dropdownVisible : ''}`}>
@@ -153,7 +155,8 @@ const Header = () => {
                     onMouseEnter={() => handleDropdownEnter(setShowCategorias)}
                     onMouseLeave={() => handleDropdownLeave(setShowCategorias)}
                 >
-                    <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} aria-haspopup="true" aria-expanded={showCategorias}>
+                    <NavLink to="/categories" className={({ isActive }) => `px-4 py-2 transition-transform duration-700 ease-in-out
+                    ${isActive ? 'text-pink-400 border-b-2 border-pink-400': 'hover:scale-80'}`} aria-haspopup="true" aria-expanded={showCategorias}>
                         Categorías <FaChevronDown className={`${styles.iconDropdown} ${showCategorias ? styles.iconDropdownOpen : ''}`} />
                     </NavLink>
                     <div className={`${styles.dropdown} ${styles.categoryDropdown} ${showCategorias ? styles.dropdownVisible : ''}`}>
@@ -169,18 +172,26 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-                <a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a>
+                    
+                    {/**<a href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''}>Blogs</a> */}  
+                        <NavLink to ="/blog"  className={({ isActive }) =>`px-4 py-2 transition-transform duration-700 ease-in-out
+                    ${isActive ? 'text-pink-400 border-b-2 border-pink-400': 'hover:scale-80'}`}> 
+                            Blogs
+                        </NavLink>
 
-                <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''}>Sobre Nosotros</NavLink>
+                <NavLink to="/about" className={({ isActive }) => `px-4 py-2 transition-transform duration-700 ease-in-out
+                    ${isActive ? 'text-pink-400 border-b-2 border-pink-400': 'hover:scale-80'}`}>Sobre Nosotros</NavLink>
                 
                 {/* <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>*/}
-                        <Link to ="/contacts"> 
-                            <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Contacto</a>
-                        </Link>
+                        <NavLink to ="/contacts"  className={({ isActive }) => `px-4 py-2 transition-transform duration-700 ease-in-out
+                    ${isActive ? 'text-pink-400 border-b-2 border-pink-400': 'hover:scale-80'}`}> 
+                            Contacto
+                        </NavLink>
                         
-                        <Link to ="/promotions"> 
-                        <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''}>Promoción</a>
-                        </Link>
+                        <NavLink to ="/promotions" className={({ isActive }) =>`px-4 py-2 transition-transform duration-700 ease-in-out
+                    ${isActive ? 'text-pink-400 border-b-2 border-pink-400': 'hover:scale-80'}`}> 
+                            Promoción
+                        </NavLink>
             </nav>
 
             <div className={`${styles.sectionright} ${styles.desktopNav}`}>
