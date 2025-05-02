@@ -1,6 +1,6 @@
 /*HEADER PRODUCTS*/
 .section {
-	background: url("../../../assets/image/headerProduct.png");
+	background: url("../../../assets/image/imgHeader2.jpg");
 	background-size: cover;
 	background-position: top;
 	display: flex;
@@ -8,7 +8,7 @@
 	align-items: center;
 	justify-content: center;
 	font-weight: bold;
-	height: 208px;
+	height: 286px;
 	text-align: center;
 	animation: circle-in-center 1.5s ease-in-out;
 }
@@ -28,20 +28,26 @@
 }
 
 .section h2 {
-	font-size: 48px;
+	font-size: 5rem;
 	color: white;
 	padding-bottom: 20px;
 	line-height: 40px;
+
 	text-shadow:
-		-1px -1px 0 rgb(229, 161, 207),
-		1px -1px 0 rgb(229, 161, 207),
-		-1px 1px 0 rgb(229, 161, 207),
-		1px 1px 0 rgb(229, 161, 207);
+		-1px -1px 0 rgb(128, 127, 127),
+		1px -1px 0 #474444,
+		-1px 1px 0 rgb(223, 115, 223),
+		1px 1px 0 rgb(199, 51, 199);
+
+	font-family: "Great Vibes", cursive;
+	font-weight: 600;
+	font-style: normal;
 }
 
 .section p {
-	color: rgba(109, 109, 109, 1);
+	color: rgb(255, 254, 254);
 	line-height: 15px;
+	font-size: 14px;
 }
 
 /*OPTIONS PRODUCTS*/
@@ -94,7 +100,7 @@
 	justify-content: center;
 	font-size: 32px;
 	font-weight: 700;
-	color: rgba(182, 42, 105, 1);
+	color: rgb(239, 103, 164);
 	padding-block: 40px;
 }
 
@@ -241,6 +247,12 @@
 	cursor: pointer;
 }
 
+.textCategorie {
+	padding-top: 20px;
+	text-transform: capitalize;
+}
+
+/*
 p {
 	margin-top: 20px;
 	text-align: center;
@@ -248,11 +260,12 @@ p {
 	justify-content: center;
 	flex-wrap: wrap;
 	font-size: 13px;
-	color: rgb(137, 135, 135);
+	color: rgb(128, 3, 3);
 	font-weight: 600;
 	padding-inline: 10px;
 	text-transform: capitalize;
 }
+
 
 h4 {
 	font-size: 16px;
@@ -260,6 +273,7 @@ h4 {
 	padding-inline: 10px;
 	margin-block: 2px;
 }
+	*/
 
 /*dscto*/
 .wrapperDscto {
@@ -521,17 +535,19 @@ h4 {
 	display: flex;
 	justify-content: space-between;
 	gap: 10px;
-	margin-top: 10px;
-	padding: 0 10px 10px;
+	margin-top: 30px;
+
 }
+
+
 
 .addToCartBtn,
 .buyBtn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0px;
-	padding: 5px;
+	gap: 10px;
+	padding: 15px;
 	border-radius: 8px;
 	border: none;
 	font-weight: 500;
@@ -542,16 +558,17 @@ h4 {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 .addToCartBtn {
-	background-color: #f8f8f8;
-	color: #333;
-	border: 1px solid #e0e0e0;
+	background-color: #FF6BBC;
+	color: #ffffff;
+	border: 1px solid #FF6BBC;
 }
 
 .addToCartBtn:hover {
-	background-color: #efefef;
+	background-color: #ef2e98;
 	transform: translateY(-2px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 8px rgba(67, 67, 67, 0.5);
 }
 
 .buyBtn {
@@ -1044,15 +1061,20 @@ h4 {
 
 	.contentProducts {
 		width: 100%;
+
 	}
 
 	.itemBenefits {
 		font-size: 10px;
 	}
 
+	.textCategorie {
+		padding-top: 10px;
+	}
+
 	.sectionProducts {
-		width: 155px;
-		height: 250px;
+		width: 156px;
+		height: 210px;
 		border-radius: 12px;
 		border: 1px solid rgb(241, 239, 239);
 		transition: all 0.3s ease-in-out;

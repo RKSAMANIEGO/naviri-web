@@ -27,14 +27,13 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const logout = useAuthStore(state => state.logout);
-  
+
   const handleMenuClick = (e) => {
     navigate(e.key);
   };
 
   return (
     <div className="relative">
-
       <button
         onClick={() => setCollapsed(!collapsed)}
         className="absolute -right-3 top-16 bg-white cursor-pointer dark:bg-gray-700 p-1.5 rounded-full shadow-lg border-2 border-gray-200 dark:border-gray-600 hover:scale-105 transition-transform z-10"
@@ -51,107 +50,156 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
       </button>
       
       <Sider 
-        collapsed={collapsed}
-        trigger={null}
-        theme={isDarkMode ? 'dark' : 'light'}
-        width={240}
-        collapsedWidth={80}
-        className="min-h-screen shadow-lg"
-        style={{ 
-          backgroundColor: isDarkMode ? '#1f2937' : 'white',
-          color: isDarkMode ? 'white' : '#1f2937',
-        }}
-      >
-        <div className="p-4 py-8">
+  collapsed={collapsed}
+  trigger={null}
+  theme={isDarkMode ? 'dark' : 'light'}
+  width={240}
+  collapsedWidth={80}
+  className="h-screen shadow-lg flex flex-col sticky top-0"
+  style={{ 
+    backgroundColor: isDarkMode ? '#1f2937' : 'white',
+    color: isDarkMode ? 'white' : '#1f2937',
+  }}
+>
+        <div className="p-4 py-8 flex-shrink-0"> 
           <div className="flex justify-center">
             <img src={logo} alt="logo" width="80px" />
           </div>
         </div>
         
-        <Menu
-          theme={isDarkMode ? 'dark' : 'light'}
-          mode="inline"
-          selectedKeys={[location.pathname]}
-          onClick={handleMenuClick}
+        <div className="flex-1 overflow-y-auto h-[calc(100vh-250px)] hide-scrollbar">
+          <Menu
+            theme={isDarkMode ? 'dark' : 'light'}
+            mode="inline"
+            selectedKeys={[location.pathname]}
+            onClick={handleMenuClick}
+            style={{ 
+              borderRight: 0,
+              backgroundColor: isDarkMode ? '#1f2937' : 'white',
+            }}
+            className="custom-sidebar-menu h-full"
+            items={[
+              {
+                key: '/admin/panel/products',
+                icon: <ShoppingOutlined />,
+                label: 'Productos',
+              },
+              
+              {
+                key: '/admin/panel/categories',
+                icon: <ShoppingOutlined />,
+                label: 'Categorias',
+              },
+              {
+                key: '/admin/panel/customers',
+                icon: <UserOutlined />,
+                label: 'Información',
+              },
+              {
+                key: '/admin/panel/coments',
+                icon: <CommentOutlined />,
+                label: 'Comentarios',
+              },
+              {
+                key: '/admin/panel/blogs',
+                icon: <FileTextOutlined />,
+                label: 'Blogs',
+              },
+              {
+                key: '/admin/panel/mail',
+                icon: <MailOutlined />,
+                label: 'Correo',
+              },
+              {
+                key: '/admin/panel/promotions',
+                icon: <TagsOutlined />,
+                label: 'Promociones',
+              },
+              /*
+              {
+                key: '/admin/panel/questions',
+                icon: <QuestionOutlined />,
+                label: 'Preguntas y Respuestas',
+              },*/
+              {
+                key: 'page',
+                icon: <SettingOutlined />,
+                label: 'Página',
+                children: [
+                  {
+                    key: '/admin/panel/page/policy',
+                    label: 'Política',
+                  },
+                  {
+                    key: '/admin/panel/page/service',
+                    label: 'Servicios',
+                  },
+                  {
+                    key: '/admin/panel/page/about',
+                    label: 'About Us',
+                  },
+                ],
+              },
+            ]}
+          />
+        </div>
+
+        {/* Botones en fila */}
+        <div 
+          className="border-t p-4 flex-shrink-0"
           style={{ 
-            marginTop: 20,
-            borderRight: 0,
-            backgroundColor: isDarkMode ? '#1f2937' : 'white',
+            borderColor: isDarkMode ? '#374151' : '#e5e7eb'
           }}
-          className="custom-sidebar-menu"
-          items={[
-            {
-              key: '/admin/panel/products',
-              icon: <ShoppingOutlined />,
-              label: 'Productos',
-            },
+        >
+          <div className={`flex ${collapsed ? 'flex-col items-center gap-4' : 'flex-row justify-around'}`}>
+            <div className="flex flex-col items-center">
+              <Button
+                type="text"
+                onClick={toggleTheme}
+                icon={isDarkMode ? (
+                  <SunOutlined style={{ fontSize: '20px', color: '#fbbf24' }} />
+                ) : (
+                  <MoonOutlined style={{ fontSize: '20px', color: '#4b5563' }} />
+                )}
+                size="large"
+              />
+              {!collapsed && (
+                <span style={{ color: isDarkMode ? '#9ca3af' : '#4b5563' }}>
+                  {isDarkMode ? 'Claro' : 'Oscuro'}
+                </span>
+              )}
+            </div>
 
-            
-            {
-              key: '/admin/panel/userdiscount',
-              icon: <ShoppingOutlined />,
-              label: 'Usuarios con Descuento',
-            },
+            <div className="flex flex-col items-center">
+              <Button
+                type="text"
+                onClick={() => { logout(); navigate('/login'); }}
+                icon={<LogoutOutlined style={{ 
+                  fontSize: '20px', 
+                  color: isDarkMode ? '#f87171' : '#4b5563' 
+                }} />}
+                size="large"
+              />
+              {!collapsed && (
+                <span style={{ color: isDarkMode ? '#f87171' : '#4b5563' }}>
+                  Cerrar sesión
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
 
-            {
-              key: '/admin/panel/categories',
-              icon: <ShoppingOutlined />,
-              label: 'Categorias',
-            },
-            {
-              key: '/admin/panel/customers',
-              icon: <UserOutlined />,
-              label: 'Información',
-            },
-            {
-              key: '/admin/panel/coments',
-              icon: <CommentOutlined />,
-              label: 'Comentarios',
-            },
-            {
-              key: '/admin/panel/blogs',
-              icon: <FileTextOutlined />,
-              label: 'Blogs',
-            },
-            {
-              key: '/admin/panel/mail',
-              icon: <MailOutlined />,
-              label: 'Correo',
-            },
-            {
-              key: '/admin/panel/promotions',
-              icon: <TagsOutlined />,
-              label: 'Promociones',
-            },
-            /*
-            {
-              key: '/admin/panel/questions',
-              icon: <QuestionOutlined />,
-              label: 'Preguntas y Respuestas',
-            },*/
-            {
-              key: 'page',
-              icon: <SettingOutlined />,
-              label: 'Página',
-              children: [
-                {
-                  key: '/admin/panel/page/policy',
-                  label: 'Política',
-                },
-                {
-                  key: '/admin/panel/page/service',
-                  label: 'Servicios',
-                },
-                {
-                  key: '/admin/panel/page/about',
-                  label: 'About Us',
-                },
-              ],
-            },
-          ]}
-        />
-        
+        {/* Estilos se mantienen igual */}
         <style jsx="true">{`
+          .hide-scrollbar {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+          }
+
+          .hide-scrollbar::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+          }
+          
           .custom-sidebar-menu .ant-menu-item:hover {
             background-color: rgba(255, 241, 249, 1) !important;
           }
@@ -177,55 +225,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
             background-color: rgba(255, 241, 249, 1) !important;
           }
         `}</style>
-        
-        <div 
-          className="absolute bottom-0 left-0 right-0 p-4 border-t flex flex-col items-center space-y-4"
-          style={{ 
-            borderColor: isDarkMode ? '#374151' : '#e5e7eb',
-            paddingBottom: '16px', 
-            paddingTop: '16px'
-          }}
-        >
-          <div className="flex flex-col items-center">
-            <Button
-              type="text"
-              onClick={toggleTheme}
-              icon={isDarkMode ? (
-                <SunOutlined style={{ fontSize: '20px', color: '#fbbf24' }} />
-              ) : (
-                <MoonOutlined style={{ fontSize: '20px', color: '#4b5563' }} />
-              )}
-              size="large"
-            />
-            {!collapsed && (
-              <span
-                style={{ 
-                  color: isDarkMode ? '#9ca3af' : '#4b5563'
-                }}
-              >
-                {isDarkMode ? 'Claro' : 'Oscuro'}
-              </span>
-            )}
-          </div>
-
-          <div className="flex flex-col items-center">
-            <Button
-              type="text"
-              onClick={() => { logout(); navigate('/login'); }}
-              icon={<LogoutOutlined style={{ fontSize: '20px', color: isDarkMode ? '#f87171' : '#4b5563' }} />}
-              size="large"
-            />
-            {!collapsed && (
-              <span
-                style={{ 
-                  color: isDarkMode ? '#f87171' : '#4b5563'
-                }}
-              >
-                Cerrar sesión
-              </span>
-            )}
-          </div>
-        </div>
       </Sider>
     </div>
   );

@@ -21,7 +21,7 @@ const BlogDetailsPage = () => {
         setLoading(false);
       }
     };
-   fetchData();
+    fetchData();
   }, [blogId]);
 
   if (loading) {
@@ -58,7 +58,7 @@ const BlogDetailsPage = () => {
               </h1>
               
               <div className="flex flex-wrap items-center gap-3">
-                <span className="bg-[#E1CCF5] px-2.5 py-0.5 rounded-full text-xs md:text-sm text-[#8A4FFF]">
+                <span className="bg-[#f282d0] px-2.5 py-0.5 rounded-full text-xs md:text-sm text-white font-bold">
                   {blog.category.name}
                 </span>
                 <div className="flex items-center gap-1 text-neutral-500 text-sm">
