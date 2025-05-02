@@ -283,6 +283,7 @@
 	text-transform: capitalize;
 }
 
+
 .titleProducts {
 	font-weight: 700;
 }
@@ -1310,6 +1311,10 @@
 
 	s {
 		font-size: 10px;
+	}
+
+	.textCategorie {
+		padding-top: 10px;
 	}
 
 	.sectionProducts {
