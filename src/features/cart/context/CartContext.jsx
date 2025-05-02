@@ -110,6 +110,7 @@ export const CartProvider = ({ children }) => {
   const closeCart = () => {
     setIsCartOpen(false);
   };
+  
 
   const value = {
     cartItems,

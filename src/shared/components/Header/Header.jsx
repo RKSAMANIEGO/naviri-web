@@ -97,7 +97,10 @@ const Header = () => {
         if (location.pathname === '/') {
             localStorage.removeItem("nameCategorie")
             navigate('/products');
-        } else {
+        } else if(location.pathname.includes("/products/")){
+            navigate('/products');
+            toggleCart();
+        }else {
             toggleCart();
         }
     };

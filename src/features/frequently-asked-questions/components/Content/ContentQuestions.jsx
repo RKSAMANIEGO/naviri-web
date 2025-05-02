@@ -5,97 +5,6 @@ import { Collapse, message } from 'antd';
 import { DoubleLeftOutlined } from '@ant-design/icons';
 import HeaderFrequentlyAskedQuestions from '../Header/HeaderFrequentlyAskedQuestions';
 
-/*
-const categorie=[
-    {
-        id:1,
-        name:"Categorie 1",
-        description:"Categorie 1 description",
-        image:"https://pixcap.com/cdn/library/template/1716824237738/thumbnail/Task_Management_3D_Animated_Icon_transparent_400_emp.webp",
-        questions:[
-            {
-                id: 1,
-                question: "What is your question 1?",
-                answer: "This is the answer to your question."
-                
-            },
-            {
-                id: 2,
-                question: "What is your question 2?",
-                answer: "This is the answer to your question 1."
-                
-            },
-            {
-                id: 3,
-                question: "What is your question 3?",
-                answer: "This is the answer to your question 2."
-                
-            },
-            {
-                id:4,
-                question: "What is your question 4?",
-                answer: "This is the answer to your question 3."
-                
-            }
-        ]
-    },
-    {
-        id:2,
-        name:"Categorie 2",
-        description:"Categorie 2 description",
-        image:"https://thumbs.dreamstime.com/b/testimoni-d-rendering-illustration-icon-free-photo-235254727.jpg",
-        questions: [
-            {
-                id: 1,
-                question: "What is your question 1",
-                answer: "This is the answer to your question for Category 2."
-            },
-            {
-                id: 2,
-                question: "What is your question 2?",
-                answer: "This is the answer to your question for Category 2."
-            },
-            {
-                id: 3,
-                question: "What is your question 3?",
-                answer: "This is the answer to your question for Category 2."
-            }
-        ]    
-    },
-    {
-        id:3,
-        name:"Categorie 3",
-        description:"Categorie 3 description",
-        image:"https://thumbs.dreamstime.com/b/d-illustration-representing-rating-system-symbolizing-customer-feedback-reviews-isolated-white-background-368033148.jpg",
-        questions: [
-            {
-                id: 1,
-                question: "What is your question for Category 3?",
-                answer: "This is the answer to your question for Category 3."
-            }
-        ]   
-
-    },
-    {
-        id:4,
-        name:"Categorie 4",
-        description:"Categorie 4 description",
-        image:"https://cdn3d.iconscout.com/3d/premium/thumb/idea-pregunta-8691333-6963916.png?f=webp",
-        questions: [
-            {
-                id: 1,
-                question: "What is your question 1",
-                answer: "This is the answer to your question for Category 4."
-            },
-            {
-                id: 2,
-                question: "What is your question 2",
-                answer: "This is the answer to your question for Category 4."
-            }
-        ]   
-    }
-]
-    */
 const categorie=[
     {
         id: 1,
@@ -172,14 +81,13 @@ const ContentQuestions = () => {
     const CustomCollapse = styled(Collapse)`
     border-radius: 10px;
     border:none;
-    color:white;
     .ant-collapse-item {
         border-bottom: none;
     }
     .ant-collapse-header {
         font-weight: bold;
-        color:white;
-        background:  #feb4e5;
+        color: white !important;
+        background: linear-gradient(to right,#ef5fac, #f18ec3) ;
     }
     `;
 
@@ -194,7 +102,8 @@ const ContentQuestions = () => {
     .ant-collapse-header {
         font-size:10px
         font-weight: bold;
-        background-color:  #f3d3e7;
+        color:white !important;
+        background-color:  #f278ca;
     
     }
     `;

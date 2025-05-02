@@ -18,8 +18,10 @@
 
 /*HEADER*/
 .headerQuestions {
-    height: 40vh;
-    background: linear-gradient(to right, #ec4899, #ec4899, #ec4899, #f43f5e);
+    height: 268px;
+    background: url("../../../assets/image/imgHeader2.jpg");
+    background-size: cover;
+    background-position: top;
     color: white;
     text-align: center;
     display: flex;
@@ -27,9 +29,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    /*animation: square-in-top-left 2s ease-in-out;*/
-    color: #f3d3e7;
-
+    animation: square-in-top-left 2s ease-in-out;
 }
 
 
@@ -51,8 +51,22 @@
 
 
 .headerQuestions h1 {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 800;
+    color: white;
+    text-shadow: -1px -1px 0 rgb(225, 166, 212);
+    text-shadow:
+        -1px -1px 0 rgb(128, 127, 127),
+        1px -1px 0 #474444,
+        -1px 1px 0 rgb(223, 115, 223),
+        1px 1px 0 rgb(199, 51, 199);
+
+    font-family: "Great Vibes", cursive;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 3rem;
+    color: #f18ec3;
+    background: linear-gradient(to right, );
 }
 
 .headerQuestions p {
@@ -192,13 +206,14 @@
     gap: 20px;
     align-items: center;
     justify-content: center;
-    color: #e642af;
+    color: #ea53b8;
     padding-block: 20px;
-    font-weight: bold;
+    font-size: 0.8rem;
 }
 
 .iconCategorie {
-    font-size: 3rem;
+
+    font-size: 2rem;
     rotate: 270deg;
     animation: move-icon 0.5s infinite alternate;
 }

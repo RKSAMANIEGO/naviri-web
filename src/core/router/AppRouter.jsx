@@ -57,9 +57,11 @@ const Router = () => {
         <Routes>
           <Route element={<MainLayout/>}>
             <Route path="/" element={<HomePage />} />
+
             <Route path="/products" element={<ProductsPage />}>
                 <Route path='/products/:name' element={<ProductDetails/>}/>
             </Route>
+            
             <Route path="/new-products" element={<NewProductsPageAdmin/>}/>
 
             <Route path='/categories' element={<PageCategorie/>}>

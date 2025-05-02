@@ -13,6 +13,7 @@ const CartSidebar = () => {
     updateQuantity,
     clearCart
   } = useCart();
+  
 
   const handleWhatsappCheckout = () => {
     const total = getCartTotal();

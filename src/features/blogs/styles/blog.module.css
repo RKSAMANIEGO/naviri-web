@@ -1,0 +1,14 @@
+.family {
+    font-family: "Great Vibes", cursive;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 3rem;
+
+    text-shadow:
+        -1px -1px 0 rgb(128, 127, 127),
+        1px -1px 0 #474444,
+        -1px 1px 0 rgb(223, 115, 223),
+        1px 1px 0 rgb(199, 51, 199);
+
+
+}
