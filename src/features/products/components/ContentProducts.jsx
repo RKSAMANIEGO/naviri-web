@@ -6,8 +6,7 @@ import SearchProducts from './SearchProducts' // Path remains relative
 import { listProducts, productByName } from '../services/productsApi' // Updated path
 import CartSidebar from '../../cart/components/CartSidebar'; // Updated path to new feature location
 import { useCart } from '../../cart/context/CartContext';
-
-import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation';
+import SearchAside from './SearchAside/SearchAside';
 
 const ContentProducts = ({categorie}) => {
 
@@ -106,7 +105,8 @@ const ContentProducts = ({categorie}) => {
                 setProductoFiltrado(productsFilterPrecio);
             }
             else if (filterCategorie){
-                const productsFilterCat=allProducts.filter(product => product.categories.some(subCat=>subCat.sub_categories.some(obj=> obj.name.toLowerCase()=== filterCategorie.toLowerCase())))
+                //const productsFilterCat=allProducts.filter(product => product.categories.some(subCat=>subCat.sub_categories.some(obj=> obj.name.toLowerCase()=== filterCategorie.toLowerCase())));
+                const productsFilterCat=allProducts.filter(product => product.categories.some(subCat=>subCat.name.toLowerCase()=== filterCategorie.toLowerCase()));
                 setProductoFiltrado(productsFilterCat); // <-- Soluciona el filtro por categoría
                 console.log(productsFilterCat);
             }
@@ -138,17 +138,19 @@ const ContentProducts = ({categorie}) => {
 
     return (
         <>
-            <SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} recibirCategories={recibirFiltroCat} products={allProducts}/>     
-
+            {/*<SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} recibirCategories={recibirFiltroCat} products={allProducts}/>     */}
+            <SearchProducts recibirTextInput={recibirTextSearch}/> 
             <div className={styles.containerProducts}>
-        
+
+                {allProducts.length>15 &&  <SearchAside className='w-[20%]'  products={allProducts}  recibirValuePrecio={recibirFiltroPrecio} recibirCategories={recibirFiltroCat}/>}
+            
                 <section  className={styles.contentProducts} >
 
                     {/*FILTRO DE PRODUCTOS */}
                     { productoFiltrado.map((product) => (
 
                         widthWindow > 850 ?
-                        (<section  class="group overflow-hidden w-[310px] h-[380px] rounded-lg border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-md" key={product.id}>
+                        (<section  class="group overflow-hidden w-[310px] h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md" key={product.id}>
                 
                             <Link to={`/products/${encodeURIComponent(product.name)}`} >
                             <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-xl transition-all duration-500 ease-in-out" 
@@ -232,6 +234,7 @@ const ContentProducts = ({categorie}) => {
                     {/*{productSelected!=null && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected} title="productCustomer"/> }*/}
                     <CartSidebar />
                 </section>
+    
             </div>
         </>
     )
