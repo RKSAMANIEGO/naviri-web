@@ -36,7 +36,8 @@
   background-color: #ffffff;
   border-radius: 1rem;
   padding: 1rem 2rem;
-  height: 120px; /* Altura total de la tarjeta */
+  height: 120px;
+  /* Altura total de la tarjeta */
   gap: 1.5rem;
 }
 
@@ -110,7 +111,7 @@
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.116);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.5s ease, color 0.3s ease;
 }
 
 .box-content {
@@ -153,7 +154,9 @@
 .text-content p {
   margin: 0;
   padding: 0 2rem;
-  font-size: 25px;
+  color: rgb(82, 80, 80);
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1.5;
   font-family: "Roboto", sans-serif;
 }
@@ -214,6 +217,7 @@
     top: -60px;
     margin-top: 3rem;
   }
+
   .text-content p {
     margin: 0;
     padding: 0 2rem;
@@ -243,11 +247,12 @@
     top: -40px;
     margin-top: 3rem;
   }
-.text-content p {
-  margin: 0;
-  padding: 0 2rem;
-  font-size: 18px;
-  line-height: 1.5;
-  font-family: "Delius", cursive;
-}
+
+  .text-content p {
+    margin: 0;
+    padding: 0 2rem;
+    font-size: 18px;
+    line-height: 1.5;
+    font-family: "Delius", cursive;
+  }
 }

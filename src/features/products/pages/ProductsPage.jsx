@@ -3,6 +3,7 @@ import ContentProducts from '../components/ContentProducts'
 import HeaderProducts from "../components/HeaderProducts"
 import OptionsProducts from "../components/OptionsProducts"
 import TitleProducst from "../components/TitleProducst"
+import SeccionInAnimation from '../../../shared/animation/SeccionInAnimation'
 
 const ProductsPage = () => {
     const {pathname} = useLocation();
@@ -12,7 +13,9 @@ const ProductsPage = () => {
         <div>
             <HeaderProducts/>
             <OptionsProducts/>
-            <TitleProducst/>
+
+            <SeccionInAnimation title={<TitleProducst />} />
+            
             <ContentProducts/>
         </div>
         :

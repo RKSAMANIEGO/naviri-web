@@ -69,10 +69,10 @@ const InfoSection = () => {
           onMouseLeave={() => setActiveCard(null)}
           onClick={() => setActiveCard('mision')}
         >
-          <div className="box-content initial-content">
+          <div className={`box-content initial-content`}>
             <h3>MISIÓN</h3>
           </div>
-          <div className="box-content text-content">
+          <div className="box-content text-content ">
             <p>{aboutUsData.mission}</p>
           </div>
         </div>

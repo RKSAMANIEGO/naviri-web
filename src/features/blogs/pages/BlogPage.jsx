@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import aceite from '../../../assets/image/aceiteARBOLDETE.jpeg'
 import { useQuery } from '@tanstack/react-query'
+import image from '../../../assets/image/imgHeader2.jpg'
 import { getBlogs } from '../services/blogsApi.js' // Updated path
+import styles from '../styles/blog.module.css'
 import { 
   Calendar,
   TrendingUp,
@@ -62,13 +64,14 @@ const BlogPage = () => {
   return (
     <div className="min-h-screen bg-[#faf5f7]">
       {/* Hero Section */}
-      <div className="relative h-64 md:h-72 bg-gradient-to-r from-[#F2B5D4] to-[#E1CCF5]">
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center px-4">
+      {/*<div className="relative h-64 md:h-72 bg-gradient-to-r from-[#F2B5D4] to-[#E1CCF5]">*/}
+      <div className="relative h-64 md:h-72 " style={{background:`url(${image})`, backgroundSize:"cover", backgroundPosition:"top" }}>
+        <div className="absolute inset-0  flex items-center justify-center px-4">
           <div className="text-center max-w-4xl">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+            <h1 className={`text-2xl md:text-7xl font-bold text-white mb-4 leading-tight ${styles.family}`}>
               Explorando la Belleza Natural
             </h1>
-            <p className="text-base md:text-lg text-white/90">
+            <p className="text-base font-bold md:text-[14px] text-white">
               Descubre nuestros artículos especializados
             </p>
           </div>
@@ -83,7 +86,7 @@ const BlogPage = () => {
             onClick={() => handleCategoryChange('')}
             className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
               selectedCategory === ''
-                ? 'bg-[#F2B5D4] text-white'
+                ? 'bg-[#FF6BBC] text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
@@ -139,7 +142,7 @@ const BlogPage = () => {
                   {/* Contenido del artículo */}
                   <div className="flex flex-col justify-center">
                     <div className="flex flex-wrap items-center gap-2 mb-3">
-                      <span className="bg-[#E1CCF5] text-[#6E45A2] px-2.5 py-1 rounded-full text-xs">
+                      <span className="bg-[#85afe9] text-[#ffffff] px-2.5 py-2 rounded-full text-xs font-bold">
                         {blog.category?.name || 'General'}
                       </span>
                       <span className="flex items-center text-gray-500 text-xs">
@@ -158,7 +161,7 @@ const BlogPage = () => {
                     
                     <a 
                       href={`/blog/${blog.id}`}
-                      className="inline-flex items-center text-[#F2B5D4] font-medium text-sm md:text-base hover:text-[#d895b3] transition-colors group"
+                      className="inline-flex items-center text-[#e974af] font-medium text-sm md:text-base hover:text-pink-500 transition-colors group"
                     >
                       Leer artículo completo
                       <TrendingUp className="w-4 h-4 md:w-5 md:h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -187,7 +190,7 @@ const BlogPage = () => {
                 onClick={() => handlePageChange(page)}
                 className={`w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-colors text-sm ${
                   page === pagination.currentPage
-                    ? 'bg-[#F2B5D4] text-white'
+                    ? 'bg-[#dd2b84] text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
