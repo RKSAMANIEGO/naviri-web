@@ -11,7 +11,6 @@ const MainLayout = () => {
       <main className="main-content">
         <Outlet /> 
       </main>
-      
       <Testimonios/>
       <GoogleMaps/>
       <Footer />

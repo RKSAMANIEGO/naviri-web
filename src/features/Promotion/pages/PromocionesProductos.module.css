@@ -1,12 +1,45 @@
 .contenedor {
+
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 40px 20px;
+
+  /*
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+*/
   font-family: "Montserrat", sans-serif;
 }
 
 .titulo {
   text-align: center;
+
+  color: rgba(182, 42, 105, 1);
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.titulo::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: rgba(255, 107, 188, 1);
+}
+
+.productosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+/*
   color: #FF6BBC;
   margin-bottom: 2rem;
   font-size: 2.5rem;
@@ -20,10 +53,35 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
+*/
 }
 
 .tarjetaProducto {
   background-color: #fff;
+
+  border-radius: 15px;
+  border: 1px solid rgb(241, 239, 239);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  height: auto;
+  max-width: 350px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.imagenContenedor {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  max-height: 100%;
+  overflow: hidden;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  object-fit: countain;
+/*
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -38,10 +96,28 @@
   position: relative;
   height: 200px;
   overflow: hidden;
+*/
 }
 
 .imagenProducto {
   width: 100%;
+
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.imagenProducto:hover {
+  transform: scale(1.05);
+}
+
+.tarjetaProducto:hover {
+  box-shadow: 0 0 30px pink;
+  border-bottom: 3px solid rgba(255, 107, 188, 1);
+}
+
+
+/*
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
@@ -51,12 +127,46 @@
   transform: scale(1.05);
 }
 
+*/
 .etiquetaPromocion {
   position: absolute;
   top: 10px;
   left: 10px;
+
+  background-color: rgba(255, 68, 171, 1);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.infoProducto {
+  padding: 0 15px 15px;
+}
+
+.nombreProducto {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 5px;
+/*
   background-color: #e83e8c;
-  /* Cambiado a la temática rosa/fucsia */
+  /* Cambiado a la temática rosa/fucsia 
   color: white;
   padding: 5px 10px;
   border-radius: 4px;
@@ -82,17 +192,144 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
+*/
 }
 
 .precioOriginal {
   text-decoration: line-through;
+
+  color: rgb(122, 121, 122);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.precioOferta {
+  color: #ef6ab7;
+  font-weight: 750;
+  font-size: 18px;
+}
+
+.descuento {
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
+  background-color: rgba(255, 221, 240, 0.5);
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+@media (max-width: 850px) {
+  .productosGrid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+  }
+  
+  .tarjetaProducto {
+      height: 360px;
+  }
+  
+  .imagenContenedor {
+      height: 180px;
+  }
+}
+
+@media (max-width: 650px) {
+  .titulo {
+      font-size: 28px;
+      margin-bottom: 30px;
+  }
+  
+  .productosGrid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 15px;
+  }
+  
+  .tarjetaProducto {
+      height: 340px;
+  }
+  
+  .imagenContenedor {
+      height: 160px;
+  }
+  
+  .nombreProducto {
+      font-size: 15px;
+  }
+  
+  .precioOferta {
+      font-size: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .contenedor {
+      padding: 30px 15px;
+  }
+  
+  .titulo {
+      font-size: 24px;
+  }
+  
+  .productosGrid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+  }
+  
+  .tarjetaProducto {
+      height: 300px;
+  }
+  
+  .imagenContenedor {
+      height: 140px;
+      padding: 15px;
+  }
+  
+  .nombreProducto {
+      font-size: 14px;
+      height: 36px;
+  }
+  
+  .price {
+      gap: 10px;
+  }
+  
+  .precioOferta {
+      font-size: 15px;
+  }
+  
+  .precioOriginal {
+      font-size: 12px;
+  }
+  
+  .descuento {
+      font-size: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .productosGrid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+  }
+  
+  .tarjetaProducto {
+      height: auto;
+      max-width: 280px;
+      margin: 0 auto;
+  }
+  
+  .imagenContenedor {
+      height: 180px;
+    /*
   color: #999;
   font-size: 0.9rem;
 }
 
 .precioOferta {
   color: #e83e8c;
-  /* Cambiado a la temática rosa/fucsia */
+  /* Cambiado a la temática rosa/fucsia 
   font-weight: 600;
   font-size: 1.1rem;
 }
@@ -105,7 +342,7 @@
 
 .botonComprar {
   background-color: #e83e8c;
-  /* Cambiado a la temática rosa/fucsia */
+  /* Cambiado a la temática rosa/fucsia
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
@@ -118,7 +355,7 @@
 
 .botonComprar:hover {
   background-color: #d5337d;
-  /* Cambiado a un tono más oscuro del rosa/fucsia */
+  /* Cambiado a un tono más oscuro del rosa/fucsia
 }
 
 @media (max-width: 768px) {
@@ -130,5 +367,6 @@
 @media (max-width: 480px) {
   .productosGrid {
     grid-template-columns: 1fr;
+*/
   }
 }

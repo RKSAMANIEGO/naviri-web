@@ -1,24 +1,24 @@
 import { useState } from 'react'
 import styles from './producto.module.css' // Updated path
 
-const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,products}) => {
+//const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,products}) => {
 
+const SearchProducts = ({recibirTextInput}) => {
     const[searchText,setSearchText]=useState("");
-    const[valuePrecio,setValuePrecio]=useState(0);
-    const[valueCategorie,setValueCategorie]=useState("");
+    //const[valuePrecio,setValuePrecio]=useState(0);
+    //const[valueCategorie,setValueCategorie]=useState("");
 
-    //PRECIOS
+    /*PRECIOS
     const precios= products?.map(obj => obj.price);
     const listPrecios= new Set(precios);
+    */
 
-    //SUB CATEGORIAS
+    /*SUB CATEGORIAS
     const categorie= products.map(obj=> obj.categories.map(subCat=>subCat.sub_categories.map(objSub=> objSub.name).join()));
     const listCategorie= new Set(categorie.flat());
+    */
 
-
-    const searchProducts = () =>{
-            recibirTextInput(searchText);
-    }
+    const searchProducts = () =>recibirTextInput(searchText);
 
     return (
     <div  className={styles.search}>
@@ -31,6 +31,7 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,p
                 <button onClick={searchProducts}>Buscar</button>
             </label>
 
+            {/*
             <h4>Filtros</h4>
 
             <div>
@@ -70,8 +71,9 @@ const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,p
 
                 </section>
 
-
             </div>
+              * */}
+
 
         </section>
     </div>
