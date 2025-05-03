@@ -42,7 +42,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
     {
         name:"Imagen",
         cell:row=>(
-            <img src={row.image.url} alt={row.name} className={styles.productImage} width="35px"/>
+            <img src={row.image.url} alt={row.name} className={styles.productImage} width="35" height='37'/>
         ),
         width:"10%"
     },
@@ -54,7 +54,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
     },
     {
         name:"Categoria",
-        selector:row=>row.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name).join()),
+        selector:row=>row.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name.toLowerCase()).join()),
         sortable:true,
         width:"15%"
     },
@@ -66,7 +66,8 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
     },
     {
         name:"Stock",
-        selector:row=>row.stock,
+        selector:row=> (row.stock > 15) ? <p className={styles.stockPositive}> {String(row.stock).padStart(2,"0")} </p>  
+                                        :  <p className={styles.stockNegative}> {String(row.stock).padStart(2,"0")} </p>,
         sortable:true,
         width:"10%"
     },
@@ -132,6 +133,8 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
                 color: 'rgba(255, 107, 188, 1)',
                 fontWeight: 'bold',
                 fontSize:"13px",
+                display:"flex",
+                justifyContent:"center"
             }
         },
         cells:{
@@ -139,7 +142,9 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
                 padding:"5px 15px",
                 fontWeight:"600",
                 fontSize:"12px",
-                textTransform:"Capitalize"
+                textTransform:"Capitalize",
+                display:"flex",
+                justifyContent:"center"
             }
         }
 

@@ -361,6 +361,29 @@ h4 {
 	border: none;
 }
 
+.isDisabled {
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border: 1px solid rgb(205, 205, 205);
+}
+
+.nextActive {
+	background-color: rgba(255, 68, 171, 1);
+	color: white;
+	border: none;
+}
+
+.nextPageDisabled {
+	background-color: #ffffff;
+	color: gray !important;
+	cursor: not-allowed !important;
+}
+
+.nextPageDisabled:hover {
+	background-color: #ffffff !important;
+	color: gray !important;
+}
+
 .pagination button {
 	padding: 5px 12px;
 	border: 1px solid rgb(205, 205, 205);
@@ -374,6 +397,11 @@ h4 {
 .pagination button:hover {
 	background-color: rgba(255, 68, 171, 1);
 	color: white;
+}
+
+.pagina {
+	text-align: center;
+	width: 100%;
 }
 
 /*MODAL*/

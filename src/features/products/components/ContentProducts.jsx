@@ -78,6 +78,7 @@ const ContentProducts = ({categorie}) => {
         if(productos){
             setDataProducts(productos.data.data);
             setTotalPages(productos.data.last_page);
+            console.log("Ultima Pagina"+productos.data.last_page);
             setTotalProducts(productos.data.total);
         }
 
@@ -230,8 +231,7 @@ const ContentProducts = ({categorie}) => {
                         </section>)
                     ))}
 
-                    {totalPages && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext}/>}
-                    {/*{productSelected!=null && <ModalProducts isOpen={isOpen} onClose={()=>setIsOpen(false)} product={productSelected} title="productCustomer"/> }*/}
+                    {totalPages && productoFiltrado.length > 10 && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext} nextPageDisabled={numPage}/>}
                     <CartSidebar />
                 </section>
     

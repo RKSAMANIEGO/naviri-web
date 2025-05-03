@@ -16,7 +16,8 @@ import {
   RightOutlined,
   MailOutlined,
   TagsOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  FolderOutlined
 } from '@ant-design/icons';
 import { useAuthStore } from '../../../core/context/authProvider';
 
@@ -87,7 +88,7 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
               
               {
                 key: '/admin/panel/categories',
-                icon: <ShoppingOutlined />,
+                icon: <FolderOutlined />,
                 label: 'Categorias',
               },
               {
@@ -115,12 +116,6 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
                 icon: <TagsOutlined />,
                 label: 'Promociones',
               },
-              /*
-              {
-                key: '/admin/panel/questions',
-                icon: <QuestionOutlined />,
-                label: 'Preguntas y Respuestas',
-              },*/
               {
                 key: 'page',
                 icon: <SettingOutlined />,

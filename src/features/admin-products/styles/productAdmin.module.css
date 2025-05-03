@@ -10,7 +10,6 @@
     font-family: "Great Vibes", cursive;
     font-weight: 600;
     font-style: normal;
-
 }
 
 .productSearch p {
@@ -84,7 +83,7 @@
 }
 
 .productImage {
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .wrapperOptions {
@@ -113,6 +112,27 @@
 .wrapperOptions i:hover {
     color: #eaeaea;
     background-color: #c52e84;
+}
+
+/* ICON STOCK*/
+.stockPositive {
+    background: rgb(15, 134, 67);
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding-block: 2px;
+    width: 35px;
+    text-align: center;
+}
+
+.stockNegative {
+    background: rgb(186, 32, 32);
+    font-weight: 500;
+    color: rgb(255, 254, 254);
+    border-radius: 5px;
+    padding-block: 2px;
+    width: 35px;
+    text-align: center;
 }
 
 /***BTN ADD PRODUCT**/
@@ -196,6 +216,7 @@
     font-weight: 600;
     padding-inline: 10px;
     text-transform: capitalize;
+    text-align: center;
 }
 
 .sectionProducts h4 {
