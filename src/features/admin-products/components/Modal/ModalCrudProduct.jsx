@@ -263,7 +263,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                     <label>Categoria
                         <select
                             name="subcategory_id"
-                            value={dataForm.subcategory_id}
+                            value={dataForm?.subcategory_id || ''}
                             onChange={getDataInput}>
                             <option value=''>Selecione una categoria</option>
 

@@ -75,7 +75,7 @@ const ProductAdminPage = () => { // Renamed component
                     />
             )}
             
-            <Tooltip title="Agregar Un Producto"  placement="left" overlayInnerStyle={{background:"#c52e84",color:"white",boxShadow:"0 0 15px gray"}}>
+            <Tooltip title="Agregar Un Producto"  placement="left" overlayInnerStyle={{fontSize:"12px", color:"white"}}>
                 <div className={styles.addProduct} onClick={()=> setOpenModal(true)}>  <i className="fa-solid fa-plus"></i>  </div>
             </Tooltip>
 

@@ -36,7 +36,7 @@ import NewProductsPage from '../../features/admin-new-products/pages/NewProducts
 import NewProductsPageAdmin from '../../features/new-products/pages/NewProductsPage.jsx';
 import AboutAdminPage from '../../features/admin-about/pages/AboutAdmin.jsx'
 
-import PromocionesProductos from '../../features/Promotion/pages/PromocionesProductos.jsx'
+import PromocionesProductos from '../../features/Promotion/pages/PromotionPage.jsx'
 // scroll to top page
 import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 

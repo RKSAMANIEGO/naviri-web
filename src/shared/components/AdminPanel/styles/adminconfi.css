@@ -3,13 +3,15 @@
     position: fixed;
     right: 20px;
     cursor: pointer;
-    background-color: #000;
-    padding: 15px;
+    background-color: #000000;
+    padding: 10px;
     border-radius: 50%;
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1100;
 }
+
+
 
 .input[readonly] {
     /*contenedor para correo*/
@@ -18,7 +20,7 @@
 }
 
 .user-icon {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 /* Estilos del modal */
