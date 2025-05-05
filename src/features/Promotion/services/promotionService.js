@@ -1,4 +1,5 @@
-import api from "../services/promotionService.js";
+import api from "../../../core/api/apiClient";
+
 
 
 export const getPromotions = async () => {

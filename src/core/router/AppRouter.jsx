@@ -37,6 +37,7 @@ import NewProductsPageAdmin from '../../features/new-products/pages/NewProductsP
 import AboutAdminPage from '../../features/admin-about/pages/AboutAdmin.jsx'
 
 import PromocionesProductos from '../../features/Promotion/pages/PromotionPage.jsx'
+import PromotionDetailPage from '../../features/Promotion/components/PromotionDetails/PromotionDetailPage.jsx';
 // scroll to top page
 import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 
@@ -81,6 +82,8 @@ const Router = () => {
             <Route path="/PreguntasFrecuentes" element={<PageQuestionsAndAnswers/>} />
             <Route path="/contacts" element={<ContactPage />} />
             <Route path="/promotions" element={<PromocionesProductos/> } />
+            <Route path="/products/:name" element={<PromotionDetailPage />} />
+
             <Route path="*" element={<Navigate to="/" />} />
         
           </Route>
