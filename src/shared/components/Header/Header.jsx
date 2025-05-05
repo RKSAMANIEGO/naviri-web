@@ -255,13 +255,13 @@ const Header = () => {
                 <button type="submit" className={styles.searchButton} aria-label="Buscar">
                     <FaSearch className={styles.iconsearch} aria-hidden="true"/>
                 </button>
-            </form>
+            </form> 
             <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
             <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
-            <NavLink to="/categories" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
+            <NavLink to="/categories/accesorios" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
             <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
             <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Sobre Nosotros</NavLink>
-            <a href="#contact" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
+            <a href="/contacts" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
             
             <div className={styles.mobileExtras}>
                 <button onClick={() => { 

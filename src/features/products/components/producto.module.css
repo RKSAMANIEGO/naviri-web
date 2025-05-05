@@ -205,9 +205,8 @@
 /*CONTENT PRODUCTS*/
 .containerProducts {
 	display: flex;
-	gap: 20px;
-	width: 100%;
-	padding-inline: 40px;
+	gap: 40px;
+	margin-inline: 40px;
 }
 
 .contentProducts {
@@ -215,7 +214,7 @@
 	max-width: 80%;
 	height: 100%;
 	display: flex;
-	justify-content: start;
+	justify-content: center;
 	flex-wrap: wrap;
 	gap: 20px;
 	padding-block: 40px;

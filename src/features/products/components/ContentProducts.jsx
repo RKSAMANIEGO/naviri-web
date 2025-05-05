@@ -231,12 +231,14 @@ const ContentProducts = ({categorie}) => {
                         </section>)
                     ))}
 
-                    {totalPages && productoFiltrado.length > 10 && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext} nextPageDisabled={numPage}/>}
+                    {totalPages && productoFiltrado.length > 5 && <PaginationProducts numPage = { totalPages } handlerPagina={recibirPagina} nextPage={pageNext} nextPageDisabled={numPage}/>}
                     <CartSidebar />
                 </section>
     
             </div>
         </>
+
+        
     )
     
 }
