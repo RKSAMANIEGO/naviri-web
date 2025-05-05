@@ -12,10 +12,7 @@ const ProductsPage = () => {
         {pathname === "/products" ?
         <div>
             <HeaderProducts/>
-            <OptionsProducts/>
-
             <SeccionInAnimation title={<TitleProducst />} />
-            
             <ContentProducts/>
         </div>
         :
