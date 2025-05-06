@@ -69,6 +69,7 @@ const Router = () => {
               <Route index element={<ContentProducts categorie="aceites"/>}/>
               <Route path="accesorios" element={ <ContentProducts categorie="accesorios"/>}/>
               <Route path="aceites" element={ <ContentProducts categorie="aceites"/>}/>
+              <Route path="jabones" element={ <ContentProducts categorie="jabones"/>}/>
               <Route path="cosmeticos" element={ <ContentProducts categorie="Cosméticos"/>}/>
               <Route path="cuidado capilar" element={ <ContentProducts categorie="cuidado capilar"/>}/>
               <Route path="Exfoliante Corporal" element={ <ContentProducts categorie="Exfoliante Corporal"/>}/>

@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react'
-
+import styles from '../producto.module.css';
 const SearchAside = ({products,recibirValuePrecio,recibirCategories}) => {
 
     const [checkSelectionCategorie ,setCheckSelectionCategorie] = useState(null);
     const [checkSelectionPrice ,setCheckSelectionPrice] = useState(null);
     const [dataCategorie , setCategorie] = useState(null);
     const [dataPrice , setPrice] = useState(null);
+
+     //responsive cards products
+        const [widthWindow,setWidthWindow] = useState(window.innerWidth);
+    
+        useEffect(()=>{
+            const widthResizable=()=> setWidthWindow(window.innerWidth);
+    
+            window.addEventListener("resize",widthResizable);
+    
+            return ()=> window.removeEventListener("resize",widthResizable);
+        },[])
+    
 
     useEffect(()=>{
         
@@ -70,26 +82,25 @@ const SearchAside = ({products,recibirValuePrecio,recibirCategories}) => {
             recibirValuePrecio(checked ? name : "");
     }
     return (
+        <div   className={widthWindow < 875 ? `${styles.hiddenFilterAside}` :styles.wrapperSearchAside  } /* className={ styles.wrapperSearchAside}*/>   
+        <aside className={styles.wrapperFilter}>
+            <h3 className={styles.titleSearchAside}>Categorias</h3>
+            <ul>
+                {dataCategorie?.map((cat,index) => (
+                    <li className={styles.itemsSearch} key={index}><input name={cat.toLowerCase()} type='checkbox' checked={checkSelectionCategorie[cat.toLowerCase()] || false} onChange={handlerCheck} />{cat.toLowerCase()}</li>
+                ))}
+            </ul>
+        </aside>
 
-        <div className='flex flex-col gap-5 w-[20%] my-[40px]'>   
-            <aside className='flex flex-col justify-around w-full h-[60vh] p-5  border-[1px] border-pink-200  rounded-sm'>
-                <h3 className='text-xl font-bold text-pink-500'>Categorias</h3>
-                <ul>
-                    {dataCategorie?.map((cat,index) => (
-                        <li className={` flex gap-3 capitalize`} key={index}><input name={cat.toLowerCase()} type='checkbox' checked={checkSelectionCategorie[cat.toLowerCase()] || false} onChange={handlerCheck} />{cat.toLowerCase()}</li>
-                    ))}
-                </ul>
-            </aside>
-
-            <aside className='flex flex-col justify-around w-full h-[60vh] p-5  border-[1px] border-pink-200  rounded-sm'>
-                <h3 className='text-xl font-bold text-pink-500'>Precios</h3>
-                <ul>
-                    {dataPrice?.map((cat,index) => (
-                        <li className='flex gap-3 capitalize' key={index}><input name={cat}  type='checkbox' checked={checkSelectionPrice[cat] || false}  onChange={handlerCheckPrice } />{cat.toLowerCase()}</li>
-                    ))}
-                </ul>
-            </aside>
-        </div>
+        <aside className={styles.wrapperFilter}>
+            <h3 className={styles.titleSearchAside}>Precios</h3>
+            <ul>
+                {dataPrice?.map((cat,index) => (
+                    <li  className={styles.itemsSearch}  key={index}><input name={cat}  type='checkbox' checked={checkSelectionPrice[cat] || false}  onChange={handlerCheckPrice } />{cat.toLowerCase()}</li>
+                ))}
+            </ul>
+        </aside>
+    </div>
     )
 }
 
