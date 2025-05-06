@@ -45,7 +45,7 @@ const ProductDetails = () => {
                         <div className='overflow-hidden relative rounded-t-2xl w-1/2 h-[520px]'>  
                             <img   className='w-full h-[600px] rounded-t-2xl object-cover  object-[50%_80%] cursor-pointer transition-all duration-500 ease-in-out hover:scale-105 ' src={productSelection.image.url} alt={`imagen de ${productSelection.name}`}/>
                             {productSelection.discount > 0 && 
-                            <label className='absolute top-5 right-5 py-1 px-3 rounded-xl bg-pink-700 text-white font-bold'>-{productSelection.discount}%</label>}
+                            <label className='absolute top-5 right-5 py-1 px-2 text-sm rounded-sm bg-pink-600 text-white font-bold'>-{productSelection.discount}%</label>}
                         </div>
                 
                         <div className='flex flex-col gap-4 my-5 w-1/2'>

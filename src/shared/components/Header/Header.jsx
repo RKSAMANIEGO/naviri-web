@@ -258,7 +258,7 @@ const Header = () => {
             </form> 
             <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
             <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
-            <NavLink to="/categories/accesorios" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
+            <NavLink to="/categories/cuidado capilar" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
             <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
             <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Sobre Nosotros</NavLink>
             <a href="/contacts" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
