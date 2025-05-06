@@ -18,7 +18,6 @@ const ProductsPage = () => {
         :
         <div>  
             <HeaderProducts/>
-            <OptionsProducts/>
             <Outlet/>
         </div>
         }
