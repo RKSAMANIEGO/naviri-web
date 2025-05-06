@@ -56,9 +56,6 @@ const categorie=[
 
 const ContentQuestions = () => {
 
-    //const [questionFilter, setQuestionFilter] = useState(null);
-    //const [questionByCategorie,setQuestionByCategorie]=useState([]);
-    // const [isVisibleIcon,setVisibleIcon]=useState(true);
     const [catFilter,setCatFilter]=useState(null);
     const [dataQuestions ,setDataQuestions]=useState(null);
     const [widthWindow,setWidthWindow]=useState({width:window.innerWidth,height:window.innerHeight});
@@ -115,22 +112,6 @@ const ContentQuestions = () => {
             (categorieFilter.length>0) ? setCatFilter(categorieFilter) :  message.warning("No Existe Esa Sección de Preguntas");
         }
     }
-    /*
-    //CLICK AL CARDS CATEGORIE QUESTIONS
-    const handlerCatQuestions =(id)=>{
-        setVisibleIcon(false);
-        const catQuestionById = categorie.find(cat => cat.id === id);
-        setQuestionFilter(catQuestionById);
-
-        const preguntas= catQuestionById.questions.flatMap(obj=>{
-            return {key:`${obj.id}`,label:`${obj.question}`,children:`${obj.answer}`}
-        })
-        setQuestionByCategorie(preguntas);
-
-        console.log(catQuestionById);
-        console.log(preguntas);
-    }
-    */
     return (
     <div className={styles.container}>
         <HeaderFrequentlyAskedQuestions setTextSearch={getTextSearch}/>
@@ -158,38 +139,6 @@ const ContentQuestions = () => {
     )
 }
 
-    {/**
-        <section className={styles.contentQuestions}>
-            {dataQuestions && dataQuestions.map(cat=>(
-                    <div key={cat.id} className={styles.card} onClick={()=>{
-                        handlerCatQuestions(cat.id);
-                    }}>
-                        <div className={styles.infoCategorie}>
-                            <h2>{cat.name}</h2>
-                            <p>{cat.description}</p>
-                        </div>
-
-                        <img src={cat.image} alt='iconCategorie'/>
-                    </div>
-
-            ))} 
-        </section>  
-
-        {isVisibleIcon && <label className={styles.wrapperIcon}> <DoubleLeftOutlined className={styles.iconCategorie}/>Haz Click en la Seccion de Preguntas</label>}
-        
-        
-        {questionFilter && (
-                <div className={styles.questionFilter}>
-                    <h3>{questionFilter.name}</h3>
-                    
-                    {widthWindow.width < 500 ?
-                        <CustomCollapseMovil className={styles.collapse} items={questionByCategorie} defaultActiveKey={questionByCategorie.flatMap(obj=>obj.key)}/>
-                    :
-                        <CustomCollapse className={styles.collapse} items={questionByCategorie} defaultActiveKey={questionByCategorie.flatMap(obj=>obj.key)}/>
-                    }
-                    </div>
-
-        )} */}
             
 
 export default ContentQuestions
