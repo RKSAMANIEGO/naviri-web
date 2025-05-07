@@ -94,7 +94,7 @@ export const CartProvider = ({ children }) => {
 
   // Calcular el total del carrito
   const getCartTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cartItems.reduce((total, item) => total + ( (item.price-(item.price*(item.discount/100))) * item.quantity), 0);
   };
 
   // Obtener número total de items en el carrito

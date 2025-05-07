@@ -124,10 +124,18 @@
 }
 
 .price {
+  display: flex;
+  flex-direction: column;
   color: #5c1e68;
   font-weight: bold;
   margin: 0 0 10px 0;
 }
+
+/*DSCTO */
+.dscto {
+  color: rgb(224, 72, 97)
+}
+
 
 .quantityControls {
   display: flex;
@@ -192,16 +200,19 @@
 .cartActions {
   display: flex;
   justify-content: space-between;
-  gap: 15px; /* Aumentado el espaciado entre botones */
+  gap: 15px;
+  /* Aumentado el espaciado entre botones */
 }
 
 .clearButton {
   background: none;
   border: 1px solid #ddd;
-  padding: 10px 18px; /* Aumentado el padding para hacer el botón más grande */
+  padding: 10px 18px;
+  /* Aumentado el padding para hacer el botón más grande */
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease; /* Transición más suave */
+  transition: all 0.3s ease;
+  /* Transición más suave */
   font-weight: 500;
   min-width: 120px;
 }
@@ -209,7 +220,8 @@
 .clearButton:hover {
   background-color: #f1f1f1;
   border-color: #ccc;
-  transform: translateY(-2px); /* Efecto de elevación al pasar el mouse */
+  transform: translateY(-2px);
+  /* Efecto de elevación al pasar el mouse */
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -217,21 +229,26 @@
   background-color: #25D366;
   color: white;
   border: none;
-  padding: 10px 20px; /* Aumentado el padding */
+  padding: 10px 20px;
+  /* Aumentado el padding */
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center; /* Centrado los elementos del botón */
+  justify-content: center;
+  /* Centrado los elementos del botón */
   gap: 8px;
   font-weight: 600;
-  transition: all 0.3s ease; /* Transición más suave */
-  min-width: 200px; /* Ancho mínimo fijo */
+  transition: all 0.3s ease;
+  /* Transición más suave */
+  min-width: 200px;
+  /* Ancho mínimo fijo */
 }
 
 .checkoutButton:hover {
   background-color: #128C7E;
-  transform: translateY(-2px); /* Efecto de elevación al pasar el mouse */
+  transform: translateY(-2px);
+  /* Efecto de elevación al pasar el mouse */
   box-shadow: 0 3px 8px rgba(18, 140, 126, 0.3);
 }
 

@@ -59,10 +59,11 @@ export default function Testi() {
   const startIndex = currentIndex * cardsPerSlide;
   const currentTestimonios = testimonios.slice(startIndex, startIndex + cardsPerSlide);
 
+
   return (
     <section className={styles.testiSection}>
       <div className={styles.container}>
-      <h2 className={styles.title}> Lo que dicen <RotatingText texts={["nuestros clientes", "nuestras clientas"]}
+      <h2 className={styles.title}> Lo que dicen <RotatingText  texts={["nuestros clientes", "nuestras clientas"]}
       mainClassName={styles.rotatingHighlight} /></h2>
         <div className={styles.carousel}>
           <div className={styles.cardsContainer}>
