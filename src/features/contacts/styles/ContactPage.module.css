@@ -109,6 +109,8 @@
     width: 60px; /* Reducido de 80px */
     height: 60px; /* Reducido de 80px */
     margin: 0 auto 1rem; /* Reducido el margen inferior */
+    justify-items: center;
+    align-content: center;
   }
   
   
@@ -135,7 +137,6 @@
   
   .infoCard:hover .iconWrapper {
     transform: scale(1.05);
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0.08) 100%);
   }
   
   .icon {
@@ -457,10 +458,7 @@
   
     .infoCard {
       padding: 2rem;
-    }
-  
-    .contactInfo {
-      flex-direction: column;
+      max-height: 400px;
     }
   
     .infoCard {

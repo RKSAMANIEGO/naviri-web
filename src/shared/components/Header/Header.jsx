@@ -9,7 +9,8 @@ import imageCategory1 from "../../../assets/image/categoria1.jpg";
 import imageCategory2 from "../../../assets/image/categoria2.jpg";
 
 const productMenuItems = [
-  { id: 'new', type: 'banner', title: 'Nuevos Productos', description: 'Descubre nuestras últimas novedades en productos de belleza', to: '/new-products' },
+  { id: 'new', title: 'Nuevos Productos', description: 'Descubre nuestras últimas novedades en productos de belleza', to: '/new-products' },
+  { id: 'promotions', title: 'Promociones', description: 'Aprovecha las Promociones que tenemos para ti', to: '/promotions' },
 ];
 
 const categoryMenuItems = [
@@ -22,16 +23,11 @@ const categoryMenuItems = [
 ];
 
 const Header = () => {
-  const [showProductos, setShowProductos] = useState(false);
-  const [showCategorias, setShowCategorias] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const { toggleCart, getCartCount } = useCart();
-  
-  const productosRef = useRef(null);
-  const categoriasRef = useRef(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,20 +46,6 @@ const Header = () => {
       document.body.classList.remove('overflow-hidden');
     }
   }, [isMobileMenuOpen]);
-  
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (productosRef.current && !productosRef.current.contains(event.target)) {
-        setShowProductos(false);
-      }
-      if (categoriasRef.current && !categoriasRef.current.contains(event.target)) {
-        setShowCategorias(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
@@ -107,33 +89,39 @@ const Header = () => {
             </NavLink>
 
             <div className="relative group">
-  <NavLink
-    to="/products"
-    className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-      isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-    }`}
-  >
-    Productos <FaChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
-  </NavLink>
+              <NavLink
+                to="/products"
+                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
+                  isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                }`}
+              >
+                Productos <FaChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
+              </NavLink>
 
-  <div className="absolute top-full left-0 w-screen max-w-xl bg-white shadow-lg rounded-lg p-6 hidden group-hover:grid transition-all duration-300 origin-top">
-    <Link
-      to="/new-products"
-      className="col-span-2 bg-gradient-to-r from-pink-200 to-pink-300 rounded-lg p-6 hover:shadow-md transition-all"
-    >
-      <h3 className="text-xl font-semibold text-gray-900">Nuevos Productos</h3>
-      <div className="grid grid-cols-2 gap-4">
-        <img src={imageProduct1} alt="Producto" className="rounded-lg h-48 object-cover w-full" />
-        <img src={imageProduct2} alt="Producto" className="rounded-lg h-48 object-cover w-full" />
-      </div>
-      <p className="text-gray-700 mt-2">Descubre nuestras últimas novedades en productos de belleza</p>
-    </Link>
-    
-  </div>
-  
-  {/* Puente invisible */}
-  <div className="absolute top-full -inset-x-20 h-4 bg-transparent pointer-events-none"></div>
-</div>
+              <div className="absolute top-full left-0 w-screen max-w-xl bg-white shadow-lg rounded-lg p-6 hidden group-hover:grid transition-all duration-300 origin-top">
+                <div className="col-span-2 grid grid-cols-3 gap-6">
+                  <div className="col-span-2 grid grid-cols-1">
+                    {productMenuItems.map((item) => (
+                      <Link
+                        key={item.id}
+                        to={item.to}
+                        className="p-4 rounded-lg hover:bg-gray-200 transition-colors"
+                      >
+                        <h4 className="font-medium text-gray-900">{item.title}</h4>
+                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-1 gap-4">
+                    <img src={imageProduct1} alt="Categoría" className="rounded-lg h-40 object-cover w-full" />
+                    <img src={imageProduct2} alt="Categoría" className="rounded-lg h-40 object-cover w-full" />
+                  </div>
+                </div>
+              </div>
+            
+             {/* Puente invisible */}
+              <div className="absolute top-full -inset-x-20 h-4 bg-transparent pointer-events-none"></div>
+          </div>
 
 {/* Categorías Dropdown */}
 <div className="relative group">
@@ -216,7 +204,8 @@ const Header = () => {
               />
               <button
                 type="submit"
-                className="bg-pink-500 text-white px-4 py-2 rounded-r-full hover:bg-pink-600 transition-colors h-10"
+                className="bg-pink-500 text-white px-4 py-2 rounded-r-full hover:bg-pink-600 
+                transition-colors h-10 cursor-pointer"
               >
                 <FaSearch className="h-5 w-5" />
               </button>
@@ -224,17 +213,19 @@ const Header = () => {
 
             <button 
               onClick={handleCartClick}
-              className="relative text-gray-700 hover:text-pink-600"
+              className="relative text-gray-700 hover:text-pink-600 cursor-pointer"
             >
               <FaShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-3 -right-2  bg-pink-500 text-white text-xs w-5 h-5 rounded-full flex 
+                items-center justify-center">
                 {getCartCount()}
               </span>
             </button>
 
             <button 
                   onClick={handleReserveClick}
-                  className="w-full flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 bg-pink-400 text-white py-2 px-4 rounded-lg
+                   hover:bg-pink-500 hover:scale-105 cursor-pointer transition-colors "
                 >
                   Reservar
                 </button>
@@ -348,7 +339,7 @@ const Header = () => {
               <div className="pt-4 border-t">
                 <button 
                   onClick={handleReserveClick}
-                  className="w-full flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
                 >
                   <FaWhatsapp className="h-5 w-5" /> Reservar
                 </button>
