@@ -13,6 +13,7 @@
   font-family: 'Arial', sans-serif;
 }
 
+
 .contacto-btn-wrapper {
   width: 100%;
   text-align: center;
@@ -74,11 +75,12 @@
   }
 
   .banner-frase h2 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   .contacto-btn {
     padding: 0.6rem 2rem;
     font-size: 0.85rem;
   }
+
 }
