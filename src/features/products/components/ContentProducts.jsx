@@ -8,7 +8,7 @@ import CartSidebar from '../../cart/components/CartSidebar'; // Updated path to 
 import { useCart } from '../../cart/context/CartContext';
 import SearchAside from './SearchAside/SearchAside';
 import { FilterOutlined } from '@ant-design/icons';
-import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts';
+import NotFoundProducts from '../../../shared/animation/iconAnimation/NotFoundProducts';
 
 const ContentProducts = ({ categorie }) => {
     const [isOpenNavCategorie, setIsOpenNavCategorie] = useState(false);

@@ -4,7 +4,7 @@ import styles from '../styles/productAdmin.module.css' // Updated path
 import ModalCrudProduct from './Modal/ModalCrudProduct' // Path remains relative to component
 import ModalProducts from './Modal/ModalProducts' // Updated path
 import { productByName , deleteProduct } from '../services/adminProductsApi' // Updated path
-import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts'
+import NotFoundProducts from '../../../shared/animation/iconAnimation/NotFoundProducts'
 const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) => {
 
     const [isOpenModal,setOpenModal] = useState(false)
