@@ -53,7 +53,7 @@ const CartSidebar = () => {
                   }}></div>
                   <div className={styles.productInfo}>
                     <h3>{item.name}</h3>
-                    <p className={styles.price}>S/ {item.price}</p>
+                    <p className={styles.price}>S/ {item.price}  <span className={styles.dscto}>S/-{((item.price*(item.discount/100))*item.quantity).toFixed(2)}</span></p>
                     <div className={styles.quantityControls}>
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
@@ -74,7 +74,7 @@ const CartSidebar = () => {
                     </div>
                   </div>
                   <div className={styles.itemTotal}>
-                    S/ {(item.price * item.quantity).toFixed(2)}
+                    S/ {(  (item.price -(item.price*(item.discount/100))) * item.quantity).toFixed(2)}
                   </div>
                 </div>
               ))}

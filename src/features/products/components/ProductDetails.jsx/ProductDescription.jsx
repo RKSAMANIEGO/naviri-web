@@ -4,20 +4,6 @@ import React from 'react'
 const ProductDescription = () => {
     return (
         <div className='w-full'>
-            
-            {/*
-            <p className='flex gap-10  justify-center text-center cursor-pointer'><a className=' text-center text-pink-500 text-3xl border-b-2 border-white hover:border-b-2 hover:border-pink-500 font-bold border-dashed'>Mas Información</a></p>
-
-            <div className='p-10'>
-                <h6 className='text-2xl text-pink-500'>BENEFICIOS</h6>
-                <ul>
-                    {product.benefits.map(obj =>(
-                        <li>{obj}</li>
-                    ))}
-                </ul>
-            </div>
-             */}
-
             <article className='flex gap-10 p-10'>
                 <div>
                     <h6 className='text-lg font-bold text-pink-500'>ENVÍO <CarOutlined/></h6>

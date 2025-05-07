@@ -8,6 +8,7 @@ import CartSidebar from '../../cart/components/CartSidebar'; // Updated path to 
 import { useCart } from '../../cart/context/CartContext';
 import SearchAside from './SearchAside/SearchAside';
 import { FilterOutlined } from '@ant-design/icons';
+import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts';
 
 const ContentProducts = ({ categorie }) => {
     const [isOpenNavCategorie, setIsOpenNavCategorie] = useState(false);
@@ -99,7 +100,8 @@ const ContentProducts = ({ categorie }) => {
         if (dataProducts) {
             if (textSearch) {
                 const productsFilter = allProducts.filter(product => product.name.toLowerCase().includes(textSearch.toLowerCase()));
-                setProductoFiltrado(productsFilter);
+                    setProductoFiltrado(productsFilter);
+
             }
             else if (filterPrecio) {
                 const productsFilterPrecio = allProducts.filter(product => Number(product.price) === Number(filterPrecio));
@@ -153,24 +155,25 @@ const ContentProducts = ({ categorie }) => {
 
     return (
         <>
-            {/*<SearchProducts recibirTextInput={recibirTextSearch} recibirValuePrecio={recibirFiltroPrecio} recibirCategories={recibirFiltroCat} products={allProducts}/>     */}
             <SearchProducts recibirTextInput={recibirTextSearch} />
             <div className={`${widthWindow < 875 ? 'flex flex-col' : `${styles.mainProducts}`}`}>
 
+                    {/*FILTER CATEGORIE CHECKBOX*/}
                 {allProducts.length > 0 && <SearchAside products={allProducts} recibirValuePrecio={recibirFiltroPrecio} recibirCategories={recibirFiltroCat} />}
 
+                    {/*FILTER CATEGORIE CHECKBOX MOVILE */}
                 {widthWindow < 875 && <div className='flex items-center gap-2 pt-[20px] px-[20px] md:px-[80px]'>
                                         <label className='flex gap-1 w-[auto] cursor-pointer text-sm  sm:text-[16px] text-pink-500  hover:text-gray-600' onClick={() => setIsOpenNavCategorie(!isOpenNavCategorie)}>FILTRAR <FilterOutlined /> </label>
                                         {!isOpenNavCategorie ? <span className='capitalize text-pink-400 text-sm  sm:text-[16px]'>&raquo; {nameCategorie} </span> : '' } 
                                     </div> }
 
-                <section className={styles.contentProducts} >
+                <section id="products" className={styles.contentProducts} >
 
                     {/*FILTRO DE PRODUCTOS */}
-                    {productoFiltrado.map((product) => (
+                    {productoFiltrado.length > 0  ? productoFiltrado.map((product) => (
 
 
-                        (<section className={`${widthWindow < 450 ? 'relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm'
+                        (<section  className={`${widthWindow < 450 ? ' relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm'
                             : 'relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[310px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md'}`} key={product.id}>
 
                             <Link to={`/products/${encodeURIComponent(product.name)}`} >
@@ -221,19 +224,23 @@ const ContentProducts = ({ categorie }) => {
                         </section>)
 
 
-                    ))}
+                    ))
+                    :
+                    <p className='flex flex-col items-center text-gray-500 w-[80%] font-bold'><NotFoundProducts/> Producto No Encontrado</p>
+                    }
 
                     {totalPages && productoFiltrado.length > 5 && <PaginationProducts numPage={totalPages} handlerPagina={recibirPagina} nextPage={pageNext} nextPageDisabled={numPage} />}
                     <CartSidebar />
                 </section>
 
+                    {/* NAV BAR CATEGORIE MOVILE*/}
                 <nav className={`fixed top-0 right-0 h-[100vh] w-[50%] sm:w-[40%] bg-pink-400 z-[100] transition-transform duration-500 transform 
                                 ${isOpenNavCategorie ? 'translate-x-0':'translate-x-full'}  flex justify-center items-center ` }>
                     {allProducts &&
                         <ul>
                             <li className='font-bold text-pink-300'>CATEGORIAS</li>
-                            {[...listCategorie].map(cat => (
-                                <li className='text-[13px] sm:text-[15px] text-white capitalize cursor-pointer p-1 hover:text-pink-300' onClick={()=> listProductsByCat(cat)}>{cat.toLowerCase()}</li>
+                            {[...listCategorie].map((cat,index) => (
+                                <li key={index} className='text-[13px] sm:text-[15px] text-white capitalize cursor-pointer p-1 hover:text-pink-300' onClick={()=> listProductsByCat(cat)}>{cat.toLowerCase()}</li>
                             ))}
                             <li className='text-[12px] text-pink-300 border-[1px] border-pink-300 text-center rounded-sm py-1 m-3 cursor-pointer hover:bg-pink-200 hover:text-pink-400' onClick={()=> listProductsByCat('all')}>Limpiar</li>
                         </ul>
@@ -248,44 +255,3 @@ const ContentProducts = ({ categorie }) => {
 }
 
 export default ContentProducts
-
-{/**  widthWindow > 850 ? */ }
-{/*: 
-                        
-                        (<section class={`group overflow-hidden hover:shadow-pink-500 ${styles.sectionProducts}`} key={product.id}>
-                            
-                            <Link to={`/products/${encodeURIComponent(product.name)}`}>
-                            <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-xl transition-all duration-500 ease-in-out" 
-                                style={{ backgroundImage: `url(${product.image.url})` }}
-                                onClick={async ()=>{
-                                    //setIsOpen(true)
-                                    if(textSearch!=null || filterPrecio!=null || filterCategorie!=null){
-                                        const productById = await productByName(product.name);
-                                        productById &&  console.log(productById) //setProductSelected(productById.data.data[0]);
-                                    }else{
-                                        const productById = await productByName(product.name);
-                                        productById &&  console.log(productById) // setProductSelected(productById.data.data[0]);
-                                    }
-                                }}>               
-                            </div>
-                            </Link>
-                            
-                            <div  className=' group-hover:-translate-y-5'>
-                                
-                                <label className='text-[9px]  hidden w-full bg-gray-200/70  group-hover:flex justify-evenly py-2 text-orange-500 text-md'>&#9733; &#9733; &#9733; &#9733; &#9733; <span className='text-pink-500 hover:underline hover:text-gray-800' onClick={() => handleAddToCart(product)}>LO QUIERO &#10084;</span></label>
-                                <p className={styles.textCategorie}>{product.categories.map(subCat=>subCat.sub_categories.map(obj=>obj.name))}</p>
-                                <h4 className={styles.h4}>{product.name.toUpperCase()}</h4>
-                    
-                                { product.discount > 0 && product.discount !==null ? 
-                                    ( <div className={styles.wrapperDscto}>
-                                    <s>S/{product.price}</s>
-                                    <h6 className={styles.dscto}>Ahora  S/{(product.price-(product.price*product.discount/100)).toFixed(2)}</h6>
-                                    </div> )  
-                                :
-                                    ( <div className={styles.wrapperDscto}>
-                                        <h5 className={styles.sinDscto}>S/{product.price}</h5>
-                                    </div> )
-                                }
-                            </div>
-                        </section>)
-                        * */}

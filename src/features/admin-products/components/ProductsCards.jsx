@@ -4,6 +4,7 @@ import styles from '../styles/productAdmin.module.css' // Updated path
 import ModalCrudProduct from './Modal/ModalCrudProduct' // Path remains relative to component
 import ModalProducts from './Modal/ModalProducts' // Updated path
 import { productByName , deleteProduct } from '../services/adminProductsApi' // Updated path
+import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts'
 const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) => {
 
     const [isOpenModal,setOpenModal] = useState(false)
@@ -22,7 +23,7 @@ const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) =
 
         <>
             <section className={styles.contentProductAdmin}>
-                { productsAll.map((product) => (
+                {productsAll.length > 0 ? productsAll.map((product) => (
                     <section className={styles.sectionProducts} key={product.id}
                     >
                         <div style={{
@@ -102,7 +103,11 @@ const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) =
                         </section>
                     </section>
 
-            ))}
+            ))
+            :
+            <p className='flex flex-col items-center text-gray-500 w-[80%] font-bold'><NotFoundProducts/> Producto No Encontrado</p>
+
+        }
 
             </section>
             {(isOpenModal) && <ModalCrudProduct isOpen={isOpenModal} onClose={()=>setOpenModal(false)} titleModal="updateProduct" confirmActualizacionProducto={(confirm)=> isUpdateProduct(confirm) }  productPutTable={productSelected}/>}

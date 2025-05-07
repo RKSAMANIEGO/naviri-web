@@ -56,8 +56,8 @@ const ProductDetails = () => {
                             <div className='text-[12px] '>
                                 <h6 className='text-lg font-bold  text-pink-500'>BENEFICIOS</h6>
                                 <ul>
-                                    {productSelection.benefits.map(obj =>(
-                                    <li>{obj}</li>
+                                    {productSelection.benefits.map((obj,index) =>(
+                                    <li key={index}>{obj}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -85,7 +85,7 @@ const ProductDetails = () => {
                     <ProductDescription product={productSelection}/>
                 </div>
             :
-                <label className='flex flex-col items-center gap-5'><LoadingOutlined className='text-4xl font-bold'/> Cargando ...</label>
+                <label className='flex flex-col items-center mt-20 gap-5'><LoadingOutlined className='text-4xl font-bold'/> Cargando ...</label>
                 
             }
         </>
