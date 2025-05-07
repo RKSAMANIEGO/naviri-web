@@ -96,7 +96,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex space-x-8">
             <NavLink 
               to="/" 
               className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
@@ -198,15 +198,7 @@ const Header = () => {
             >
               Contacto
             </NavLink>
-            
-            <NavLink 
-              to="/promotions" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
-            >
-              Promoción
-            </NavLink>
+
           </nav>
 
           {/* Right Section */}
@@ -240,9 +232,16 @@ const Header = () => {
               </span>
             </button>
 
+            <button 
+                  onClick={handleReserveClick}
+                  className="w-full flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
+                >
+                  Reservar
+                </button>
+
             <button
               onClick={toggleMobileMenu}
-              className="md:hidden text-gray-700 hover:text-pink-600"
+              className="lg:hidden text-gray-700 hover:text-pink-600"
               aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
               {isMobileMenuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
@@ -252,7 +251,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 bg-white z-50 pt-16 overflow-y-auto">
+          <div className="lg:hidden fixed inset-0 bg-white z-50 pt-16 overflow-y-auto">
             <div className="px-4 pt-2 pb-8 space-y-4">
               {/* Mobile Search */}
               <form className="flex" onSubmit={(e) => {
