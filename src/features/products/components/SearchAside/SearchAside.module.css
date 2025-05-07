@@ -1,0 +1,15 @@
+@media screen and (max-width: 522px) {
+    .responsiveMain {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      gap: 16px !important; /* Si deseas mantener espacio */
+      align-items: center !important;
+    }
+  
+    .responsiveAside {
+      height: auto !important;
+      width: 90% !important;
+    }
+  }
+  
