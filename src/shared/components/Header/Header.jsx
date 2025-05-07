@@ -245,6 +245,7 @@ const Header = () => {
                     closeMobileMenu();
                 }}
             >
+
                 <input
                     type="text"
                     placeholder="Buscar productos"
@@ -259,10 +260,9 @@ const Header = () => {
             <NavLink to="/" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu} end>Inicio</NavLink>
             <NavLink to="/products" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Productos</NavLink>
             <NavLink to="/categories/cuidado capilar" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Categorías</NavLink>
-            <a  href="blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</a>
+            <NavLink to="/blog" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Blogs</NavLink>
             <NavLink to="/about" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Sobre Nosotros</NavLink>
-            <a href="/contacts" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</a>
-            
+            <NavLink to="/contacts" className={({ isActive }) => isActive ? styles.activeLink : ''} onClick={closeMobileMenu}>Contacto</NavLink>
             <div className={styles.mobileExtras}>
                 <button onClick={() => { 
                     if (location.pathname === '/') {

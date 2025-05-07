@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import aceite from '../../../assets/image/aceiteARBOLDETE.jpeg'
 import { useQuery } from '@tanstack/react-query'
 import image from '../../../assets/image/imgHeader2.jpg'
@@ -16,6 +16,18 @@ const BlogPage = () => {
  // const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState('')
+
+  //responsive con window width
+  const [windowWidth,setWindowWidth]= useState(window.innerWidth);
+
+  useEffect(()=>{
+    const getWidthPage=()=>(setWindowWidth(window.innerWidth));
+
+    window.addEventListener("resize", getWidthPage);
+
+    return () => window.removeEventListener("resize",getWidthPage);
+  },[])
+
 
   const { data: apiResponse, isLoading, error } = useQuery({
     queryKey: ['blogs', currentPage, selectedCategory],
@@ -65,13 +77,13 @@ const BlogPage = () => {
     <div className="min-h-screen bg-[#faf5f7]">
       {/* Hero Section */}
       {/*<div className="relative h-64 md:h-72 bg-gradient-to-r from-[#F2B5D4] to-[#E1CCF5]">*/}
-      <div className="relative h-64 md:h-72 " style={{background:`url(${image})`, backgroundSize:"cover", backgroundPosition:"top" }}>
+      <div className="relative h-[240px] md:h-72 " style={ {background:`url(${image})`, backgroundSize: windowWidth < 1025 ? "300%" : "cover", backgroundPosition:"top" } }>
         <div className="absolute inset-0  flex items-center justify-center px-4">
           <div className="text-center max-w-4xl">
-            <h1 className={`text-2xl md:text-7xl font-bold text-white mb-4 leading-tight ${styles.family}`}>
-              Explorando la Belleza Natural
+            <h1 className={`text-5xl md:text-7xl font-bold text-white mb-4 leading-tight ${styles.family}`}>
+            Descubre tu belleza natural
             </h1>
-            <p className="text-base font-bold md:text-[14px] text-white">
+            <p className="text-[12px] font-bold md:text-[14px] text-white">
               Descubre nuestros artículos especializados
             </p>
           </div>
@@ -142,7 +154,7 @@ const BlogPage = () => {
                   {/* Contenido del artículo */}
                   <div className="flex flex-col justify-center">
                     <div className="flex flex-wrap items-center gap-2 mb-3">
-                      <span className="bg-[#85afe9] text-[#ffffff] px-2.5 py-2 rounded-full text-xs font-bold">
+                      <span className="bg-[#fc87a6] text-[rgb(244,244,244)] px-2.5 py-2 rounded-full text-xs font-bold">
                         {blog.category?.name || 'General'}
                       </span>
                       <span className="flex items-center text-gray-500 text-xs">
