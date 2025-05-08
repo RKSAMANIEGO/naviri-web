@@ -42,7 +42,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
     {
         name:"Imagen",
         cell:row=>(
-            <img src={row.image.url} alt={row.name} className={styles.productImage} width="35" height='37'/>
+            <img src={row.image[0].url} alt={row.name} className={styles.productImage} width="35" height='37'/>
         ),
         width:"10%"
     },
@@ -107,6 +107,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
                         cancelButtonText:"Cancelar"
                     }).then(async(result)=>{
                         if(result.value){
+                            console.log(row.name);
                             const response = await deleteProduct(row.name);
                             if(response.status === 200){
                                 Swal.fire({

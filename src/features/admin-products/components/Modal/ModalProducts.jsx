@@ -105,7 +105,7 @@ const ModalProducts = ({isOpen, onClose, product, title}) => {
             <div className={styles.modalProducts}>
                 <section className={styles.section} style={
                     {
-                        backgroundImage: `url(${product.image.url})`,
+                        backgroundImage: `url(${product.image[0].url})`,
                     }
                 }>
 
