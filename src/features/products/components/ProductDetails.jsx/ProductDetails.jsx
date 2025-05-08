@@ -46,7 +46,7 @@ const ProductDetails = () => {
                     <div className='overflow-hidden relative pt-0  rounded-t-2xl w-[auto] md:w-1/2  h-[auto] md:h-[520px]'>  
                         <img
                             className=' w-[auto] md:w-full h-[auto] md:h-[600px] rounded-t-2xl object-cover object-[50%_80%] cursor-pointer transition-all duration-500 ease-in-out hover:scale-105 hover:rounded-t-2xl'
-                            src={productSelection.image.url}
+                            src={productSelection.image[0].url}
                             alt={`imagen de ${productSelection.name}`}
                         />
                         {productSelection.discount > 0 && 

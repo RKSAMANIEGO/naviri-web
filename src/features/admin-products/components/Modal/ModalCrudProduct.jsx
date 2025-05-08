@@ -12,11 +12,15 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
     console.log(productPutTable);
 
-    //const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",pdf:"",subcategory_id:[""],image:''})
-    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],image:''})
+
+    //const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],image:''}) *****
+    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],image:[]}) 
+
 
     const [benefits, setBenefits] = useState([]);
-    const [imageUrl, setImageUrl] = useState(null);
+    //const [imageUrl, setImageUrl] = useState(null);  *****
+    const [imageUrl, setImageUrl] = useState([]);
+
     const [inputValue, setInputValue] = useState('');
     const [dataCategories,setDataCategories]=useState(null)
     const [confirmAddProd,setConfirmAddProd]=useState(false)
@@ -48,9 +52,15 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 discount:productPutTable?.discount || '',  // add field discount
                 //pdf:productPutTable?.pdf || '',
                 subcategory_id:[productPutTable?.subcategories[0]?.id],
-                image:productPutTable?.image.url || ''
+
+                //image:productPutTable?.image.url || '' *****
+                image: productPutTable?.image?.map(img => img.url) || []     
+
             })
-            setImageUrl(productPutTable?.image.url);
+            //setImageUrl(productPutTable?.image.url); ********
+            setImageUrl(productPutTable?.image?.map(img => img.url) || []);  
+
+
             setBenefits(productPutTable?.benefits || []);
         }
     },[productPutTable])
@@ -84,7 +94,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
                 reader.onloadend = () => {
                     const base64Image = reader.result;
-                    setImageUrl(base64Image);
+                    //setImageUrl(base64Image);  ********
+                    setImageUrl((prev) => [...prev, base64Image]);
                 };
 
                 reader.readAsDataURL(file);
@@ -121,14 +132,19 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         if (!dataForm.stock) {message.error("Ingrese el Stock del Producto"); return;}
         if (!dataForm.discount) {message.error("Ingrese el % de  Descuento del Producto"); return;}
         if (!dataForm.compatibility) {message.error("Ingrese la Descripcion del Producto"); return;}
-        if (!imageUrl) { message.error('Debes cargar una imagen');return;}
+
+        //if (!imageUrl) { message.error('Debes cargar una imagen');return;} *******
+        if (imageUrl.length === 0) { message.error('Debes cargar al menos una imagen'); return; }
+
         if (benefits.length === 0) { message.error('Debes agregar al menos un beneficio'); return;}
 
         const updatedDataForm = {
             ...dataForm,
             characteristics:"string",
             benefits,
-            image: imageUrl,
+            //image: imageUrl,
+            image: imageUrl.map(img => ({ url: img }))
+            
         };
 
 
@@ -197,7 +213,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     };
     //LIMPIAR CAMPOS DEL FORM
     const clearForm=()=>{
-        setImageUrl(null);
+        //setImageUrl(null); ******
+        setImageUrl([]); 
         setBenefits([]);
         setDataForm({
             name:'',
@@ -205,6 +222,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
             price:0,
             stock:0,
             discount:0, // add field discount
+            image: [],
+            subcategory_id: [''],   
         })
     }
 
@@ -327,16 +346,60 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
                 </section>
 
-                <section className={styles.sectionLast}>
-                    <label>Imagen del Producto
+                
+        
+                <section className=''>
+                <label className='flex flex-col  w-[310px]  h-[auto] items-center gap-2 border-[1px] border-gray-300 rounded-sm py-3'>Imágenes del Producto
+                    <Upload {...props} showUploadList={false}>
+                        <Button icon={<UploadOutlined />} style={{display:"flex", justifyContent:"center",  marginBottom: '10px' }}>
+                        Cargar imagen
+                        </Button>
+                    </Upload>
 
+                    {imageUrl.length > 0 && (
+                    
+                    <div style={{ display: 'flex', justifyContent:"center", gap:"10px", flexWrap: 'wrap' }}>
+                        {imageUrl.map((img, index) => (
+                            <div key={index} style={{display:"flex",  position: 'relative', gap:"3px"}}>
+                                <img
+                                    src={img}
+                                    alt={`img-${index}`}
+                                    style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '5px' }}
+                                />
+                                <DeleteOutlined
+                                onClick={() => {setImageUrl(prev => prev.filter((_, i) => i !== index));}}
+                                style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 0,
+                                    backgroundColor: 'white',
+                                    borderRadius: '50%',
+                                    padding: '2px',
+                                    cursor: 'pointer',
+                                    color: 'red'
+                                }}
+                            />
+                            </div>
+                            ))}
+                    </div>
+                    )}
+                </label>
+                
+                <div className='flex justify-end mt-2'>
+                        <button  className='bg-pink-600 font-bold text-white w-[50%] text-center py-2 rounded-sm cursor-pointer hover:bg-pink-500' onClick={handlerAddProduct}>{title}</button>
+                </div>
+                </section>    
+            
+                {/*
+                <section className={styles.sectionLast}>
+                    <label>Imagen del Producto 
                     {imageUrl ?
                         <div>
                             <div styles={{background:"red"}}>
                                 <Upload {...props} showUploadList={false} customStyles={{padding:"0",margin:"0",boxSizing:"border-box", border:"none"}} />
                                 <DeleteOutlined className={styles.deleteImage} onClick={()=> setImageUrl(null)}/>
                             </div>
-
+                        
                             {imageUrl && (
                                 <div style={{
                                     width: '100%',
@@ -344,6 +407,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center 70%',  }}>
                                 </div>)}
+                        
 
                         </div>
                         :
@@ -374,11 +438,13 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                     }
                     </label>
 
-
                     <div className={styles.wrapperBtnProducts}>
-                        <button onClick={handlerAddProduct}>{title}</button>
+                            <button onClick={handlerAddProduct}>{title}</button>
                     </div>
-                </section>
+
+                </section>     
+              */}     
+                
             </form>
 
             <div style={{width:"100%", display:"flex" , flexWrap:"wrap",borderRight:"1px solid  rgba(213, 213, 213, 1)",borderLeft:"1px solid  rgba(213, 213, 213, 1)",borderBottom:"1px solid  rgba(213, 213, 213, 1)",borderBottomLeftRadius:"5px",borderBottomRightRadius:"5px" }}>
