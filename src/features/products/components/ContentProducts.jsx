@@ -179,7 +179,7 @@ const ContentProducts = ({ categorie }) => {
                             <Link to={`/products/${encodeURIComponent(product.name)}`} >
                                 <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-sm sm:rounded-t-xl transition-all duration-500 ease-in-out"
                                     style={{
-                                        backgroundImage: `url(${product.image.url})`
+                                        backgroundImage: `url(${product.image[0].url})`
                                     }}
 
                                     onClick={async () => {
@@ -236,7 +236,7 @@ const ContentProducts = ({ categorie }) => {
                     {/* NAV BAR CATEGORIE MOVILE*/}
                 <nav className={`fixed top-0 right-0 h-[100vh] w-[50%] sm:w-[40%] bg-pink-400 z-[100] transition-transform duration-500 transform 
                                 ${isOpenNavCategorie ? 'translate-x-0':'translate-x-full'}  flex justify-center items-center ` }>
-                    {allProducts &&
+                    {allProducts.length > 0 &&
                         <ul>
                             <li className='font-bold text-pink-300'>CATEGORIAS</li>
                             {[...listCategorie].map((cat,index) => (

@@ -12,7 +12,7 @@
 }
 
 .container h1 {
-  font-size: 2rem;
+  font-size: 36px;
   color: #B62A69;
   text-align: center;
   margin-bottom: 1rem;
@@ -20,18 +20,20 @@
 }
 
 .container p {
-  font-size: 1.1rem;
-  color: #777;
+  font-size: 20px;
+  color:rgb(146, 146, 146);
   text-align: center;
   margin-bottom: 2rem;
   line-height: 1.5;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  font-weight: 700;
 }
 
 .swiperContainer {
   padding: 1rem 0 3rem;
+  transition: opacity 0.5s ease-out;
 }
 
 .swiperSlide {

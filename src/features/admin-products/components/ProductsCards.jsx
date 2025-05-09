@@ -30,7 +30,7 @@ const ProductsCards = ({products,productFilter,productDelete,isUpdateProduct}) =
                             width:"100%",
                             height:"220px",
                             marginBottom:"10px",
-                            backgroundImage: `url(${product.image.url})`,
+                            backgroundImage: `url(${product.image[0].url})`,
                             backgroundSize: "100%",
                             backgroundPosition:"center",
                             borderTopLeftRadius:"10px",

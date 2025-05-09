@@ -1,9 +1,77 @@
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import styles from "../styles/ContactPage.module.css"
 import { FaWhatsapp, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa"
 import { createEmail } from "../services/emailService"
+import ScrollReveal from "scrollreveal";
 
 const ContactPage = () => {
+  const contactHeaderRef = useRef(null);
+  const contactInfoRef = useRef(null);
+  const contactFormRef = useRef(null);
+  const whatsappCardRef = useRef(null);
+  const emailCardRef = useRef(null);
+  const sr = useRef(null);
+
+  useEffect(() => {
+    sr.current = ScrollReveal({
+      reset: false, 
+      distance: "30px",
+      duration: 800,
+      easing: "ease-out",
+      viewFactor: 0.2, 
+      opacity: 0,
+    });
+
+    if (contactHeaderRef.current) {
+      sr.current.reveal(contactHeaderRef.current, {
+        origin: "top",
+        delay: 200,
+      });
+    }
+
+  if (whatsappCardRef.current) {
+  whatsappCardRef.current.style.opacity = '0';
+  whatsappCardRef.current.style.transform = 'translateX(-30px)'; 
+  
+  sr.current.reveal(whatsappCardRef.current, {
+    origin: "left",
+    distance: '30px', 
+    delay: 500,
+    beforeReveal: (el) => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateX(0)'; 
+    }
+  });
+}
+
+  if (emailCardRef.current) {
+  emailCardRef.current.style.opacity = '0';
+  emailCardRef.current.style.transform = 'translateX(-30px)';
+  
+  sr.current.reveal(emailCardRef.current, {
+    origin: "left",
+    distance: '30px', 
+    delay: 500, 
+    beforeReveal: (el) => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateX(0)'; 
+    }
+  });
+}
+    if (contactFormRef.current) {
+      sr.current.reveal(contactFormRef.current, {
+        origin: "right",
+        delay: 400,
+      });
+    }
+
+    return () => {
+      if (sr.current) {
+        sr.current.destroy();
+      }
+    };
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -168,17 +236,18 @@ const ContactPage = () => {
       <div className={styles.decorCircle1}></div>
       <div className={styles.decorCircle2}></div>
 
-      <div className={styles.contactHeader}>
+      <div ref={contactHeaderRef} className={styles.contactHeader}>
         <h1>Contáctanos</h1>
         <p>Estamos aquí para ayudarte con cualquier consulta o servicio que necesites</p>
       </div>
 
       <div className={styles.contactContent}>
-        <div className={styles.contactInfo}>
-          <div className={styles.infoCard}>
-            <div className={styles.iconWrapper}>
+        <div ref={contactInfoRef} className={styles.contactInfo}>
+
+          <div ref={whatsappCardRef} className={styles.infoCard}>
+             <div className={styles.iconWrapper}>
               <FaWhatsapp className={styles.icon} />
-            </div>
+             </div>
             <h3>WhatsApp</h3>
             <p>Contáctanos directamente a nuestro número de WhatsApp para una respuesta rápida</p>
             <p>+51 927 987 259</p>
@@ -187,30 +256,18 @@ const ContactPage = () => {
             </a>
           </div>
 
-          <div className={styles.infoCard}>
-            <div className={styles.iconWrapper}>
+           <div ref={emailCardRef} className={styles.infoCard}>
+             <div className={styles.iconWrapper}>
               <FaEnvelope className={styles.icon} />
-            </div>
-            <h3>Correo Electrónico</h3>
-            <p>Escríbenos a nuestro correo electrónico para consultas y cotizaciones</p>
-            <p>info@navinatubelleza.com</p>
-            <a href="mailto:info@navinatubelleza.com">Enviar email</a>
-          </div>
-
-          <div className={styles.infoCard}>
-            <div className={styles.iconWrapper}>
-              <FaMapMarkerAlt className={styles.icon} />
-            </div>
-            <h3>Ubicación</h3>
-            <p>Visítanos en nuestra ubicación en Lima para conocer nuestros servicios</p>
-            <p>Lima, Perú</p>
-            <a href="https://goo.gl/maps/..." target="_blank" rel="noopener noreferrer">
-              Ver en mapa
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.contactForm}>
+             </div>
+             <h3>Correo Electrónico</h3>
+             <p>Escríbenos a nuestro correo electrónico para consultas y cotizaciones</p>
+             <p>info@navinatubelleza.com</p>
+             <a href="mailto:info@navinatubelleza.com">Enviar email</a>
+           </div>
+       </div>
+    
+        <div ref={contactFormRef} className={styles.contactForm}>
           <h2>Envíanos un mensaje</h2>
           {submissionStatus.message && (
             <div className={`${styles.alert} ${submissionStatus.success ? styles.success : styles.error}`}>
