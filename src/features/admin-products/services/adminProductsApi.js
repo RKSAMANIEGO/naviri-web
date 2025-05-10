@@ -5,6 +5,8 @@ export const listProducts = async (page = 1, limit = 16) => {
 		const response = await api.get("/products", {
 			params: { page, limit },
 		});
+		console.log(response);
+		
 		return response;
 	} catch (error) {
 		console.error("Ocurrio un Error al Listar el Producto" + error);
@@ -32,54 +34,53 @@ export const deleteProduct = async (nameProduct) => {
 	}
 };
 
-export const addProduct = async (form) => {
-	console.log(form);
+export const addProduct = async (formData) => {
 	try {
-		const response = await api.post("/products", form);
-		return response;
+	  const response = await api.post("/products", formData);
+	  return response;
 	} catch (error) {
-		console.error("Ocurrio un Error al Registrar el Producto" + error);
-
-		if (error.response) {
-			return {
-				success: false,
-				message: error.response.data.message || "Error desconocido",
-				status: error.response.status,
-			};
-		} else if (error.request) {
-			return {
-				success: false,
-				message: "No se recibió respuesta del servidor. Verifica tu conexión.",
-				status: 500,
-			};
-		} else {
-			return { success: false, message: error.message, status: 500 };
-		}
+	  if (error.response) {
+		console.error("422 Detalles de validación:", error.response.data);
+		return {
+		  success: false,
+		  message: error.response.data.message || "Error desconocido",
+		  errors: error.response.data.errors,    // <— propaga el objeto de errores
+		  status: error.response.status,
+		};
+	  }
+	  // resto del catch…
 	}
 };
-
-export const updateProduct = async (nameProduct, form) => {
-	console.log(form);
+  
+export const updateProduct = async (nameProduct, formData) => {
 	try {
-		const response = await api.put(`/products/${nameProduct}`, form);
-		console.log(response);
-		return response;
+		const response = await api.post(`/products/${nameProduct}`,
+			formData,
+			{
+			  headers: { 'Content-Type': 'multipart/form-data' }
+			}
+		  );
+	  return response;
 	} catch (error) {
-		console.error("Ocurrio un Error al Actualizar el Producto" + error);
-		if (error.response) {
-			return {
-				success: false,
-				message: error.response.data.message || "Error desconocido",
-				status: error.response.status,
-			};
-		} else if (error.request) {
-			return {
-				success: false,
-				message: "No se recibió respuesta del servidor. Verifica tu conexión.",
-				status: 500,
-			};
-		} else {
-			return { success: false, message: error.message, status: 500 };
-		}
+	  // Si no hay response, error.response será undefined
+	  const respData = error.response?.data;
+	  console.error("422 Detalles de validación:", respData);
+  
+	  if (error.response) {
+		return {
+		  status: error.response.status,
+		  message: respData?.message || "Error desconocido",
+		  errors: respData?.errors || {},
+		};
+	  } else if (error.request) {
+		return {
+		  status: 500,
+		  message: "No se recibió respuesta del servidor. Verifica tu conexión.",
+		  errors: {},
+		};
+	  } else {
+		return { status: 500, message: error.message, errors: {} };
+	  }
 	}
-};
+  };
+  
