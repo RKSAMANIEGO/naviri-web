@@ -9,6 +9,8 @@
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
+ justify-content: center;
+  
 }
 
 .container h1 {
@@ -42,7 +44,6 @@
 .servicecard {
   background: white;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
   width: 100%;
   height: 100%;
@@ -55,6 +56,7 @@
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 1rem;
+  justify-items: center;
 }
 
 .imgContainer img {
@@ -63,7 +65,10 @@
   object-fit: cover;
   transition: transform 0.3s ease;
 }
-
+.swiperContainer div {
+  justify-content: center;
+  text-align: center;
+}
 .servicecard:hover img {
   transform: scale(1.05);
 }
@@ -83,24 +88,31 @@
 }
 
 .servicecard ul {
-  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   padding: 0;
-  margin-bottom: 1rem;
+  margin: 0;
+  list-style: none;
+  justify-content: center;
 }
 
 .servicecard ul li {
-  padding: 0.5rem 0;
-  font-size: 0.9rem;
-  color: #444;
-  display: flex;
-  align-items: center;
+  background-color: transparent;
+  color: #B62A69;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid #B62A69;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .servicecard ul li::before {
-  content: "✓";
   color: #ff6bbc;
   margin-right: 0.5rem;
   font-weight: bold;
+  gap: 0.5rem;
 }
 
 /* Estilos de navegación del carrusel */
@@ -126,6 +138,9 @@
 @media (max-width: 768px) {
   :global(.swiper-button-prev),
   :global(.swiper-button-next) {
-      display: none !important;
+    display: none !important;
+    justify-content: center !important;
+    text-align: center !important;
+
   }
 }
