@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+
 import aceite from '../../../assets/image/aceiteARBOLDETE.jpeg'
 import { useQuery } from '@tanstack/react-query'
 import image from '../../../assets/image/imgHeader2.jpg'
 import { getBlogs } from '../services/blogsApi.js' // Updated path
 import styles from '../styles/blog.module.css'
+import ScrollReveal from "scrollreveal";
 import { 
   Calendar,
   TrendingUp,
@@ -11,12 +12,57 @@ import {
   ChevronRight
 } from 'lucide-react'
 import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation.jsx'
+import { useEffect, useRef, useState } from 'react'
 //import { useNavigate } from 'react-router-dom'
 
 const BlogPage = () => {
  // const navigate = useNavigate()
+
+  //Animación
+  const sr = useRef(null);
+  const titleRef = useRef(null);
+  const subTitleRef = useRef(null);
+  
+
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedCategory, setSelectedCategory] = useState('')
+
+  
+  //animation
+  useEffect(() => {
+        sr.current = ScrollReveal({
+            reset: false, 
+            distance: '20px',
+            duration: 1000,
+            easing: 'cubic-bezier(0.5, 0, 0, 0.3)',
+            viewFactor: 0.1, 
+        });
+
+        if (titleRef.current) {
+            sr.current.reveal(titleRef.current, {
+                origin: 'top',
+                delay: 300,
+            });
+        }
+        
+        if (subTitleRef.current) {
+            sr.current.reveal(subTitleRef.current, {
+                origin: 'right',
+                delay: 300,
+            });
+        }
+
+
+        return () =>{
+            if(sr.current){
+                sr.current.clean(titleRef.current);
+                sr.current.clean(subTitleRef.current);
+            } 
+        }
+
+    }, []);
+
+
 
   //responsive con window width
   const [windowWidth,setWindowWidth]= useState(window.innerWidth);
@@ -74,6 +120,8 @@ const BlogPage = () => {
     )
   }
 
+
+
   return (
     <div className="min-h-screen bg-[#faf5f7]">
       {/* Hero Section */}
@@ -82,10 +130,10 @@ const BlogPage = () => {
       <div className="relative h-[240px] md:h-72 " style={ {background:`url(${image})`, backgroundSize: windowWidth < 1025 ? "300%" : "cover", backgroundPosition:"top" } }>
         <div className="absolute inset-0  flex items-center justify-center px-4">
           <div className="text-center max-w-4xl">
-            <h1 className={`text-5xl md:text-7xl font-bold text-white mb-4 leading-tight ${styles.family}`}>
+            <h1 ref={titleRef} className={`text-5xl md:text-7xl font-bold text-white mb-4 leading-tight ${styles.family}`}>
             Descubre tu belleza natural
             </h1>
-            <p className="text-[12px] font-bold md:text-[14px] text-white">
+            <p ref={subTitleRef} className="text-[12px] font-bold md:text-[14px] text-white">
               Descubre nuestros artículos especializados
             </p>
           </div>

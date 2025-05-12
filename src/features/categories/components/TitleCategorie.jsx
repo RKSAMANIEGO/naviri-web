@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
-import styles from '../styles/producto.module.css'
+import { useEffect, useRef, useState } from 'react';
+import styles from '../styles/producto.module.css';
+import ScrollReveal from "scrollreveal";
+
 const TitleCategorie = () => {
-    
+
+        const sr = useRef(null);
+        const featuresRef = useRef(null);
         const [titleCat, setTitle] = useState(localStorage.getItem("nameCategorie") || "");
     
         useEffect(() => {
@@ -33,14 +37,34 @@ const TitleCategorie = () => {
             };
         }, []);
         
+
+        //Animación
+        useEffect(() => {
+            sr.current = ScrollReveal({
+                reset: false, 
+                distance: '20px',
+                duration: 800,
+                easing: 'cubic-bezier(0.5, 0, 0, 0.3)',
+                viewFactor: 0.2, 
+            });
+    
+            if (featuresRef.current) {
+                sr.current.reveal(featuresRef.current, {
+                    origin: 'bottom',
+                    delay: 300,
+                });
+            }
+            return () => (sr.current) && sr.current.clean(featuresRef.current);
+    
+        }, []);
     
     
         //const titleCat = localStorage.getItem("nameCategorie");
     return (
         <section className={styles.title}>
                 {!titleCat || titleCat.trim() === '' 
-                    ? <h3>Belleza Esencial</h3> 
-                    : <h3>{titleCat.toUpperCase()}</h3>}
+                    ? <h3 ref={featuresRef}>Belleza Esencial</h3> 
+                    : <h3 ref={featuresRef}>{titleCat.toUpperCase()}</h3>}
         </section>
     )
 }

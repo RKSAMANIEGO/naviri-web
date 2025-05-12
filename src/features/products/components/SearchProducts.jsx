@@ -1,80 +1,61 @@
-import { useState } from 'react'
-import styles from './producto.module.css' // Updated path
-
-//const SearchProducts = ({recibirTextInput,recibirValuePrecio,recibirCategories,products}) => {
-
+import { useEffect, useRef, useState } from 'react'
+import styles from './producto.module.css' 
+import ScrollReveal from "scrollreveal";
 const SearchProducts = ({recibirTextInput}) => {
+
+    //Animación
+    const sr = useRef(null);
+    const searchRef = useRef(null);
+    const btnSearchRef = useRef(null);
+
     const[searchText,setSearchText]=useState("");
-    //const[valuePrecio,setValuePrecio]=useState(0);
-    //const[valueCategorie,setValueCategorie]=useState("");
-
-    /*PRECIOS
-    const precios= products?.map(obj => obj.price);
-    const listPrecios= new Set(precios);
-    */
-
-    /*SUB CATEGORIAS
-    const categorie= products.map(obj=> obj.categories.map(subCat=>subCat.sub_categories.map(objSub=> objSub.name).join()));
-    const listCategorie= new Set(categorie.flat());
-    */
-
     const searchProducts = () =>recibirTextInput(searchText);
+
+
+    useEffect(() => {
+        sr.current = ScrollReveal({
+            reset: false, 
+            distance: '20px',
+            duration: 1000,
+            easing: 'cubic-bezier(0.5, 0, 0, 0.3)',
+            viewFactor: 0.1, 
+        });
+
+        if (searchRef.current) {
+            sr.current.reveal(searchRef.current, {
+                origin: 'left',
+                delay: 300,
+            });
+        }
+        
+        if (btnSearchRef.current) {
+            sr.current.reveal(btnSearchRef.current, {
+                origin: 'right',
+                delay: 300,
+            });
+        }
+
+
+        return () =>{
+            if(sr.current){
+                sr.current.clean(searchRef.current);
+                sr.current.clean(btnSearchRef.current);
+            } 
+        }
+
+    }, []);
+
 
     return (
     <div  className={styles.search}>
         <section className='container-search'>
-            <label>
-                <span>
+            <label   ref={btnSearchRef}>
+                <span ref={searchRef}>
                     <input type="text" placeholder='Buscar productos...' value={searchText} onChange={(e)=>setSearchText(e.target.value)} />
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </span>
                 <button onClick={searchProducts}>Buscar</button>
             </label>
-
-            {/*
-            <h4>Filtros</h4>
-
-            <div>
-                <section >
-                    <p>Categorias</p>
-                    <select value={valueCategorie} onChange={(e)=>{
-                                setValueCategorie(e.target.value);
-                                recibirCategories(e.target.value);
-                            }} style={{textTransform:"capitalize"}}>
-
-                        <option value=''>Todas las sub categorias</option>
-
-
-                        {[...listCategorie]?.map( (cat,index)=> (
-                            <option key={index} >
-                                {cat}
-                            </option>
-                        ))}
-
-                    </select>
-                </section>
-
-
-
-                <section>
-                    <p>Precios</p>
-
-                        <select value={valuePrecio} onChange={(e)=>{
-                            setValuePrecio(e.target.value)
-                            recibirValuePrecio(e.target.value)
-                        }}>
-                            <option value={''}>Todos los precios</option>
-                        { [...listPrecios].sort((a,b) => a-b).map(precio => (
-                            <option  key={precio} value={precio}>{precio}</option>
-                        ))}
-                        </select>
-
-                </section>
-
-            </div>
-              * */}
-
-
         </section>
     </div>
     )

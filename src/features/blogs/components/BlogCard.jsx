@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { Clock, ArrowRight } from 'lucide-react'
+
 // BlogCard.jsx
 const BlogCard = ({ blog }) => {
   return (
     <div className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl 
-                   transition-all duration-300 ease-out flex flex-col h-full
-                   border border-gray-100 hover:border-gray-200">
+                  transition-all duration-300 ease-out flex flex-col h-full
+                  border border-gray-100 hover:border-gray-200">
       <div className="relative aspect-video overflow-hidden">
         <a href={`/blog/${blog.id}`} className="block h-full">
           <img
@@ -21,7 +21,7 @@ const BlogCard = ({ blog }) => {
       <div className="p-6 flex flex-col flex-grow">
         <div className="mb-3">
           <span className="inline-block bg-[#E1CCF5]/30 text-[#B62A69] px-3 py-1.5 
-                         rounded-full text-xs font-medium tracking-wide">
+                        rounded-full text-xs font-medium tracking-wide">
             {blog.category.name}
           </span>
         </div>
@@ -32,7 +32,7 @@ const BlogCard = ({ blog }) => {
         </h2>
 
         <p className="text-gray-600 mb-4 line-clamp-3 text-sm leading-relaxed 
-                     flex-grow">
+                    flex-grow">
           {blog.description}
         </p>
 
@@ -40,11 +40,11 @@ const BlogCard = ({ blog }) => {
           <a
             href={`/blog/${blog.id}`}
             className="flex items-center justify-between gap-2 w-full 
-                     text-[#B62A69] hover:text-fuchsia-700 transition-colors"
+                    text-[#B62A69] hover:text-fuchsia-700 transition-colors"
           >
             <span className="font-medium text-sm">Leer artículo</span>
             <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform 
-                                 group-hover:translate-x-1" />
+                                group-hover:translate-x-1" />
           </a>
         </div>
       </div>

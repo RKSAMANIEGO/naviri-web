@@ -65,7 +65,6 @@ const SectionCategorias = () => {
         };
     }, []);
 
-
     const features = [
         { icon: <Leaf size={25} color="#ff6bbc" />, text: "Productos Naturales" },
         { icon: <Truck size={25} color="#ff6bbc" />, text: "Envío gratis" },
