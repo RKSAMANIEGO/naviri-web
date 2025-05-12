@@ -59,10 +59,13 @@ const Header = () => {
     if (location.pathname === '/') {
       localStorage.removeItem("nameCategorie");
       navigate('/products');
-    } else if(location.pathname.includes("/products/")){
+    } else if(location.pathname.includes("/products/" )){
             navigate('/products');
             toggleCart();
-        }else {
+    } else if(location.pathname.includes("/promotions")){
+            navigate('/products');
+            toggleCart();
+    }else {
       toggleCart();
     }
   };
@@ -225,7 +228,7 @@ const Header = () => {
             <button 
                   onClick={handleReserveClick}
                   className="w-full flex items-center justify-center gap-2 bg-pink-400 text-white py-2 px-4 rounded-lg
-                   hover:bg-pink-500 hover:scale-105 cursor-pointer transition-colors "
+                  hover:bg-pink-500 hover:scale-105 cursor-pointer transition-colors "
                 >
                   Reservar
                 </button>
@@ -287,7 +290,7 @@ const Header = () => {
               </NavLink>
               
               <NavLink 
-                to="/categories" 
+                to="/categories/cuidado capilar" 
                 onClick={closeMobileMenu}
                 className={({ isActive }) => `block py-2 px-4 rounded-lg ${
                   isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'

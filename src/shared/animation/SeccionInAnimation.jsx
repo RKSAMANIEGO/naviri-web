@@ -1,9 +1,9 @@
 import React from 'react'
-import {motion as Title} from 'framer-motion';
+import {motion} from 'framer-motion';
 
 const SeccionInAnimation = ({title}) => {
     return (
-    <Title.div
+    <motion.div
         initial={{ x: '100%' }} // Comienza fuera de la pantalla por la derecha
         animate={{ x: 0 }}       // Se mueve a su posición original
         exit={{ x: '100%' }}     // Sale por la derecha cuando cambia
@@ -11,7 +11,7 @@ const SeccionInAnimation = ({title}) => {
         style={{ fontSize: '32px', fontWeight: 'bold', marginTop: '20px' }}
     >
         {title}
-    </Title.div>
+    </motion.div>
     )
 }
 

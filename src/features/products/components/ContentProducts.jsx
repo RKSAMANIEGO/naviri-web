@@ -9,6 +9,9 @@ import { useCart } from '../../cart/context/CartContext';
 import SearchAside from './SearchAside/SearchAside';
 import { FilterOutlined } from '@ant-design/icons';
 import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts';
+import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation';
+import { lanzarConfetti } from '../../../shared/animation/Confetti/confetti';
+
 
 const ContentProducts = ({ categorie }) => {
     const [isOpenNavCategorie, setIsOpenNavCategorie] = useState(false);
@@ -131,6 +134,7 @@ const ContentProducts = ({ categorie }) => {
     //CART PRODUCT
     const handleAddToCart = (product) => {
         addToCart(product);
+        lanzarConfetti();
     };
 
     //CATEGORIA PARA EL NAV
@@ -157,24 +161,28 @@ const ContentProducts = ({ categorie }) => {
         <>
             <SearchProducts recibirTextInput={recibirTextSearch} />
             <div className={`${widthWindow < 875 ? 'flex flex-col' : `${styles.mainProducts}`}`}>
-
+    
                     {/*FILTER CATEGORIE CHECKBOX*/}
+        
                 {allProducts.length > 0 && <SearchAside products={allProducts} recibirValuePrecio={recibirFiltroPrecio} recibirCategories={recibirFiltroCat} />}
-
+                
                     {/*FILTER CATEGORIE CHECKBOX MOVILE */}
                 {widthWindow < 875 && <div className='flex items-center gap-2 pt-[20px] px-[20px] md:px-[80px]'>
                                         <label className='flex gap-1 w-[auto] cursor-pointer text-sm  sm:text-[16px] text-pink-500  hover:text-gray-600' onClick={() => setIsOpenNavCategorie(!isOpenNavCategorie)}>FILTRAR <FilterOutlined /> </label>
                                         {!isOpenNavCategorie ? <span className='capitalize text-pink-400 text-sm  sm:text-[16px]'>&raquo; {nameCategorie} </span> : '' } 
                                     </div> }
-
+            <section className={styles.wrapperProducts}>
+            
                 <section id="products" className={styles.contentProducts} >
-
+                    
                     {/*FILTRO DE PRODUCTOS */}
-                    {productoFiltrado.length > 0  ? productoFiltrado.map((product) => (
-
-
-                        (<section  className={`${widthWindow < 450 ? ' relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm'
-                            : 'relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[310px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md'}`} key={product.id}>
+                    {productoFiltrado.length > 0  ? 
+                    
+                    productoFiltrado.map((product) => (
+                
+                    <SeccionScrollAnimation direction='rigth'>
+                        <section  className={`${widthWindow < 450 ? ' relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm'
+                            : 'relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[330px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md'}`} key={product.id}>
 
                             <Link to={`/products/${encodeURIComponent(product.name)}`} >
                                 <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-sm sm:rounded-t-xl transition-all duration-500 ease-in-out"
@@ -221,18 +229,25 @@ const ContentProducts = ({ categorie }) => {
                                     </div>)
                                 }
                             </div>
-                        </section>)
-
+                        </section>
+                    </SeccionScrollAnimation>
 
                     ))
+                    
                     :
                     <p className='flex flex-col items-center text-gray-500 w-[80%] font-bold'><NotFoundProducts/> Producto No Encontrado</p>
+                    
                     }
-
-                    {totalPages && productoFiltrado.length > 5 && <PaginationProducts numPage={totalPages} handlerPagina={recibirPagina} nextPage={pageNext} nextPageDisabled={numPage} />}
-                    <CartSidebar />
+                
                 </section>
-
+            
+                    
+                {totalPages && productoFiltrado.length > 5 && <PaginationProducts numPage={totalPages} handlerPagina={recibirPagina} nextPage={pageNext} nextPageDisabled={numPage} />}
+            
+                <CartSidebar />
+            </section>
+        
+            
                     {/* NAV BAR CATEGORIE MOVILE*/}
                 <nav className={`fixed top-0 right-0 h-[100vh] w-[50%] sm:w-[40%] bg-pink-400 z-[100] transition-transform duration-500 transform 
                                 ${isOpenNavCategorie ? 'translate-x-0':'translate-x-full'}  flex justify-center items-center ` }>

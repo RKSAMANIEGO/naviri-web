@@ -6,7 +6,7 @@ import styles from '../producto.module.css'
 import { useCart } from '../../../cart/context/CartContext';
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
 import ProductDescription from './ProductDescription';
-
+import {lanzarConfetti} from '../../../../shared/animation/Confetti/confetti';
 const ProductDetails = () => {
 
     const [productSelection, setProductSelection]= useState(null);
@@ -28,6 +28,7 @@ const ProductDetails = () => {
     //CART PRODUCT
     const handleAddToCart = (product) => {
         addToCart(product);
+        lanzarConfetti();
     };
 
     //BTN WSP 

@@ -5,7 +5,7 @@ import { LoadingOutlined} from '@ant-design/icons';
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
 import styles from "../../styles/PromotionDetailPage.module.css";
 import { useCart } from '../../../cart/context/CartContext';
-
+import {lanzarConfetti} from '../../../../shared/animation/Confetti/confetti';
 
 const PromotionDetailPage = () => {
   const { name } = useParams();
@@ -31,10 +31,12 @@ const PromotionDetailPage = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    if (promotion) addToCart(promotion);
+    if (promotion) {
+      addToCart(promotion);
+      lanzarConfetti();
+    } 
   };
-  console.log("Lista de productos:", all);
-  console.log("ID recibido:", id);
+
 
 
   const handleWhatsapp = () => {
