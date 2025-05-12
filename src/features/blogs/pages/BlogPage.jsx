@@ -10,6 +10,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react'
+import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation.jsx'
 //import { useNavigate } from 'react-router-dom'
 
 const BlogPage = () => {
@@ -77,6 +78,7 @@ const BlogPage = () => {
     <div className="min-h-screen bg-[#faf5f7]">
       {/* Hero Section */}
       {/*<div className="relative h-64 md:h-72 bg-gradient-to-r from-[#F2B5D4] to-[#E1CCF5]">*/}
+      
       <div className="relative h-[240px] md:h-72 " style={ {background:`url(${image})`, backgroundSize: windowWidth < 1025 ? "300%" : "cover", backgroundPosition:"top" } }>
         <div className="absolute inset-0  flex items-center justify-center px-4">
           <div className="text-center max-w-4xl">
@@ -91,8 +93,11 @@ const BlogPage = () => {
       </div>
 
       {/* Contenido Principal */}
+
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* Filtros de Categoría */}
+        <SeccionScrollAnimation direction="left">
         <div className="flex flex-wrap gap-2 mb-8 md:mb-12">
           <button
             onClick={() => handleCategoryChange('')}
@@ -118,6 +123,7 @@ const BlogPage = () => {
             </button>
           ))}
         </div>
+        </SeccionScrollAnimation>
 
         {/* Listado de Artículos */}
         {blogs.length === 0 ? (
@@ -125,12 +131,15 @@ const BlogPage = () => {
             <p className="text-gray-600 text-base md:text-lg">No se encontraron artículos</p>
           </div>
         ) : (
+
+
           <div className="space-y-12">
             {blogs.map(blog => (
               <article 
                 key={blog.id}
                 className="border-b border-gray-200 pb-12 last:border-b-0"
               >
+                <SeccionScrollAnimation direction="rigth">
                 <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                   {/* Imagen del artículo */}
                   
@@ -180,12 +189,15 @@ const BlogPage = () => {
                     </a>
                   </div>
                 </div>
+                </SeccionScrollAnimation>
               </article>
             ))}
           </div>
         )}
 
         {/* Paginación */}
+
+        <SeccionScrollAnimation direction="left">
         {pagination.lastPage > 1 && (
           <div className="mt-12 flex justify-center items-center gap-1.5 sm:gap-2">
             <button
@@ -219,6 +231,7 @@ const BlogPage = () => {
             </button>
           </div>
         )}
+        </SeccionScrollAnimation>
       </div>
     </div>
   );

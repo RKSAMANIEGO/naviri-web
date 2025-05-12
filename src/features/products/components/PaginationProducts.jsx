@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './producto.module.css' // Updated path
+import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation';
 const PaginationProducts = ({numPage,handlerPagina,nextPage,nextPageDisabled}) => {
 
     const [activePage,setActivePage]=useState(1);
@@ -18,6 +19,7 @@ const PaginationProducts = ({numPage,handlerPagina,nextPage,nextPageDisabled}) =
 
     return (
         <>
+        <SeccionScrollAnimation direction='rigth'>
         <div className={styles.pagination}>
             {newPages.map((pagina,index)=> (
                 
@@ -42,7 +44,7 @@ const PaginationProducts = ({numPage,handlerPagina,nextPage,nextPageDisabled}) =
                 nextPage();
             }}>{handlerNextPage ? `Pagina ${nextPageDisabled}` : 'Siguiente' }</button>
         </div>
-    
+        </SeccionScrollAnimation>
         </>
     )
 }

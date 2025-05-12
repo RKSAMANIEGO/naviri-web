@@ -15,7 +15,7 @@ export const PromotionCards = ({ product }) => {
     <div className={styles.card}>
       <div className={styles.imageContainer} onClick={handleClick}>
         <img
-          src={product.image?.url || "/placeholder.svg"}
+          src={product.image[0].url || "/placeholder.svg"}
           alt={product.name}
           className={styles.image}
         />

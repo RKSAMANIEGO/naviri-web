@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../producto.module.css';
+import SeccionScrollAnimation from '../../../../shared/animation/SeccionScrollAnimation';
 const SearchAside = ({products,recibirValuePrecio,recibirCategories}) => {
 
     const [checkSelectionCategorie ,setCheckSelectionCategorie] = useState(null);
@@ -82,7 +83,8 @@ const SearchAside = ({products,recibirValuePrecio,recibirCategories}) => {
             recibirValuePrecio(checked ? name : "");
     }
     return (
-        <div   className={widthWindow < 875 ? `${styles.hiddenFilterAside}` :styles.wrapperSearchAside  } /* className={ styles.wrapperSearchAside}*/>   
+    <SeccionScrollAnimation direction='left'>
+    <div   className={widthWindow < 875 ? `${styles.hiddenFilterAside}` : styles.wrapperSearchAside  } /* className={ styles.wrapperSearchAside}*/>   
         <aside className={styles.wrapperFilter}>
             <h3 className={styles.titleSearchAside}>Categorias</h3>
             <ul>
@@ -101,6 +103,7 @@ const SearchAside = ({products,recibirValuePrecio,recibirCategories}) => {
             </ul>
         </aside>
     </div>
+    </SeccionScrollAnimation>
     )
 }
 

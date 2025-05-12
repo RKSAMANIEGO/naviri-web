@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Upload,Button,message,Form,Tag,Input } from 'antd';
-import { UploadOutlined, DeleteOutlined,FileAddOutlined  } from '@ant-design/icons';
+import { UploadOutlined, DeleteOutlined,FileAddOutlined, InboxOutlined  } from '@ant-design/icons';
 import ModalProducto from 'react-modal'
 import styles from '../../styles/productAdmin.module.css';
 import {getCategories} from '../../services/adminCategoriesApi'
@@ -10,16 +10,15 @@ import Swal from 'sweetalert2';
 
 const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
 
-    console.log(productPutTable);
 
 
-    //const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],image:''}) *****
-    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],image:[]}) 
 
-
+    //const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",pdf:"",subcategory_id:[""],image:''})
+    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""]})
+    const [imageFiles, setImageFiles] = useState([]);
     const [benefits, setBenefits] = useState([]);
-    //const [imageUrl, setImageUrl] = useState(null);  *****
-    const [imageUrl, setImageUrl] = useState([]);
+    const [deleteImgs, setDeleteImgs] = useState([]);
+    const [imageUrl, setImageUrl] = useState(null);
 
     const [inputValue, setInputValue] = useState('');
     const [dataCategories,setDataCategories]=useState(null)
@@ -57,10 +56,10 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 image: productPutTable?.image?.map(img => img.url) || []     
 
             })
-            //setImageUrl(productPutTable?.image.url); ********
-            setImageUrl(productPutTable?.image?.map(img => img.url) || []);  
 
-
+            setImageFiles(productPutTable?.image)
+            setImageUrl(productPutTable?.image.url);
+ 
             setBenefits(productPutTable?.benefits || []);
         }
     },[productPutTable])
@@ -78,31 +77,43 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         setInputValue(''); // Limpiar el campo de entrada
         };
 
-    const handleDeleteBenefit = (benefit) => {
-            setBenefits(benefits.filter((item) => item !== benefit));
+    const handleDeleteBenefit = (benefit) => {        
+        setBenefits(benefits.filter((item) => item !== benefit));
     };
 
     //MANEJO DE LA IMAGEN
-    const props = {
-        beforeUpload: (file, onSuccess) => {
-            const isImage = file.type.startsWith('image/');
-            if (!isImage) {
-                message.error('Solo se pueden cargar imágenes!');
-                return false;
-            } else {
-                const reader = new FileReader();
 
-                reader.onloadend = () => {
-                    const base64Image = reader.result;
-                    //setImageUrl(base64Image);  ********
-                    setImageUrl((prev) => [...prev, base64Image]);
-                };
-
-                reader.readAsDataURL(file);
-            }
-            onSuccess();
-            return false;
+    const uploadProps = {
+        beforeUpload: (file) => {
+        const isImage = file.type.startsWith('image/');
+        if (!isImage) {
+            message.error('Solo se permiten imágenes (JPG, PNG, WEBP)!');
+        }
+        return isImage ? false : Upload.LIST_IGNORE;
         },
+        onChange: ({ file,fileList: newFileList }) => {
+
+            if (file.status === 'removed') {
+                if (file.id) {
+                    message.info(`Se eliminó la imagen: ${file.id}`);
+                    setDeleteImgs(prev => [...prev, file.id]);
+                }
+            }
+
+            newFileList = newFileList.map(file => {
+            if (file.originFileObj && !file.preview) {
+                file.preview = URL.createObjectURL(file.originFileObj);
+            }
+            return file;
+            });
+            setImageFiles(newFileList);
+        },
+        
+        imageFiles,
+        listType: "picture-card",
+        maxCount: 6,
+        accept: "image/jpeg,image/png,image/webp",
+        multiple: true,
     };
 
     //OBTENER LOS DATOS DEL FORM
@@ -110,6 +121,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         const {name,value}=e.target;
 
         if(name==="subcategory_id"){
+            // console.log(value);
+            
             setDataForm((prevData)=>({
                 ...prevData,
                 [name]:[Number(value)]
@@ -126,12 +139,13 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     //ENVIAR FORMULARIO DE AGREGAR
     const handlerAddProduct = async (e) => {
         e.preventDefault();
-
+        
         if (!dataForm.name) { message.error("Ingrese el Nombre del Producto"); return; }
+        if (!dataForm.subcategory_id[0]) { message.error("Ingrese Una Categoria"); return; }
         if (!dataForm.price) { message.error("Ingrese el Precio del Producto"); return; }
         if (!dataForm.stock) {message.error("Ingrese el Stock del Producto"); return;}
-        if (!dataForm.discount) {message.error("Ingrese el % de  Descuento del Producto"); return;}
         if (!dataForm.compatibility) {message.error("Ingrese la Descripcion del Producto"); return;}
+/*
 
         //if (!imageUrl) { message.error('Debes cargar una imagen');return;} *******
         if (imageUrl.length === 0) { message.error('Debes cargar al menos una imagen'); return; }
@@ -146,14 +160,42 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
             image: imageUrl.map(img => ({ url: img }))
             
         };
+*/
+        if (benefits.length === 0) { message.error('Agrega al menos un beneficio'); return; }
+        if (imageFiles.length   === 0) { message.error('Carga al menos una imagen'); return; }
+
+        const formData = new FormData();
+        
+        formData.append('name', dataForm.name);
+        formData.append('characteristics', dataForm.compatibility);
+        formData.append('price', dataForm.price);
+        formData.append('stock', dataForm.stock);
+        formData.append('discount', dataForm.discount);
+        formData.append('compatibility', dataForm.compatibility);
+
+        // formData.append('subcategory_id', 1);
+        formData.append('subcategory_id', dataForm.subcategory_id[0]);
+        deleteImgs && deleteImgs.forEach(i => formData.append('delete_images[]', i));
 
 
-        if (updatedDataForm.characteristics !== '') {
+        benefits.forEach(b => formData.append('benefits[]', b));
 
+        // Agregar imágenes
+        imageFiles.forEach(file => {
+            if (file.originFileObj) formData.append('images[]', file.originFileObj);
+        });
+
+
+            let response;
             if(titleModal==="updateProduct"){
                 const nameProd= localStorage.getItem("nameProduct");
-                const response = await updateProduct(nameProd, updatedDataForm);
-                console.log(updatedDataForm);
+
+                formData.append('_method', 'PUT');
+
+                const response = await updateProduct(nameProd, formData);
+                console.log(formData.name);
+                console.log(dataForm.name);
+                console.log(dataForm.price);
 
                 if(response.status===422){
                     Swal.fire({
@@ -184,7 +226,9 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 }
 
             }else{
-                const response = await addProduct(updatedDataForm);
+                console.log(formData);
+                
+                response = await addProduct(formData);
 
                 if (response.status!==200) {
                 Swal.fire({
@@ -207,14 +251,12 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 onClose();
                 }
             }
-        } else {
-            message.error('Debes completar las características del producto');
-        }
+    
     };
     //LIMPIAR CAMPOS DEL FORM
     const clearForm=()=>{
-        //setImageUrl(null); ******
-        setImageUrl([]); 
+
+        setImageFiles([]);
         setBenefits([]);
         setDataForm({
             name:'',
@@ -268,7 +310,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
             <p style={{fontSize:"12px"}}>{descripcion}</p>
 
-            <form className={styles.form}>
+            <form className={styles.form} >
                 <section className={styles.sectionFirts}>
                     <label>Producto
                         <input type='text'
@@ -338,11 +380,28 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
                     <label >Beneficios
                         <div style={{display:"flex", gap:"5px"}}>
-                        <Input style={{ width: '90%' , border: "1px solid rgb(173, 170, 170)"}} value={inputValue} onChange={(e) => setInputValue(e.target.value)} onPressEnter={handleAddBenefit} placeholder="Agregar beneficio"/>
+                        <Input
+                            value={inputValue}
+                            onChange={e => setInputValue(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                e.preventDefault();    // evita el submit
+                                handleAddBenefit();
+                                }
+                            }}
+                            placeholder="Agregar beneficio"
+                        />
+
                         <Button icon={<FileAddOutlined/>} type="primary" onClick={handleAddBenefit} style={{ width: '10%'}} />
                         </div>
                     </label>
 
+                    <div style={{height: "20px" , width:"100%", display:"flex" , flexWrap:"wrap"}}>
+                        {benefits.map((benefit, index) => (
+                        <Tag key={index} closable onClose={() => handleDeleteBenefit(benefit)} style={{ margin: '5px'}}>
+                                            {benefit}
+                        </Tag> ))}
+                    </div>
 
                 </section>
 
@@ -392,68 +451,27 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
             
                 {/*
                 <section className={styles.sectionLast}>
-                    <label>Imagen del Producto 
-                    {imageUrl ?
-                        <div>
-                            <div styles={{background:"red"}}>
-                                <Upload {...props} showUploadList={false} customStyles={{padding:"0",margin:"0",boxSizing:"border-box", border:"none"}} />
-                                <DeleteOutlined className={styles.deleteImage} onClick={()=> setImageUrl(null)}/>
-                            </div>
-                        
-                            {imageUrl && (
-                                <div style={{
-                                    width: '100%',
-                                    backgroundImage: `url(${imageUrl})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center 70%',  }}>
-                                </div>)}
-                        
-
-                        </div>
-                        :
-                        <div style={{
-                            overflow:"hidden",
-                            border: "1px solid rgb(173, 170, 170)",
-                            borderRadius: "5px",
-                            fontSize: "10px",
-                            padding: "10px",
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent:"space-around",
-                            cursor: "pointer",
-                            height: "78%",
-                            backgroundImage: `url(${imageUrl})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',}}>
-
-                            <i className="fa-solid fa-cloud-arrow-down"></i>
-                            <p>Arrastra una imagen o haz clic para seleccionar</p>
-
-                            <Upload {...props}>
-                                <Button icon={<UploadOutlined />} style={{height:"120px", border:"1px dashed black"}}>Cargar imagen</Button>
-                            </Upload>
-
-                        </div>
-                    }
-                    </label>
-
-                    <div className={styles.wrapperBtnProducts}>
-                            <button onClick={handlerAddProduct}>{title}</button>
-                    </div>
-
-                </section>     
-              */}     
                 
+
+                    <Upload.Dragger {...uploadProps} fileList={imageFiles} height={120} >
+                        <div className="text-center">
+                            <UploadOutlined className="text-2xl mb-2" />
+                            <p className="text-sm">Arrastra tu imagen aquí o haz clic para seleccionar</p>
+                        </div>
+                    </Upload.Dragger>
+                
+
+                    <div className={styles.footerButtonWrapper}> 
+                        <button
+                            className='bg-pink-500 h-10 text-sm text-white px-4 rounded hover:bg-pink-600 cursor-pointer'
+                            onClick={handlerAddProduct}
+                        >
+                            {title}
+                        </button>
+                    </div>                
+                </section>
+
             </form>
-
-            <div style={{width:"100%", display:"flex" , flexWrap:"wrap",borderRight:"1px solid  rgba(213, 213, 213, 1)",borderLeft:"1px solid  rgba(213, 213, 213, 1)",borderBottom:"1px solid  rgba(213, 213, 213, 1)",borderBottomLeftRadius:"5px",borderBottomRightRadius:"5px" }}>
-                {benefits.map((benefit, index) => (
-                <Tag key={index} closable onClose={() => handleDeleteBenefit(benefit)} style={{ margin: '5px'}}>
-                                    {benefit}
-                </Tag> ))}
-            </div>
-
             <label onClick={()=>{
                 onClose();
                 setImageUrl("")
