@@ -406,50 +406,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 </section>
 
                 
-        
-                <section className=''>
-                <label className='flex flex-col  w-[310px]  h-[auto] items-center gap-2 border-[1px] border-gray-300 rounded-sm py-3'>Imágenes del Producto
-                    <Upload {...props} showUploadList={false}>
-                        <Button icon={<UploadOutlined />} style={{display:"flex", justifyContent:"center",  marginBottom: '10px' }}>
-                        Cargar imagen
-                        </Button>
-                    </Upload>
-
-                    {imageUrl.length > 0 && (
-                    
-                    <div style={{ display: 'flex', justifyContent:"center", gap:"10px", flexWrap: 'wrap' }}>
-                        {imageUrl.map((img, index) => (
-                            <div key={index} style={{display:"flex",  position: 'relative', gap:"3px"}}>
-                                <img
-                                    src={img}
-                                    alt={`img-${index}`}
-                                    style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '5px' }}
-                                />
-                                <DeleteOutlined
-                                onClick={() => {setImageUrl(prev => prev.filter((_, i) => i !== index));}}
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    right: 0,
-                                    backgroundColor: 'white',
-                                    borderRadius: '50%',
-                                    padding: '2px',
-                                    cursor: 'pointer',
-                                    color: 'red'
-                                }}
-                            />
-                            </div>
-                            ))}
-                    </div>
-                    )}
-                </label>
-                
-                <div className='flex justify-end mt-2'>
-                        <button  className='bg-pink-600 font-bold text-white w-[50%] text-center py-2 rounded-sm cursor-pointer hover:bg-pink-500' onClick={handlerAddProduct}>{title}</button>
-                </div>
-                </section>    
-            
-                {/*
                 <section className={styles.sectionLast}>
                 
 
