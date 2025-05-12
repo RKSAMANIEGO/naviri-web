@@ -22,6 +22,10 @@
     background: url("../../../assets/image/imgHeader2.jpg");
     background-size: cover;
     background-position: top;
+    height: 268px;
+    background: url("../../../assets/image/imgHeader2.jpg");
+    background-size: cover;
+    background-position: top;
     color: white;
     text-align: center;
     display: flex;
@@ -29,6 +33,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+    animation: square-in-top-left 2s ease-in-out;
     animation: square-in-top-left 2s ease-in-out;
 }
 
@@ -52,6 +57,7 @@
 
 .headerQuestions h1 {
     font-size: 5rem;
+    font-size: 5rem;
     font-weight: 800;
     color: white;
     text-shadow: -1px -1px 0 rgb(225, 166, 212);
@@ -65,6 +71,7 @@
     font-weight: 600;
     font-style: normal;
     line-height: 3rem;
+
 }
 
 .headerQuestions p {
@@ -205,11 +212,15 @@
     align-items: center;
     justify-content: center;
     color: #ea53b8;
+    color: #ea53b8;
     padding-block: 20px;
+    font-size: 0.8rem;
     font-size: 0.8rem;
 }
 
 .iconCategorie {
+
+    font-size: 2rem;
 
     font-size: 2rem;
     rotate: 270deg;

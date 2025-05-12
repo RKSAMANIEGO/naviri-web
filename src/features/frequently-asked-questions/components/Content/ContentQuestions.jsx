@@ -55,7 +55,7 @@ const categorie=[
 ]
 
 const ContentQuestions = () => {
-
+    const [activeKey, setActiveKey] = useState(null);
     const [catFilter,setCatFilter]=useState(null);
     const [dataQuestions ,setDataQuestions]=useState(null);
     const [widthWindow,setWidthWindow]=useState({width:window.innerWidth,height:window.innerHeight});
@@ -72,6 +72,10 @@ const ContentQuestions = () => {
         return ()=> window.removeEventListener("resize",handlerWidthPage)
 
     },[])
+
+    const handlePanelChange = (keys) => {
+        setActiveKey(keys.length > 0 ? keys[0] : null); 
+    };
 
 
     //ESTILOS DEL COMPONENTE COLLAPSE PARA PC
@@ -113,29 +117,39 @@ const ContentQuestions = () => {
         }
     }
     return (
-    <div className={styles.container}>
+        <div className={styles.container}>
         <HeaderFrequentlyAskedQuestions setTextSearch={getTextSearch}/>
-            <label className={styles.wrapperIcon}> <DoubleLeftOutlined className={styles.iconCategorie}/>Resolvemos tus dudas aquí.</label>
-            <div className={styles.questionFilter}>
-                    {widthWindow.width < 500 ?
-                        <CustomCollapseMovil className={styles.collapse} defaultActiveKey={categorie.map(obj=>obj.id.toString())}>
-                                    {categorie.map(obj => (
-                                        <Collapse.Panel key={obj.id} header={obj.question}>
-                                            <p className={styles.answers}>{obj.answer}</p>
-                                        </Collapse.Panel>
-                                    ))}
-                        </CustomCollapseMovil>
-                    :
-                        <CustomCollapse className={styles.collapse}  defaultActiveKey={categorie.map(obj=>obj.id.toString())}>
-                                    {categorie.map(obj => (
-                                        <Collapse.Panel key={obj.id} header={obj.question}>
-                                            <p className={styles.answers}>{obj.answer}</p>
-                                        </Collapse.Panel>
-                                    ))}
-                        </CustomCollapse>
-                    }
-            </div>
-    </div>
+        <label className={styles.wrapperIcon}> <DoubleLeftOutlined className={styles.iconCategorie}/>Resolvemos tus dudas aquí.</label>
+        <div className={styles.questionFilter}>
+          {widthWindow.width < 500 ?
+            <CustomCollapseMovil
+              className={styles.collapse}
+              activeKey={activeKey ? [activeKey] : []} 
+              onChange={handlePanelChange} 
+              accordion 
+            >
+              {categorie.map(obj => (
+                <Collapse.Panel key={obj.id} header={obj.question}>
+                  <p className={styles.answers}>{obj.answer}</p>
+                </Collapse.Panel>
+              ))}
+            </CustomCollapseMovil>
+            :
+            <CustomCollapse
+              className={styles.collapse}
+              activeKey={activeKey ? [activeKey] : []} 
+              onChange={handlePanelChange}
+              accordion
+            >
+              {categorie.map(obj => (
+                <Collapse.Panel key={obj.id} header={obj.question}>
+                  <p className={styles.answers}>{obj.answer}</p>
+                </Collapse.Panel>
+              ))}
+            </CustomCollapse>
+          }
+        </div>
+      </div>
     )
 }
 

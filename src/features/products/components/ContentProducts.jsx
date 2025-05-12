@@ -8,6 +8,7 @@ import CartSidebar from '../../cart/components/CartSidebar'; // Updated path to 
 import { useCart } from '../../cart/context/CartContext';
 import SearchAside from './SearchAside/SearchAside';
 import { FilterOutlined } from '@ant-design/icons';
+
 import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts';
 import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation';
 import { lanzarConfetti } from '../../../shared/animation/Confetti/confetti';
