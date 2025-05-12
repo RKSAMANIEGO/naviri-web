@@ -49,7 +49,7 @@ const CartSidebar = () => {
               {cartItems.map(item => (
                 <div key={item.id} className={styles.cartItem}>
                   <div className={styles.productImage} style={{
-                    backgroundImage: `url(${item.image?.url})`
+                    backgroundImage: `url(${item.image[0].url})`
                   }}></div>
                   <div className={styles.productInfo}>
                     <h3>{item.name}</h3>
