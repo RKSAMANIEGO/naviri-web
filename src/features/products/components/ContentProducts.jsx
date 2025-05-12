@@ -9,7 +9,7 @@ import { useCart } from '../../cart/context/CartContext';
 import SearchAside from './SearchAside/SearchAside';
 import { FilterOutlined } from '@ant-design/icons';
 
-import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts';
+import NotFoundProducts from '../../../shared/animation/iconAnimation/NotFoundProducts';
 import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation';
 import { lanzarConfetti } from '../../../shared/animation/Confetti/confetti';
 

@@ -140,7 +140,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         if (imageFiles.length   === 0) { message.error('Carga al menos una imagen'); return; }
         if (!dataForm.discount) {
                 
-            message.error("Ingrese el Stock del Producto"); return;
+            message.error("Ingrese el descuento del Producto"); return;
         }
 
         const formData = new FormData();
