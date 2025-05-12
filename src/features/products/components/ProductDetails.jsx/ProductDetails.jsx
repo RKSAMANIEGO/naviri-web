@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { productByName } from '../../services/productsApi';
 import { EllipsisOutlined, LeftOutlined, LoadingOutlined, RightOutlined, ScissorOutlined, ShoppingCartOutlined } from '@ant-design/icons';
