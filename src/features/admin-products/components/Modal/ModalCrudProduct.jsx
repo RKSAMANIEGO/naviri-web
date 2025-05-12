@@ -86,7 +86,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
             if (file.status === 'removed') {
                 if (file.id) {
-                    message.info(`Se eliminó la imagen: ${file.id}`);
+                    // message.info(`Se eliminó la imagen: ${file.id}`);
                     setDeleteImgs(prev => [...prev, file.id]);
                 }
             }
