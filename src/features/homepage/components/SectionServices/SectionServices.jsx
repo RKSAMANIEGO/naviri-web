@@ -74,7 +74,7 @@ const SectionServices = () => {
                 spaceBetween={30}
                 slidesPerView={1}
                 pagination={{ clickable: true }}
-                autoplay={{ delay: 3000 }}
+                /*autoplay={{ delay: 10000}}*/
                 breakpoints={{
                     640: {
                         slidesPerView: 2,
