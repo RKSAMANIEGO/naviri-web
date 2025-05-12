@@ -82,5 +82,6 @@ export const updateProduct = async (nameProduct, formData) => {
 		return { status: 500, message: error.message, errors: {} };
 	  }
 	}
+
   };
-  
+

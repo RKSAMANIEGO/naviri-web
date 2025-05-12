@@ -59,6 +59,7 @@ const Header = () => {
     if (location.pathname === '/') {
       localStorage.removeItem("nameCategorie");
       navigate('/products');
+
     } else if(location.pathname.includes("/products/" )){
             navigate('/products');
             toggleCart();
@@ -228,7 +229,9 @@ const Header = () => {
             <button 
                   onClick={handleReserveClick}
                   className="w-full flex items-center justify-center gap-2 bg-pink-400 text-white py-2 px-4 rounded-lg
+
                   hover:bg-pink-500 hover:scale-105 cursor-pointer transition-colors "
+
                 >
                   Reservar
                 </button>
@@ -290,6 +293,7 @@ const Header = () => {
               </NavLink>
               
               <NavLink 
+
                 to="/categories/cuidado capilar" 
                 onClick={closeMobileMenu}
                 className={({ isActive }) => `block py-2 px-4 rounded-lg ${

@@ -33,10 +33,20 @@ const ProductDetails = () => {
 
     //BTN WSP 
     const handleWhatsappCheckout = (product) => {
-        const message = `¡Hola! Me interesa comprar el producto ${product.name} por ${product.price}. ¿Podría darme más información?`;
+        const price = Number(product.price) || 0;
+        const discount = Number(product.discount) || 0;
+      
+        const discountedPrice = (price * (1 - discount / 100)).toFixed(2);
+        const finalPrice = discount > 0 ? discountedPrice : price.toFixed(2);
+      
+        const message = discount > 0
+          ? `¡Hola! Me interesa comprar el producto ${product.name}.S/ ${finalPrice} (antes: S/ ${price.toFixed(2)}). ¿Podría darme más información?`
+          : `¡Hola! Me interesa comprar el producto ${product.name} por S/ ${finalPrice}. ¿Podría darme más información?`;
+      
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/+51927987259?text=${encodedMessage}`, '_blank');
-    };
+      };
+      
 
     return (
         <> 
