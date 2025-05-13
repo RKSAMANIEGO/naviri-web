@@ -42,6 +42,13 @@ const PaginationProducts = ({numPage,handlerPagina,nextPage,nextPageDisabled}) =
                 setNextActive(true);
                 setHandlerNextPage(true);
                 nextPage();
+
+                setTimeout(()=>{
+                    const element = document.getElementById("products");
+                    element && element.scrollIntoView({behavior:"smooth"});
+                },800)
+                
+
             }}>{handlerNextPage ? `Pagina ${nextPageDisabled}` : 'Siguiente' }</button>
         </div>
         </SeccionScrollAnimation>
