@@ -594,8 +594,6 @@
 
 }
 
-
-
 .addToCartBtn,
 .buyBtn {
 	display: flex;
@@ -613,7 +611,6 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .addToCartBtn {
 	background-color: #FF6BBC;
 	color: #ffffff;
@@ -627,7 +624,7 @@
 }
 
 .buyBtn {
-	background-color: #25D366;
+	background-color: #86A997;
 	color: white;
 	font-weight: 600;
 	gap: 8px;
