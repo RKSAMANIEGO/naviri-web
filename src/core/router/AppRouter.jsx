@@ -44,7 +44,11 @@ import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 import ContactPage from '../../features/contacts/pages/ContactPage.jsx';
 
 import ProductDetails from '../../features/products/components/ProductDetails.jsx/ProductDetails.jsx';
+
 import ShipmentPage from '../../features/shipment/Pages/ShipmentPage.jsx';
+
+import ServiceDetailPage from '../../features/services-page/pages/ServiceDetailPage.jsx';
+
 
 
 
@@ -89,6 +93,7 @@ const Router = () => {
             <Route path="/contacts" element={<ContactPage />} />
             <Route path="/promotions" element={<PromocionesProductos/> } />
             <Route path="/products/:name" element={<PromotionDetailPage />} />
+            <Route path="/services/:serviceId" element={<ServiceDetailPage />} />
 
             <Route path="/envios" element={<ShipmentPage />} />
             <Route path="*" element={<Navigate to="/" />} />
