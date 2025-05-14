@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaWhatsapp, FaInstagram, FaTiktok} from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaTiktok, FaFacebookF} from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 import { useCart } from '../../../features/cart/context/CartContext';
 import './SocialButtons.css';
@@ -12,8 +12,8 @@ const SocialButtons = () => {
   const { isCartOpen } = useCart(); 
   
 
-  const hiddenRoutes = ['/admin/panel', '/checkout', 'login'];
-  const shouldHideButtons = hiddenRoutes.some(path => location.pathname.includes(path)) || isCartOpen;;
+  const hiddenRoutes = ['/admin/panel', '/checkout', 'login', ];
+  const shouldHideButtons = hiddenRoutes.some(path => location.pathname.includes(path)) || isCartOpen;
   if (shouldHideButtons) {
     return null;
   }
@@ -30,11 +30,24 @@ const SocialButtons = () => {
     window.open('https://www.tiktok.com/@natubellezanavi26', '_blank');
   };
 
+  const handleFacebookClick = () => {
+    window.open('https://www.facebook.com/share/1J3jvCRaNW/?mibextid=wwXIfr', '_blank');
+  };
+
+
 
 
   return (
    <>
      <div className="left-social-buttons">
+
+         <button 
+            className="social-button facebook-button"
+            onClick={handleFacebookClick}
+            aria-label="Visitar TikTok"
+          >
+          <FaFacebookF />
+         </button>
          <button 
             className="social-button instagram-button"
             onClick={handleInstagramClick}

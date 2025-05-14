@@ -3,15 +3,9 @@ import { FaShoppingCart, FaSearch, FaChevronDown, FaBars, FaTimes, FaWhatsapp } 
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../../assets/image/logo-navi.png';
 import { useCart } from '../../../features/cart/context/CartContext';
-import imageProduct1 from "../../../assets/image/cosmetologia.png";
-import imageProduct2 from "../../../assets/image/cosmetologia2.jpg";
 import imageCategory1 from "../../../assets/image/categoria1.jpg";
 import imageCategory2 from "../../../assets/image/categoria2.jpg";
 
-const productMenuItems = [
-  { id: 'new', title: 'Nuevos Productos', description: 'Descubre nuestras últimas novedades en productos de belleza', to: '/new-products' },
-  { id: 'promotions', title: 'Promociones', description: 'Aprovecha las Promociones que tenemos para ti', to: '/promotions' },
-];
 
 const categoryMenuItems = [
   { id: 'accessories', title: 'Accesorios',to: '/categories/accesorios' },
@@ -82,12 +76,13 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
+          <Link to="/" className="flex-shrink-0 flex items-center">
             <img className="h-12 w-auto" src={logo} alt="Navi Cosméticos" />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-8">
+          <nav className="hidden lg:flex items-center space-x-6">
+            <div className="flex items-center space-x-6">
             <NavLink 
               to="/" 
               className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
@@ -97,43 +92,40 @@ const Header = () => {
               Inicio
             </NavLink>
 
-            <div className="relative group">
-              <NavLink
-                to="/products"
-                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                  isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-                }`}
-              >
-                Productos <FaChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
-              </NavLink>
+            <NavLink 
+              to="/new-products" 
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
+                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+              }`}
+            >
+              Lo Nuevo
+            </NavLink>
 
-              <div className="absolute top-full left-0 w-screen max-w-xl bg-white shadow-lg rounded-lg p-6 hidden group-hover:grid transition-all duration-300 origin-top">
-                <div className="col-span-2 grid grid-cols-3 gap-6">
-                  <div className="col-span-2 grid grid-cols-1">
-                    {productMenuItems.map((item) => (
-                      <Link
-                        key={item.id}
-                        to={item.to}
-                        className="p-4 rounded-lg hover:bg-gray-200 transition-colors"
-                      >
-                        <h4 className="font-medium text-gray-900">{item.title}</h4>
-                        <p className="text-sm text-gray-600 mt-1">{item.description}</p>
-                      </Link>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-1 gap-4">
-                    <img src={imageProduct1} alt="Categoría" className="rounded-lg h-40 object-cover w-full" />
-                    <img src={imageProduct2} alt="Categoría" className="rounded-lg h-40 object-cover w-full" />
-                  </div>
-                </div>
-              </div>
+            <NavLink 
+              to="/promotions" 
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
+                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+              }`}
+            >
+              Ofertas
+            </NavLink>
+
+            <div className="relative group">
+              <NavLink 
+              to="/products" 
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
+                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+              }`}
+            >
+              Productos
+            </NavLink>
             
              {/* Puente invisible */}
               <div className="absolute top-full -inset-x-20 h-4 bg-transparent pointer-events-none"></div>
           </div>
 
 {/* Categorías Dropdown */}
-<div className="relative group">
+<div className="relative group h-full flex items-center">
   <NavLink
     to="/categories"
     className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
@@ -161,6 +153,7 @@ const Header = () => {
         <img src={imageCategory2} alt="Categoría" className="rounded-lg h-48 object-cover w-full" />
       </div>
     </div>
+  </div>
   </div>
   
   {/* Puente invisible */}
@@ -263,6 +256,7 @@ const Header = () => {
           </div>
         </div>
 
+
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden fixed inset-0 bg-white z-50 pt-16 overflow-y-auto">
@@ -297,6 +291,26 @@ const Header = () => {
                 }`}
               >
                 Inicio
+              </NavLink>
+
+              <NavLink 
+                to="/new-products" 
+                onClick={closeMobileMenu}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
+                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                Lo nuevo
+              </NavLink>
+
+              <NavLink 
+                to="/promotions" 
+                onClick={closeMobileMenu}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
+                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                Promociones
               </NavLink>
               
               <NavLink 
