@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapPin, Phone, Mail, Clock, Instagram } from "lucide-react";
-import { FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import styles from "./Footer.module.css";
 import logo from '../../../assets/image/logo-navi.png';
 import { getContact } from "../../../core/services/contactService";
@@ -12,7 +12,8 @@ const Footer = () => {
     instagram: "https://www.instagram.com/navi_natubelleza",
     tiktok: "https://www.tiktok.com/@natubellezanavi26",
     whatsapp: "https://wa.me/+51927987259",
-    whatsappMessage: "¡Hola! Me gustaría conocer más sobre los productos de Navi Natubelleza."
+    whatsappMessage: "¡Hola! Me gustaría conocer más sobre los productos de Navi Natubelleza.",
+    facebook: "https://www.facebook.com/share/1J3jvCRaNW/?mibextid=wwXIfr",
   };
 
   useEffect(() => {
@@ -47,11 +48,10 @@ const Footer = () => {
         <div className={styles.sectionfooter}>
           <h3>Productos</h3>
           <ul>
-            <li><a href="#">Cuidado Facial</a></li>
-            <li><a href="#">Maquillaje</a></li>
-            <li><a href="#">Cuidado Capilar</a></li>
-            <li><a href="#">Fragancias</a></li>
-            <li><a href="#">Accesorios</a></li>
+            <li><a href="/categories/cuidado capilar">Cuidado Capilar</a></li>
+            <li><a href="/categories/cosmeticos">Maquillaje</a></li>
+            <li><a href="/categories/Exfoliante Corporal">Cuidado Corporal</a></li>
+            <li><a href="/categories/accesorios">Accesorios</a></li>
             <Link to="PreguntasFrecuentes"><li> <li><a href="/PreguntasFrecuentes">Preguntas Frecuentes</a></li></li> </Link>
           </ul>
         </div>
@@ -59,10 +59,9 @@ const Footer = () => {
         <div className={styles.sectionfooter}>
           <h3>Categorías</h3>
           <ul>
-            <li><a href="#">Novedades</a></li>
-            <li><a href="#">Más vendidos</a></li>
-            <li><a href="#">Ofertas</a></li>
-            <li><a href="#">Productos Naturales</a></li>
+            <li><a href="/new-products">Novedades</a></li>
+            <li><a href="/promotions">Ofertas</a></li>
+            <li><a href="/products">Productos Naturales</a></li>
             <li><a href="/policy">Políticas</a></li>
             <li><a href="/blog">Blogs</a></li>
           </ul>
@@ -121,6 +120,17 @@ const Footer = () => {
               data-tooltip="Contáctanos por WhatsApp"
             >
               <FaWhatsapp size={20} />
+            </a>
+
+            <a
+              href={`${socialLinks.facebook}?text=${encodeURIComponent}`}
+              className={styles.socialIcon}
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-tooltip="Contáctanos por WhatsApp"
+            >
+              <FaFacebookF size={20} />
             </a>
             
           </div>

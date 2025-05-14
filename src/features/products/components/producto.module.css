@@ -631,7 +631,7 @@
 }
 
 .buyBtn:hover {
-	background-color: #128C7E;
+	background-color: #66947c;
 	transform: translateY(-2px);
 	box-shadow: 0 4px 8px rgba(18, 140, 126, 0.3);
 }
