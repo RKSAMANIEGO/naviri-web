@@ -44,6 +44,7 @@ import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 import ContactPage from '../../features/contacts/pages/ContactPage.jsx';
 
 import ProductDetails from '../../features/products/components/ProductDetails.jsx/ProductDetails.jsx';
+import ShipmentPage from '../../features/shipment/Pages/ShipmentPage.jsx';
 
 
 
@@ -89,6 +90,7 @@ const Router = () => {
             <Route path="/promotions" element={<PromocionesProductos/> } />
             <Route path="/products/:name" element={<PromotionDetailPage />} />
 
+            <Route path="/envios" element={<ShipmentPage />} />
             <Route path="*" element={<Navigate to="/" />} />
         
           </Route>
