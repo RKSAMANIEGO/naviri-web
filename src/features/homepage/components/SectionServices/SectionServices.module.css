@@ -117,6 +117,7 @@
   gap: 0.5rem;
 }
 
+
 /* Estilos de navegación del carrusel */
 :global(.swiper-button-prev),
 :global(.swiper-button-next) {
