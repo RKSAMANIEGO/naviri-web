@@ -14,12 +14,17 @@ const productMenuItems = [
 ];
 
 const categoryMenuItems = [
-  { id: 'accessories', title: 'Accesorios', description: 'Encuentra productos esenciales para limpiar y proteger tu piel', to: '/categories/accesorios' },
-  { id: 'oils', title: 'Aceite', description: 'Aceites naturales para nutrir, revitalizar tu piel y cabello', to: '/categories/aceites' },
-  { id: 'cosmetics', title: 'Cosméticos', description: 'Brochas, esponjas, neceseres y más para tu rutina', to: '/categories/cosmeticos' },
-  { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
-  { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
-  { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/sales minerales' },
+  { id: 'accessories', title: 'Accesorios',to: '/categories/accesorios' },
+  { id: 'oils', title: 'Aceites',  to: '/categories/aceites' },
+  { id: 'cosmetics', title: 'Cosméticos', to: '/categories/cosmeticos' },
+  { id: 'hair', title: 'Cuidado capilar', to: '/categories/cuidado capilar' },
+  { id: 'body', title: 'Cuidado corporal', to: '/categories/Exfoliante Corporal' },
+  { id: 'salts', title: 'Sales minerales', to: '/categories/sales minerales' },
+
+  { id: 'soaps', title: 'Jabones', to: '/categories/jabones' },
+  { id: 'hydrolates', title: 'Hidrolatos', to: '/categories/hidrolatos' },
+  { id: 'perfumes', title: 'Perfumes', to: '/categories/perfumes' },
+  { id: 'combs', title: 'Peines', to: '/categories/peines' },
 ];
 
 const Header = () => {
@@ -59,7 +64,8 @@ const Header = () => {
     if (location.pathname === '/') {
       localStorage.removeItem("nameCategorie");
       navigate('/products');
-    } else if(location.pathname.includes("/products/" )){
+    }
+    else if(location.pathname.includes("/products/" )){
             navigate('/products');
             toggleCart();
     } else if(location.pathname.includes("/promotions")){
@@ -139,15 +145,14 @@ const Header = () => {
 
   <div className="absolute top-full left-0 w-screen max-w-2xl bg-white shadow-lg rounded-lg p-6 hidden group-hover:grid transition-all duration-300 origin-top">
     <div className="col-span-2 grid grid-cols-3 gap-6">
-      <div className="col-span-2 grid grid-cols-2 gap-4">
+      <div className="h-[100%] col-span-2 grid grid-cols-2  gap-4">
         {categoryMenuItems.map((item) => (
           <Link
             key={item.id}
             to={item.to}
-            className="p-4 rounded-lg hover:bg-gray-200 transition-colors"
+            className="flex justify-center items-center  rounded-lg hover:bg-pink-400 hover:text-white transition-colors"
           >
-            <h4 className="font-medium text-gray-900">{item.title}</h4>
-            <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+            <h4 className="font-medium">{item.title}</h4>
           </Link>
         ))}
       </div>
@@ -228,7 +233,9 @@ const Header = () => {
             <button 
                   onClick={handleReserveClick}
                   className="w-full flex items-center justify-center gap-2 bg-pink-400 text-white py-2 px-4 rounded-lg
+
                   hover:bg-pink-500 hover:scale-105 cursor-pointer transition-colors "
+
                 >
                   Reservar
                 </button>
@@ -290,6 +297,7 @@ const Header = () => {
               </NavLink>
               
               <NavLink 
+
                 to="/categories/cuidado capilar" 
                 onClick={closeMobileMenu}
                 className={({ isActive }) => `block py-2 px-4 rounded-lg ${

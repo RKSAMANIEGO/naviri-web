@@ -31,7 +31,7 @@ const SeccionScrollAnimation = ({ children ,direction }) => {
         ref={ref}
         initial={{ x: '100%' }}
         animate={{ x: inView ? 0 : dir || '-100%' }}
-        transition={{ type: 'spring', stiffness: 50 , duration:0.7 }}
+        transition={{ type: 'spring', stiffness: 30, damping: 14 }}
         >
             {children}
         </motion.div>

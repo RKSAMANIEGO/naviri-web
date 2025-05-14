@@ -9,7 +9,7 @@ import { useCart } from '../../cart/context/CartContext';
 import SearchAside from './SearchAside/SearchAside';
 import { FilterOutlined } from '@ant-design/icons';
 
-import NotFoundProducts from '../../../shared/animation/iconAnimation/notFoundProducts';
+import NotFoundProducts from '../../../shared/animation/iconAnimation/NotFoundProducts';
 import SeccionScrollAnimation from '../../../shared/animation/SeccionScrollAnimation';
 import { lanzarConfetti } from '../../../shared/animation/Confetti/confetti';
 
@@ -253,7 +253,7 @@ const ContentProducts = ({ categorie }) => {
             </section>
         
             
-                    {/* NAV BAR CATEGORIE MOVILE*/}
+            {/* NAV BAR CATEGORIE MOVILE*/}
                 <nav className={`fixed top-0 right-0 h-[100vh] w-[50%] sm:w-[40%] bg-pink-400 z-[100] transition-transform duration-500 transform 
                                 ${isOpenNavCategorie ? 'translate-x-0':'translate-x-full'}  flex justify-center items-center ` }>
                     {allProducts.length > 0 &&

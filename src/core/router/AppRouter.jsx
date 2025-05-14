@@ -73,6 +73,11 @@ const Router = () => {
               <Route path="cuidado capilar" element={ <ContentProducts categorie="cuidado capilar"/>}/>
               <Route path="Exfoliante Corporal" element={ <ContentProducts categorie="Exfoliante Corporal"/>}/>
               <Route path="sales minerales" element={ <ContentProducts categorie="sales minerales"/>}/>
+
+              <Route path="jabones" element={ <ContentProducts categorie="jabones"/>}/>
+              <Route path="hidrolatos" element={ <ContentProducts categorie="hidrolatos"/>}/>
+              <Route path="perfumes" element={ <ContentProducts categorie="perfumes"/>}/>
+              <Route path="peines" element={ <ContentProducts categorie="peines"/>}/>
             </Route>
             
             <Route path="/policy" element={<PolicyPage />} />

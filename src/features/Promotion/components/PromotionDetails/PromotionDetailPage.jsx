@@ -21,14 +21,14 @@ const PromotionDetailPage = () => {
         console.log("Promoción encontrada:", found);
   
         if (found) setPromotion(found);
-        else console.warn("Promoción no encontrada con ID:", name);
+        else console.warn("Promoción no encontrada con nombre:", name);
       } catch (err) {
         console.error(err);
       }
     };
   
     loadPromotion();
-  }, [id]);
+  }, [name]);
 
   const handleAddToCart = () => {
     if (promotion) {
@@ -42,16 +42,17 @@ const PromotionDetailPage = () => {
   const handleWhatsapp = () => {
     if (!promotion) return;
   
-    const price = parseFloat(promotion.price);
-    const discount = parseFloat(promotion.discount);
-    const discountedPrice = (price * (1 - discount / 100)).toFixed(2);
+    const price = Number(promotion.price) || 0;
+    const discount = Number(promotion.discount) || 0;
   
-    const msg = `¡Hola! Me interesa la promoción ${promotion.name} en S/${discountedPrice}. ¿Más info?`;
+    const discountedPrice = (price * (1 - discount / 100)).toFixed(2);
+    const finalPrice = discount > 0 ? discountedPrice : price.toFixed(2);
+  
+    const msg = `¡Hola! Me interesa la promoción ${promotion.name} en S/${finalPrice}. ¿Más info?`;
     window.open(`https://wa.me/+51927987259?text=${encodeURIComponent(msg)}`, '_blank');
   };
   
   
-
   if (!promotion) {
     return (
       <div className={styles.loading}>

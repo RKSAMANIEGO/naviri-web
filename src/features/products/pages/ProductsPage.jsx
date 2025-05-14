@@ -2,7 +2,6 @@ import { Outlet, useLocation } from 'react-router-dom'
 import ContentProducts from '../components/ContentProducts'
 import HeaderProducts from "../components/HeaderProducts"
 import TitleProducst from "../components/TitleProducst"
-import SeccionInAnimation from '../../../shared/animation/SeccionInAnimation'
 
 const ProductsPage = () => {
     const {pathname} = useLocation();
@@ -11,7 +10,7 @@ const ProductsPage = () => {
         {pathname === "/products" ?
         <div>
             <HeaderProducts/>
-            <SeccionInAnimation title={<TitleProducst />} />
+            <TitleProducst />
             <ContentProducts/>
         </div>
         :

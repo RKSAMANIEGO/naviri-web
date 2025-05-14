@@ -10,8 +10,6 @@ import Swal from 'sweetalert2';
 
 const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
 
-
-    //const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",pdf:"",subcategory_id:[""],image:''})
     const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""]})
     const [imageFiles, setImageFiles] = useState([]);
     const [benefits, setBenefits] = useState([]);
@@ -45,11 +43,12 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 compatibility:productPutTable?.compatibility || '',
                 price:productPutTable?.price || '',
                 stock:productPutTable?.stock || '',
-                discount:productPutTable?.discount || '',  // add field discount
-                //pdf:productPutTable?.pdf || '',
+                discount:productPutTable?.discount || 0,  
                 subcategory_id:[productPutTable?.subcategories[0]?.id],
-                image:productPutTable?.image.url || ''
+                image: productPutTable?.image?.map(img => img.url) || []     
+
             })
+
             setImageFiles(productPutTable?.image)
             setImageUrl(productPutTable?.image.url);
             setBenefits(productPutTable?.benefits || []);
@@ -74,6 +73,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     };
 
     //MANEJO DE LA IMAGEN
+
     const uploadProps = {
         beforeUpload: (file) => {
         const isImage = file.type.startsWith('image/');
@@ -86,7 +86,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
             if (file.status === 'removed') {
                 if (file.id) {
-                    message.info(`Se eliminó la imagen: ${file.id}`);
+                    // message.info(`Se eliminó la imagen: ${file.id}`);
                     setDeleteImgs(prev => [...prev, file.id]);
                 }
             }
@@ -138,6 +138,10 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         if (!dataForm.compatibility) {message.error("Ingrese la Descripcion del Producto"); return;}
         if (benefits.length === 0) { message.error('Agrega al menos un beneficio'); return; }
         if (imageFiles.length   === 0) { message.error('Carga al menos una imagen'); return; }
+        if (!dataForm.discount) {
+                
+            message.error("Ingrese el descuento del Producto"); return;
+        }
 
         const formData = new FormData();
         
@@ -145,10 +149,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         formData.append('characteristics', dataForm.compatibility);
         formData.append('price', dataForm.price);
         formData.append('stock', dataForm.stock);
-        formData.append('discount', dataForm.discount);
+        formData.append('discount',parseInt(dataForm.discount));
         formData.append('compatibility', dataForm.compatibility);
-
-        // formData.append('subcategory_id', 1);
         formData.append('subcategory_id', dataForm.subcategory_id[0]);
         deleteImgs && deleteImgs.forEach(i => formData.append('delete_images[]', i));
 
@@ -171,7 +173,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 console.log(dataForm.name);
                 console.log(dataForm.price);
 
-                if(response.status===422){
+                if(response.status === 422){
                     Swal.fire({
                         title: '¡El Producto Ya Existe!',
                         text: 'Intente con otro nombre',
@@ -200,17 +202,17 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 }
 
             }else{
-                console.log(formData);
+                console.log(dataForm.discount);
                 
                 response = await addProduct(formData);
 
-                if (response.status!==200) {
+                if (response.status===422 || response.status===409) {
                 Swal.fire({
-                    title:  response.message,
-                    text: 'Error al agregar producto',
-                    icon: 'error',
-                    timer: 2000,
-                });
+                        title: '¡El Producto Ya Existe!',
+                        text: 'Intente con otro nombre',
+                        icon: 'warning',
+                        timer: 2000,
+                    });
                 }
                 else if(response.status===200){
                 Swal.fire({
@@ -229,6 +231,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     };
     //LIMPIAR CAMPOS DEL FORM
     const clearForm=()=>{
+
         setImageFiles([]);
         setBenefits([]);
         setDataForm({
@@ -237,6 +240,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
             price:0,
             stock:0,
             discount:0, // add field discount
+            image: [],
+            subcategory_id: [''],   
         })
     }
 
@@ -376,7 +381,10 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
                 </section>
 
+                
                 <section className={styles.sectionLast}>
+                
+
                     <Upload.Dragger {...uploadProps} fileList={imageFiles} height={120} >
                         <div className="text-center">
                             <UploadOutlined className="text-2xl mb-2" />
@@ -394,6 +402,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                         </button>
                     </div>                
                 </section>
+
             </form>
             <label onClick={()=>{
                 onClose();
