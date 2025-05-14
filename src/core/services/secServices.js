@@ -13,7 +13,16 @@ export const getServices = async (page = 1, limit = 5) => {
   }
 };
 
-
+export const getServiceById = async (id) => {
+  try {
+    const response = await api.get(`/services/${id}`);
+    console.log("Servicio individual:", response);
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener el servicio por ID:", error);
+    return null;
+  }
+};
 
 export const createService = async (data) => {
   console.log(data);
