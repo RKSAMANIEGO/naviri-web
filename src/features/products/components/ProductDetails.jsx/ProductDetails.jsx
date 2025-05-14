@@ -6,6 +6,7 @@ import styles from '../producto.module.css'
 import { useCart } from '../../../cart/context/CartContext';
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
 import ProductDescription from './ProductDescription';
+import RecommendedProducts from './RecommendedProducts';
 import {lanzarConfetti} from '../../../../shared/animation/Confetti/confetti';
 const ProductDetails = () => {
 
@@ -125,11 +126,15 @@ const ProductDetails = () => {
                                 <FaWhatsapp /> Comprar
                             </button>
                         </section>
-
+                                
                     </div>
                 </div>
             
                 <ProductDescription product={productSelection} />
+                <RecommendedProducts currentProductId={productSelection?._id} />
+                
+
+                
             </div>            
             :
             <label className='flex flex-col items-center mt-20 gap-5'><LoadingOutlined className='text-4xl font-bold'/> Cargando ...</label>                
