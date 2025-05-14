@@ -29,6 +29,13 @@ const SeccionScrollAnimation = ({ children ,direction }) => {
     return (
         <motion.div
         ref={ref}
+        style={{
+        position: inView ? 'relative' : 'absolute',
+        left: inView ? '0' : dir,
+        width: '100%', 
+        height: '100%', 
+        overflow: 'hidden', 
+      }}
         initial={{ x: '100%' }}
         animate={{ x: inView ? 0 : dir || '-100%' }}
         transition={{ type: 'spring', stiffness: 30, damping: 14 }}
