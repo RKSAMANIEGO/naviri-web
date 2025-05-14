@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Clock, Instagram } from "lucide-react";
 import { FaFacebookF, FaTiktok, FaWhatsapp } from "react-icons/fa";
 import styles from "./Footer.module.css";
 import logo from '../../../assets/image/logo-navi.png';
+import libroReclamacionesImg from '../../../assets/libro_reclamaciones.png'; // Importa la imagen
 import { getContact } from "../../../core/services/contactService";
 import { Link } from "react-router-dom";
 
@@ -128,11 +129,25 @@ const Footer = () => {
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
-              data-tooltip="Contáctanos por WhatsApp"
+              data-tooltip="Síguenos por Facebook"
             >
               <FaFacebookF size={20} />
             </a>
             
+          </div>
+          <div className={styles.reclamacionesContainer}>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeXE6S2SUrGNB3-83XSvSjOvvVYP1QQSljrts7a3GLhXoiMYw/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Libro de Reclamaciones"
+            >
+              <img 
+                src={libroReclamacionesImg} 
+                alt="Libro de Reclamaciones" 
+                className={styles.libroReclamacionesImg}
+              />
+            </a>
           </div>
         </div>
       </div>
