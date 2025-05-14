@@ -147,6 +147,10 @@
     color: white;
 }
 
+.socialIcon:nth-child(4):hover {
+    background-color: #3b5998;
+    color: white;
+}
 
 @media (max-width: 768px) {
 .footer {
