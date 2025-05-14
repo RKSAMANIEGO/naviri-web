@@ -11,9 +11,11 @@
     z-index: 1000;
   }
   
+
+
   .modalContainer {
-    height: 90%;
-    width: 70%;
+    height: auto;
+    width: 60%;
     max-width: 100%;
     background-color: white;
     border-radius: 8px;
@@ -25,6 +27,7 @@
   .modalContent {
     display: flex;
     height:100%;
+  
   }
   
   .imageSection {
@@ -54,8 +57,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding-inline: 40px;
+    padding: 40px;
     overflow-y: auto;
   }
   
@@ -83,11 +87,10 @@
   
   .formHeader {
     text-align: center;
-    /*margin-bottom: clamp(15px, 2vw, 25px);*/
   }
   
   .title {
-    font-size: 1.8rem;
+    font-size: 1rem;
     line-height: 0.8;
     font-weight: 700;
     margin: 0;
@@ -95,24 +98,23 @@
   }
   
   .description {
-    font-size: 11px;
+    font-size: 9px;
     color: #666;
     padding-block: 10px;
     line-height: 1.5;
   }
   
   .form {
-    margin-block: 10px;
+    margin-block: 5px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-  
   }
   
   .fieldContainer {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 3px;
     width: 100%;
   }
   
@@ -129,10 +131,10 @@
   
   .input,
   .select {
-    padding: 8px 15px;
+    padding: 5px 15px;
     border-radius: 2px;
     border: 1px solid #ddd;
-    font-size: 14px;
+    font-size: 12px;
     transition: all 0.2s ease;
     width: 100%;
   }
@@ -168,8 +170,8 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #f9f9f9;
-    font-size: 14px;
-    height: 40px;
+    font-size: 12px;
+    height: 30px;
   }
   
   .flag {
@@ -199,7 +201,7 @@
   
   .privacyNote {
     text-align: center;
-    font-size: 10px;
+    font-size: 9px;
     color: #666;
     line-height: 1.2;
 
@@ -254,7 +256,8 @@
     }
 
     .modalContainer {
-      width: 95%;
+      height: auto;
+      width: 90%;
       max-height: 100vh;
       border-radius: 5px;
       display: flex;
@@ -316,12 +319,19 @@
     }
     
     .title {
-      font-size:1.5rem;
+      font-size:1rem;
     }
-  
-
+    .description{
+      font-size:7px;
+    }
+    .input,
+    .select {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+ 
     .subtitle {
-      font-size: 18px;
+      font-size: 9px;
     }
     
     .closeButton {
@@ -331,8 +341,12 @@
     }
     
     .submitButton {
-      padding: 12px;
+      padding: 5px;
     }
+    
+  .privacyNote {
+    font-size: 7px;
+  }
   }
 
   @media (max-width: 320px) {
@@ -345,10 +359,7 @@
       text-align: justify;
     }
     
-    .subtitle {
-      font-size: 16px;
-    }
-    
+
     .description {
       font-size: 12px;
     }

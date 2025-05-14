@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import {  Link, useSearchParams } from "react-router-dom";
 import styles from "./producto.module.css"; // Updated path
 import PaginationProducts from "./PaginationProducts"; // Path remains relative
 import SearchProducts from "./SearchProducts"; // Path remains relative
@@ -26,6 +26,7 @@ const ContentProducts = ({ categorie }) => {
 	const [numPage, setNumPage] = useState(1);
 	const [allProducts, setAllProducts] = useState([]);
 	const [totalProducts, setTotalProducts] = useState(null);
+	const [messageFilterProducts, setMessageFilterProducts] = useState(false);
 	const { addToCart } = useCart();
 
 	const blogsContainerRef = useRef(null);
@@ -37,23 +38,21 @@ const ContentProducts = ({ categorie }) => {
 			distance: "20px",
 			duration: 500,
 			easing: "ease-out",
-			viewFactor: 0.05,
+			viewFactor: 0.5,
 			opacity: 0,
 			scale: 0.98,
 		});
 
-    setTimeout(() => {
-
 		if (blogsContainerRef.current) {
 			const cards = blogsContainerRef.current.children;
-			Array.from(cards).forEach((card, index) => {
+			Array.from(cards).forEach((card) => {
 				card.style.opacity = "0";
-				card.style.transform = "translateY(20px)";
-				card.style.transition = "all 0.4s ease-out";
+				card.style.transform = "translateY(40px)";
+				card.style.transition = "ease-out";
 
 				sr.current.reveal(card, {
-					origin: "bottom",
-					delay: 400 + index * 100,
+					origin: "right",
+					delay: 0,
 					beforeReveal: (el) => {
 						el.style.opacity = "1";
 						el.style.transform = "translateY(0)";
@@ -61,7 +60,7 @@ const ContentProducts = ({ categorie }) => {
 				});
 			});
 		}
-    },100)
+
 		return () => sr.current && sr.current.destroy();
 	});
 
@@ -134,13 +133,32 @@ const ContentProducts = ({ categorie }) => {
 		listAllProducts(1, totalProducts);
 	}, [numPage, totalProducts]);
 
+
+	//filtrar los productos mediante el input
+	const filterProductInput = (textSearch) => {
+		const productsFilter = allProducts.filter((product) =>
+			product.name.toLowerCase().includes(textSearch.toLowerCase())
+		);
+		console.log(productsFilter);
+		if (productsFilter.length === 0) {
+			setMessageFilterProducts(true);
+		} else {
+			setMessageFilterProducts(false);
+			setProductoFiltrado(productsFilter);
+		}
+	};
+
+	// click para listar todos los productos cuando no se encuentre algun producto en la busqueda por nombre
+	const handlerListProducts = () => {
+		setMessageFilterProducts(false);
+		setProductoFiltrado(dataProducts);
+		setTextSearch("");
+	};
+
 	useEffect(() => {
 		if (dataProducts) {
 			if (textSearch) {
-				const productsFilter = allProducts.filter((product) =>
-					product.name.toLowerCase().includes(textSearch.toLowerCase())
-				);
-				setProductoFiltrado(productsFilter);
+				filterProductInput(textSearch);
 			} else if (filterPrecio) {
 				const productsFilterPrecio = allProducts.filter(
 					(product) => Number(product.price) === Number(filterPrecio)
@@ -213,7 +231,6 @@ const ContentProducts = ({ categorie }) => {
 		}
 	};
 
-
 	return (
 		<>
 			<SearchProducts recibirTextInput={recibirTextSearch} />
@@ -230,6 +247,8 @@ const ContentProducts = ({ categorie }) => {
 						recibirCategories={recibirFiltroCat}
 					/>
 				)}
+
+
 
 				{/*FILTER CATEGORIE CHECKBOX MOVILE */}
 				{widthWindow < 875 && (
@@ -249,145 +268,156 @@ const ContentProducts = ({ categorie }) => {
 					</div>
 				)}
 				<section className={styles.wrapperProducts}>
-					<section ref={blogsContainerRef} id="products" className={styles.contentProducts}>
+					<section
+						ref={blogsContainerRef}
+						id="products"
+						className={styles.contentProducts}>
+
 						{/*FILTRO DE PRODUCTOS */}
-						{productoFiltrado.length > 0 ? (
+						{productoFiltrado.length > 0 && !messageFilterProducts ? ( 
+
 							productoFiltrado.map((product) => (
-							
+								<section
+									className={`${
+										widthWindow < 450
+											? " relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm"
+											: "relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[330px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md"
+									}`}
+									key={product.id}>
+									<Link to={`/products/${encodeURIComponent(product.name)}`}>
+										<div
+											className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-sm sm:rounded-t-xl transition-all duration-500 ease-in-out"
+											style={{
+												backgroundImage: `url(${product.image[0].url})`,
+											}}
+											onClick={async () => {
+												//setIsOpen(true)
+												if (
+													textSearch != null ||
+													filterPrecio != null ||
+													filterCategorie != null
+												) {
+													const productById = await productByName(product.name);
+													productById && console.log(productById); //setProductSelected(productById.data.data[0]);
+												} else {
+													const productById = await productByName(product.name);
+													productById && console.log(productById); //setProductSelected(productById.data.data[0]);
+												}
+											}}></div>
+										{product.discount > 0 && (
+											<span className="absolute top-[5%] right-[3%] text-[10px] md:text-lg bg-pink-600 text-white px-2 py-1 rounded-sm">
+												-{product.discount}%
+											</span>
+										)}
+									</Link>
 
-
-									<section  
+									<div
 										className={`${
 											widthWindow < 450
-												? " relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm"
-												: "relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[330px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md"
-										}`}
-										key={product.id}>
-										<Link to={`/products/${encodeURIComponent(product.name)}`}>
-											<div
-												className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-sm sm:rounded-t-xl transition-all duration-500 ease-in-out"
-												style={{
-													backgroundImage: `url(${product.image[0].url})`,
-												}}
-												onClick={async () => {
-													//setIsOpen(true)
-													if (
-														textSearch != null ||
-														filterPrecio != null ||
-														filterCategorie != null
-													) {
-														const productById = await productByName(
-															product.name
-														);
-														productById && console.log(productById); //setProductSelected(productById.data.data[0]);
-													} else {
-														const productById = await productByName(
-															product.name
-														);
-														productById && console.log(productById); //setProductSelected(productById.data.data[0]);
-													}
-												}}></div>
-											{product.discount > 0 && (
-												<span className="absolute top-[5%] right-[3%] text-[10px] md:text-lg bg-pink-600 text-white px-2 py-1 rounded-sm">
-													-{product.discount}%
-												</span>
-											)}
-										</Link>
-
-										<div
+												? "group-hover:-translate-y-6"
+												: "group-hover:-translate-y-7"
+										}`}>
+										<label
 											className={`${
 												widthWindow < 450
-													? "group-hover:-translate-y-6"
-													: "group-hover:-translate-y-7"
+													? "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-[10px]"
+													: "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-sm md:text-md"
 											}`}>
-											<label
-												className={`${
-													widthWindow < 450
-														? "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-[10px]"
-														: "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-sm md:text-md"
-												}`}>
-												&#9733; &#9733; &#9733; &#9733; &#9733;
-												<span
-													className="text-pink-500 hover:underline hover:text-gray-800"
-													onClick={() => handleAddToCart(product)}>
-													LO QUIERO &#10084;
-												</span>
-											</label>
+											&#9733; &#9733; &#9733; &#9733; &#9733;
+											<span
+												className="text-pink-500 hover:underline hover:text-gray-800"
+												onClick={() => handleAddToCart(product)}>
+												LO QUIERO &#10084;
+											</span>
+										</label>
 
-											<p
-												className={`${
-													widthWindow < 450
-														? "text-[9px] mt-2 capitalize"
-														: `${styles.textCategorie}`
-												}`}>
-												{product.categories.map((subCat) =>
-													subCat.sub_categories.map((obj) =>
-														obj.name.toLowerCase()
-													)
-												)}
-											</p>
-											<h4
-												className={`${
-													widthWindow < 450
-														? "truncate px-1 text-[11px] leading-3 font-[700]"
-														: `${styles.titleProducts}`
-												}`}>
-												{product.name.toUpperCase()}
-											</h4>
+										<p
+											className={`${
+												widthWindow < 450
+													? "text-[9px] mt-2 capitalize"
+													: `${styles.textCategorie}`
+											}`}>
+											{product.categories.map((subCat) =>
+												subCat.sub_categories.map((obj) =>
+													obj.name.toLowerCase()
+												)
+											)}
+										</p>
+										<h4
+											className={`${
+												widthWindow < 450
+													? "truncate px-1 text-[11px] leading-3 font-[700]"
+													: `${styles.titleProducts}`
+											}`}>
+											{product.name.toUpperCase()}
+										</h4>
 
-											{product.discount > 0 && product.discount !== null ? (
-												<div
+										{product.discount > 0 && product.discount !== null ? (
+											<div
+												className={`${
+													widthWindow < 450 ? "flex" : `${styles.wrapperDscto}`
+												}`}>
+												<s
+													className={`${
+														widthWindow < 450 ? "text-[10px]" : `${styles.s}`
+													}`}>
+													S/{product.price}
+												</s>
+												<h6
 													className={`${
 														widthWindow < 450
-															? "flex"
-															: `${styles.wrapperDscto}`
+															? "text-pink-400 font-bold text-[10px]"
+															: `${styles.dscto}`
 													}`}>
-													<s
-														className={`${
-															widthWindow < 450 ? "text-[10px]" : `${styles.s}`
-														}`}>
-														S/{product.price}
-													</s>
-													<h6
-														className={`${
-															widthWindow < 450
-																? "text-pink-400 font-bold text-[10px]"
-																: `${styles.dscto}`
-														}`}>
-														Ahora S/
-														{(
-															product.price -
-															(product.price * product.discount) / 100
-														).toFixed(2)}
-													</h6>
-												</div>
-											) : (
-												<div className={styles.wrapperDscto}>
-													<h5 className={styles.sinDscto}>S/{product.price}</h5>
-												</div>
-											)}
-										</div>
-									</section>
-
-
-
-
-
+													Ahora S/
+													{(
+														product.price -
+														(product.price * product.discount) / 100
+													).toFixed(2)}
+												</h6>
+											</div>
+										) : (
+											<div className={styles.wrapperDscto}>
+												<h5 className={styles.sinDscto}>S/{product.price}</h5>
+											</div>
+										)}
+									</div>
+								</section>
 							))
 						) : (
 							<p className="flex flex-col items-center text-gray-500 w-[80%] font-bold">
-								<LoadingOutlined /> Cargando	
+								{messageFilterProducts ? (
+									<p className="flex flex-col items-center text-gray-500 w-[80%] font-bold">
+										{" "}
+										<NotFoundProducts />
+										Producto No Existe
+									</p>
+								) : (
+									<p className="flex flex-col items-center text-gray-500 w-[80%] font-bold">
+										<LoadingOutlined /> Cargando{" "}
+									</p>
+								)}
 							</p>
 						)}
 					</section>
 
-					{totalPages && productoFiltrado.length > 5 && (
-						<PaginationProducts
-							numPage={totalPages}
-							handlerPagina={recibirPagina}
-							nextPage={pageNext}
-							nextPageDisabled={numPage}
-						/>
+					{messageFilterProducts ? (
+						<button
+							className=" font-bold text-pink-500 hover:underline cursor-pointer"
+							onClick={handlerListProducts}>
+							Listar Productos
+						</button>
+					) : (
+						<div>
+							{totalPages && productoFiltrado.length > 5 && (
+								<PaginationProducts
+									numPage={totalPages}
+									handlerPagina={recibirPagina}
+									nextPage={pageNext}
+									nextPageDisabled={numPage}
+								/>
+							)}
+						</div>
 					)}
 
 					<CartSidebar />

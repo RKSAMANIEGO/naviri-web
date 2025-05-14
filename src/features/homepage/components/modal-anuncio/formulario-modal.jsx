@@ -155,6 +155,7 @@ export default function FormularioModal({ isOpen, onClose }) {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContainer}>
         <div className={styles.modalContent}>
+          
           <div className={styles.imageSection}>
             <img src={modalImage} alt="Imagen promocional" className={styles.promoImage} />
           </div>

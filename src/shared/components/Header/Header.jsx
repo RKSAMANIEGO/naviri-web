@@ -188,6 +188,16 @@ const Header = () => {
               Contacto
             </NavLink>
 
+          <NavLink 
+                to="/envios" 
+                onClick={closeMobileMenu}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
+                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                Envios
+          </NavLink>
+
           </nav>
 
           {/* Right Section */}
@@ -359,7 +369,10 @@ const Header = () => {
                 }`}
               >
                 Promoción
+
               </NavLink>
+
+  
 
               <div className="pt-4 border-t">
                 <button 
