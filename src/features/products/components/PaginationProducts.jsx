@@ -48,6 +48,7 @@ const PaginationProducts = ({numPage,handlerPagina,nextPage,nextPageDisabled}) =
                     element && element.scrollIntoView({behavior:"smooth"});
                 },800)
                 
+
             }}>{handlerNextPage ? `Pagina ${nextPageDisabled}` : 'Siguiente' }</button>
         </div>
         </SeccionScrollAnimation>

@@ -87,6 +87,10 @@ const ContentProducts = ({ categorie }) => {
         }
 
     }
+
+    const feature =()=>{
+                    console.log("no se pudo");
+    }
     const listAllProducts = async (nPage, limit) => {
         const productos = await listProducts(nPage, limit);
         if (productos) {
