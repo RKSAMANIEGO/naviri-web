@@ -13,17 +13,6 @@ const productMenuItems = [
   { id: 'promotions', title: 'Promociones', description: 'Aprovecha las Promociones que tenemos para ti', to: '/promotions' },
 ];
 
-/*
-const categoryMenuItems = [
-  { id: 'accessories', title: 'Accesorios', description: 'Encuentra productos esenciales para limpiar y proteger tu piel', to: '/categories/accesorios' },
-  { id: 'oils', title: 'Aceite', description: 'Aceites naturales para nutrir, revitalizar tu piel y cabello', to: '/categories/aceites' },
-  { id: 'cosmetics', title: 'Cosméticos', description: 'Brochas, esponjas, neceseres y más para tu rutina', to: '/categories/cosmeticos' },
-  { id: 'hair', title: 'Cuidado capilar', description: 'Tratamientos para fortalecer y embellecer tu cabello', to: '/categories/cuidado capilar' },
-  { id: 'body', title: 'Cuidado corporal', description: 'Perfumes y colonias para cada ocasión y estilo', to: '/categories/Exfoliante Corporal' },
-  { id: 'salts', title: 'Sales minerales', description: 'Sales de baño, ideales para revitalizar y suavizar la piel', to: '/categories/sales minerales' },
-];
-*/
-
 const categoryMenuItems = [
   { id: 'accessories', title: 'Accesorios',to: '/categories/accesorios' },
   { id: 'oils', title: 'Aceites',  to: '/categories/aceites' },
@@ -75,8 +64,8 @@ const Header = () => {
     if (location.pathname === '/') {
       localStorage.removeItem("nameCategorie");
       navigate('/products');
-
-    } else if(location.pathname.includes("/products/" )){
+    }
+    else if(location.pathname.includes("/products/" )){
             navigate('/products');
             toggleCart();
     } else if(location.pathname.includes("/promotions")){

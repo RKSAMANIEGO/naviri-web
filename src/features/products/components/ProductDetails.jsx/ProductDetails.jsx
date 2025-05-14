@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { productByName } from '../../services/productsApi';
-import { EllipsisOutlined, LeftOutlined, LoadingOutlined, RightOutlined, ScissorOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { LeftOutlined, LoadingOutlined, RightOutlined, ScissorOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import styles from '../producto.module.css'
 import { useCart } from '../../../cart/context/CartContext';
 import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
 import ProductDescription from './ProductDescription';
+import RecommendedProducts from './RecommendedProducts';
 import {lanzarConfetti} from '../../../../shared/animation/Confetti/confetti';
 const ProductDetails = () => {
 
@@ -62,7 +63,7 @@ const ProductDetails = () => {
     return (
         <> 
         {productSelection ?
-            <div className='flex flex-col w-full'>
+            <div id="content" className='scroll-mt-12 flex flex-col w-full'>
                 <div className='flex md:flex-row flex-col gap-5 md:gap-10 w-full p-10 max-[520px]:p-4'>
                     <div className='overflow-hidden relative pt-0  rounded-t-2xl w-[auto] md:w-1/2  h-[auto] md:h-[520px]'>  
                         <img 
@@ -125,11 +126,15 @@ const ProductDetails = () => {
                                 <FaWhatsapp /> Comprar
                             </button>
                         </section>
-
+                                
                     </div>
                 </div>
             
                 <ProductDescription product={productSelection} />
+                <RecommendedProducts currentProductId={productSelection?._id} />
+                
+
+                
             </div>            
             :
             <label className='flex flex-col items-center mt-20 gap-5'><LoadingOutlined className='text-4xl font-bold'/> Cargando ...</label>                
