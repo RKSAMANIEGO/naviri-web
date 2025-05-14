@@ -152,6 +152,21 @@
     color: white;
 }
 
+.reclamacionesContainer {
+  margin-top: 1rem;
+  text-align: center; 
+}
+
+.libroReclamacionesImg {
+  width: 120px;
+  height: auto;
+  transition: opacity 0.3s ease;
+}
+
+.libroReclamacionesImg:hover {
+  opacity: 0.85;
+}
+
 @media (max-width: 768px) {
 .footer {
     padding: 10px;

@@ -8,8 +8,8 @@ import imageCategory2 from "../../../assets/image/categoria2.jpg";
 
 
 const categoryMenuItems = [
-  { id: 'accessories', title: 'Accesorios',to: '/categories/accesorios' },
-  { id: 'oils', title: 'Aceites',  to: '/categories/aceites' },
+  { id: 'accessories', title: 'Accesorios', to: '/categories/accesorios' },
+  { id: 'oils', title: 'Aceites', to: '/categories/aceites' },
   { id: 'cosmetics', title: 'Cosméticos', to: '/categories/cosmeticos' },
   { id: 'hair', title: 'Cuidado capilar', to: '/categories/cuidado capilar' },
   { id: 'body', title: 'Cuidado corporal', to: '/categories/Exfoliante Corporal' },
@@ -59,149 +59,142 @@ const Header = () => {
       localStorage.removeItem("nameCategorie");
       navigate('/products');
     }
-    else if(location.pathname.includes("/products/" )){
-            navigate('/products');
-            toggleCart();
-    } else if(location.pathname.includes("/promotions")){
-            navigate('/products');
-            toggleCart();
-    }else {
+    else if (location.pathname.includes("/products/")) {
+      navigate('/products');
+      toggleCart();
+    } else if (location.pathname.includes("/promotions")) {
+      navigate('/products');
+      toggleCart();
+    } else {
       toggleCart();
     }
   };
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-8 sm:px-4 lg:px-2">
         <div className="flex justify-between items-center h-16">
-          
+
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center">
             <img className="h-12 w-auto" src={logo} alt="Navi Cosméticos" />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
-            <div className="flex items-center space-x-6">
-            <NavLink 
-              to="/" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
-            >
-              Inicio
-            </NavLink>
+          <nav className="hidden lg:flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
+              <NavLink
+                to="/"
+                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                  }`}
+              >
+                Inicio
+              </NavLink>
 
-            <NavLink 
-              to="/new-products" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
-            >
-              Lo Nuevo
-            </NavLink>
+              <NavLink
+                to="/new-products"
+                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                  }`}
+              >
+                Lo Nuevo
+              </NavLink>
 
-            <NavLink 
-              to="/promotions" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
-            >
-              Ofertas
-            </NavLink>
+              <NavLink
+                to="/promotions"
+                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                  }`}
+              >
+                Ofertas
+              </NavLink>
 
-            <div className="relative group">
-              <NavLink 
-              to="/products" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
-            >
-              Productos
-            </NavLink>
-            
-             {/* Puente invisible */}
+              <div className="relative group">
+                <NavLink
+                  to="/products"
+                  className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                    }`}
+                >
+                  Productos
+                </NavLink>
+
+                {/* Puente invisible */}
+                <div className="absolute top-full -inset-x-20 h-4 bg-transparent pointer-events-none"></div>
+              </div>
+
+              {/* Categorías Dropdown */}
+              <div className="relative group h-full flex items-center">
+                <NavLink
+                  to="/categories"
+                  className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                    }`}
+                >
+                  Categorías <FaChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
+                </NavLink>
+
+                <div className="absolute top-full left-0 w-screen max-w-2xl bg-white shadow-lg rounded-lg p-6 hidden group-hover:grid transition-all duration-300 origin-top">
+                  <div className="col-span-2 grid grid-cols-3 gap-6">
+                    <div className="h-[100%] col-span-2 grid grid-cols-2  gap-4">
+                      {categoryMenuItems.map((item) => (
+                        <Link
+                          key={item.id}
+                          to={item.to}
+                          className="flex justify-center items-center  rounded-lg hover:bg-pink-400 hover:text-white transition-colors"
+                        >
+                          <h4 className="font-medium">{item.title}</h4>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-1 gap-4">
+                      <img src={imageCategory1} alt="Categoría" className="rounded-lg h-48 object-cover w-full" />
+                      <img src={imageCategory2} alt="Categoría" className="rounded-lg h-48 object-cover w-full" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Puente invisible */}
               <div className="absolute top-full -inset-x-20 h-4 bg-transparent pointer-events-none"></div>
-          </div>
-
-{/* Categorías Dropdown */}
-<div className="relative group h-full flex items-center">
-  <NavLink
-    to="/categories"
-    className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-      isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-    }`}
-  >
-    Categorías <FaChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
-  </NavLink>
-
-  <div className="absolute top-full left-0 w-screen max-w-2xl bg-white shadow-lg rounded-lg p-6 hidden group-hover:grid transition-all duration-300 origin-top">
-    <div className="col-span-2 grid grid-cols-3 gap-6">
-      <div className="h-[100%] col-span-2 grid grid-cols-2  gap-4">
-        {categoryMenuItems.map((item) => (
-          <Link
-            key={item.id}
-            to={item.to}
-            className="flex justify-center items-center  rounded-lg hover:bg-pink-400 hover:text-white transition-colors"
-          >
-            <h4 className="font-medium">{item.title}</h4>
-          </Link>
-        ))}
-      </div>
-      <div className="grid grid-cols-1 gap-4">
-        <img src={imageCategory1} alt="Categoría" className="rounded-lg h-48 object-cover w-full" />
-        <img src={imageCategory2} alt="Categoría" className="rounded-lg h-48 object-cover w-full" />
-      </div>
-    </div>
-  </div>
-  </div>
-  
-  {/* Puente invisible */}
-  <div className="absolute top-full -inset-x-20 h-4 bg-transparent pointer-events-none"></div>
-</div>
+            </div>
 
             {/* Otros enlaces */}
-            <NavLink 
-              to="/blog" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
+            <NavLink
+              to="/blog"
+              className={({ isActive }) => `inline-flex items-center pr-2 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                }`}
             >
               Blogs
             </NavLink>
-            
-            <NavLink 
-              to="/about" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                }`}
             >
               Sobre Nosotros
             </NavLink>
-            
-            <NavLink 
-              to="/contacts" 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium ${
-                isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
-              }`}
+
+            <NavLink
+              to="/contacts"
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                }`}
             >
               Contacto
             </NavLink>
 
-          <NavLink 
-                to="/envios" 
-                onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+
+
+            <NavLink
+              to="/envios"
+              onClick={closeMobileMenu} 
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
                 }`}
-              >
-                Envios
-          </NavLink>
+            >
+              Envíos
+            </NavLink>
 
           </nav>
 
           {/* Right Section */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center pl-4 gap-4">
             <form className="hidden md:flex items-center" onSubmit={(e) => {
               e.preventDefault();
               navigate(`/products?search=${searchTerm}`);
@@ -222,7 +215,7 @@ const Header = () => {
               </button>
             </form>
 
-            <button 
+            <button
               onClick={handleCartClick}
               className="relative text-gray-700 hover:text-pink-600 cursor-pointer"
             >
@@ -233,15 +226,15 @@ const Header = () => {
               </span>
             </button>
 
-            <button 
-                  onClick={handleReserveClick}
-                  className="w-full flex items-center justify-center gap-2 bg-pink-400 text-white py-2 px-4 rounded-lg
+            <button
+              onClick={handleReserveClick}
+              className="w-full flex items-center justify-center gap-2 bg-pink-400 text-white py-2 px-4 rounded-lg
 
                   hover:bg-pink-500 hover:scale-105 cursor-pointer transition-colors "
 
-                >
-                  Reservar
-                </button>
+            >
+              Reservar
+            </button>
 
             <button
               onClick={toggleMobileMenu}
@@ -280,102 +273,93 @@ const Header = () => {
               </form>
 
               {/* Mobile Navigation Links */}
-              <NavLink 
-                to="/" 
+              <NavLink
+                to="/"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Inicio
               </NavLink>
 
-              <NavLink 
-                to="/new-products" 
+              <NavLink
+                to="/new-products"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Lo nuevo
               </NavLink>
 
-              <NavLink 
-                to="/promotions" 
+              <NavLink
+                to="/promotions"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Promociones
               </NavLink>
-              
-              <NavLink 
-                to="/products" 
+
+              <NavLink
+                to="/products"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Productos
               </NavLink>
-              
-              <NavLink 
 
-                to="/categories/cuidado capilar" 
+              <NavLink
+
+                to="/categories/cuidado capilar"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Categorías
               </NavLink>
-              
-              <NavLink 
-                to="/blog" 
+
+              <NavLink
+                to="/blog"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Blogs
               </NavLink>
-              
-              <NavLink 
-                to="/about" 
+
+              <NavLink
+                to="/about"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Sobre Nosotros
               </NavLink>
-              
-              <NavLink 
-                to="/contacts" 
+
+              <NavLink
+                to="/contacts"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Contacto
               </NavLink>
-              
-              <NavLink 
-                to="/promotions" 
+
+              <NavLink
+                to="/promotions"
                 onClick={closeMobileMenu}
-                className={({ isActive }) => `block py-2 px-4 rounded-lg ${
-                  isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                className={({ isActive }) => `block py-2 px-4 rounded-lg ${isActive ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-gray-50'
+                  }`}
               >
                 Promoción
 
               </NavLink>
 
-  
+
 
               <div className="pt-4 border-t">
-                <button 
+                <button
                   onClick={handleReserveClick}
                   className="w-full flex items-center justify-center gap-2 bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
                 >

@@ -1,39 +1,44 @@
-import { useEffect, useRef } from 'react';
-import styles from '../../styles/producto.module.css'
-import ScrollReveal from "scrollreveal";
+import { motion } from 'framer-motion';
+
 const TitleNewProducts = () => {
-    
-    //Animación
-    const sr = useRef(null);
-    const subTitleRef = useRef(null);
+    const variants = {
+        hidden: { opacity: 0, x: -50 }, 
+        visible: (i = 0) => ({
+            opacity: 1,
+            x: 0,
+            transition: {
+                type: 'spring',
+                stiffness: 100,
+                damping: 20,
+                delay: i * 0.2,
+            },
+        }),
+    };
 
-      //animation
-    useEffect(() => {
-        sr.current = ScrollReveal({
-            reset: false, 
-            distance: '20px',
-            duration: 1000,
-            easing: 'cubic-bezier(0.5, 0, 0, 0.3)',
-            viewFactor: 0.1, 
-        });
-        
-        if (subTitleRef.current) {
-            sr.current.reveal(subTitleRef.current, {
-                origin: 'left',
-                delay: 300,
-            });
-        }
-
-        return () =>(sr.current) && sr.current.clean(subTitleRef.current);
-    
-    }, []);
     return (
-        <section className={styles.title} ref={subTitleRef}>
-            <h3>Ultimas Novedades</h3>
-            <p>¡Hoy llegó lo nuevo! Belleza natural que transforma tu piel desde el primer toque.</p>
+        <section className="py-8 md:py-12 text-center"> 
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <motion.h3
+                    className="text-3xl sm:text-4xl font-semibold text-[#fb64b6] mb-3" 
+                    initial="hidden"
+                    animate="visible"
+                    variants={variants}
+                    custom={0} 
+                >
+                    Últimas Novedades
+                </motion.h3>
+                <motion.p
+                    className="text-md sm:text-lg text-gray-600 max-w-xl mx-auto leading-relaxed"
+                    initial="hidden"
+                    animate="visible"
+                    variants={variants}
+                    custom={1} // Segundo elemento en animar
+                >
+                    ¡Hoy llegó lo nuevo! Belleza natural que transforma tu piel desde el primer toque.
+                </motion.p>
+            </div>
         </section>
-    )
-}
+    );
+};
 
-export default TitleNewProducts
-            
+export default TitleNewProducts;
