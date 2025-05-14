@@ -49,7 +49,7 @@ const SearchProducts = ({recibirTextInput}) => {
     return (
     <div  className={styles.search}>
         <section className='container-search'>
-            <label   ref={btnSearchRef}>
+            <label  ref={btnSearchRef}>
                 <span ref={searchRef}>
                     <input type="text" placeholder='Buscar productos...' value={searchText} onChange={(e)=>setSearchText(e.target.value)} />
                     <i className="fa-solid fa-magnifying-glass"></i>

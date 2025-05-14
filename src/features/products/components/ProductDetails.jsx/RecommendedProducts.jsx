@@ -109,7 +109,7 @@ const ProductCard = ({ product, scrollContentProduct }) => {
     const finalPrice = product.price * (1 - (product.discount / 100));
     
     return (
-        <div className="group rounded-sm  pb-10   sm:rounded-2xl overflow-hidden  hover:shadow-md md:shadow-pink-400 transition-shadow duration-300 h-full flex flex-col">
+        <div className="group rounded-sm  pb-10   sm:rounded-2xl overflow-hidden  md:hover:shadow-md md:shadow-pink-400 transition-shadow duration-300 h-full flex flex-col">
             <Link to={`/products/${encodeURIComponent(product.name)}`}>
                 <div 
                     className="relative overflow-hidden pt-[100%]"
