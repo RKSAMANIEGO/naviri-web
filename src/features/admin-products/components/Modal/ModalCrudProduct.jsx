@@ -10,16 +10,11 @@ import Swal from 'sweetalert2';
 
 const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
 
-
-
-
-    //const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",pdf:"",subcategory_id:[""],image:''})
     const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""]})
     const [imageFiles, setImageFiles] = useState([]);
     const [benefits, setBenefits] = useState([]);
     const [deleteImgs, setDeleteImgs] = useState([]);
     const [imageUrl, setImageUrl] = useState(null);
-
     const [inputValue, setInputValue] = useState('');
     const [dataCategories,setDataCategories]=useState(null)
     const [confirmAddProd,setConfirmAddProd]=useState(false)
@@ -48,18 +43,14 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 compatibility:productPutTable?.compatibility || '',
                 price:productPutTable?.price || '',
                 stock:productPutTable?.stock || '',
-                discount:productPutTable?.discount || '',  // add field discount
-                //pdf:productPutTable?.pdf || '',
+                discount:productPutTable?.discount || 0,  
                 subcategory_id:[productPutTable?.subcategories[0]?.id],
-
-                //image:productPutTable?.image.url || '' *****
                 image: productPutTable?.image?.map(img => img.url) || []     
 
             })
 
             setImageFiles(productPutTable?.image)
             setImageUrl(productPutTable?.image.url);
- 
             setBenefits(productPutTable?.benefits || []);
         }
     },[productPutTable])
@@ -95,7 +86,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
             if (file.status === 'removed') {
                 if (file.id) {
-                    message.info(`Se eliminó la imagen: ${file.id}`);
+                    // message.info(`Se eliminó la imagen: ${file.id}`);
                     setDeleteImgs(prev => [...prev, file.id]);
                 }
             }
@@ -145,24 +136,12 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         if (!dataForm.price) { message.error("Ingrese el Precio del Producto"); return; }
         if (!dataForm.stock) {message.error("Ingrese el Stock del Producto"); return;}
         if (!dataForm.compatibility) {message.error("Ingrese la Descripcion del Producto"); return;}
-/*
-
-        //if (!imageUrl) { message.error('Debes cargar una imagen');return;} *******
-        if (imageUrl.length === 0) { message.error('Debes cargar al menos una imagen'); return; }
-
-        if (benefits.length === 0) { message.error('Debes agregar al menos un beneficio'); return;}
-
-        const updatedDataForm = {
-            ...dataForm,
-            characteristics:"string",
-            benefits,
-            //image: imageUrl,
-            image: imageUrl.map(img => ({ url: img }))
-            
-        };
-*/
         if (benefits.length === 0) { message.error('Agrega al menos un beneficio'); return; }
         if (imageFiles.length   === 0) { message.error('Carga al menos una imagen'); return; }
+        if (!dataForm.discount) {
+                
+            message.error("Ingrese el descuento del Producto"); return;
+        }
 
         const formData = new FormData();
         
@@ -170,13 +149,10 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         formData.append('characteristics', dataForm.compatibility);
         formData.append('price', dataForm.price);
         formData.append('stock', dataForm.stock);
-        formData.append('discount', dataForm.discount);
+        formData.append('discount',parseInt(dataForm.discount));
         formData.append('compatibility', dataForm.compatibility);
-
-        // formData.append('subcategory_id', 1);
         formData.append('subcategory_id', dataForm.subcategory_id[0]);
         deleteImgs && deleteImgs.forEach(i => formData.append('delete_images[]', i));
-
 
         benefits.forEach(b => formData.append('benefits[]', b));
 
@@ -197,7 +173,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 console.log(dataForm.name);
                 console.log(dataForm.price);
 
-                if(response.status===422){
+                if(response.status === 422){
                     Swal.fire({
                         title: '¡El Producto Ya Existe!',
                         text: 'Intente con otro nombre',
@@ -226,17 +202,17 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 }
 
             }else{
-                console.log(formData);
+                console.log(dataForm.discount);
                 
                 response = await addProduct(formData);
 
-                if (response.status!==200) {
+                if (response.status===422 || response.status===409) {
                 Swal.fire({
-                    title:  response.message,
-                    text: 'Error al agregar producto',
-                    icon: 'error',
-                    timer: 2000,
-                });
+                        title: '¡El Producto Ya Existe!',
+                        text: 'Intente con otro nombre',
+                        icon: 'warning',
+                        timer: 2000,
+                    });
                 }
                 else if(response.status===200){
                 Swal.fire({
@@ -406,50 +382,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 </section>
 
                 
-        
-                <section className=''>
-                <label className='flex flex-col  w-[310px]  h-[auto] items-center gap-2 border-[1px] border-gray-300 rounded-sm py-3'>Imágenes del Producto
-                    <Upload {...props} showUploadList={false}>
-                        <Button icon={<UploadOutlined />} style={{display:"flex", justifyContent:"center",  marginBottom: '10px' }}>
-                        Cargar imagen
-                        </Button>
-                    </Upload>
-
-                    {imageUrl.length > 0 && (
-                    
-                    <div style={{ display: 'flex', justifyContent:"center", gap:"10px", flexWrap: 'wrap' }}>
-                        {imageUrl.map((img, index) => (
-                            <div key={index} style={{display:"flex",  position: 'relative', gap:"3px"}}>
-                                <img
-                                    src={img}
-                                    alt={`img-${index}`}
-                                    style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '5px' }}
-                                />
-                                <DeleteOutlined
-                                onClick={() => {setImageUrl(prev => prev.filter((_, i) => i !== index));}}
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    right: 0,
-                                    backgroundColor: 'white',
-                                    borderRadius: '50%',
-                                    padding: '2px',
-                                    cursor: 'pointer',
-                                    color: 'red'
-                                }}
-                            />
-                            </div>
-                            ))}
-                    </div>
-                    )}
-                </label>
-                
-                <div className='flex justify-end mt-2'>
-                        <button  className='bg-pink-600 font-bold text-white w-[50%] text-center py-2 rounded-sm cursor-pointer hover:bg-pink-500' onClick={handlerAddProduct}>{title}</button>
-                </div>
-                </section>    
-            
-                {/*
                 <section className={styles.sectionLast}>
                 
 
