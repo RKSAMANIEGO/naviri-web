@@ -117,8 +117,13 @@
   gap: 0.5rem;
 }
 
+.serviceLink { 
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%; 
+}
 
-/* Estilos de navegación del carrusel */
 :global(.swiper-button-prev),
 :global(.swiper-button-next) {
   color: #B62A69 !important;
