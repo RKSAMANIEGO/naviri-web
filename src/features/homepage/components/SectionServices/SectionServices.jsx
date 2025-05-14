@@ -4,6 +4,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { getServices } from "../../../../core/services/secServices";
 import styles from "./SectionServices.module.css";
 import ScrollReveal from 'scrollreveal';
+import { Link } from 'react-router-dom';
 
 // Importa los estilos de Swiper
 import 'swiper/css';
@@ -35,7 +36,14 @@ const SectionServices = () => {
         const fetchData = async () => {
             try {
                 const response = await getServices();
-                setServices(response.data);
+                if (response && response.data && Array.isArray(response.data.data)) { 
+                    setServices(response.data.data);
+                } else if (response && Array.isArray(response.data)) {
+                     setServices(response.data);
+                } else {
+                    console.warn("La respuesta de getServices no tiene el formato esperado:", response);
+                    setServices([]);
+                }
                 setTimeout(() => {
                     if (sectionRef.current) {
                         sr.current.reveal(sectionRef.current, {
@@ -49,6 +57,7 @@ const SectionServices = () => {
                 }, 500);
             } catch (error) {
                 console.error("Error al obtener los datos:", error);
+                setServices([]);
             }
         };
         
@@ -74,7 +83,6 @@ const SectionServices = () => {
                 spaceBetween={30}
                 slidesPerView={1}
                 pagination={{ clickable: true }}
-                /*autoplay={{ delay: 10000}}*/
                 breakpoints={{
                     640: {
                         slidesPerView: 2,
@@ -91,20 +99,22 @@ const SectionServices = () => {
             >
                 {services.map(service => (
                     <SwiperSlide key={service.id} className={styles.swiperSlide}>
-                        <div className={styles.servicecard}>
-                            {service.image && (
-                                <div className={styles.imgContainer}>
-                                    <img src={service.image.url} alt={service.title} />
-                                </div>
-                            )}
-                            <h3>{service.title}</h3>
-                            <p>{service.description}</p>
-                            <ul>
-                                {service.features.map((feature, index) => (
-                                    <li key={index}>{feature}</li>
-                                ))}
-                            </ul>
-                        </div>
+                        <Link to={`/services/${service.id}`} className={styles.serviceLink}> {/* Enlace añadido */}
+                            <div className={styles.servicecard}>
+                                {service.image && service.image.url && (
+                                    <div className={styles.imgContainer}>
+                                        <img src={service.image.url} alt={service.title} />
+                                    </div>
+                                )}
+                                <h3>{service.title}</h3>
+                                <p>{service.description}</p>
+                                <ul>
+                                    {service.features && service.features.map((feature, index) => (
+                                        <li key={index}>{feature}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </Link>
                     </SwiperSlide>
                 ))}
             </Swiper>
