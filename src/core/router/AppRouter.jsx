@@ -44,8 +44,11 @@ import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 import ContactPage from '../../features/contacts/pages/ContactPage.jsx';
 
 import ProductDetails from '../../features/products/components/ProductDetails.jsx/ProductDetails.jsx';
-import ServiceDetailPage from '../../features/services-page/pages/ServiceDetailPage.jsx';
+
 import ShipmentPage from '../../features/shipment/Pages/ShipmentPage.jsx';
+
+import ServiceDetailPage from '../../features/services-page/pages/ServiceDetailPage.jsx';
+
 
 
 
