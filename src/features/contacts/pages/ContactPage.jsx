@@ -262,8 +262,11 @@ const ContactPage = () => {
              </div>
              <h3>Correo Electrónico</h3>
              <p>Escríbenos a nuestro correo electrónico para consultas y cotizaciones</p>
-             <p>info@navinatubelleza.com</p>
-             <a href="mailto:info@navinatubelleza.com">Enviar email</a>
+             <p>navinatubelleza@gmail.com</p>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=navinatubelleza@gmail.com"
+               target="_blank"
+               rel="noopener noreferrer"
+               >Enviar email</a>
            </div>
        </div>
     
