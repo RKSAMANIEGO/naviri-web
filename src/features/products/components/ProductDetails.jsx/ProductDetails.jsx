@@ -88,9 +88,8 @@ const ProductDetails = () => {
                     </div>
             
                     <div className='flex flex-col gap-4 lg:my-5 md:w-1/2 w-full'>
-                        <h2 className='text-pink-400 text-2xl sm:text-3xl lg:text-4xl font-bold capitalize border-b-2 border-pink-300 border-dashed pb-3 relative w-[95%]'>
+                        <h2 className='text-[#505666] text-2xl sm:text-3xl lg:text-4xl font-bold capitalize relative w-[95%]'>
                             {productSelection.name}
-                            <ScissorOutlined className='rotate-180 absolute -bottom-[8px] sm:-bottom-[10px] -right-5 text-[16px] sm:text-[20px]' />
                         </h2>
                         <p className='text-[12px] sm:text-[13px] lg:text-[16px]'>{productSelection.compatibility}</p>
                         {/*----BENEFICIOS----*/}

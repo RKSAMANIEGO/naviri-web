@@ -85,7 +85,7 @@ const Header = () => {
             <div className="flex items-center space-x-4">
               <NavLink
                 to="/"
-                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                   }`}
               >
                 Inicio
@@ -93,7 +93,7 @@ const Header = () => {
 
               <NavLink
                 to="/new-products"
-                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                   }`}
               >
                 Lo Nuevo
@@ -101,7 +101,7 @@ const Header = () => {
 
               <NavLink
                 to="/promotions"
-                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                   }`}
               >
                 Ofertas
@@ -110,7 +110,7 @@ const Header = () => {
               <div className="relative group">
                 <NavLink
                   to="/products"
-                  className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                  className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                     }`}
                 >
                   Productos
@@ -124,7 +124,7 @@ const Header = () => {
               <div className="relative group h-full flex items-center">
                 <NavLink
                   to="/categories"
-                  className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+                  className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                     }`}
                 >
                   Categorías <FaChevronDown className="ml-1 h-4 w-4 transition-transform group-hover:rotate-180" />
@@ -137,7 +137,7 @@ const Header = () => {
                         <Link
                           key={item.id}
                           to={item.to}
-                          className="flex justify-center items-center  rounded-lg hover:bg-pink-400 hover:text-white transition-colors"
+                          className="flex justify-center items-center  rounded-lg hover:bg-[#f180a9] hover:text-white transition-colors"
                         >
                           <h4 className="font-medium">{item.title}</h4>
                         </Link>
@@ -158,7 +158,7 @@ const Header = () => {
             {/* Otros enlaces */}
             <NavLink
               to="/blog"
-              className={({ isActive }) => `inline-flex items-center pr-2 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+              className={({ isActive }) => `inline-flex items-center pr-2 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' :'text-gray-700 hover:text-[#f180a9]'
                 }`}
             >
               Blogs
@@ -166,7 +166,7 @@ const Header = () => {
 
             <NavLink
               to="/about"
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                 }`}
             >
               Sobre Nosotros
@@ -174,7 +174,7 @@ const Header = () => {
 
             <NavLink
               to="/contacts"
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                 }`}
             >
               Contacto
@@ -183,7 +183,7 @@ const Header = () => {
             <NavLink
               to="/envios"
               onClick={closeMobileMenu} 
-              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-pink-500 border-b-2 border-pink-500' : 'text-gray-700 hover:text-pink-600'
+              className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                 }`}
             >
               Envíos
@@ -206,7 +206,7 @@ const Header = () => {
               />
               <button
                 type="submit"
-                className="bg-pink-500 text-white px-4 py-2 rounded-r-full hover:bg-pink-600 
+                className="bg-[#f180a9] text-white px-4 py-2 rounded-r-full
                 transition-colors h-10 cursor-pointer"
               >
                 <FaSearch className="h-5 w-5" />
@@ -215,10 +215,10 @@ const Header = () => {
 
             <button
               onClick={handleCartClick}
-              className="relative text-gray-700 hover:text-pink-600 cursor-pointer"
+              className="relative text-gray-700 cursor-pointer"
             >
               <FaShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-3 -right-2  bg-pink-500 text-white text-xs w-5 h-5 rounded-full flex 
+              <span className="absolute -top-3 -right-2  bg-[#fff212] text-black text-xs w-5 h-5 rounded-full flex 
                 items-center justify-center">
                 {getCartCount()}
               </span>
@@ -226,9 +226,7 @@ const Header = () => {
 
             <button
               onClick={handleReserveClick}
-              className="w-full flex items-center justify-center gap-2 bg-pink-400 text-white py-2 px-4 rounded-lg
-
-                  hover:bg-pink-500 hover:scale-105 cursor-pointer transition-colors "
+              className="w-full flex items-center justify-center gap-2 bg-[#f180a9] text-white py-2 px-4 rounded-lg hover:scale-105 cursor-pointer transition-colors"
 
             >
               Reservar
@@ -236,7 +234,7 @@ const Header = () => {
 
             <button
               onClick={toggleMobileMenu}
-              className="lg:hidden text-gray-700 hover:text-pink-600"
+              className="lg:hidden text-gray-700 bg-white"
               aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             >
               {isMobileMenuOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
