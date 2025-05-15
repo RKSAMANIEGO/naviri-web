@@ -12,7 +12,6 @@ const lima = [
 ]
 
 const provincia = [
-  "Envíos a nivel nacional",
   "Realizamos envío en la agencia de tu preferencia: (Shalom, Marvisur, Olva Courier, etc.)",
   "Los tiempos de entrega son de 3 a 5 días hábiles, una vez recibas el correo que tu pedido está en camino."
 ]
@@ -55,7 +54,7 @@ const ShipmentPage = () => {
           </section>
         ))}
 
-        <h3 className='text-lg sm:text-2xl font-bold text-gray-600 underline'>Para Provincia</h3>
+        <h3 className='text-lg sm:text-2xl font-bold text-gray-600 underline'>Envíos a nivel nacional</h3>
         <ul className='flex flex-col gap-5 px-3'>
           {provincia.map((item, index) => (
             <li className="text-[12px] sm:text-[16px]" key={index}>- {item}</li>
@@ -92,7 +91,7 @@ const ShipmentPage = () => {
         </p>
         
         <p className="text-[12px] sm:text-[16px]">
-          También puede comunicarte con nosotros al WhatsApp (927 987 259) en horario de oficina.
+          También puede comunicarte con nosotros al WhatsApp a (927 987 259) en horario de oficina.
         </p>
       </section>
 
