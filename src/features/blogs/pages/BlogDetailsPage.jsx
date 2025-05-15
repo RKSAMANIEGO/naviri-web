@@ -29,7 +29,7 @@ const BlogDetailsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FAF5FF] to-[#F3E8FF] py-12 px-3 sm:px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#FAF5FF] to-[#f5afdb] py-12 px-3 sm:px-4">
       <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
         <div className="space-y-8">
           {/* Sección horizontal */}
