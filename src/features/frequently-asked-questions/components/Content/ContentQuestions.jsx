@@ -53,16 +53,31 @@ const categorie=[
         answer: "Sí, muchos de nuestros productos están formulados específicamente para pieles sensibles. Te recomendamos revisar la descripción y los ingredientes antes de comprar."
     }
 ]
-
+import {listQuestions} from '../../../admin-questions/services/questionService';
 const ContentQuestions = () => {
     const [activeKey, setActiveKey] = useState(null);
     const [catFilter,setCatFilter]=useState(null);
     const [dataQuestions ,setDataQuestions]=useState(null);
     const [widthWindow,setWidthWindow]=useState({width:window.innerWidth,height:window.innerHeight});
 
+
+    const [dataFAQ, setDataFAQ] = useState(null);
     useEffect(()=>{
         (catFilter !== null) ? setDataQuestions(catFilter) : setDataQuestions(categorie);
-    },[catFilter,dataQuestions])
+    },[catFilter,dataQuestions]);
+
+
+    const questionsData = async() =>{
+      const response = await listQuestions();
+      if(response.status === 200){
+        setDataFAQ(response.data.data);
+        console.log(response.data.data);
+      } 
+    }
+
+    useEffect(()=>{
+      questionsData();
+    },[])
 
 
     useEffect(()=>{
@@ -120,6 +135,8 @@ const ContentQuestions = () => {
         <div className={styles.container}>
         <HeaderFrequentlyAskedQuestions setTextSearch={getTextSearch}/>
         <label className={styles.wrapperIcon}> <DoubleLeftOutlined className={styles.iconCategorie}/>Resolvemos tus dudas aquí.</label>
+        
+        {dataFAQ && 
         <div className={styles.questionFilter}>
           {widthWindow.width < 500 ?
             <CustomCollapseMovil
@@ -127,8 +144,8 @@ const ContentQuestions = () => {
               activeKey={activeKey ? [activeKey] : []} 
               onChange={handlePanelChange} 
               accordion 
-            >
-              {categorie.map(obj => (
+        >
+              {dataFAQ.map(obj => (
                 <Collapse.Panel key={obj.id} header={obj.question}>
                   <p className={styles.answers}>{obj.answer}</p>
                 </Collapse.Panel>
@@ -141,7 +158,7 @@ const ContentQuestions = () => {
               onChange={handlePanelChange}
               accordion
             >
-              {categorie.map(obj => (
+              {dataFAQ.map(obj => (
                 <Collapse.Panel key={obj.id} header={obj.question}>
                   <p className={styles.answers}>{obj.answer}</p>
                 </Collapse.Panel>
@@ -149,6 +166,7 @@ const ContentQuestions = () => {
             </CustomCollapse>
           }
         </div>
+        }
       </div>
     )
 }

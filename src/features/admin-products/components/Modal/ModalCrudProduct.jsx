@@ -22,7 +22,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     
     //add prop Dscto
     //const [dscto,setDscto]=useState(0);
-
+    console.log(imageUrl);
     //LISTAR CATEGORIAS
     const listCategories= async()=>{
         const response =await getCategories();
