@@ -116,6 +116,11 @@ const Sidebar = ({ isDarkMode, toggleTheme }) => {
                 icon: <TagsOutlined />,
                 label: 'Promociones',
               },
+               {
+                key: '/admin/panel/questions',
+                icon: <QuestionOutlined />,
+                label: 'Preguntas & Respuestas',
+              },
               {
                 key: 'page',
                 icon: <SettingOutlined />,
