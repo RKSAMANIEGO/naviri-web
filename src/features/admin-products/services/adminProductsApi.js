@@ -5,7 +5,7 @@ export const listProducts = async (page = 1, limit = 16) => {
 		const response = await api.get("/products", {
 			params: { page, limit },
 		});
-		console.log(response);
+		// console.log(response);
 
 		return response;
 	} catch (error) {
