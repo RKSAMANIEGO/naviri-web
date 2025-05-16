@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
 
-    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""]})
+    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],use_case:""})
     const [imageFiles, setImageFiles] = useState([]);
     const [benefits, setBenefits] = useState([]);
     const [deleteImgs, setDeleteImgs] = useState([]);
@@ -22,7 +22,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
     
     //add prop Dscto
     //const [dscto,setDscto]=useState(0);
-    console.log(imageUrl);
     //LISTAR CATEGORIAS
     const listCategories= async()=>{
         const response =await getCategories();
@@ -45,6 +44,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 stock:productPutTable?.stock || '',
                 discount:productPutTable?.discount || 0,  
                 subcategory_id:[productPutTable?.subcategories[0]?.id],
+                use_case: productPutTable.use_case || '',
                 image: productPutTable?.image?.map(img => img.url) || []     
 
             })
@@ -151,6 +151,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
         formData.append('stock', dataForm.stock);
         formData.append('discount',parseInt(dataForm.discount));
         formData.append('compatibility', dataForm.compatibility);
+        formData.append('use_case', dataForm.use_case);
         formData.append('subcategory_id', dataForm.subcategory_id[0]);
         deleteImgs && deleteImgs.forEach(i => formData.append('delete_images[]', i));
 
@@ -169,9 +170,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 formData.append('_method', 'PUT');
 
                 const response = await updateProduct(nameProd, formData);
-                console.log(formData.name);
-                console.log(dataForm.name);
-                console.log(dataForm.price);
 
                 if(response.status === 422){
                     Swal.fire({
@@ -202,8 +200,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 }
 
             }else{
-                console.log(dataForm.discount);
-                
+            
                 response = await addProduct(formData);
 
                 if (response.status===422 || response.status===409) {
@@ -239,6 +236,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
             compatibility:'',
             price:0,
             stock:0,
+            use_case: '',
             discount:0, // add field discount
             image: [],
             subcategory_id: [''],   
@@ -350,6 +348,14 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                             name="compatibility"
                             placeholder='Breve descripcion...'
                             value={dataForm.compatibility}
+                            onChange={getDataInput}
+                            />
+                    </label>
+                    <label className={styles.descripcion}>Modo de Uso
+                        <textarea
+                            name="use_case"
+                            placeholder='Modo de aplicar'
+                            value={dataForm.use_case}
                             onChange={getDataInput}
                             />
                     </label>

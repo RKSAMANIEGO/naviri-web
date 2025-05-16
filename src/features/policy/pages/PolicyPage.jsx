@@ -68,10 +68,13 @@ const PolicyPage = () => {
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="p-8 md:p-12 lg:p-16">
             <div className="prose lg:prose-lg text-gray-700 mx-auto text-center">
-              <div 
-                dangerouslySetInnerHTML={{ __html: policy.description }} 
-                className="space-y-8 text-left"
-              />
+              <div
+                className="prose lg:prose-lg text-gray-700 mx-auto text-left"
+                style={{ whiteSpace: 'pre-line' }}
+              >
+                {policy.description}
+              </div>
+
               <div>
                 {policy.image?.url && <img src={policy.image.url} alt="Imagen de la política" />}
               </div>

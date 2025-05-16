@@ -22,7 +22,7 @@ const ProductDetails = () => {
         const productSelected = async(nameProduct)=>{
             const response = await productByName(nameProduct);
             if(response) {
-                console.log(response.data.data[0]);
+                // console.log(response.data.data[0]);
                 setProductSelection(response.data.data[0]);
             }
         } 
@@ -129,6 +129,18 @@ const ProductDetails = () => {
                     </div>
                 </div>
             
+                {productSelection.use_case && (
+                    <div className='px-10'>
+                        <h6 className='text-lg font-bold text-pink-500'>Modo de Uso</h6>
+                        <div
+                            className="prose lg:prose-lg text-gray-700 mx-auto text-left"
+                            style={{ whiteSpace: 'pre-line' }}
+                        >
+                        {productSelection.use_case}
+                        </div>
+                    </div>
+                )}
+
                 <ProductDescription product={productSelection} />
                 <RecommendedProducts currentProductId={productSelection?._id} />
                 
