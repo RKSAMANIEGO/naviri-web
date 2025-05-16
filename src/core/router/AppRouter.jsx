@@ -44,6 +44,7 @@ import ScrollToTop from '../../shared/components/ScrollPage/ScrollToPage.js'
 import ContactPage from '../../features/contacts/pages/ContactPage.jsx';
 
 import ProductDetails from '../../features/products/components/ProductDetails.jsx/ProductDetails.jsx';
+import MyEditor from '../../features/Editor/Editor.jsx';
 
 import ShipmentPage from '../../features/shipment/Pages/ShipmentPage.jsx';
 
@@ -101,6 +102,7 @@ const Router = () => {
           </Route>
 
           <Route path="/login" element={<LoginPage />} />  
+          <Route path="/editor" element={<MyEditor />} />  
           <Route element={ <RequireAuth/> }>
             <Route element={<AdminLayout />}>
               <Route path="/admin/panel/dashboard" element={<AdminDashboardPage />} />
