@@ -5,7 +5,7 @@ export const listProducts = async (page = 1, limit = 16) => {
 		const response = await api.get("/products", {
 			params: { page, limit },
 		});
-		console.log(response);
+		// // // console.log(response);
 		return response;
 	} catch (error) {
 		console.error("Ocurrio un Error al Listar el Producto" + error);
@@ -33,7 +33,7 @@ export const deleteProduct = async (nameProduct) => {
 };
 
 export const addProduct = async (form) => {
-	console.log(form);
+	// // console.log(form);
 	try {
 		const response = await api.post("/products", form);
 		return response;
@@ -59,10 +59,10 @@ export const addProduct = async (form) => {
 };
 
 export const updateProduct = async (nameProduct, form) => {
-	console.log(form);
+	// // // console.log(form);
 	try {
 		const response = await api.put(`/products/${nameProduct}`, form);
-		console.log(response);
+		// // // console.log(response);
 		return response;
 	} catch (error) {
 		console.error("Ocurrio un Error al Actualizar el Producto" + error);

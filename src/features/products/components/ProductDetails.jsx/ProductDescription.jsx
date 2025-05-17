@@ -51,7 +51,7 @@ const ProductDescription = () => {
   
     return (
 
-        <div className='w-full justify-center items-center flex flex-col'>
+        <div className='pt-10 w-full justify-center items-center flex flex-col'>
         <article className='flex md:flex-row flex-col gap-10 p-10 sm:p-6 max-[520px]:p-4'>
           <div ref={imgRef}>
             <h6 className='text-sm sm:text-lg font-bold text-pink-500'>ENVÍO <CarOutlined/></h6>

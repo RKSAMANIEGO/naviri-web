@@ -20,14 +20,14 @@ const BlogCard = ({ blog }) => {
 
       <div className="p-6 flex flex-col flex-grow">
         <div className="mb-3">
-          <span className="inline-block bg-[#E1CCF5]/30 text-[#B62A69] px-3 py-1.5 
+          <span className="inline-block bg-[#E1CCF5]/30 text-[#f180a9] px-3 py-1.5 
                         rounded-full text-xs font-medium tracking-wide">
             {blog.category.name}
           </span>
         </div>
 
         <h2 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 
-                      leading-snug hover:text-[#B62A69] transition-colors">
+                      leading-snug hover:text-[#f180a9] transition-colors">
           <a href={`/blog/${blog.id}`}>{blog.title}</a>
         </h2>
 
@@ -40,7 +40,7 @@ const BlogCard = ({ blog }) => {
           <a
             href={`/blog/${blog.id}`}
             className="flex items-center justify-between gap-2 w-full 
-                    text-[#B62A69] hover:text-fuchsia-700 transition-colors"
+                    text-[#f180a9] hover:text-[#f180a9] transition-colors"
           >
             <span className="font-medium text-sm">Leer artículo</span>
             <ArrowRight className="w-4 h-4 md:w-5 md:h-5 transition-transform 

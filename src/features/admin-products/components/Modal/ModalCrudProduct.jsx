@@ -1,70 +1,59 @@
-import { useEffect, useState } from "react";
-import { Upload, Button, message, Tag, Input , Modal , Typography } from "antd";
-import {EditOutlined,UploadOutlined,FileAddOutlined} from "@ant-design/icons";
+import  { useEffect, useState } from 'react'
+import { Upload,Button,message,Tag,Input, Modal , Typography  } from 'antd';
+import { UploadOutlined,FileAddOutlined ,EditOutlined } from '@ant-design/icons';
+import ModalProducto from 'react-modal'
+import styles from '../../styles/productAdmin.module.css';
+import {getCategories} from '../../services/adminCategoriesApi'
+import { addProduct, updateProduct } from '../../services/adminProductsApi';
+import {PropTypes} from 'prop-types'
+import Swal from 'sweetalert2';
 
-
-import ModalProducto from "react-modal";
-import styles from "../../styles/productAdmin.module.css";
-import { getCategories } from "../../services/adminCategoriesApi";
-import { addProduct, updateProduct } from "../../services/adminProductsApi";
-import { PropTypes } from "prop-types";
-import Swal from "sweetalert2";
 
 const { TextArea } = Input;
 const { Text } = Typography;
+const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
 
-const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable,}) => {
-	const [dataForm, setDataForm] = useState({
-		name: "",
-		characteristics: "",
-		benefits: "",
-		compatibility: "",
-		price: "",
-		stock: "",
-		discount: "",
-		pdf: "",
-		subcategory_id: [""],
-	});
-	const [imageFiles, setImageFiles] = useState([]);
-	const [benefits, setBenefits] = useState([]);
-	const [deleteImgs, setDeleteImgs] = useState([]);
-	const [imageUrl, setImageUrl] = useState(null);
-	const [inputValue, setInputValue] = useState("");
-	const [dataCategories, setDataCategories] = useState(null);
-	const [confirmAddProd, setConfirmAddProd] = useState(false);
-	const [confirmPutProd, setConfirmPutProd] = useState(false);
+    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],use_case:""})
+    const [imageFiles, setImageFiles] = useState([]);
+    const [benefits, setBenefits] = useState([]);
+    const [deleteImgs, setDeleteImgs] = useState([]);
+    const [imageUrl, setImageUrl] = useState(null);
+    const [inputValue, setInputValue] = useState('');
+    const [dataCategories,setDataCategories]=useState(null)
+    const [confirmAddProd,setConfirmAddProd]=useState(false)
+    const [confirmPutProd,setConfirmPutProd]=useState(false)
 
+	console.log(imageUrl);
+	
 	//text Area
 	const [visible, setVisible] = useState(false);
 	const [text, setText] = useState("Haz clic para editar");
 	const [tempText, setTempText] = useState("");
 
-	//add prop Dscto
-	//const [dscto,setDscto]=useState(0);
-	console.log(imageUrl);
-	//LISTAR CATEGORIAS
-	const listCategories = async () => {
-		const response = await getCategories();
-		response && setDataCategories(response.data);
-	};
+    //LISTAR CATEGORIAS
+    const listCategories= async()=>{
+        const response =await getCategories();
+        response && setDataCategories(response.data);
+    }
 
-	useEffect(() => {
-		listCategories();
-	}, []);
+    useEffect(()=>{
+        listCategories();
+    },[])
 
-    //opteniendo los datos del producto para actualizar
-	useEffect(() => {
-		if (productPutTable != null) {
-			setDataForm({
-				name: productPutTable?.name || "",
-				characteristics: productPutTable?.characteristics || "",
-				benefits: productPutTable?.benefits || "",
-				compatibility: productPutTable?.compatibility || "",
-				price: productPutTable?.price || "",
-				stock: productPutTable?.stock || "",
-				discount: productPutTable?.discount || 0,
-				subcategory_id: [productPutTable?.subcategories[0]?.id],
-				image: productPutTable?.image?.map((img) => img.url) || [],
+
+    useEffect(()=>{
+        if (productPutTable!=null) {
+            setDataForm({
+                name:productPutTable?.name || '',
+                characteristics:productPutTable?.characteristics || '',
+                benefits:productPutTable?.benefits || '',
+                compatibility:productPutTable?.compatibility || '',
+                price:productPutTable?.price || '',
+                stock:productPutTable?.stock || '',
+                discount:productPutTable?.discount || 0,  
+                subcategory_id:[productPutTable?.subcategories[0]?.id],
+                use_case: productPutTable.use_case || '',
+                image: productPutTable?.image?.map(img => img.url) || []     
 			});
             setText(productPutTable?.compatibility)
 			setImageFiles(productPutTable?.image);
@@ -103,7 +92,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 		onChange: ({ file, fileList: newFileList }) => {
 			if (file.status === "removed") {
 				if (file.id) {
-					// message.info(`Se eliminó la imagen: ${file.id}`);
 					setDeleteImgs((prev) => [...prev, file.id]);
 				}
 			}
@@ -129,8 +117,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 		const { name, value } = e.target;
 
 		if (name === "subcategory_id") {
-			// console.log(value);
-
 			setDataForm((prevData) => ({
 				...prevData,
 				[name]: [Number(value)],
@@ -184,25 +170,19 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
 		formData.append("name", dataForm.name);
 		formData.append("characteristics", text);
-        //formData.append("characteristics", dataForm.compatibility);
 		formData.append("price", dataForm.price);
 		formData.append("stock", dataForm.stock);
 		formData.append("discount", parseInt(dataForm.discount));
         formData.append("compatibility", text);
-		//formData.append("compatibility", dataForm.compatibility);
-        
+        formData.append('use_case', dataForm.use_case);
 		formData.append("subcategory_id", dataForm.subcategory_id[0]);
-		deleteImgs &&
-			deleteImgs.forEach((i) => formData.append("delete_images[]", i));
-
+		deleteImgs && deleteImgs.forEach((i) => formData.append("delete_images[]", i));
 		benefits.forEach((b) => formData.append("benefits[]", b));
 
 		// Agregar imágenes
 		imageFiles.forEach((file) => {
 			if (file.originFileObj) formData.append("images[]", file.originFileObj);
 		});
-
-        console.log(formData);
 
 		let response;
 		if (titleModal === "updateProduct") {
@@ -211,9 +191,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			formData.append("_method", "PUT");
 
 			const response = await updateProduct(nameProd, formData);
-			console.log(formData.name);
-			console.log(dataForm.name);
-			console.log(dataForm.price);
 
 			if (response.status === 422) {
 				Swal.fire({
@@ -275,6 +252,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			compatibility: "",
 			price: 0,
 			stock: 0,
+			use_case: '',
 			discount: 0, // add field discount
 			image: [],
 			subcategory_id: [""],
@@ -291,7 +269,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			backgroundColor: "#f9f9f9",
 			padding: "20px 30px",
 			height: "500px",
-			width: "750px",
+			width: "780px",
 		},
 		overlay: {
 			backgroundColor: "rgba(0,0,0,0.5)",
@@ -299,9 +277,11 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 		},
 	};
 
+
 	//VALIDACION DEPENDIENDO DE QUE OPCION (ADD || PUT )INVOCA AL MODAL
 	let title = "";
 	let descripcion = "";
+
 
 	if (titleModal === "updateProduct") {
 		title = "Editar Producto";
@@ -310,6 +290,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 		title = "Nuevo Producto";
 		descripcion = "Añade un nuevo producto a tu catálogo";
 	}
+
 
 	//TEXT DESCRIPCION
 	const openModal = () => {
@@ -325,6 +306,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 	const handleCancel = () => {
 		setVisible(false);
 	};
+
 
 	return (
 		<ModalProducto
@@ -403,6 +385,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 								/>
 							</label>
 						</div>
+
 						<label className={styles.descripcion}>
 							Descripcion
 							<Text
@@ -423,18 +406,18 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 									value={tempText}
 									onChange={(e) => setTempText(e.target.value)}
 								/>
-							</Modal>
-
-							{/*
-                            <textarea
-                                name="compatibility"
-                                placeholder='Breve descripcion...'
-                                value={dataForm.compatibility}
-                                onChange={getDataInput}
-                            />
-                            */}
-                            
+							</Modal>          
 						</label>
+						
+						
+                    	<label className={styles.descripcion}>Modo de Uso
+                        	<textarea
+                            	name="use_case"
+                            	placeholder='Modo de aplicar'
+                            	value={dataForm.use_case}
+                            	onChange={getDataInput}
+                            	/>
+                    	</label>
 
 						<label>
 							Beneficios
@@ -455,29 +438,32 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 									icon={<FileAddOutlined />}
 									type="primary"
 									onClick={handleAddBenefit}
-									style={{ width: "10%" }}
+									style={{ width: "10%"}}
 								/>
 							</div>
 						</label>
 
 						<div
 							style={{
-								height: "20px",
+								
 								width: "100%",
 								display: "flex",
 								flexWrap: "wrap",
+								padding: "10px 0" 
 							}}>
 							{benefits.map((benefit, index) => (
 								<Tag
 									key={index}
 									closable
 									onClose={() => handleDeleteBenefit(benefit)}
-									style={{ margin: "5px" }}>
+									style={{ margin: "5px"}}>
 									{benefit}
 								</Tag>
 							))}
 						</div>
+
 					</section>
+
 
 					<section className={styles.sectionLast}>
 						<Upload.Dragger {...uploadProps} fileList={imageFiles} height={120}>
