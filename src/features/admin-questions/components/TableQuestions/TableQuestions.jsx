@@ -1,45 +1,57 @@
 import { useEffect, useState } from "react";
-import Table from "react-data-table-component";
+import TableFAQ from "react-data-table-component";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import styles from "./TableQuestions.module.css";
 import ModalQuestions from "../ModalQuestions/ModalQuestions";
 import { listQuestions, deleteQuestions } from "../../services/questionService";
 import Swal from "sweetalert2";
-const TableQuestions = ({confirmaddQuestion}) => {
+
+const TableQuestions = ({ confirmaddQuestion, textSearch }) => {
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const [dataQuestions, setDataQuestions] = useState(null);
-    const [updateDataTable,setUpdateDataTable] = useState(false);
+	const [updateDataTable, setUpdateDataTable] = useState(false);
 
+	console.log(textSearch);
 
-    const lsquestions = async () => {
+	// FILTRAR
+	useEffect(() => {
+		if (dataQuestions && textSearch) {
+			const responseFilter = dataQuestions.filter((obj) =>
+				obj.question.toLowerCase().includes(textSearch.toLowerCase())
+			);
+			responseFilter.length > 0 && setDataQuestions(responseFilter);
+		} else if (dataQuestions && textSearch === "") {
+			lsquestions();
+		}
+	}, [textSearch]);
+
+	// CONSUMIR LA LISTA DE PREGUNTAS
+	const lsquestions = async () => {
 		const response = await listQuestions();
-			if (response) {
-				console.log(response.data.data);
-				setDataQuestions(response.data.data);
-			}
+		if (response) {
+			console.log(response.data.data);
+			setDataQuestions(response.data.data);
+		}
 	};
 
-    useEffect(()=>{
-        lsquestions();
-    },[updateDataTable,confirmaddQuestion])
+	useEffect(() => {
+		lsquestions();
+	}, [updateDataTable, confirmaddQuestion]);
 
 	const styleTableQuestions = {
+
 		headCells: {
 			style: {
-				display: "flex",
-				justifyContent: "start",
-				fontSize: "0.8rem",
+				fontSize: "12px",
 				fontWeight: "bold",
 				color: "rgba(255, 107, 188, 1)",
 				backgroundColor: "rgba(255, 241, 249, 1)",
-				padding: "10px 15px",
+				padding: "5px 15px",
 			},
 		},
 		cells: {
 			style: {
-				display: "flex",
-				justifyContent: "start",
-				fontSize: "0.73rem",
+				fontSize: "10px",
 				fontWeight: "500",
 				padding: "5px 15px",
 				textTransform: "capitalize",
@@ -51,7 +63,7 @@ const TableQuestions = ({confirmaddQuestion}) => {
 		{
 			name: "Preguntas",
 			selector: (row) => row.question,
-			width: "30%",
+			width: "40%",
 		},
 		{
 			name: "Respuestas",
@@ -65,9 +77,9 @@ const TableQuestions = ({confirmaddQuestion}) => {
 					<EditOutlined
 						className={styles.EditOption}
 						onClick={() => {
-                            localStorage.setItem("idQuestions",row.id);
-                            setIsOpenModal(true)
-                        } }
+							localStorage.setItem("idQuestions", row.id);
+							setIsOpenModal(true);
+						}}
 					/>
 					<DeleteOutlined
 						className={styles.DeleteOption}
@@ -89,7 +101,7 @@ const TableQuestions = ({confirmaddQuestion}) => {
 											`La pregunta ha sido eliminada Correctamente.`,
 											"success"
 										);
-                                        setUpdateDataTable(!updateDataTable);
+										setUpdateDataTable(!updateDataTable);
 									} else {
 										Swal.fire(
 											"Ocurrio un Error al Eliminar la Pregunta",
@@ -107,12 +119,14 @@ const TableQuestions = ({confirmaddQuestion}) => {
 		},
 	];
 
-    const updateListQuestions = (confirm)=>(confirm === updateDataTable) ? setUpdateDataTable(!confirm):  setUpdateDataTable(confirm);
-
+	const updateListQuestions = (confirm) =>
+		confirm === updateDataTable
+			? setUpdateDataTable(!confirm)
+			: setUpdateDataTable(confirm);
 
 	return (
 		<>
-			<Table
+			<TableFAQ
 				columns={colums}
 				data={dataQuestions ? dataQuestions : []}
 				customStyles={styleTableQuestions}
@@ -127,7 +141,7 @@ const TableQuestions = ({confirmaddQuestion}) => {
 				isOpen={isOpenModal}
 				onClosed={() => setIsOpenModal(false)}
 				titleModal="updateQuestion"
-                putConfirm={updateListQuestions}
+				putConfirm={updateListQuestions}
 			/>
 		</>
 	);

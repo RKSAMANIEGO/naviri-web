@@ -58,7 +58,7 @@ const AdminLayout = () => {
           </div>
         </header>
       
-        <div className="flex-1 overflow-auto p-6 bg-white rounded-tl-2xl text-black">
+        <div className="flex-1 overflow-auto px-4 bg-white rounded-tl-2xl text-black">
           <Outlet />
         </div>
 

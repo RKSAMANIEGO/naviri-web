@@ -10,6 +10,8 @@
     const {Search} = Input;
     const [isOpen, setIsOpen] =useState(false);
     const [updateDataTable,setUpdateDataTable] = useState(false);
+    const [textInput,setTextInput] = useState("");
+
 
     const updateListQuestions = (confirm)=> (confirm === updateDataTable) ? setUpdateDataTable(!confirm) : setUpdateDataTable(confirm);
     
@@ -17,8 +19,8 @@
       <>
       <div className={styles.wrapperQuestions}> 
           <h1>Preguntas y Respuestas</h1>
-          <Search  placeholder='Ingrese la Pregunta...' enterButton className={styles.search}/>
-          <TableQuestions confirmaddQuestion = {updateDataTable}/>
+          <Search  placeholder='Ingrese la Pregunta...' value={textInput} onChange={(e)=>setTextInput(e.target.value)} enterButton className={styles.search}/>
+          <TableQuestions confirmaddQuestion = {updateDataTable} textSearch={textInput ? textInput : '' }/>
           <Tooltip title="Agregar Una Pregunta"  placement="left" overlayInnerStyle={{background:"white",color:"gray",boxShadow:"0 0 15px gray"}}>
             <PlusOutlined className={styles.addOptions} onClick={()=>setIsOpen(true)}/>
           </Tooltip>

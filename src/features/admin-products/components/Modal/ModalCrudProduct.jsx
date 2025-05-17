@@ -1,423 +1,518 @@
-import React, { useEffect, useState } from 'react'
-import { Upload,Button,message,Form,Tag,Input } from 'antd';
-import { UploadOutlined, DeleteOutlined,FileAddOutlined, InboxOutlined  } from '@ant-design/icons';
-import ModalProducto from 'react-modal'
-import styles from '../../styles/productAdmin.module.css';
-import {getCategories} from '../../services/adminCategoriesApi'
-import { addProduct, updateProduct } from '../../services/adminProductsApi';
-import {PropTypes} from 'prop-types'
-import Swal from 'sweetalert2';
-
-const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
-
-    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""]})
-    const [imageFiles, setImageFiles] = useState([]);
-    const [benefits, setBenefits] = useState([]);
-    const [deleteImgs, setDeleteImgs] = useState([]);
-    const [imageUrl, setImageUrl] = useState(null);
-    const [inputValue, setInputValue] = useState('');
-    const [dataCategories,setDataCategories]=useState(null)
-    const [confirmAddProd,setConfirmAddProd]=useState(false)
-    const [confirmPutProd,setConfirmPutProd]=useState(false)
-    
-    //add prop Dscto
-    //const [dscto,setDscto]=useState(0);
-    console.log(imageUrl);
-    //LISTAR CATEGORIAS
-    const listCategories= async()=>{
-        const response =await getCategories();
-        response && setDataCategories(response.data);
-    }
-
-    useEffect(()=>{
-        listCategories();
-    },[])
+import { useEffect, useState } from "react";
+import { Upload, Button, message, Tag, Input , Modal , Typography } from "antd";
+import {EditOutlined,UploadOutlined,FileAddOutlined} from "@ant-design/icons";
 
 
-    useEffect(()=>{
-        if (productPutTable!=null) {
-            setDataForm({
-                name:productPutTable?.name || '',
-                characteristics:productPutTable?.characteristics || '',
-                benefits:productPutTable?.benefits || '',
-                compatibility:productPutTable?.compatibility || '',
-                price:productPutTable?.price || '',
-                stock:productPutTable?.stock || '',
-                discount:productPutTable?.discount || 0,  
-                subcategory_id:[productPutTable?.subcategories[0]?.id],
-                image: productPutTable?.image?.map(img => img.url) || []     
+import ModalProducto from "react-modal";
+import styles from "../../styles/productAdmin.module.css";
+import { getCategories } from "../../services/adminCategoriesApi";
+import { addProduct, updateProduct } from "../../services/adminProductsApi";
+import { PropTypes } from "prop-types";
+import Swal from "sweetalert2";
 
-            })
+const { TextArea } = Input;
+const { Text } = Typography;
 
-            setImageFiles(productPutTable?.image)
-            setImageUrl(productPutTable?.image.url);
-            setBenefits(productPutTable?.benefits || []);
+const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable,}) => {
+	const [dataForm, setDataForm] = useState({
+		name: "",
+		characteristics: "",
+		benefits: "",
+		compatibility: "",
+		price: "",
+		stock: "",
+		discount: "",
+		pdf: "",
+		subcategory_id: [""],
+	});
+	const [imageFiles, setImageFiles] = useState([]);
+	const [benefits, setBenefits] = useState([]);
+	const [deleteImgs, setDeleteImgs] = useState([]);
+	const [imageUrl, setImageUrl] = useState(null);
+	const [inputValue, setInputValue] = useState("");
+	const [dataCategories, setDataCategories] = useState(null);
+	const [confirmAddProd, setConfirmAddProd] = useState(false);
+	const [confirmPutProd, setConfirmPutProd] = useState(false);
+
+	//text Area
+	const [visible, setVisible] = useState(false);
+	const [text, setText] = useState("Haz clic para editar");
+	const [tempText, setTempText] = useState("");
+
+	//add prop Dscto
+	//const [dscto,setDscto]=useState(0);
+	console.log(imageUrl);
+	//LISTAR CATEGORIAS
+	const listCategories = async () => {
+		const response = await getCategories();
+		response && setDataCategories(response.data);
+	};
+
+	useEffect(() => {
+		listCategories();
+	}, []);
+
+    //opteniendo los datos del producto para actualizar
+	useEffect(() => {
+		if (productPutTable != null) {
+			setDataForm({
+				name: productPutTable?.name || "",
+				characteristics: productPutTable?.characteristics || "",
+				benefits: productPutTable?.benefits || "",
+				compatibility: productPutTable?.compatibility || "",
+				price: productPutTable?.price || "",
+				stock: productPutTable?.stock || "",
+				discount: productPutTable?.discount || 0,
+				subcategory_id: [productPutTable?.subcategories[0]?.id],
+				image: productPutTable?.image?.map((img) => img.url) || [],
+			});
+            setText(productPutTable?.compatibility)
+			setImageFiles(productPutTable?.image);
+			setImageUrl(productPutTable?.image.url);
+			setBenefits(productPutTable?.benefits || []);
+		}
+	}, [productPutTable]);
+
+	//MANEJO DE BENEFICIOS
+	const handleAddBenefit = () => {
+		if (!inputValue) return;
+
+		if (benefits.includes(inputValue)) {
+			message.warning("Este beneficio ya ha sido agregado.");
+			return;
+		}
+
+		setBenefits([...benefits, inputValue]);
+		setInputValue(""); // Limpiar el campo de entrada
+	};
+
+	const handleDeleteBenefit = (benefit) => {
+		setBenefits(benefits.filter((item) => item !== benefit));
+	};
+
+	//MANEJO DE LA IMAGEN
+
+	const uploadProps = {
+		beforeUpload: (file) => {
+			const isImage = file.type.startsWith("image/");
+			if (!isImage) {
+				message.error("Solo se permiten imágenes (JPG, PNG, WEBP)!");
+			}
+			return isImage ? false : Upload.LIST_IGNORE;
+		},
+		onChange: ({ file, fileList: newFileList }) => {
+			if (file.status === "removed") {
+				if (file.id) {
+					// message.info(`Se eliminó la imagen: ${file.id}`);
+					setDeleteImgs((prev) => [...prev, file.id]);
+				}
+			}
+
+			newFileList = newFileList.map((file) => {
+				if (file.originFileObj && !file.preview) {
+					file.preview = URL.createObjectURL(file.originFileObj);
+				}
+				return file;
+			});
+			setImageFiles(newFileList);
+		},
+
+		imageFiles,
+		listType: "picture-card",
+		maxCount: 6,
+		accept: "image/jpeg,image/png,image/webp",
+		multiple: true,
+	};
+
+	//OBTENER LOS DATOS DEL FORM
+	const getDataInput = (e) => {
+		const { name, value } = e.target;
+
+		if (name === "subcategory_id") {
+			// console.log(value);
+
+			setDataForm((prevData) => ({
+				...prevData,
+				[name]: [Number(value)],
+			}));
+		} else {
+			setDataForm((prevData) => ({
+				...prevData,
+				[name]: value,
+			}));
+		}
+	};
+
+	//ENVIAR FORMULARIO DE AGREGAR
+	const handlerAddProduct = async (e) => {
+		e.preventDefault();
+
+		if (!dataForm.name) {
+			message.error("Ingrese el Nombre del Producto");
+			return;
+		}
+		if (!dataForm.subcategory_id[0]) {
+			message.error("Ingrese Una Categoria");
+			return;
+		}
+		if (!dataForm.price) {
+			message.error("Ingrese el Precio del Producto");
+			return;
+		}
+		if (!dataForm.stock) {
+			message.error("Ingrese el Stock del Producto");
+			return;
+		}
+        if(text === ""){
+			message.error("Ingrese la Descripción del Producto");
+			return;
         }
-    },[productPutTable])
+		if (benefits.length === 0) {
+			message.error("Agrega al menos un beneficio");
+			return;
+		}
+		if (imageFiles.length === 0) {
+			message.error("Carga al menos una imagen");
+			return;
+		}
+		if (!dataForm.discount) {
+			message.error("Ingrese el descuento del Producto");
+			return;
+		}
 
-    //MANEJO DE BENEFICIOS
-    const handleAddBenefit = () => {
-        if (!inputValue) return;
+		const formData = new FormData();
 
-        if (benefits.includes(inputValue)) {
-            message.warning('Este beneficio ya ha sido agregado.');
-            return;
-        }
-
-        setBenefits([...benefits, inputValue]);
-        setInputValue(''); // Limpiar el campo de entrada
-        };
-
-    const handleDeleteBenefit = (benefit) => {        
-        setBenefits(benefits.filter((item) => item !== benefit));
-    };
-
-    //MANEJO DE LA IMAGEN
-
-    const uploadProps = {
-        beforeUpload: (file) => {
-        const isImage = file.type.startsWith('image/');
-        if (!isImage) {
-            message.error('Solo se permiten imágenes (JPG, PNG, WEBP)!');
-        }
-        return isImage ? false : Upload.LIST_IGNORE;
-        },
-        onChange: ({ file,fileList: newFileList }) => {
-
-            if (file.status === 'removed') {
-                if (file.id) {
-                    // message.info(`Se eliminó la imagen: ${file.id}`);
-                    setDeleteImgs(prev => [...prev, file.id]);
-                }
-            }
-
-            newFileList = newFileList.map(file => {
-            if (file.originFileObj && !file.preview) {
-                file.preview = URL.createObjectURL(file.originFileObj);
-            }
-            return file;
-            });
-            setImageFiles(newFileList);
-        },
+		formData.append("name", dataForm.name);
+		formData.append("characteristics", text);
+        //formData.append("characteristics", dataForm.compatibility);
+		formData.append("price", dataForm.price);
+		formData.append("stock", dataForm.stock);
+		formData.append("discount", parseInt(dataForm.discount));
+        formData.append("compatibility", text);
+		//formData.append("compatibility", dataForm.compatibility);
         
-        imageFiles,
-        listType: "picture-card",
-        maxCount: 6,
-        accept: "image/jpeg,image/png,image/webp",
-        multiple: true,
-    };
+		formData.append("subcategory_id", dataForm.subcategory_id[0]);
+		deleteImgs &&
+			deleteImgs.forEach((i) => formData.append("delete_images[]", i));
 
-    //OBTENER LOS DATOS DEL FORM
-    const getDataInput= (e)=>{
-        const {name,value}=e.target;
+		benefits.forEach((b) => formData.append("benefits[]", b));
 
-        if(name==="subcategory_id"){
-            // console.log(value);
-            
-            setDataForm((prevData)=>({
-                ...prevData,
-                [name]:[Number(value)]
-            }));
-        }else{
-            setDataForm((prevData)=>({
-                ...prevData,
-                [name]:value
-            }));
-        }
+		// Agregar imágenes
+		imageFiles.forEach((file) => {
+			if (file.originFileObj) formData.append("images[]", file.originFileObj);
+		});
 
-    }
+        console.log(formData);
 
-    //ENVIAR FORMULARIO DE AGREGAR
-    const handlerAddProduct = async (e) => {
-        e.preventDefault();
-        
-        if (!dataForm.name) { message.error("Ingrese el Nombre del Producto"); return; }
-        if (!dataForm.subcategory_id[0]) { message.error("Ingrese Una Categoria"); return; }
-        if (!dataForm.price) { message.error("Ingrese el Precio del Producto"); return; }
-        if (!dataForm.stock) {message.error("Ingrese el Stock del Producto"); return;}
-        if (!dataForm.compatibility) {message.error("Ingrese la Descripcion del Producto"); return;}
-        if (benefits.length === 0) { message.error('Agrega al menos un beneficio'); return; }
-        if (imageFiles.length   === 0) { message.error('Carga al menos una imagen'); return; }
-        if (!dataForm.discount) {
-                
-            message.error("Ingrese el descuento del Producto"); return;
-        }
+		let response;
+		if (titleModal === "updateProduct") {
+			const nameProd = localStorage.getItem("nameProduct");
 
-        const formData = new FormData();
-        
-        formData.append('name', dataForm.name);
-        formData.append('characteristics', dataForm.compatibility);
-        formData.append('price', dataForm.price);
-        formData.append('stock', dataForm.stock);
-        formData.append('discount',parseInt(dataForm.discount));
-        formData.append('compatibility', dataForm.compatibility);
-        formData.append('subcategory_id', dataForm.subcategory_id[0]);
-        deleteImgs && deleteImgs.forEach(i => formData.append('delete_images[]', i));
+			formData.append("_method", "PUT");
 
-        benefits.forEach(b => formData.append('benefits[]', b));
+			const response = await updateProduct(nameProd, formData);
+			console.log(formData.name);
+			console.log(dataForm.name);
+			console.log(dataForm.price);
 
-        // Agregar imágenes
-        imageFiles.forEach(file => {
-            if (file.originFileObj) formData.append('images[]', file.originFileObj);
-        });
+			if (response.status === 422) {
+				Swal.fire({
+					title: "¡El Producto Ya Existe!",
+					text: "Intente con otro nombre",
+					icon: "warning",
+					timer: 2000,
+				});
+			} else if (response.status !== 200) {
+				Swal.fire({
+					title: response.message,
+					text: "Error al Actualizar el producto",
+					icon: "error",
+					timer: 2000,
+				});
+			} else if (response.status === 200) {
+				Swal.fire({
+					title: "¡Producto Actualizado con éxito!",
+					icon: "success",
+					timer: 2000,
+				});
+				confirmActualizacionProducto(!confirmPutProd);
+				setConfirmPutProd(!confirmPutProd);
+				clearForm();
+				onClose();
+			}
+		} else {
+			console.log(dataForm.discount);
 
+			response = await addProduct(formData);
 
-            let response;
-            if(titleModal==="updateProduct"){
-                const nameProd= localStorage.getItem("nameProduct");
+			if (response.status === 422 || response.status === 409) {
+				Swal.fire({
+					title: "¡El Producto Ya Existe!",
+					text: "Intente con otro nombre",
+					icon: "warning",
+					timer: 2000,
+				});
+			} else if (response.status === 200) {
+				Swal.fire({
+					title: "¡Producto agregado con éxito!",
+					icon: "success",
+					timer: 2000,
+				});
 
-                formData.append('_method', 'PUT');
+				clearForm();
+				setConfirmAddProd(!confirmAddProd);
+				confirmAddProduct(!confirmAddProd);
+				onClose();
+			}
+		}
+	};
+	//LIMPIAR CAMPOS DEL FORM
+	const clearForm = () => {
+		setImageFiles([]);
+		setBenefits([]);
+		setDataForm({
+			name: "",
+			compatibility: "",
+			price: 0,
+			stock: 0,
+			discount: 0, // add field discount
+			image: [],
+			subcategory_id: [""],
+		});
+        setText("Haz clic para editar");
+	};
 
-                const response = await updateProduct(nameProd, formData);
-                console.log(formData.name);
-                console.log(dataForm.name);
-                console.log(dataForm.price);
+	//ESTILOS DEL MODAL
+	const customStyles = {
+		content: {
+			top: "50%",
+			left: "50%",
+			transform: "translate(-50%, -50%)",
+			backgroundColor: "#f9f9f9",
+			padding: "20px 30px",
+			height: "500px",
+			width: "750px",
+		},
+		overlay: {
+			backgroundColor: "rgba(0,0,0,0.5)",
+			zIndex: 100,
+		},
+	};
 
-                if(response.status === 422){
-                    Swal.fire({
-                        title: '¡El Producto Ya Existe!',
-                        text: 'Intente con otro nombre',
-                        icon: 'warning',
-                        timer: 2000,
-                    });
-                }
-                else if (response.status!==200) {
-                    Swal.fire({
-                        title:  response.message,
-                        text: 'Error al Actualizar el producto',
-                        icon: 'error',
-                        timer: 2000,
-                    });
-                }
-                else if(response.status===200){
-                    Swal.fire({
-                        title: '¡Producto Actualizado con éxito!',
-                        icon: 'success',
-                        timer: 2000,
-                    });
-                    confirmActualizacionProducto(!confirmPutProd);
-                    setConfirmPutProd(!confirmPutProd);
-                    clearForm();
-                    onClose();
-                }
+	//VALIDACION DEPENDIENDO DE QUE OPCION (ADD || PUT )INVOCA AL MODAL
+	let title = "";
+	let descripcion = "";
 
-            }else{
-                console.log(dataForm.discount);
-                
-                response = await addProduct(formData);
+	if (titleModal === "updateProduct") {
+		title = "Editar Producto";
+		descripcion = "Modifica los detalles del producto";
+	} else {
+		title = "Nuevo Producto";
+		descripcion = "Añade un nuevo producto a tu catálogo";
+	}
 
-                if (response.status===422 || response.status===409) {
-                Swal.fire({
-                        title: '¡El Producto Ya Existe!',
-                        text: 'Intente con otro nombre',
-                        icon: 'warning',
-                        timer: 2000,
-                    });
-                }
-                else if(response.status===200){
-                Swal.fire({
-                    title: '¡Producto agregado con éxito!',
-                    icon: 'success',
-                    timer: 2000,
-                });
+	//TEXT DESCRIPCION
+	const openModal = () => {
+		setTempText(text); // Para precargar el texto actual
+		setVisible(true);
+	};
 
-                clearForm();
-                setConfirmAddProd(!confirmAddProd);
-                confirmAddProduct(!confirmAddProd);
-                onClose();
-                }
-            }
-    
-    };
-    //LIMPIAR CAMPOS DEL FORM
-    const clearForm=()=>{
+	const handleOk = () => {
+		setText(tempText);
+		setVisible(false);
+	};
 
-        setImageFiles([]);
-        setBenefits([]);
-        setDataForm({
-            name:'',
-            compatibility:'',
-            price:0,
-            stock:0,
-            discount:0, // add field discount
-            image: [],
-            subcategory_id: [''],   
-        })
-    }
+	const handleCancel = () => {
+		setVisible(false);
+	};
 
-   //ESTILOS DEL MODAL
-    const customStyles= {
-        content:{
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: '#f9f9f9',
-            padding: '20px 30px',
-            height:"500px",
-            width:"750px",
-        },
-        overlay:{
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 100
-        }
+	return (
+		<ModalProducto
+			isOpen={isOpen}
+			onRequestClose={onClose}
+			style={customStyles}>
+			<div className={styles.productoAdminCrud}>
+				<h3>{title}</h3>
 
-    }
+				<p style={{ fontSize: "12px" }}>{descripcion}</p>
 
-    //VALIDACION DEPENDIENDO DE QUE OPCION (ADD || PUT )INVOCA AL MODAL
-    let title="";
-    let descripcion="";
+				<form className={styles.form}>
+					<section className={styles.sectionFirts}>
+						<label>
+							Producto
+							<input
+								type="text"
+								placeholder="Nombre del producto"
+								name="name"
+								value={dataForm.name}
+								onChange={getDataInput}
+								required
+							/>
+						</label>
 
-    if(titleModal==="updateProduct"){
-        title="Editar Producto";
-        descripcion="Modifica los detalles del producto";
-    }else{
-        title="Nuevo Producto"
-        descripcion="Añade un nuevo producto a tu catálogo"
-    }
+						<label>
+							Categoria
+							<select
+								name="subcategory_id"
+								value={dataForm?.subcategory_id || ""}
+								onChange={getDataInput}>
+								<option value="">Selecione una categoria</option>
 
-    return (
-        <ModalProducto
-            isOpen={isOpen}
-            onRequestClose={onClose}
-            style={customStyles}
-        >
-        <div className={styles.productoAdminCrud}>
-            <h3>{title}</h3>
+								{dataCategories?.map((obj) =>
+									obj.subcategories.map((subCat) => (
+										<option key={subCat.id} value={subCat.id}>
+											{subCat.name.toLowerCase()}
+										</option>
+									))
+								)}
+							</select>
+						</label>
 
-            <p style={{fontSize:"12px"}}>{descripcion}</p>
+						<div className={styles.div}>
+							<label>
+								Precio
+								<input
+									type="number"
+									name="price"
+									value={dataForm.price}
+									onChange={getDataInput}
+								/>
+							</label>
 
-            <form className={styles.form} >
-                <section className={styles.sectionFirts}>
-                    <label>Producto
-                        <input type='text'
-                            placeholder='Nombre del producto'
-                            name='name'
-                            value={dataForm.name}
-                            onChange={getDataInput}
-                            required/>
-                    </label>
+							{/**** add prop Dscto ****/}
 
-                    <label>Categoria
-                        <select
-                            name="subcategory_id"
-                            value={dataForm?.subcategory_id || ''}
-                            onChange={getDataInput}>
-                            <option value=''>Selecione una categoria</option>
+							<label>
+								Dscto
+								<input
+									type="number"
+									name="discount"
+									value={dataForm.discount}
+									onChange={getDataInput}
+								/>
+							</label>
 
-                            {dataCategories?.map((obj) => (
-                                obj.subcategories.map(subCat => (
-                                    <option key={subCat.id} value={subCat.id}>{subCat.name.toLowerCase()}</option>
-                                ))
-                            ))}
+							{/** ------------------*/}
 
-                        </select>
-                    </label>
+							<label>
+								Stock
+								<input
+									type="number"
+									name="stock"
+									value={dataForm.stock}
+									onChange={getDataInput}
+								/>
+							</label>
+						</div>
+						<label className={styles.descripcion}>
+							Descripcion
+							<Text
+                                className="truncate" 
+								onClick={openModal}
+								style={{ cursor: "pointer", fontSize: "14px", border:"1px solid #aaa", padding: '7px 15px', borderRadius:"5px" }}>
+								{text} <EditOutlined />
+							</Text>
+							<Modal
+								title="Editar Descripción"
+								open={visible}
+								onOk={handleOk}
+								onCancel={handleCancel}
+								okText="Guardar"
+								cancelText="Cancelar">
+								<TextArea
+                                    rows={10} 
+									value={tempText}
+									onChange={(e) => setTempText(e.target.value)}
+								/>
+							</Modal>
 
-                    <div className={styles.div}>
-                        <label>Precio
-                            <input
-                                type='number'
-                                name='price'
-                                value={dataForm.price}
+							{/*
+                            <textarea
+                                name="compatibility"
+                                placeholder='Breve descripcion...'
+                                value={dataForm.compatibility}
                                 onChange={getDataInput}
                             />
-                        </label>
+                            */}
+                            
+						</label>
 
-                        {/**** add prop Dscto ****/}
+						<label>
+							Beneficios
+							<div style={{ display: "flex", gap: "5px" }}>
+								<Input
+									value={inputValue}
+									onChange={(e) => setInputValue(e.target.value)}
+									onKeyDown={(e) => {
+										if (e.key === "Enter") {
+											e.preventDefault(); // evita el submit
+											handleAddBenefit();
+										}
+									}}
+									placeholder="Agregar beneficio"
+								/>
 
-                        <label>Dscto
-                            <input
-                                type='number'
-                                name='discount'
-                                value={dataForm.discount}
-                                onChange={getDataInput}
-                            />
-                        </label>
+								<Button
+									icon={<FileAddOutlined />}
+									type="primary"
+									onClick={handleAddBenefit}
+									style={{ width: "10%" }}
+								/>
+							</div>
+						</label>
 
-                        {/** ------------------*/}
+						<div
+							style={{
+								height: "20px",
+								width: "100%",
+								display: "flex",
+								flexWrap: "wrap",
+							}}>
+							{benefits.map((benefit, index) => (
+								<Tag
+									key={index}
+									closable
+									onClose={() => handleDeleteBenefit(benefit)}
+									style={{ margin: "5px" }}>
+									{benefit}
+								</Tag>
+							))}
+						</div>
+					</section>
 
-                        <label>Stock
-                            <input
-                                type='number'
-                                name='stock'
-                                value={dataForm.stock}
-                                onChange={getDataInput}
-                                />
-                        </label>
-                    </div>
-                    <label className={styles.descripcion}>Descripcion
-                        <textarea
-                            name="compatibility"
-                            placeholder='Breve descripcion...'
-                            value={dataForm.compatibility}
-                            onChange={getDataInput}
-                            />
-                    </label>
+					<section className={styles.sectionLast}>
+						<Upload.Dragger {...uploadProps} fileList={imageFiles} height={120}>
+							<div className="text-center">
+								<UploadOutlined className="text-2xl mb-2" />
+								<p className="text-sm">
+									Arrastra tu imagen aquí o haz clic para seleccionar
+								</p>
+							</div>
+						</Upload.Dragger>
 
-                    <label >Beneficios
-                        <div style={{display:"flex", gap:"5px"}}>
-                        <Input
-                            value={inputValue}
-                            onChange={e => setInputValue(e.target.value)}
-                            onKeyDown={e => {
-                                if (e.key === 'Enter') {
-                                e.preventDefault();    // evita el submit
-                                handleAddBenefit();
-                                }
-                            }}
-                            placeholder="Agregar beneficio"
-                        />
-
-                        <Button icon={<FileAddOutlined/>} type="primary" onClick={handleAddBenefit} style={{ width: '10%'}} />
-                        </div>
-                    </label>
-
-                    <div style={{height: "20px" , width:"100%", display:"flex" , flexWrap:"wrap"}}>
-                        {benefits.map((benefit, index) => (
-                        <Tag key={index} closable onClose={() => handleDeleteBenefit(benefit)} style={{ margin: '5px'}}>
-                                            {benefit}
-                        </Tag> ))}
-                    </div>
-
-                </section>
-
-                
-                <section className={styles.sectionLast}>
-                
-
-                    <Upload.Dragger {...uploadProps} fileList={imageFiles} height={120} >
-                        <div className="text-center">
-                            <UploadOutlined className="text-2xl mb-2" />
-                            <p className="text-sm">Arrastra tu imagen aquí o haz clic para seleccionar</p>
-                        </div>
-                    </Upload.Dragger>
-                
-
-                    <div className={styles.footerButtonWrapper}> 
-                        <button
-                            className='bg-pink-500 h-10 text-sm text-white px-4 rounded hover:bg-pink-600 cursor-pointer'
-                            onClick={handlerAddProduct}
-                        >
-                            {title}
-                        </button>
-                    </div>                
-                </section>
-
-            </form>
-            <label onClick={()=>{
-                onClose();
-                setImageUrl("")
-            }} className={styles.closeModal}>&#215;
-            </label>
-        </div>
-
-        </ModalProducto>
-    )
-}
-ModalCrudProduct.propTypes={
-    titleModal:PropTypes.string,
-    confirmAddProduct:PropTypes.func,
-    confirmPutProduct:PropTypes.func,
-
-}
-export default ModalCrudProduct
+						<div className={styles.footerButtonWrapper}>
+							<button
+								className="bg-pink-500 h-10 text-sm text-white px-4 rounded hover:bg-pink-600 cursor-pointer"
+								onClick={handlerAddProduct}>
+								{title}
+							</button>
+						</div>
+					</section>
+				</form>
+				<label
+					onClick={() => {
+						onClose();
+						setImageUrl("");
+					}}
+					className={styles.closeModal}>
+					&#215;
+				</label>
+			</div>
+		</ModalProducto>
+	);
+};
+ModalCrudProduct.propTypes = {
+	titleModal: PropTypes.string,
+	confirmAddProduct: PropTypes.func,
+	confirmPutProduct: PropTypes.func,
+};
+export default ModalCrudProduct;
