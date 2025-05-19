@@ -8,6 +8,7 @@ import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
 import ProductDescription from './ProductDescription';
 import RecommendedProducts from './RecommendedProducts';
 import {lanzarConfetti} from '../../../../shared/animation/Confetti/confetti';
+import ContentCaseUse from './ContentCaseUse';
 const ProductDetails = () => {
 
     const [productSelection, setProductSelection]= useState(null);
@@ -128,7 +129,10 @@ const ProductDetails = () => {
                                 
                     </div>
                 </div>
-            
+                
+                <ContentCaseUse data={productSelection.use_case}/>
+                
+                {/* 
                 {productSelection.use_case && (
                     <div className='px-10'>
                         <h6 className='text-lg font-bold text-pink-500'>Modo de Uso</h6>
@@ -140,6 +144,7 @@ const ProductDetails = () => {
                         </div>
                     </div>
                 )}
+                */}
 
                 <ProductDescription product={productSelection} />
                 <RecommendedProducts currentProductId={productSelection?._id} />

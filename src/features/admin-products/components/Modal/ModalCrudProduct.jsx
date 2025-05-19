@@ -25,10 +25,17 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
 	console.log(imageUrl);
 	
-	//text Area
+	//text Area Descripcion
 	const [visible, setVisible] = useState(false);
 	const [text, setText] = useState("Haz clic para editar");
 	const [tempText, setTempText] = useState("");
+
+	//text Area caso de uso
+	const [visibleCaseUse, setVisibleCaseUse] = useState(false);
+	const [textCaseUse, setTextCaseUse] = useState("Haz clic para editar");
+	const [tempTextCaseUse, setTempTextCaseUse] = useState("");
+
+
 
     //LISTAR CATEGORIAS
     const listCategories= async()=>{
@@ -55,6 +62,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                 use_case: productPutTable.use_case || '',
                 image: productPutTable?.image?.map(img => img.url) || []     
 			});
+			setTextCaseUse(productPutTable?.use_case)  /// ***
             setText(productPutTable?.compatibility)
 			setImageFiles(productPutTable?.image);
 			setImageUrl(productPutTable?.image.url);
@@ -153,6 +161,12 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			message.error("Ingrese la Descripción del Producto");
 			return;
         }
+
+		if(textCaseUse === ""){
+			message.error("Ingrese el Caso de Uso del Producto");
+			return;
+		}
+
 		if (benefits.length === 0) {
 			message.error("Agrega al menos un beneficio");
 			return;
@@ -174,7 +188,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 		formData.append("stock", dataForm.stock);
 		formData.append("discount", parseInt(dataForm.discount));
         formData.append("compatibility", text);
-        formData.append('use_case', dataForm.use_case);
+        formData.append('use_case', textCaseUse);
+		//formData.append('use_case', dataForm.use_case);
 		formData.append("subcategory_id", dataForm.subcategory_id[0]);
 		deleteImgs && deleteImgs.forEach((i) => formData.append("delete_images[]", i));
 		benefits.forEach((b) => formData.append("benefits[]", b));
@@ -217,7 +232,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 				clearForm();
 				onClose();
 			}
-		} else {
+			} else {
 			console.log(dataForm.discount);
 
 			response = await addProduct(formData);
@@ -243,6 +258,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			}
 		}
 	};
+
 	//LIMPIAR CAMPOS DEL FORM
 	const clearForm = () => {
 		setImageFiles([]);
@@ -258,6 +274,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			subcategory_id: [""],
 		});
         setText("Haz clic para editar");
+		setTextCaseUse("Haz clic para editar");
 	};
 
 	//ESTILOS DEL MODAL
@@ -307,6 +324,27 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 		setVisible(false);
 	};
 
+	/**
+	//text Area Descripcion
+	const [visible, setVisible] = useState(false);
+	const [text, setText] = useState("Haz clic para editar");
+	const [tempText, setTempText] = useState(""); 
+	*/
+	
+	//TEXT CASE USE
+	const openModalCaseUse = () => {
+		setTempTextCaseUse(textCaseUse); // Para precargar el texto actual
+		setVisibleCaseUse(true);
+	};
+
+	const handleOkCaseUse = () => {
+		setTextCaseUse(tempTextCaseUse);
+		setVisibleCaseUse(false);
+	};
+
+	const handleCancelCaseUse = () => {
+		setVisibleCaseUse(false);
+	};
 
 	return (
 		<ModalProducto
@@ -396,20 +434,46 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 							</Text>
 							<Modal
 								title="Editar Descripción"
+								centered
 								open={visible}
 								onOk={handleOk}
 								onCancel={handleCancel}
 								okText="Guardar"
 								cancelText="Cancelar">
 								<TextArea
-                                    rows={10} 
+                                    rows={15} 
 									value={tempText}
 									onChange={(e) => setTempText(e.target.value)}
 								/>
 							</Modal>          
 						</label>
+
+
+						<label className={styles.descripcion}>
+							Caso de Uso
+							<Text
+                                className="truncate" 
+								onClick={openModalCaseUse}
+								style={{ cursor: "pointer", fontSize: "14px", border:"1px solid #aaa", padding: '7px 15px', borderRadius:"5px" }}>
+								{textCaseUse} <EditOutlined />
+							</Text>
+							<Modal
+								title="Editar Caso de Uso"
+								centered
+								open={visibleCaseUse}
+								onOk={handleOkCaseUse}
+								onCancel={handleCancelCaseUse}
+								okText="Guardar"
+								cancelText="Cancelar">
+								<TextArea
+                                    rows={15} 
+									value={tempTextCaseUse}
+									onChange={(e) => setTempTextCaseUse(e.target.value)}
+								/>
+							</Modal>          
+						</label>
 						
-						
+						{/*
                     	<label className={styles.descripcion}>Modo de Uso
                         	<textarea
                             	name="use_case"
@@ -418,6 +482,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
                             	onChange={getDataInput}
                             	/>
                     	</label>
+						*/}
 
 						<label>
 							Beneficios
