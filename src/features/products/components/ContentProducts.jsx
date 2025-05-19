@@ -435,12 +435,14 @@ const ContentProducts = ({ categorie }) => {
 						<ul>
 							<li className="font-bold text-pink-300">CATEGORIAS</li>
 							{[...listCategorie].map((cat, index) => (
+								
 								<li
 									key={index}
 									className="text-[13px] sm:text-[15px] text-white capitalize cursor-pointer p-1 hover:text-pink-300"
 									onClick={() => listProductsByCat(cat)}>
 									{cat.toLowerCase()}
 								</li>
+								
 							))}
 							<li
 								className="text-[12px] text-pink-300 border-[1px] border-pink-300 text-center rounded-sm py-1 m-3 cursor-pointer hover:bg-pink-200 hover:text-pink-400"

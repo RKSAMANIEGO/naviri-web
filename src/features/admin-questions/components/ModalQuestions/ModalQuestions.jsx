@@ -9,7 +9,7 @@ Modal.setAppElement("#root");
 const ModalQuestions = ({ isOpen, onClosed, titleModal,addConfirm,putConfirm }) => {
 
 	const [form] = Form.useForm();
-  const [successModified,setSuccesModified] = useState(false);
+  	const [successModified,setSuccesModified] = useState(false);
 
   //BUSCAR PREGUNTA POR SU ID PARA ACTUALIZAR
 	if (titleModal === "updateQuestion") {
@@ -17,7 +17,6 @@ const ModalQuestions = ({ isOpen, onClosed, titleModal,addConfirm,putConfirm }) 
     const getQuestionsId = async (idQues) => {
 		  const response = await questionById(idQues);
 		  if (response.status === 200) {
-          console.log(response.data);
 			    form.setFieldsValue({
 				    question: response.data.question, 
 				    answer: response.data.answer, 

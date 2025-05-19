@@ -82,7 +82,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
         cell:row=>(
             <div className={styles.wrapperOptions}>
                 <i className="fa-solid fa-eye" onClick={ async()=>{
-
+                
                 const productById = await productByName(row.name);
                 productById &&  setProductSelect(productById.data.data[0]);
                 setOpenModalDetailsProduct(true);
@@ -91,6 +91,7 @@ const ProductsTable = ({products,productFilter,productDelete,isUpdateProduct}) =
                 <i className="fa-solid fa-pencil" onClick={async()=>{
                     localStorage.setItem("nameProduct",row.name);
                     const productById = await productByName(row.name);
+                    console.log(productById);
                     productById &&  setProductPutSelect(productById.data.data[0]);
                     setOpenModalProducts(true)
                 }}></i>

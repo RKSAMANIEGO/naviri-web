@@ -107,7 +107,9 @@ const SectionServices = () => {
                                     </div>
                                 )}
                                 <h3>{service.title}</h3>
-                                <p>{service.description}</p>
+                                <p className="line-clamp-3 text-sm leading-relaxed">
+                                    {service.description}
+                                </p>
                                 <ul>
                                     {service.features && service.features.map((feature, index) => (
                                         <li key={index}>{feature}</li>

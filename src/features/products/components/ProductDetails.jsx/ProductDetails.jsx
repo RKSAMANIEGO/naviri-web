@@ -8,6 +8,7 @@ import { FaShoppingCart, FaWhatsapp } from 'react-icons/fa';
 import ProductDescription from './ProductDescription';
 import RecommendedProducts from './RecommendedProducts';
 import {lanzarConfetti} from '../../../../shared/animation/Confetti/confetti';
+import ContentCaseUse from './ContentCaseUse';
 const ProductDetails = () => {
 
     const [productSelection, setProductSelection]= useState(null);
@@ -22,7 +23,7 @@ const ProductDetails = () => {
         const productSelected = async(nameProduct)=>{
             const response = await productByName(nameProduct);
             if(response) {
-                console.log(response.data.data[0]);
+                // console.log(response.data.data[0]);
                 setProductSelection(response.data.data[0]);
             }
         } 
@@ -88,9 +89,8 @@ const ProductDetails = () => {
                     </div>
             
                     <div className='flex flex-col gap-4 lg:my-5 md:w-1/2 w-full'>
-                        <h2 className='text-pink-400 text-2xl sm:text-3xl lg:text-4xl font-bold capitalize border-b-2 border-pink-300 border-dashed pb-3 relative w-[95%]'>
+                        <h2 className='text-[#505666] text-2xl sm:text-3xl lg:text-4xl font-bold capitalize relative w-[95%]'>
                             {productSelection.name}
-                            <ScissorOutlined className='rotate-180 absolute -bottom-[8px] sm:-bottom-[10px] -right-5 text-[16px] sm:text-[20px]' />
                         </h2>
                         <p className='text-[12px] sm:text-[13px] lg:text-[16px]'>{productSelection.compatibility}</p>
                         {/*----BENEFICIOS----*/}
@@ -129,7 +129,23 @@ const ProductDetails = () => {
                                 
                     </div>
                 </div>
-            
+                
+                <ContentCaseUse data={productSelection.use_case}/>
+                
+                {/* 
+                {productSelection.use_case && (
+                    <div className='px-10'>
+                        <h6 className='text-lg font-bold text-pink-500'>Modo de Uso</h6>
+                        <div
+                            className="prose lg:prose-lg text-gray-700 mx-auto text-left"
+                            style={{ whiteSpace: 'pre-line' }}
+                        >
+                        {productSelection.use_case}
+                        </div>
+                    </div>
+                )}
+                */}
+
                 <ProductDescription product={productSelection} />
                 <RecommendedProducts currentProductId={productSelection?._id} />
                 
