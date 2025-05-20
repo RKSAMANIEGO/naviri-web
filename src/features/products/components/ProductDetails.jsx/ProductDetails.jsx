@@ -104,7 +104,7 @@ const ProductDetails = () => {
                         </div>
             
                         <span className='text-[12px] sm:text-[14px] font-bold'>
-                            <ShoppingCartOutlined /> Disponible solo para la ciudad de Lima.
+                            <ShoppingCartOutlined /> Disponible
                         </span>
             
                         <label className='flex gap-3 items-center text-pink-500 font-bold text-lg'>
