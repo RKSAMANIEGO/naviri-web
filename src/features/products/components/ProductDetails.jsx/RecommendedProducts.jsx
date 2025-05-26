@@ -83,12 +83,12 @@ const RecommendedProducts = ({ currentProductId }) => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto px-4 py-8 w-full">
             <h2 className="text-2xl font-bold mb-6 text-center">Productos recomendados</h2>
             <Swiper
                 modules={[Pagination]}
-                spaceBetween={20}
-                slidesPerView={1}
+                spaceBetween={5}
+                slidesPerView={3}
                 pagination={{ clickable: true }}
                 breakpoints={{
                     640: { slidesPerView: 2 },
@@ -115,7 +115,7 @@ const ProductCard = ({ product, scrollContentProduct }) => {
     const finalPrice = product.price * (1 - (product.discount / 100));
 
     return (
-        <div className="group rounded-sm pb-10 sm:rounded-2xl overflow-hidden md:hover:shadow-md md:shadow-pink-400 transition-shadow duration-300 h-full flex flex-col">
+        <div className="group rounded-sm pb-10 sm:rounded-2xl overflow-hidden md:hover:shadow-md md:shadow-pink-400 transition-shadow duration-300 h-full flex flex-col w-[100%] sm:w-[100%]">
             <Link to={`/products/${encodeURIComponent(product.name)}`}>
                 <div
                     className="relative overflow-hidden pt-[100%]"
