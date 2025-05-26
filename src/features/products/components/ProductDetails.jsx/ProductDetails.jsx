@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { productByName } from '../../services/productsApi';
 import { LeftOutlined, LoadingOutlined, RightOutlined, ScissorOutlined, ShoppingCartOutlined } from '@ant-design/icons';
@@ -59,16 +59,15 @@ const ProductDetails = () => {
     const prevImg = (longitudImg) => (indexImg > 0) ? setIndexImg(indexImg-1) : setIndexImg(longitudImg-1);
     
     const handlerSelectImg=(index) => setIndexImg(index);
-
-
     return (
         <> 
         {productSelection ?
-            <div id="content" className='scroll-mt-12 flex flex-col w-full'>
+            <div id="content" className='scroll-mt-12 flex flex-col max-w-7xl m-auto '>
+            
                 <div className='flex md:flex-row flex-col gap-5 md:gap-10 w-full p-10 max-[520px]:p-4'>
-                    <div className='overflow-hidden relative pt-0  rounded-t-2xl w-[auto] md:w-1/2  h-[auto] md:h-[520px]'>  
+                    <div className='overflow-hidden relative pt-0  rounded-t-2xl w-[auto] md:w-1/2  h-[auto] bg-amber-200 md:h-[520px]'>
                         <img 
-                            className=' w-[auto] md:w-full h-[auto] md:h-[600px] rounded-t-2xl object-cover object-[50%_80%] cursor-pointer transition-all duration-500 ease-in-out hover:scale-105 hover:rounded-t-2xl'
+                            className=' w-[auto] md:w-full h-[auto] md:h-[600px] rounded-t-2xl object-cover object-[50%_80%]   lg:object-cover lg:object-[50%_130%]  cursor-pointer transition-all duration-500 ease-in-out hover:scale-105 hover:rounded-t-2xl'
                             src={productSelection.image[indexImg].url}
                             alt={`imagen de ${productSelection.name}`}
                         />
@@ -131,26 +130,9 @@ const ProductDetails = () => {
                 </div>
                 
                 <ContentCaseUse data={productSelection.use_case}/>
-                
-                {/* 
-                {productSelection.use_case && (
-                    <div className='px-10'>
-                        <h6 className='text-lg font-bold text-pink-500'>Modo de Uso</h6>
-                        <div
-                            className="prose lg:prose-lg text-gray-700 mx-auto text-left"
-                            style={{ whiteSpace: 'pre-line' }}
-                        >
-                        {productSelection.use_case}
-                        </div>
-                    </div>
-                )}
-                */}
-
                 <ProductDescription product={productSelection} />
                 <RecommendedProducts currentProductId={productSelection?._id} />
-                
-
-                
+  
             </div>            
             :
             <label className='flex flex-col items-center mt-20 gap-5'><LoadingOutlined className='text-4xl font-bold'/> Cargando ...</label>                

@@ -34,6 +34,7 @@ const devolucion = [
 
 const ShipmentPage = () => {
   return (
+  <div className="grid place-items-center max-w-7xl m-auto">
     <div className='flex flex-col gap-10 p-5 sm:p-10'>
       <section className='flex flex-col gap-5'>
         <h2 className='text-[1.3rem] sm:text-3xl font-[900] text-[#f180a9]'>ENVÍOS Y ENTREGA <GiftOutlined /></h2>
@@ -102,6 +103,7 @@ const ShipmentPage = () => {
         </p>
       </section>
     </div>
+  </div>
   )
 }
 
