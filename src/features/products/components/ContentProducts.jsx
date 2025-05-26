@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {  Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import styles from "./producto.module.css"; // Updated path
 import PaginationProducts from "./PaginationProducts"; // Path remains relative
 import SearchProducts from "./SearchProducts"; // Path remains relative
@@ -232,12 +232,11 @@ const ContentProducts = ({ categorie }) => {
 	};
 
 	return (
-		<>
+		<div className="grid place-items-center max-w-7xl m-auto">
 			<SearchProducts recibirTextInput={recibirTextSearch} />
 			<div
-				className={`${
-					widthWindow < 875 ? "flex flex-col" : `${styles.mainProducts}`
-				}`}>
+				className={`${widthWindow < 875 ? "flex flex-col" : `${styles.mainProducts}`
+					}`}>
 				{/*FILTER CATEGORIE CHECKBOX*/}
 
 				{allProducts.length > 0 && (
@@ -274,15 +273,14 @@ const ContentProducts = ({ categorie }) => {
 						className={styles.contentProducts}>
 
 						{/*FILTRO DE PRODUCTOS */}
-						{productoFiltrado.length > 0 && !messageFilterProducts ? ( 
+						{productoFiltrado.length > 0 && !messageFilterProducts ? (
 
 							productoFiltrado.map((product) => (
 								<section
-									className={`${
-										widthWindow < 450
+									className={`${widthWindow < 450
 											? " relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm"
 											: "relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[330px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md"
-									}`}
+										}`}
 									key={product.id}>
 									<Link to={`/products/${encodeURIComponent(product.name)}`}>
 										<div
@@ -312,17 +310,15 @@ const ContentProducts = ({ categorie }) => {
 									</Link>
 
 									<div
-										className={`${
-											widthWindow < 450
+										className={`${widthWindow < 450
 												? "group-hover:-translate-y-6"
 												: "group-hover:-translate-y-7"
-										}`}>
+											}`}>
 										<label
-											className={`${
-												widthWindow < 450
+											className={`${widthWindow < 450
 													? "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-[10px]"
 													: "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-sm md:text-md"
-											}`}>
+												}`}>
 											&#9733; &#9733; &#9733; &#9733; &#9733;
 											<span
 												className="text-pink-500 hover:underline hover:text-gray-800"
@@ -332,11 +328,10 @@ const ContentProducts = ({ categorie }) => {
 										</label>
 
 										<p
-											className={`${
-												widthWindow < 450
+											className={`${widthWindow < 450
 													? "text-[9px] mt-2 capitalize"
 													: `${styles.textCategorie}`
-											}`}>
+												}`}>
 											{product.categories.map((subCat) =>
 												subCat.sub_categories.map((obj) =>
 													obj.name.toLowerCase()
@@ -344,31 +339,27 @@ const ContentProducts = ({ categorie }) => {
 											)}
 										</p>
 										<h4
-											className={`${
-												widthWindow < 450
+											className={`${widthWindow < 450
 													? "truncate px-1 text-[11px] leading-3 font-[700]"
 													: `${styles.titleProducts}`
-											}`}>
+												}`}>
 											{product.name.toUpperCase()}
 										</h4>
 
 										{product.discount > 0 && product.discount !== null ? (
 											<div
-												className={`${
-													widthWindow < 450 ? "flex" : `${styles.wrapperDscto}`
-												}`}>
-												<s
-													className={`${
-														widthWindow < 450 ? "text-[10px]" : `${styles.s}`
+												className={`${widthWindow < 450 ? "flex" : `${styles.wrapperDscto}`
 													}`}>
+												<s
+													className={`${widthWindow < 450 ? "text-[10px]" : `${styles.s}`
+														}`}>
 													S/{product.price}
 												</s>
 												<h6
-													className={`${
-														widthWindow < 450
+													className={`${widthWindow < 450
 															? "text-pink-400 font-bold text-[10px]"
 															: `${styles.dscto}`
-													}`}>
+														}`}>
 													Ahora S/
 													{(
 														product.price -
@@ -388,9 +379,13 @@ const ContentProducts = ({ categorie }) => {
 							<p className="flex flex-col items-center text-gray-500 w-[80%] font-bold">
 								{messageFilterProducts ? (
 									<p className="flex flex-col items-center text-gray-500 w-[80%] font-bold">
-										{" "}
 										<NotFoundProducts />
 										Producto No Existe
+									</p>
+								) : productoFiltrado.length === 0 && categorie && categorie.trim() !== "" ? (
+									<p className="flex flex-col items-center text-gray-500 w-[100%] font-bold">
+										<NotFoundProducts />
+										No hay productos disponibles con la categoría "{categorie}"
 									</p>
 								) : (
 									<p className="flex flex-col items-center text-gray-500 w-[80%] font-bold">
@@ -426,23 +421,22 @@ const ContentProducts = ({ categorie }) => {
 				{/* NAV BAR CATEGORIE MOVILE*/}
 				<nav
 					className={`fixed top-0 right-0 h-[100vh] w-[50%] sm:w-[40%] bg-pink-400 z-[100] transition-transform duration-500 transform 
-                                ${
-																	isOpenNavCategorie
-																		? "translate-x-0"
-																		: "translate-x-full"
-																}  flex justify-center items-center `}>
+                                ${isOpenNavCategorie
+							? "translate-x-0"
+							: "translate-x-full"
+						}  flex justify-center items-center `}>
 					{allProducts.length > 0 && (
 						<ul>
 							<li className="font-bold text-pink-300">CATEGORIAS</li>
 							{[...listCategorie].map((cat, index) => (
-								
+
 								<li
 									key={index}
 									className="text-[13px] sm:text-[15px] text-white capitalize cursor-pointer p-1 hover:text-pink-300"
 									onClick={() => listProductsByCat(cat)}>
 									{cat.toLowerCase()}
 								</li>
-								
+
 							))}
 							<li
 								className="text-[12px] text-pink-300 border-[1px] border-pink-300 text-center rounded-sm py-1 m-3 cursor-pointer hover:bg-pink-200 hover:text-pink-400"
@@ -453,7 +447,7 @@ const ContentProducts = ({ categorie }) => {
 					)}
 				</nav>
 			</div>
-		</>
+		</div>
 	);
 };
 

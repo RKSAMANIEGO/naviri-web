@@ -40,7 +40,7 @@ const ContentProductNew = () => {
         const dateNow=new Date();
 
         const dateFilter=new Date();
-        dateFilter.setDate(dateNow.getDate()-7);
+        dateFilter.setDate(dateNow.getDate()-30);
 
         const productFilterDate = dataProducts.filter(products => {
             const dateProducts =new Date( products.created.replace(" ","T"));

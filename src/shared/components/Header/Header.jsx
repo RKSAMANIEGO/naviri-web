@@ -5,7 +5,7 @@ import logo from '../../../assets/image/logo-navi.png';
 import { useCart } from '../../../features/cart/context/CartContext';
 import imageCategory1 from "../../../assets/image/categoria1.jpg";
 import imageCategory2 from "../../../assets/image/categoria2.jpg";
-
+import { getCategories } from '../../../features/admin-categories/services/adminCategoriesApi';
 
 const categoryMenuItems = [
   { id: 'accessories', title: 'Accesorios', to: '/categories/accesorios' },
@@ -14,7 +14,6 @@ const categoryMenuItems = [
   { id: 'hair', title: 'Cuidado capilar', to: '/categories/cuidado capilar' },
   { id: 'body', title: 'Cuidado corporal', to: '/categories/Exfoliante Corporal' },
   { id: 'salts', title: 'Sales minerales', to: '/categories/sales minerales' },
-
   { id: 'soaps', title: 'Jabones', to: '/categories/jabones' },
   { id: 'hydrolates', title: 'Hidrolatos', to: '/categories/hidrolatos' },
   { id: 'perfumes', title: 'Perfumes', to: '/categories/perfumes' },
@@ -27,6 +26,30 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { toggleCart, getCartCount } = useCart();
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const response = await getCategories();
+
+        if (response && response.data) {
+          setCategories(response.data);
+          console.log("Categories set:", response.data);
+        } else {
+          console.log("No categories data returned from API");
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -72,7 +95,7 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-8 sm:px-4 lg:px-2">
+      <div className="max-w-7xl mx-auto  px-8 sm:px-4 lg:px-0">
         <div className="flex justify-between items-center h-16">
 
           {/* Logo */}
@@ -132,16 +155,22 @@ const Header = () => {
 
                 <div className="absolute top-full left-0 w-screen max-w-2xl bg-white shadow-lg rounded-lg p-6 hidden group-hover:grid transition-all duration-300 origin-top">
                   <div className="col-span-2 grid grid-cols-3 gap-6">
-                    <div className="h-[100%] col-span-2 grid grid-cols-2  gap-4">
-                      {categoryMenuItems.map((item) => (
-                        <Link
-                          key={item.id}
-                          to={item.to}
-                          className="flex justify-center items-center  rounded-lg hover:bg-[#f180a9] hover:text-white transition-colors"
-                        >
-                          <h4 className="font-medium">{item.title}</h4>
-                        </Link>
-                      ))}
+                    <div className="h-[100%] col-span-2 grid grid-cols-2 gap-4">
+                      {isLoading ? (
+                        <div className="col-span-2 text-center py-4">Cargando categorías...</div>
+                      ) : categories && categories.length > 0 ? (
+                        categories.map((category) => (
+                          <Link
+                            key={category.id || category._id}
+                            to={`/categories/${category.name}`}
+                            className="flex justify-center items-center rounded-lg hover:bg-[#f180a9] hover:text-white transition-colors"
+                          >
+                            <h4 className="font-medium"> {category.name.charAt(0).toUpperCase() + category.name.slice(1).toLowerCase()}</h4>
+                          </Link>
+                        ))
+                      ) : (
+                        <div className="col-span-2 text-center py-4">No hay categorías disponibles</div>
+                      )}
                     </div>
                     <div className="grid grid-cols-1 gap-4">
                       <img src={imageCategory1} alt="Categoría" className="rounded-lg h-48 object-cover w-full" />
@@ -158,7 +187,7 @@ const Header = () => {
             {/* Otros enlaces */}
             <NavLink
               to="/blog"
-              className={({ isActive }) => `inline-flex items-center pr-2 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' :'text-gray-700 hover:text-[#f180a9]'
+              className={({ isActive }) => `inline-flex items-center pr-2 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                 }`}
             >
               Blogs
@@ -184,7 +213,7 @@ const Header = () => {
 
             <NavLink
               to="/envios"
-              onClick={closeMobileMenu} 
+              onClick={closeMobileMenu}
               className={({ isActive }) => `inline-flex items-center px-1 pt-1 text-sm font-medium whitespace-nowrap ${isActive ? 'text-[#f180a9]' : 'text-gray-700 hover:text-[#f180a9]'
                 }`}
             >
@@ -202,7 +231,7 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Buscar productos"
-                className="px-4 py-2 ring-1 ring-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-pink-500 w-48 lg:w-64"
+                className="px-4 py-2 ring-1 ring-gray-300 rounded-l-full focus:outline-none focus:ring-1 focus:ring-pink-500 w-48 lg:w-50"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
