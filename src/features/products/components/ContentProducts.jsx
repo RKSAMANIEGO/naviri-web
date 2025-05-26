@@ -232,7 +232,7 @@ const ContentProducts = ({ categorie }) => {
 	};
 
 	return (
-		<>
+		<div className="grid place-items-center max-w-7xl m-auto">
 			<SearchProducts recibirTextInput={recibirTextSearch} />
 			<div
 				className={`${
@@ -453,7 +453,7 @@ const ContentProducts = ({ categorie }) => {
 					)}
 				</nav>
 			</div>
-		</>
+		</div>
 	);
 };
 
