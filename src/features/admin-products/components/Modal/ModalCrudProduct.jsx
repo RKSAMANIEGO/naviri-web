@@ -1,69 +1,69 @@
-import  { useEffect, useState } from 'react'
-import { Upload,Button,message,Tag,Input, Modal , Typography  } from 'antd';
-import { UploadOutlined,FileAddOutlined ,EditOutlined } from '@ant-design/icons';
+import { useEffect, useState } from 'react'
+import { Upload, Button, message, Tag, Input, Modal, Typography } from 'antd';
+import { UploadOutlined, FileAddOutlined, EditOutlined } from '@ant-design/icons';
 import ModalProducto from 'react-modal'
 import styles from '../../styles/productAdmin.module.css';
-import {getCategories} from '../../services/adminCategoriesApi'
+import { getCategories } from '../../services/adminCategoriesApi'
 import { addProduct, updateProduct } from '../../services/adminProductsApi';
-import {PropTypes} from 'prop-types'
+import { PropTypes } from 'prop-types'
 import Swal from 'sweetalert2';
 
 
 const { TextArea } = Input;
 const { Text } = Typography;
-const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmActualizacionProducto,productPutTable}) => {
+const ModalCrudProduct = ({ isOpen, onClose, titleModal, confirmAddProduct, confirmActualizacionProducto, productPutTable }) => {
 
-    const [dataForm,setDataForm]=useState({name:'',characteristics:'',benefits:'',compatibility:'',price:"",stock:"",discount:"",pdf:"",subcategory_id:[""],use_case:""})
-    const [imageFiles, setImageFiles] = useState([]);
-    const [benefits, setBenefits] = useState([]);
-    const [deleteImgs, setDeleteImgs] = useState([]);
-    const [imageUrl, setImageUrl] = useState(null);
-    const [inputValue, setInputValue] = useState('');
-    const [dataCategories,setDataCategories]=useState(null)
-    const [confirmAddProd,setConfirmAddProd]=useState(false)
-    const [confirmPutProd,setConfirmPutProd]=useState(false)
+	const [dataForm, setDataForm] = useState({ name: '', characteristics: '', benefits: '', compatibility: '', price: "", stock: "", discount: "", pdf: "", subcategory_id: [""], use_case: "" })
+	const [imageFiles, setImageFiles] = useState([]);
+	const [benefits, setBenefits] = useState([]);
+	const [deleteImgs, setDeleteImgs] = useState([]);
+	const [imageUrl, setImageUrl] = useState(null);
+	const [inputValue, setInputValue] = useState('');
+	const [dataCategories, setDataCategories] = useState(null)
+	const [confirmAddProd, setConfirmAddProd] = useState(false)
+	const [confirmPutProd, setConfirmPutProd] = useState(false)
 
 	console.log(imageUrl);
-	
+
 	//text Area Descripcion
 	const [visible, setVisible] = useState(false);
-	const [text, setText] = useState("Haz clic para editar");
+	const [text, setText] = useState("");
 	const [tempText, setTempText] = useState("");
 
 	//text Area caso de uso
 	const [visibleCaseUse, setVisibleCaseUse] = useState(false);
-	const [textCaseUse, setTextCaseUse] = useState("Haz clic para editar");
+	const [textCaseUse, setTextCaseUse] = useState("");
 	const [tempTextCaseUse, setTempTextCaseUse] = useState("");
 
 
 
-    //LISTAR CATEGORIAS
-    const listCategories= async()=>{
-        const response =await getCategories();
-        response && setDataCategories(response.data);
-    }
+	//LISTAR CATEGORIAS
+	const listCategories = async () => {
+		const response = await getCategories();
+		response && setDataCategories(response.data);
+	}
 
-    useEffect(()=>{
-        listCategories();
-    },[])
+	useEffect(() => {
+		listCategories();
+	}, [])
 
 
-    useEffect(()=>{
-        if (productPutTable!=null) {
-            setDataForm({
-                name:productPutTable?.name || '',
-                characteristics:productPutTable?.characteristics || '',
-                benefits:productPutTable?.benefits || '',
-                compatibility:productPutTable?.compatibility || '',
-                price:productPutTable?.price || '',
-                stock:productPutTable?.stock || '',
-                discount:productPutTable?.discount || 0,  
-                subcategory_id:[productPutTable?.subcategories[0]?.id],
-                use_case: productPutTable.use_case || '',
-                image: productPutTable?.image?.map(img => img.url) || []     
+	useEffect(() => {
+		if (productPutTable != null) {
+			setDataForm({
+				name: productPutTable?.name || '',
+				characteristics: productPutTable?.characteristics || '',
+				benefits: productPutTable?.benefits || '',
+				compatibility: productPutTable?.compatibility || '',
+				price: productPutTable?.price || '',
+				stock: productPutTable?.stock || '',
+				discount: productPutTable?.discount || 0,
+				subcategory_id: [productPutTable?.subcategories[0]?.id],
+				use_case: productPutTable.use_case || '',
+				image: productPutTable?.image?.map(img => img.url) || []
 			});
 			setTextCaseUse(productPutTable?.use_case)  /// ***
-            setText(productPutTable?.compatibility)
+			setText(productPutTable?.compatibility)
 			setImageFiles(productPutTable?.image);
 			setImageUrl(productPutTable?.image.url);
 			setBenefits(productPutTable?.benefits || []);
@@ -157,12 +157,12 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			message.error("Ingrese el Stock del Producto");
 			return;
 		}
-        if(text === ""){
+		if (text === "") {
 			message.error("Ingrese la Descripción del Producto");
 			return;
-        }
+		}
 
-		if(textCaseUse === ""){
+		if (textCaseUse === "") {
 			message.error("Ingrese el Caso de Uso del Producto");
 			return;
 		}
@@ -175,10 +175,6 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			message.error("Carga al menos una imagen");
 			return;
 		}
-		if (!dataForm.discount) {
-			message.error("Ingrese el descuento del Producto");
-			return;
-		}
 
 		const formData = new FormData();
 
@@ -187,8 +183,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 		formData.append("price", dataForm.price);
 		formData.append("stock", dataForm.stock);
 		formData.append("discount", parseInt(dataForm.discount));
-        formData.append("compatibility", text);
-        formData.append('use_case', textCaseUse);
+		formData.append("compatibility", text);
+		formData.append('use_case', textCaseUse);
 		//formData.append('use_case', dataForm.use_case);
 		formData.append("subcategory_id", dataForm.subcategory_id[0]);
 		deleteImgs && deleteImgs.forEach((i) => formData.append("delete_images[]", i));
@@ -232,7 +228,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 				clearForm();
 				onClose();
 			}
-			} else {
+		} else {
 			console.log(dataForm.discount);
 
 			response = await addProduct(formData);
@@ -273,8 +269,8 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 			image: [],
 			subcategory_id: [""],
 		});
-        setText("Haz clic para editar");
-		setTextCaseUse("Haz clic para editar");
+		setText("");
+		setTextCaseUse("");
 	};
 
 	//ESTILOS DEL MODAL
@@ -311,7 +307,7 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 
 	//TEXT DESCRIPCION
 	const openModal = () => {
-		setTempText(text); // Para precargar el texto actual
+		setTempText(text || ''); // Para precargar el texto actual
 		setVisible(true);
 	};
 
@@ -330,10 +326,10 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 	const [text, setText] = useState("Haz clic para editar");
 	const [tempText, setTempText] = useState(""); 
 	*/
-	
+
 	//TEXT CASE USE
 	const openModalCaseUse = () => {
-		setTempTextCaseUse(textCaseUse); // Para precargar el texto actual
+		setTempTextCaseUse(textCaseUse || ''); // Para precargar el texto actual
 		setVisibleCaseUse(true);
 	};
 
@@ -427,10 +423,10 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 						<label className={styles.descripcion}>
 							Descripcion
 							<Text
-                                className="truncate" 
+								className="truncate"
 								onClick={openModal}
-								style={{ cursor: "pointer", fontSize: "14px", border:"1px solid #aaa", padding: '7px 15px', borderRadius:"5px" }}>
-								{text} <EditOutlined />
+								style={{ cursor: "pointer", fontSize: "14px", border: "1px solid #aaa", padding: '7px 15px', borderRadius: "5px", color: text ? 'inherit' : '#999' }}>
+								{text || "Haz clic para editar"} <EditOutlined />
 							</Text>
 							<Modal
 								title="Editar Descripción"
@@ -441,21 +437,21 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 								okText="Guardar"
 								cancelText="Cancelar">
 								<TextArea
-                                    rows={15} 
+									rows={15}
 									value={tempText}
 									onChange={(e) => setTempText(e.target.value)}
 								/>
-							</Modal>          
+							</Modal>
 						</label>
 
 
 						<label className={styles.descripcion}>
 							Caso de Uso
 							<Text
-                                className="truncate" 
+								className="truncate"
 								onClick={openModalCaseUse}
-								style={{ cursor: "pointer", fontSize: "14px", border:"1px solid #aaa", padding: '7px 15px', borderRadius:"5px" }}>
-								{textCaseUse} <EditOutlined />
+								style={{ cursor: "pointer", fontSize: "14px", border: "1px solid #aaa", padding: '7px 15px', borderRadius: "5px", color: textCaseUse ? 'inherit' : '#999' }}>
+								{textCaseUse || "Haz clic para editar"} <EditOutlined />
 							</Text>
 							<Modal
 								title="Editar Caso de Uso"
@@ -466,13 +462,13 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 								okText="Guardar"
 								cancelText="Cancelar">
 								<TextArea
-                                    rows={15} 
+									rows={15}
 									value={tempTextCaseUse}
 									onChange={(e) => setTempTextCaseUse(e.target.value)}
 								/>
-							</Modal>          
+							</Modal>
 						</label>
-						
+
 						{/*
                     	<label className={styles.descripcion}>Modo de Uso
                         	<textarea
@@ -503,25 +499,25 @@ const ModalCrudProduct = ({isOpen,onClose,titleModal,confirmAddProduct,confirmAc
 									icon={<FileAddOutlined />}
 									type="primary"
 									onClick={handleAddBenefit}
-									style={{ width: "10%"}}
+									style={{ width: "10%" }}
 								/>
 							</div>
 						</label>
 
 						<div
 							style={{
-								
+
 								width: "100%",
 								display: "flex",
 								flexWrap: "wrap",
-								padding: "10px 0" 
+								padding: "10px 0"
 							}}>
 							{benefits.map((benefit, index) => (
 								<Tag
 									key={index}
 									closable
 									onClose={() => handleDeleteBenefit(benefit)}
-									style={{ margin: "5px"}}>
+									style={{ margin: "5px" }}>
 									{benefit}
 								</Tag>
 							))}

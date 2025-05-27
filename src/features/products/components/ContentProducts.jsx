@@ -28,9 +28,37 @@ const ContentProducts = ({ categorie }) => {
 	const [totalProducts, setTotalProducts] = useState(null);
 	const [messageFilterProducts, setMessageFilterProducts] = useState(false);
 	const { addToCart } = useCart();
-
+	const [currentPage, setCurrentPage] = useState(1);
+	const [productsPerPage] = useState(6);
 	const blogsContainerRef = useRef(null);
 	const sr = useRef(null);
+
+	const getPaginatedProducst = (products, page, itemsPerPage) => {
+		const startIndex = (page - 1) * itemsPerPage;
+		const endIndex = startIndex + itemsPerPage;
+		return products.slice(startIndex, endIndex)
+	}
+	// Calcular los productos para mostrar en la pagina actual que ve el usuario
+	const currentProducts = getPaginatedProducst(productoFiltrado, currentPage, productsPerPage)
+
+	// Calcular el total de páginas para los productos filtrados.
+	const totalFilteredPages = Math.ceil(productoFiltrado.length / productsPerPage)
+
+	// Esta función es para cambiar página
+	const handlePageChange = (page) => {
+		setCurrentPage(page);
+
+		//Scroll suave al contenedor de productos.
+		setTimeout(() => {
+			const element = document.getElementById("products");
+			element && element.scrollIntoView({ behavior: "smooth" });
+		}, 100);
+	}
+
+	// Resetear página actual cuando cambias los filtros
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [textSearch, filterPrecio, filterCategorie, categorie]);
 
 	useEffect(() => {
 		sr.current = ScrollReveal({
@@ -247,8 +275,6 @@ const ContentProducts = ({ categorie }) => {
 					/>
 				)}
 
-
-
 				{/*FILTER CATEGORIE CHECKBOX MOVILE */}
 				{widthWindow < 875 && (
 					<div className="flex items-center gap-2 pt-[20px] px-[20px] md:px-[80px]">
@@ -274,17 +300,17 @@ const ContentProducts = ({ categorie }) => {
 
 						{/*FILTRO DE PRODUCTOS */}
 						{productoFiltrado.length > 0 && !messageFilterProducts ? (
-
-							productoFiltrado.map((product) => (
+							// Cambiamos por currentProducts
+							currentProducts.map((product) => (
 								<section
 									className={`${widthWindow < 450
-											? " relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm"
-											: "relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[330px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md"
+										? " relative group overflow-hidden   w-[145px] h-[230px] rounded-sm border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-400 hover:shadow-sm"
+										: "relative group overflow-hidden    w-[200px] md:w-[300px] lg:w-[330px] h-[290px] md:h-[350px]  lg:h-[380px] rounded-xl border border-[#F1EFEF] transition-all duration-400 ease-in-out text-center  hover:shadow-pink-500 hover:shadow-md"
 										}`}
 									key={product.id}>
 									<Link to={`/products/${encodeURIComponent(product.name)}`}>
 										<div
-											className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-sm sm:rounded-t-xl transition-all duration-500 ease-in-out"
+											className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center] bg-[length:cover] rounded-t-sm sm:rounded-t-xl transition-all duration-500 ease-in-out"
 											style={{
 												backgroundImage: `url(${product.image[0].url})`,
 											}}
@@ -311,13 +337,13 @@ const ContentProducts = ({ categorie }) => {
 
 									<div
 										className={`${widthWindow < 450
-												? "group-hover:-translate-y-6"
-												: "group-hover:-translate-y-7"
+											? "group-hover:-translate-y-6"
+											: "group-hover:-translate-y-7"
 											}`}>
 										<label
 											className={`${widthWindow < 450
-													? "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-[10px]"
-													: "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-sm md:text-md"
+												? "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-[10px]"
+												: "hidden w-full bg-gray-200/70  group-hover:flex justify-evenly  py-2 text-orange-500 text-sm md:text-md"
 												}`}>
 											&#9733; &#9733; &#9733; &#9733; &#9733;
 											<span
@@ -329,8 +355,8 @@ const ContentProducts = ({ categorie }) => {
 
 										<p
 											className={`${widthWindow < 450
-													? "text-[9px] mt-2 capitalize"
-													: `${styles.textCategorie}`
+												? "text-[9px] mt-2 capitalize font-[700] truncate"
+												: `${styles.textCategorie} font-bold`
 												}`}>
 											{product.categories.map((subCat) =>
 												subCat.sub_categories.map((obj) =>
@@ -340,8 +366,8 @@ const ContentProducts = ({ categorie }) => {
 										</p>
 										<h4
 											className={`${widthWindow < 450
-													? "truncate px-1 text-[11px] leading-3 font-[700]"
-													: `${styles.titleProducts}`
+												? "truncate px-1 text-[13px] leading-3 font-[700]"
+												: `${styles.titleProducts}`
 												}`}>
 											{product.name.toUpperCase()}
 										</h4>
@@ -357,8 +383,8 @@ const ContentProducts = ({ categorie }) => {
 												</s>
 												<h6
 													className={`${widthWindow < 450
-															? "text-pink-400 font-bold text-[10px]"
-															: `${styles.dscto}`
+														? "text-pink-400 font-bold text-[10px]"
+														: `${styles.dscto}`
 														}`}>
 													Ahora S/
 													{(
@@ -404,12 +430,18 @@ const ContentProducts = ({ categorie }) => {
 						</button>
 					) : (
 						<div>
-							{totalPages && productoFiltrado.length > 5 && (
+							{/* Cambiar la condición de paginación */}
+							{totalFilteredPages > 1 && (
 								<PaginationProducts
-									numPage={totalPages}
-									handlerPagina={recibirPagina}
-									nextPage={pageNext}
-									nextPageDisabled={numPage}
+									numPage={totalFilteredPages}
+									handlerPagina={handlePageChange}
+									nextPage={() => {
+										if (currentPage < totalFilteredPages) {
+											handlePageChange(currentPage + 1);
+										}
+									}}
+									nextPageDisabled={currentPage}
+									currentPage={currentPage}
 								/>
 							)}
 						</div>

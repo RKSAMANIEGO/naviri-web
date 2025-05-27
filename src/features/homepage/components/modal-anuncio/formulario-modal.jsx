@@ -166,7 +166,7 @@ export default function FormularioModal({ isOpen, onClose }) {
             </button>
 
             <div className={styles.formHeader}>
-              <h2 className={styles.title}>¡Ten un increíble descuento en tu primera compra!</h2>
+              <h2 className={styles.title}>Inscríbete y disfruta de beneficios exclusivos.</h2>
               <p className={styles.description}>
                 Regístrate y disfruta de la maravilla que genera hacer un regalo desde el corazón
               </p>
