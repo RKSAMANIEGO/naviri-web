@@ -13,7 +13,7 @@ const { TextArea } = Input;
 const { Text } = Typography;
 const ModalCrudProduct = ({ isOpen, onClose, titleModal, confirmAddProduct, confirmActualizacionProducto, productPutTable }) => {
 
-	const [dataForm, setDataForm] = useState({ name: '', characteristics: '', benefits: '', compatibility: '', price: "", stock: "", discount: "", pdf: "", subcategory_id: [""], use_case: "" })
+	const [dataForm, setDataForm] = useState({ name: '', characteristics: '', benefits: '', compatibility: '', price: 0, stock: 0, discount: 0, pdf: "", subcategory_id: [""], use_case: "" })
 	const [imageFiles, setImageFiles] = useState([]);
 	const [benefits, setBenefits] = useState([]);
 	const [deleteImgs, setDeleteImgs] = useState([]);
