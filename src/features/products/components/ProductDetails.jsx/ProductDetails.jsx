@@ -9,15 +9,12 @@ import ProductDescription from './ProductDescription';
 import RecommendedProducts from './RecommendedProducts';
 import { lanzarConfetti } from '../../../../shared/animation/Confetti/confetti';
 import ContentCaseUse from './ContentCaseUse';
-const ProductDetails = () => {
 
+const ProductDetails = () => {
     const [productSelection, setProductSelection] = useState(null);
     const { addToCart } = useCart();
     const { name } = useParams();
-
     const [indexImg, setIndexImg] = useState(0);
-
-
 
     useEffect(() => {
         const productSelected = async (nameProduct) => {
@@ -66,10 +63,9 @@ const ProductDetails = () => {
             {productSelection ?
                 <div id="content" className='scroll-mt-12 flex flex-col max-w-7xl m-auto '>
 
-                    <div className='flex md:flex-row flex-col gap-5 md:gap-10 w-full p-10 max-[520px]:p-4'>
-                        <div className='overflow-hidden relative pt-0  rounded-t-2xl w-[auto] md:w-1/2  h-[auto] bg-amber-200 md:h-[520px]'>
+                    <div className='flex md:flex-row flex-col gap-5 md:gap-10 w-full p-10 max-[520px]:p-4'>                        <div className='overflow-hidden relative pt-0 rounded-t-2xl w-[auto] md:w-1/2 h-[auto] bg-amber-200 md:h-[520px]'>
                             <img
-                                className=' w-[auto] md:w-full h-[auto] md:h-[600px] rounded-t-2xl object-cover object-[50%_80%]   lg:object-cover lg:object-[50%_130%]  cursor-pointer transition-all duration-500 ease-in-out hover:scale-105 hover:rounded-t-2xl'
+                                className='w-[auto] md:w-full h-[auto] md:h-[520px] rounded-t-2xl object-cover object-[50%_80%] lg:object-cover lg:object-[50%_50%] cursor-pointer transition-all duration-500 ease-in-out hover:scale-105 hover:rounded-t-2xl'
                                 src={productSelection.image[indexImg].url}
                                 alt={`imagen de ${productSelection.name}`}
                             />
