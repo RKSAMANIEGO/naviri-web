@@ -1,6 +1,6 @@
 import api from "../../../core/api/apiClient"; // Updated path
 
-export const listProducts = async (page = 1, limit = 16) => {
+export const listProducts = async (page = 1, limit = 100000000) => {
 	try {
 		const response = await api.get("/products", {
 			params: { page, limit },

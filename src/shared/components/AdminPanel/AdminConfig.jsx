@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/adminconfi.css'; 
+import './styles/adminconfi.css';
 import { FaUser, FaCheckCircle, FaTimes } from 'react-icons/fa';
 
 const EditProfile = () => {
@@ -50,7 +50,7 @@ const EditProfile = () => {
         setError(data.message || 'Error al enviar el código.');
       }
     } catch (err) {
-      setError('Error de red al enviar el código.'+err);
+      setError('Error de red al enviar el código.' + err);
     }
   };
 
@@ -73,7 +73,7 @@ const EditProfile = () => {
           setError(data.message || 'Código incorrecto.');
         }
       } catch (err) {
-        setError('Error al verificar el código.'+err);
+        setError('Error al verificar el código.' + err);
       }
     } else {
       setError('Código inválido.');
@@ -109,7 +109,7 @@ const EditProfile = () => {
         setError(data.message || 'Error al cambiar la contraseña.');
       }
     } catch (err) {
-      setError('Error de red al cambiar la contraseña.'+err);
+      setError('Error de red al cambiar la contraseña.' + err);
     }
   };
 
@@ -159,8 +159,8 @@ const EditProfile = () => {
                 <input
                   type="email"
                   value={email}
+                  readOnly 
                   className="input"
-                  readOnly
                 />
               </div>
 

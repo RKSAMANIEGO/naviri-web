@@ -10,18 +10,61 @@ const PaginationProducts = ({ numPage, handlerPagina, nextPage, nextPageDisabled
         setActivePage(currentPage || 1);
     }, [currentPage])
 
-    const newPages=[]
-    for (let i=1 ; i<=numPage ; i++){
-        newPages.push(i)
-    }
+    const getVisiblePages = () => {
+        const maxVisiblePages = 3;
+        const pages = [];
+        
+        // Si hay 5 páginas o menos, mostrar todas
+        if (numPage <= maxVisiblePages) {
+            for (let i = 1; i <= numPage; i++) {
+                pages.push(i);
+            }
+            return pages;
+        }
+        
+        // Calcular el rango de páginas a mostrar
+        let startPage = Math.max(1, activePage - 2);
+        let endPage = Math.min(numPage, startPage + maxVisiblePages - 1);
+        
+        // Ajustar si estamos cerca del final
+        if (endPage - startPage < maxVisiblePages - 1) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+            pages.push(i);
+        }
+        
+        return pages;
+    };
 
-    return (
+    const visiblePages = getVisiblePages();
+
+     return (
         <>
             <div className={styles.pagination}>
-                {newPages.map((pagina, index) => (
+                {/* Botón para ir a la primera página */}
+                {activePage > 3 && numPage > 5 && (
+                    <>
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                handlerPagina(1);
+                                setActivePage(1);
+                                setNextActive(false);
+                                setHandlerNextPage(false);
+                            }}>
+                            1
+                        </button>
+                        {activePage > 4 && <span className={styles.ellipsis}>...</span>}
+                    </>
+                )}
+
+                {/* Páginas visibles */}
+                {visiblePages.map((pagina) => (
                     <button
                         id="products"
-                        key={index}
+                        key={pagina}
                         className={`${styles.button} ${activePage === pagina ? styles.activePage : ''} ${nextActive && styles.isDisabled}`}
                         onClick={() => {
                             handlerPagina(pagina);
@@ -33,8 +76,25 @@ const PaginationProducts = ({ numPage, handlerPagina, nextPage, nextPageDisabled
                     </button>
                 ))}
 
+                {/* Botón para ir a la última página */}
+                {activePage < numPage - 2 && numPage > 5 && (
+                    <>
+                        {activePage < numPage - 3 && <span className={styles.ellipsis}>...</span>}
+                        <button
+                            className={styles.button}
+                            onClick={() => {
+                                handlerPagina(numPage);
+                                setActivePage(numPage);
+                                setNextActive(false);
+                                setHandlerNextPage(false);
+                            }}>
+                            {numPage}
+                        </button>
+                    </>
+                )}
+
                 <button
-                    className={`${nextActive ? styles.nextActive : ''} ${activePage === newPages.length ? styles.nextPageDisabled : ''}`}
+                    className={`${nextActive ? styles.nextActive : ''} ${activePage === numPage ? styles.nextPageDisabled : ''}`}
                     onClick={() => {
                         setNextActive(true);
                         setHandlerNextPage(true);
