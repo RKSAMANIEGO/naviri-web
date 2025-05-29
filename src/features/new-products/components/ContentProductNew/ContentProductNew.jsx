@@ -74,7 +74,7 @@ const ContentProductNew = () => {
                             
                             
                             <Link to={`/products/${encodeURIComponent(product.name)}`}>
-                                <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-[260px] cursor-pointer object-content bg-[position:center_70%] bg-[length:100%_auto] rounded-t-xl transition-all duration-500 ease-in-out"
+                                <div className="overflow-hidden group-hover:scale-105 flex items-end w-full h-2/3 cursor-pointer object-content bg-[position:center] bg-[length:cover] rounded-t-sm sm:rounded-t-xl transition-all duration-500 ease-in-out"
                                     style={{backgroundImage: `url(${product.image[0].url})`
                                 }}>
                                 </div>
